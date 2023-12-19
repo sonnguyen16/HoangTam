@@ -39,6 +39,8 @@ Route::prefix('/nhacungcap')->middleware('auth')->group(function (){
 
 Route::prefix('/sanpham')->middleware('auth')->group(function (){
     Route::get('/', [SanPhamController::class, 'index'])->name('sanpham.index');
+    Route::post('/store', [SanPhamController::class, 'store'])->name('sanpham.store');
+    Route::delete('/delete', [SanPhamController::class, 'delete'])->name('sanpham.delete');
 });
 
 Route::prefix('/kho')->middleware('auth')->group(function (){

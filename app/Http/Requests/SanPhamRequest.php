@@ -11,7 +11,7 @@ class SanPhamRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,29 @@ class SanPhamRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'id' => '',
+            'ten' => 'required|max:255',
+            'gia_ban' => 'required|numeric|min:0',
+            'gia_nhap' => 'required|numeric|min:0',
+            'don_vi_tinh_id' => 'required|numeric',
+            'mo_ta' => 'required',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'ten.required' => 'Tên sản phẩm không được để trống',
+            'ten.max' => 'Tên sản phẩm không được quá 255 ký tự',
+            'gia_ban.required' => 'Giá bán không được để trống',
+            'gia_ban.numeric' => 'Giá bán phải là số',
+            'gia_ban.min' => 'Giá bán phải lớn hơn hoặc bằng 0',
+            'gia_nhap.required' => 'Giá nhập không được để trống',
+            'gia_nhap.numeric' => 'Giá nhập phải là số',
+            'gia_nhap.min' => 'Giá nhập phải lớn hơn hoặc bằng 0',
+            'don_vi_tinh_id.required' => 'Đơn vị tính không được để trống',
+            'don_vi_tinh_id.numeric' => 'Đơn vị tính phải là số',
+            'mo_ta.required' => 'Mô tả không được để trống',
         ];
     }
 }

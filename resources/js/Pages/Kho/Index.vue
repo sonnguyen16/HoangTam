@@ -26,7 +26,6 @@ function openModal() {
 }
 
 const allData = computed(() => {
-    console.log(props.kho_list)
     if (search.value) {
         router.get(route('kho.index'), {search: search.value})
     } else {

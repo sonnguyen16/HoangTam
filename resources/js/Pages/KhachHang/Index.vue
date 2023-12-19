@@ -34,7 +34,6 @@ function openModal() {
 }
 
 const allData = computed(() => {
-    console.log(props.khach_hang_list)
     if (search.value) {
         router.get(route('khachhang.index'), {search: search.value})
     } else {

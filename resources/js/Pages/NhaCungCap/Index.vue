@@ -33,7 +33,6 @@ function openModal() {
 }
 
 const allData = computed(() => {
-    console.log(props.nha_cung_cap_list)
     if (search.value) {
         router.get(route('nhacungcap.index'), {search: search.value})
     } else {

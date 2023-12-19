@@ -26,7 +26,6 @@ function openModal() {
 }
 
 const allData = computed(() => {
-    console.log(props.don_vi_tinh_list)
     if (search.value) {
         router.get(route('donvitinh.index'), {search: search.value})
     } else {

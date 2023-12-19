@@ -11,7 +11,7 @@ class KhoRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,16 @@ class KhoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'id' => '',
+            'ten' => 'required|max:255',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'ten.required' => 'Tên không được để trống',
+            'ten.max' => 'Tên không được quá 255 ký tự',
         ];
     }
 }

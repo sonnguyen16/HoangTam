@@ -43,9 +43,13 @@ Route::prefix('/sanpham')->middleware('auth')->group(function (){
 
 Route::prefix('/kho')->middleware('auth')->group(function (){
     Route::get('/', [KhoController::class, 'index'])->name('kho.index');
+    Route::post('/store', [KhoController::class, 'store'])->name('kho.store');
+    Route::delete('/delete', [KhoController::class, 'delete'])->name('kho.delete');
 });
 
 Route::prefix('/donvitinh')->middleware('auth')->group(function (){
     Route::get('/', [DonViTinhController::class, 'index'])->name('donvitinh.index');
+    Route::post('/store', [DonViTinhController::class, 'store'])->name('donvitinh.store');
+    Route::delete('/delete', [DonViTinhController::class, 'delete'])->name('donvitinh.delete');
 });
 

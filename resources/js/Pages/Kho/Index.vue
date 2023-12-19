@@ -1,7 +1,7 @@
 <script setup>
 
 import MainLayout from "@/Layouts/MainLayout.vue";
-import {computed, onMounted, ref} from "vue";
+import {computed, onMounted, ref, watch} from "vue";
 import {router, useRemember} from "@inertiajs/vue3";
 import {useRoute} from "vue-router";
 import khoModal from "@/Pages/kho/khoModal.vue";
@@ -25,13 +25,21 @@ function openModal() {
     $('#khomodal').modal('show');
 }
 
-const allData = computed(() => {
-    if (search.value) {
-        router.get(route('kho.index'), {search: search.value})
-    } else {
-        return props.kho_list
-    }
+const allData = computed( () => {
+    return props.kho_list
 })
+
+watch(search, (value) => {
+    router.visit(route('kho.index', {search: value}), {
+        preserveState: true
+    })
+})
+
+function changePage(url) {
+    router.visit(url, {
+        preserveState: true
+    })
+}
 
 function editModal(kh) {
     kho.value = {
@@ -54,9 +62,6 @@ function delelekho(id) {
     }
 }
 
-function changePage(url) {
-    router.visit(url)
-}
 
 </script>
 

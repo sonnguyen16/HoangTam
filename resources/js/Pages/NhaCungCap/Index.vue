@@ -1,7 +1,7 @@
 <script setup>
 
 import MainLayout from "@/Layouts/MainLayout.vue";
-import {computed, onMounted, ref} from "vue";
+import {computed, onMounted, ref, watch} from "vue";
 import NhaCungCapModal from "@/Pages/NhaCungCap/NhaCungCapModal.vue";
 import {router, useRemember} from "@inertiajs/vue3";
 
@@ -32,13 +32,21 @@ function openModal() {
     $('#nhacungcapmodal').modal('show');
 }
 
-const allData = computed(() => {
-    if (search.value) {
-        router.get(route('nhacungcap.index'), {search: search.value})
-    } else {
-        return props.nha_cung_cap_list
-    }
+const allData = computed( () => {
+    return props.nha_cung_cap_list
 })
+
+watch(search, (value) => {
+    router.visit(route('nhacungcap.index', {search: value}), {
+        preserveState: true
+    })
+})
+
+function changePage(url) {
+    router.visit(url, {
+        preserveState: true
+    })
+}
 
 function editModal(kh) {
     nha_cung_cap.value = {
@@ -63,10 +71,6 @@ function deleleNhaCungCap(id) {
             }
         })
     }
-}
-
-function changePage(url) {
-    router.visit(url)
 }
 
 </script>
@@ -141,7 +145,7 @@ function changePage(url) {
                 <div class="float-right mt-3 mb-0">
                     <div class="row">
                         <div class="col-md-12 col-lg-12 text-center">
-                            <ul v-if="allData.total > 10" class="pagination">
+                            <ul v-if="allData?.total > 10" class="pagination">
                                 <li v-for="pageNumber in allData.links.slice(1, -1)" :key="pageNumber" class="page-item">
                                     <a
                                         class="page-link"

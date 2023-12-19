@@ -1,7 +1,7 @@
 <script setup>
 
 import MainLayout from "@/Layouts/MainLayout.vue";
-import {computed, onMounted, ref} from "vue";
+import {computed, onMounted, ref, watch} from "vue";
 import SanPhamModal from "@/Pages/sanpham/sanphamModal.vue";
 import {router, useRemember} from "@inertiajs/vue3";
 import {useRoute} from "vue-router";
@@ -34,13 +34,21 @@ function openModal() {
     $('#sanphammodal').modal('show');
 }
 
-const allData = computed(() => {
-    if (search.value) {
-        router.get(route('sanpham.index'), {search: search.value})
-    } else {
-        return props.san_pham_list
-    }
+const allData = computed( () => {
+    return props.san_pham_list
 })
+
+watch(search, (value) => {
+    router.visit(route('sanpham.index', {search: value}), {
+        preserveState: true
+    })
+})
+
+function changePage(url) {
+    router.visit(url, {
+        preserveState: true
+    })
+}
 
 function editModal(kh) {
     san_pham.value = {
@@ -65,10 +73,6 @@ function delelesanpham(id) {
             }
         })
     }
-}
-
-function changePage(url) {
-    router.visit(url)
 }
 
 </script>
@@ -141,7 +145,7 @@ function changePage(url) {
                 <div class="float-right mt-3 mb-0">
                     <div class="row">
                         <div class="col-md-12 col-lg-12 text-center">
-                            <ul v-if="allData.total > 10" class="pagination">
+                            <ul v-if="allData?.total > 10" class="pagination">
                                 <li v-for="pageNumber in allData.links.slice(1, -1)" :key="pageNumber" class="page-item">
                                     <a
                                         class="page-link"

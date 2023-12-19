@@ -1,7 +1,7 @@
 <script setup>
 
 import MainLayout from "@/Layouts/MainLayout.vue";
-import {computed, onMounted, ref} from "vue";
+import {computed, onMounted, ref, watch} from "vue";
 import KhachHangModal from "@/Pages/KhachHang/KhachHangModal.vue";
 import {router, useRemember} from "@inertiajs/vue3";
 import {useRoute} from "vue-router";
@@ -33,15 +33,25 @@ function openModal() {
     $('#khachhangmodal').modal('show');
 }
 
-const allData = computed(() => {
-    if (search.value) {
-        router.get(route('khachhang.index'), {search: search.value})
-    } else {
-        return props.khach_hang_list
-    }
+const allData = computed( () => {
+    return props.khach_hang_list
 })
 
+watch(search, (value) => {
+    router.visit(route('khachhang.index', {search: value}), {
+        preserveState: true
+    })
+})
+
+function changePage(url) {
+    router.visit(url, {
+        preserveState: true
+    })
+}
+
+
 function editModal(kh) {
+    console.log(search.value)
     khach_hang.value = {
         id: kh.id,
         ten: kh.ten,
@@ -66,9 +76,6 @@ function deleleKhachHang(id) {
     }
 }
 
-function changePage(url) {
-    router.visit(url)
-}
 
 </script>
 
@@ -122,7 +129,7 @@ function changePage(url) {
                         </tr>
                     </thead>
                     <tbody>
-                    <tr v-if="allData?.data.length == 0">
+                    <tr v-if="allData?.data?.length == 0">
                         <td colspan="6" class="text-center">Không có dữ liệu</td>
                     </tr>
 
@@ -142,7 +149,7 @@ function changePage(url) {
                 <div class="float-right mt-3 mb-0">
                     <div class="row">
                         <div class="col-md-12 col-lg-12 text-center">
-                            <ul v-if="allData.total > 10" class="pagination">
+                            <ul v-if="allData?.total > 10" class="pagination">
                                 <li v-for="pageNumber in allData.links.slice(1, -1)" :key="pageNumber" class="page-item">
                                     <a
                                         class="page-link"

@@ -29,12 +29,7 @@ class KhoController extends Controller
     public function store(KhoRequest $request)
     {
         $data = $request->validated();
-        if($request->has('id')  && $request->filled('id')){
-            $kho = Kho::find($request->id);
-            $kho->update($data);
-            return;
-        }
-        Kho::create($data);
+        Kho::updateOrCreate(['id' => $data['id']], $data);
     }
 
     public function delete(Request $request)

@@ -21,10 +21,12 @@ import NavLinkTree from "@/Components/app/NavLinkTree.vue";
                             <NavItem :href="route('donvitinh.index')" title="Quản lý đơn vị tính"/>
                         </ul>
                     </li>
-<!--                    <hr class="m-2 mr-4 ml-3">-->
-<!--                    <li class="nav-item menu-open ">-->
-<!--                        <NavLink title="Quản lý dịch vụ tòa nhà"/>-->
-<!--                        <ul class="nav nav-treeview">-->
+                    <hr class="m-2 mr-4 ml-3">
+                    <li class="nav-item menu-open ">
+                        <NavLink title="Nhập xuất kho"/>
+                        <ul class="nav nav-treeview">
+                            <NavItem :href="route('hoadon.index',{ loai: 0})" title="Phiếu nhập kho"/>
+                            <NavItem :href="route('hoadon.index',{ loai: 1})" title="Phiếu xuất kho"/>
 <!--                            <li class="nav-item">-->
 <!--                                <NavLinkTree title="Quản lý cư dân"/>-->
 <!--                                <ul class="nav nav-treeview ">-->
@@ -33,9 +35,9 @@ import NavLinkTree from "@/Components/app/NavLinkTree.vue";
 <!--                                </ul>-->
 <!--                            </li>-->
 
-<!--                        </ul>-->
-<!--                    </li>-->
-<!--                    <hr class="m-2 mr-4 ml-3">-->
+                        </ul>
+                    </li>
+                    <hr class="m-2 mr-4 ml-3">
                 </ul>
             </nav>
         </div>

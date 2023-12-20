@@ -22,19 +22,13 @@ class DonViTinhController extends Controller
         }
 
         $don_vi_tinh_list = $query->paginate(10)->withQueryString();
-
         return Inertia::render('DonViTinh/Index', compact('don_vi_tinh_list'));
     }
 
     public function store(DonViTinhRequest $request)
     {
         $data = $request->validated();
-        if($request->has('id')  && $request->filled('id')){
-            $don_vi_tinh = DonViTinh::find($request->id);
-            $don_vi_tinh->update($data);
-            return;
-        }
-        DonViTinh::create($data);
+        DonViTinh::updateOrCreate(['id' => $data['id']], $data);
     }
 
     public function delete(Request $request)

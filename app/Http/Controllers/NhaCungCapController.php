@@ -31,12 +31,7 @@ class NhaCungCapController extends Controller
     public function store(NhaCungCapRequest $request)
     {
         $data = $request->validated();
-        if($request->has('id')  && $request->filled('id')){
-            $nha_cung_cap = NhaCungCap::find($request->id);
-            $nha_cung_cap->update($data);
-            return;
-        }
-        NhaCungCap::create($data);
+        NhaCungCap::updateOrCreate(['id' => $data['id']], $data);
     }
 
     public function delete(Request $request)

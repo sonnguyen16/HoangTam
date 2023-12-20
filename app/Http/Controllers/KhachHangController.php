@@ -31,12 +31,7 @@ class KhachHangController extends Controller
     public function store(KhachHangRequest $request)
     {
         $data = $request->validated();
-        if($request->has('id')  && $request->filled('id')){
-            $khach_hang = KhachHang::find($request->id);
-            $khach_hang->update($data);
-            return;
-        }
-        KhachHang::create($data);
+        KhachHang::updateOrCreate(['id' => $data['id']], $data);
     }
 
     public function delete(Request $request)

@@ -7,6 +7,7 @@ use App\Http\Controllers\SanPhamController;
 use App\Http\Controllers\KhoController;
 use App\Http\Controllers\DonViTinhController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\HoaDonController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,4 +55,11 @@ Route::prefix('/donvitinh')->middleware('auth')->group(function (){
     Route::post('/store', [DonViTinhController::class, 'store'])->name('donvitinh.store');
     Route::delete('/delete', [DonViTinhController::class, 'delete'])->name('donvitinh.delete');
 });
+
+Route::prefix('/hoadon')->middleware('auth')->group(function (){
+    Route::get('/{loai?}', [HoaDonController::class, 'index'])->name('hoadon.index');
+    Route::post('/store', [HoaDonController::class, 'store'])->name('hoadon.store');
+    Route::delete('/delete', [HoaDonController::class, 'delete'])->name('hoadon.delete');
+});
+
 

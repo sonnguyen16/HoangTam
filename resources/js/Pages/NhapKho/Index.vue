@@ -2,71 +2,72 @@
 
 import MainLayout from "@/Layouts/MainLayout.vue";
 import {computed, onMounted, ref, watch} from "vue";
-import SanPhamModal from "@/Pages/sanpham/sanphamModal.vue";
 import {router, useRemember} from "@inertiajs/vue3";
-import {useRoute} from "vue-router";
+import NhapKhoModal from "@/Pages/NhapKho/NhapKhoModal.vue";
 
 const props = defineProps({
-    san_pham_list: Object,
-    don_vi_tinh_list: Object,
+    hoa_don_list: Object,
+    nha_cung_cap_list: Object,
+    kho_list: Object,
+    san_pham_list: Object
 })
 
-let san_pham = ref({
+let hoa_don = ref({
     id: "",
-    ten: "",
-    gia_ban: 0,
-    gia_nhap: 0,
-    don_vi_tinh_id: "",
-    mo_ta: "",
+    ma: "",
+    nha_cung_cap: {},
+    kho: {},
+    ghi_chu: "",
+    chi_tiet_hoa_don: [],
 })
 
 let search = ref("")
 
 function openModal() {
-    san_pham.value = {
+    hoa_don.value = {
         id: "",
-        ten: "",
-        gia_ban: 0,
-        gia_nhap: 0,
-        don_vi_tinh_id: "",
-        mo_ta: "",
+        ma: "",
+        nha_cung_cap: {},
+        kho: {},
+        ghi_chu: "",
+        chi_tiet_hoa_don: [],
     }
-    $('#sanphammodal').modal('show');
+    $('#hoadonmodal').modal('show');
 }
 
 const allData = computed( () => {
-    return props.san_pham_list
+    return props.hoa_don_list
 })
 
 watch(search, (value) => {
-    router.visit(route('sanpham.index', {search: value}), {
+    router.visit(route('hoadon.index', {search: value, loai: 0}), {
         preserveState: true
     })
 })
 
 function changePage(url) {
     router.visit(url, {
-        preserveState: true
+        preserveState: true,
     })
 }
 
 function editModal(kh) {
-    san_pham.value = {
+    hoa_don.value = {
         id: kh.id,
-        ten: kh.ten,
-        gia_ban: kh.gia_ban,
-        gia_nhap: kh.gia_nhap,
-        don_vi_tinh_id: kh.don_vi_tinh?.id,
-        mo_ta: kh.mo_ta,
+        ma: kh.ma,
+        nha_cung_cap: kh.nha_cung_cap,
+        kho: kh.kho,
+        ghi_chu: kh.ghi_chu,
+        chi_tiet_hoa_don: kh.chi_tiet_hoa_don,
     };
-    $('#sanphammodal').modal('show');
+    $('#hoadonmodal').modal('show');
 }
 
-function delelesanpham(id) {
-    if (confirm('Bạn có chắc chắn muốn xóa sản phẩm này không?')) {
-        router.delete(route('sanpham.delete', { id: id }), {
+function delelehoadon(id) {
+    if (confirm('Bạn có chắc chắn muốn xóa hóa đơn này không?')) {
+        router.delete(route('hoadon.delete', { id: id }), {
             onSuccess: () => {
-                router.visit(route('sanpham.index'))
+                router.visit(route('hoadon.index', { loai: 0 }))
             },
             onError: () => {
                 console.log(form.errors)
@@ -81,17 +82,17 @@ function delelesanpham(id) {
     <MainLayout>
         <div class="card shadow">
             <div class="card-body card-brc">
-                <p class="txt-color mb-0 font-weight-bold">Danh mục quản lý <i
-                    class="fa fa-angle-right mr-2 ml-2"></i> Quản lý sản phẩm</p>
+                <p class="txt-color mb-0 font-weight-bold">Nhập xuất kho <i
+                    class="fa fa-angle-right mr-2 ml-2"></i> Phiếu nhập kho</p>
             </div>
         </div>
 
         <div class="card shadow card-child" style="">
             <div class="card-body">
-                <h4 class="txt-color mb-3 text-red">Danh sách sản phẩm</h4>
+                <h4 class="txt-color mb-3 text-red">Danh sách phiếu nhập kho</h4>
                 <div class="row mt-3 mb-4">
                     <div class=" col-md-2">
-                        <a @click.prevent="openModal" class="btn btn-primary form-control">Thêm sản phẩm</a>
+                        <a @click.prevent="openModal" class="btn btn-primary form-control">Thêm phiếu nhập kho</a>
                     </div>
                     <div class="col-md-10">
                         <form >
@@ -103,7 +104,7 @@ function delelesanpham(id) {
                                     <div class="input-group">
                                         <input v-model="search" type="text" name="search"
                                                class="form-control"
-                                               placeholder="Tìm kiếm sản phẩm">
+                                               placeholder="Tìm kiếm hóa đơn">
                                         <div class="input-group-append">
                                             <button class="btn btn-primary" type="submit">
                                                 <i class="fas fa-search"></i>
@@ -118,26 +119,30 @@ function delelesanpham(id) {
                 <table class="table table-bordered  table-responsive-md">
                     <thead>
                     <tr>
-                        <th>Tên sản phẩm</th>
-                        <th>Giá bán</th>
-                        <th>Giá nhập</th>
-                        <th>Đơn vị tính</th>
+                        <th>Mã phiếu</th>
+                        <th>Nhà cung cấp</th>
+                        <th>Kho</th>
+                        <th>Ngày tạo</th>
+                        <th>Tổng tiền</th>
+                        <th>Ghi chú</th>
                         <th>Thao tác</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr v-if="allData?.data.length == 0">
-                        <td colspan="5" class="text-center">Không có dữ liệu</td>
+                        <td colspan="7" class="text-center">Không có dữ liệu</td>
                     </tr>
 
                     <tr :key="kh.id" v-else v-for="kh in allData?.data">
-                        <td>{{kh.ten}}</td>
-                        <td>{{kh.gia_ban.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</td>
-                        <td>{{kh.gia_nhap.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</td>
-                        <td>{{kh.don_vi_tinh.ten}}</td>
+                        <td >{{ kh.ma }}</td>
+                        <td >{{ kh.nha_cung_cap.ten }}</td>
+                        <td >{{ kh.kho.ten }}</td>
+                        <td >{{ kh.created_at }}</td>
+                        <td >{{ kh.tong_tien.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</td>
+                        <td >{{ kh.ghi_chu }}</td>
                         <td >
                             <a class="btn btn-primary btn-sm d-inline-block mr-2" @click.prevent="editModal(kh)">Sửa</a>
-                            <a class="btn btn-danger btn-sm" @click.prevent="delelesanpham(kh.id)">Xóa</a>
+                            <a class="btn btn-danger btn-sm" @click.prevent="delelehoadon(kh.id)">Xóa</a>
                         </td>
                     </tr>
                     </tbody>
@@ -162,7 +167,12 @@ function delelesanpham(id) {
 
             </div>
         </div>
-        <SanPhamModal :san_pham="san_pham" :don_vi_tinh_list="don_vi_tinh_list"/>
+        <NhapKhoModal
+            :hoa_don="hoa_don"
+            :nha_cung_cap_list="nha_cung_cap_list"
+            :kho_list="kho_list"
+            :san_pham_list="san_pham_list"
+        />
     </MainLayout>
 </template>
 <style scoped>

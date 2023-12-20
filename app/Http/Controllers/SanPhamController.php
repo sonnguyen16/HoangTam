@@ -33,12 +33,7 @@ class SanPhamController extends Controller
     public function store(SanPhamRequest $request)
     {
         $data = $request->validated();
-        if($request->has('id')  && $request->filled('id')){
-            $san_pham = SanPham::find($request->id);
-            $san_pham->update($data);
-            return;
-        }
-        SanPham::create($data);
+        SanPham::updateOrCreate(['id' => $data['id']], $data);
     }
 
     public function delete(Request $request)

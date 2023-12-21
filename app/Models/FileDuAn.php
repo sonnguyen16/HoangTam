@@ -5,10 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TonKho extends Model
+class FileDuAn extends Model
 {
     use HasFactory;
 
-    protected $table = 'ton_kho';
-
+    protected $table = 'file_du_an';
 }

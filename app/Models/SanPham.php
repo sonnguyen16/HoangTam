@@ -16,4 +16,9 @@ class SanPham extends Model
     {
         return $this->belongsTo(DonViTinh::class, 'don_vi_tinh_id')->first();
     }
+
+    public  function ton_kho()
+    {
+        return $this->hasMany(TonKho::class, 'san_pham_id')->get();
+    }
 }

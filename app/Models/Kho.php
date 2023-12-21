@@ -11,4 +11,9 @@ class Kho extends Model
     use HasFactory;
 
     protected $table = 'kho';
+
+    public function ton_kho()
+    {
+        return $this->hasMany(TonKho::class, 'kho_id')->get();
+    }
 }

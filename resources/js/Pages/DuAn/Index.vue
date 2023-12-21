@@ -2,72 +2,86 @@
 
 import MainLayout from "@/Layouts/MainLayout.vue";
 import {computed, onMounted, ref, watch} from "vue";
+import DuAnModal from "@/Pages/duan/DuAnModal.vue";
 import {router, useRemember} from "@inertiajs/vue3";
-import NhapKhoModal from "@/Pages/NhapKho/NhapKhoModal.vue";
 
 const props = defineProps({
-    hoa_don_list: Object,
-    nha_cung_cap_list: Object,
-    kho_list: Object,
-    san_pham_list: Object
+    du_an_list: Object,
+    nhan_vien_list: Object,
 })
 
-let hoa_don = ref({
+let du_an = ref({
     id: "",
-    ma: "",
-    nha_cung_cap: {},
-    kho: {},
-    ghi_chu: "",
-    chi_tiet_hoa_don: [],
+    ten: "",
+    ngay_bat_dau: "",
+    ngay_ket_thuc: "",
+    user_id: "",
+    mo_ta: "",
+    trang_thai: "",
+    parent_id: "",
+    children: [],
+    files: []
 })
 
 let search = ref("")
 
 function openModal() {
-    hoa_don.value = {
+    du_an.value = {
         id: "",
-        ma: "",
-        nha_cung_cap: {},
-        kho: {},
-        ghi_chu: "",
-        chi_tiet_hoa_don: [],
+        ten: "",
+        ngay_bat_dau: "",
+        ngay_ket_thuc: "",
+        user_id: "",
+        mo_ta: "",
+        trang_thai: "",
+        parent_id: "",
+        children: [],
+        files: []
     }
-    $('#hoadonmodal').modal('show');
+    $('#duanmodal').modal('show');
 }
 
 const allData = computed( () => {
-    return props.hoa_don_list
+    console.log(props.du_an_list)
+    return props.du_an_list
 })
 
 watch(search, (value) => {
-    router.visit(route('hoadon.index', {search: value, loai: 0}), {
+    router.visit(route('duan.index', {search: value}), {
         preserveState: true
     })
 })
 
 function changePage(url) {
     router.visit(url, {
-        preserveState: true,
+        preserveState: true
     })
 }
 
+
 function editModal(kh) {
-    hoa_don.value = {
+    console.log(search.value)
+    du_an.value = {
         id: kh.id,
-        ma: kh.ma,
-        nha_cung_cap: kh.nha_cung_cap,
-        kho: kh.kho,
-        ghi_chu: kh.ghi_chu,
-        chi_tiet_hoa_don: kh.chi_tiet_hoa_don,
-    };
-    $('#hoadonmodal').modal('show');
+        ten: kh.ten,
+        ngay_bat_dau: kh.ngay_bat_dau,
+        ngay_ket_thuc: kh.ngay_ket_thuc,
+        user_id: kh.user_id,
+        mo_ta: kh.mo_ta,
+        trang_thai: kh.trang_thai,
+        parent_id: kh.parent_id,
+        children: kh.children,
+        files: kh.files
+    }
+    $('#duanmodal').modal('show');
 }
 
-function delelehoadon(id) {
-    if (confirm('Bạn có chắc chắn muốn xóa hóa đơn này không?')) {
-        router.delete(route('hoadon.delete', { id: id }), {
+
+function deleleduan(id) {
+    if (confirm('Bạn có chắc chắn muốn xóa dự án này không?')) {
+        router.delete(route('duan.delete', { id: id }), {
             onSuccess: () => {
-                router.visit(route('hoadon.index', { loai: 0 }))
+                router.visit(route('duan.index'))
             },
             onError: () => {
                 console.log(form.errors)
@@ -76,23 +90,24 @@ function delelehoadon(id) {
     }
 }
 
+
 </script>
 
 <template>
     <MainLayout>
         <div class="card shadow">
             <div class="card-body card-brc">
-                <p class="txt-color mb-0 font-weight-bold">Nhập xuất kho <i
-                    class="fa fa-angle-right mr-2 ml-2"></i> Phiếu nhập kho</p>
+                <p class="txt-color mb-0 font-weight-bold">Danh mục quản lý <i
+                    class="fa fa-angle-right mr-2 ml-2"></i> Quản lý dự án</p>
             </div>
         </div>
 
         <div class="card shadow card-child" style="">
             <div class="card-body">
-                <h4 class="txt-color mb-3 text-red">Danh sách phiếu nhập kho</h4>
+                <h4 class="txt-color mb-3 text-red">Danh sách dự án</h4>
                 <div class="row mt-3 mb-4">
                     <div class=" col-md-2">
-                        <a @click.prevent="openModal" class="btn btn-primary form-control">Thêm phiếu nhập kho</a>
+                        <a @click.prevent="openModal" class="btn btn-primary form-control">Thêm dự án</a>
                     </div>
                     <div class="col-md-10">
                         <form >
@@ -104,7 +119,7 @@ function delelehoadon(id) {
                                     <div class="input-group">
                                         <input v-model="search" type="text" name="search"
                                                class="form-control"
-                                               placeholder="Tìm kiếm hóa đơn">
+                                               placeholder="Tìm kiếm dự án">
                                         <div class="input-group-append">
                                             <button class="btn btn-primary" type="submit">
                                                 <i class="fas fa-search"></i>
@@ -119,30 +134,35 @@ function delelehoadon(id) {
                 <table class="table table-bordered  table-responsive-md">
                     <thead>
                     <tr>
-                        <th>Mã phiếu</th>
-                        <th>Nhà cung cấp</th>
-                        <th>Kho</th>
-                        <th>Ngày tạo</th>
-                        <th>Tổng tiền</th>
-                        <th>Ghi chú</th>
+                        <th>Tên dự án</th>
+                        <th>Ngày bắt đầu</th>
+                        <th>Ngày kết thúc</th>
+                        <th>Người phụ trách</th>
+                        <th>Mô tả</th>
+                        <th>Trạng thái</th>
                         <th>Thao tác</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-if="allData?.data.length == 0">
+                    <tr v-if="allData?.length == 0">
                         <td colspan="7" class="text-center">Không có dữ liệu</td>
                     </tr>
 
-                    <tr :key="kh.id" v-else v-for="kh in allData?.data">
-                        <td >{{ kh.ma }}</td>
-                        <td >{{ kh.nha_cung_cap.ten }}</td>
-                        <td >{{ kh.kho.ten }}</td>
-                        <td >{{ kh.created_at }}</td>
-                        <td >{{ kh.tong_tien.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</td>
-                        <td >{{ kh.ghi_chu }}</td>
+                    <tr :key="kh.id" v-else v-for="kh in allData">
+                        <td >{{ kh.ten }}</td>
+                        <td >{{ kh.ngay_bat_dau }}</td>
+                        <td >{{ kh.ngay_ket_thuc }}</td>
+                        <td >{{ kh.nhan_vien.name }}</td>
+                        <td >{{ kh.mo_ta }}</td>
                         <td >
+                            <span v-if="kh.trang_thai == 0" class="badge badge-warning">Chưa triển khai</span>
+                            <span v-else-if="kh.trang_thai == 1" class="badge badge-primary">Đang triển khai</span>
+                            <span v-else-if="kh.trang_thai == 2" class="badge badge-success">Hoàn thành</span>
+                        </td>
+                        <td >
+<!--                        <a class="btn btn-primary btn-sm d-inline-block mr-2" @click.prevent="themHangMuc(kh.id)">Thêm hạng mục</a>-->
                             <a class="btn btn-primary btn-sm d-inline-block mr-2" @click.prevent="editModal(kh)">Sửa</a>
-                            <a class="btn btn-danger btn-sm" @click.prevent="delelehoadon(kh.id)">Xóa</a>
+                            <a class="btn btn-danger btn-sm" @click.prevent="deleleduan(kh.id)">Xóa</a>
                         </td>
                     </tr>
                     </tbody>
@@ -164,14 +184,10 @@ function delelehoadon(id) {
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
-        <NhapKhoModal
-            :hoa_don="hoa_don"
-            :nha_cung_cap_list="nha_cung_cap_list"
-            :kho_list="kho_list"
-            :san_pham_list="san_pham_list"
-        />
+        <DuAnModal :du_an="du_an" :users="nhan_vien_list"/>
     </MainLayout>
 </template>
 <style scoped>

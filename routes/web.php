@@ -8,6 +8,7 @@ use App\Http\Controllers\KhoController;
 use App\Http\Controllers\DonViTinhController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\HoaDonController;
+use App\Http\Controllers\DuAnController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,6 +61,12 @@ Route::prefix('/hoadon')->middleware('auth')->group(function (){
     Route::get('/{loai?}', [HoaDonController::class, 'index'])->name('hoadon.index');
     Route::post('/store', [HoaDonController::class, 'store'])->name('hoadon.store');
     Route::delete('/delete', [HoaDonController::class, 'delete'])->name('hoadon.delete');
+});
+
+Route::prefix('/duan')->middleware('auth')->group(function (){
+    Route::get('/', [DuAnController::class, 'index'])->name('duan.index');
+    Route::post('/store', [DuAnController::class, 'store'])->name('duan.store');
+    Route::delete('/delete', [DuAnController::class, 'delete'])->name('duan.delete');
 });
 
 

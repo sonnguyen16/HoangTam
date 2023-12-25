@@ -18,6 +18,7 @@ let san_pham = ref({
     gia_nhap: 0,
     don_vi_tinh_id: "",
     mo_ta: "",
+    dinh_muc: [],
 })
 
 let search = ref("")
@@ -30,6 +31,7 @@ function openModal() {
         gia_nhap: 0,
         don_vi_tinh_id: "",
         mo_ta: "",
+        dinh_muc: [],
     }
     $('#sanphammodal').modal('show');
 }
@@ -58,6 +60,7 @@ function editModal(kh) {
         gia_nhap: kh.gia_nhap,
         don_vi_tinh_id: kh.don_vi_tinh?.id,
         mo_ta: kh.mo_ta,
+        dinh_muc: kh.dinh_muc,
     };
     $('#sanphammodal').modal('show');
 }
@@ -162,7 +165,11 @@ function delelesanpham(id) {
 
             </div>
         </div>
-        <SanPhamModal :san_pham="san_pham" :don_vi_tinh_list="don_vi_tinh_list"/>
+        <SanPhamModal
+            :san_pham="san_pham"
+            :don_vi_tinh_list="don_vi_tinh_list"
+            :san_pham_list="san_pham_list"
+        />
     </MainLayout>
 </template>
 <style scoped>

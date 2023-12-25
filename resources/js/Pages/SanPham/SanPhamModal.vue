@@ -1,11 +1,13 @@
 <script setup>
-import {watchEffect} from "vue";
+import {ref, watchEffect} from "vue";
 import {router, useForm} from "@inertiajs/vue3";
 import InputError from "@/Components/InputError.vue";
+import {cloneDeep} from "lodash";
 
 const props = defineProps({
     san_pham: Object,
     don_vi_tinh_list: Object,
+    san_pham_list: Object
 })
 
 const form = useForm({
@@ -15,6 +17,15 @@ const form = useForm({
     gia_ban: 0,
     gia_nhap: 0,
     don_vi_tinh_id: "",
+    dinh_muc: [],
+})
+
+let item = ref({
+    id: "",
+    san_pham_id: props.san_pham.id,
+    san_pham: {},
+    so_luong: 0,
+    don_vi_tinh: {},
 })
 
 watchEffect(() => {
@@ -24,6 +35,7 @@ watchEffect(() => {
     form.gia_nhap = props.san_pham.gia_nhap
     form.don_vi_tinh_id = props.san_pham.don_vi_tinh_id
     form.mo_ta = props.san_pham.mo_ta
+    form.dinh_muc = props.san_pham.dinh_muc
 })
 const submit = () => {
     form.post(route('sanpham.store'), {
@@ -41,6 +53,37 @@ const closeModal = () => {
     $('#sanphammodal').modal('hide');
     form.reset();
     form.clearErrors();
+}
+
+function removeDinhMuc(id) {
+    form.dinh_muc = form.dinh_muc.filter(dm => dm.id !== id)
+}
+
+function addDinhMuc(){
+    if(!item.value.san_pham){
+        return;
+    }
+
+    if(item.value.so_luong === 0){
+        return;
+    }
+
+    form.dinh_muc.push({
+        id: "",
+        san_pham_id: props.san_pham.id,
+        san_pham: cloneDeep(item.value.san_pham),
+        so_luong: item.value.so_luong,
+        don_vi_tinh: item.value.san_pham.don_vi_tinh,
+    })
+
+    item.value = {
+        id: "",
+        san_pham_id: props.san_pham.id,
+        san_pham: {},
+        so_luong: 0,
+        gia: 0,
+        don_vi_tinh: {},
+    }
 }
 
 </script>
@@ -94,6 +137,53 @@ const closeModal = () => {
                             </select>
                         </div>
                         <InputError :message="form.errors.don_vi_tinh_id" />
+
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label>Sản phẩm</label>
+                                    <select class="form-control" v-model="item.san_pham">
+                                        <option v-for="sp in san_pham_list.data" :value="sp">{{ sp.ten }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="name">Số lượng</label>
+                                    <input type="number" v-model="item.so_luong" class="form-control" id="ghi_chu" />
+                                </div>
+                            </div>
+                            <div class="col">
+                                <button @click.prevent="addDinhMuc()"  class="btn btn-primary mt-[28px]">Thêm</button>
+                            </div>
+                        </div>
+
+                        <table class="table table-bordered  table-responsive-md">
+                            <thead>
+                            <tr>
+                                <th>Sản phẩm</th>
+                                <th>Số lượng</th>
+                                <th>Đơn vị tính</th>
+                                <th>Thao tác</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr v-if="form.dinh_muc.length === 0">
+                                <td colspan="6" class="text-center">Không có dữ liệu</td>
+                            </tr>
+
+                            <tr :key="cthd.id" v-else v-for="cthd in form.dinh_muc">
+                                <td >{{ cthd?.san_pham?.ten }}</td>
+                                <td >{{ cthd?.so_luong }}</td>
+                                <td >{{ cthd?.don_vi_tinh?.ten }}</td>
+                                <td >
+                                    <a class="btn btn-danger btn-sm" @click.prevent="removeDinhMuc(cthd.id)">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" :disabled="form.processing" class="btn btn-primary" >Lưu</button>

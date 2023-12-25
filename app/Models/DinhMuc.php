@@ -10,4 +10,9 @@ class DinhMuc extends Model
     use HasFactory;
 
     protected $table = 'dinh_muc';
+
+    public function san_pham()
+    {
+        return $this->belongsTo(SanPham::class, 'nguyen_lieu_id')->first();
+    }
 }

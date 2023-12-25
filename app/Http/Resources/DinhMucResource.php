@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class SanPhamResource extends JsonResource
+class DinhMucResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,12 +16,9 @@ class SanPhamResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'ten' => $this->ten,
-            'gia_ban' => $this->gia_ban,
-            'gia_nhap' => $this->gia_nhap,
-            'don_vi_tinh' => $this->don_vi_tinh(),
-            'mo_ta' => $this->mo_ta,
-            'dinh_muc' => DinhMucResource::collection($this->dinh_muc()),
+            'san_pham' => $this->san_pham(),
+            'so_luong' => $this->so_luong,
+            'don_vi_tinh' => $this->san_pham()->don_vi_tinh(),
         ];
     }
 }

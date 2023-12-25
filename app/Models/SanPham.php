@@ -21,4 +21,9 @@ class SanPham extends Model
     {
         return $this->hasMany(TonKho::class, 'san_pham_id')->get();
     }
+
+    public function dinh_muc()
+    {
+        return $this->hasMany(DinhMuc::class, 'san_pham_id')->get();
+    }
 }

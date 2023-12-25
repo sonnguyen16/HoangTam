@@ -1,8 +1,8 @@
 <script setup>
 
 import MainLayout from "@/Layouts/MainLayout.vue";
-import {computed, onMounted, ref, watch} from "vue";
-import {router, useRemember} from "@inertiajs/vue3";
+import {computed, ref, watch} from "vue";
+import {router} from "@inertiajs/vue3";
 import DonMuaModal from "@/Pages/DonMua/DonMuaModal.vue";
 
 const props = defineProps({
@@ -124,7 +124,7 @@ function deleledonhang(id) {
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-if="allData?.data.length == 0">
+                    <tr v-if="allData?.data.length === 0">
                         <td colspan="7" class="text-center">Không có dữ liệu</td>
                     </tr>
 

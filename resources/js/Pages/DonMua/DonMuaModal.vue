@@ -58,7 +58,7 @@ const closeModal = () => {
 }
 
 function removeChiTietdonhang(id) {
-    form.chi_tiet_don_hang = form.chi_tiet_don_hang.filter(cthd => cthd.id != id)
+    form.chi_tiet_don_hang = form.chi_tiet_don_hang.filter(cthd => cthd.id !== id)
 }
 
 function addChiTietdonhang(){

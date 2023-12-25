@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SanPhamRequest;
 use App\Http\Resources\SanPhamResource;
+use App\Models\DinhMuc;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -33,7 +34,19 @@ class SanPhamController extends Controller
     public function store(SanPhamRequest $request)
     {
         $data = $request->validated();
-        SanPham::updateOrCreate(['id' => $data['id']], $data);
+        $sanpham = SanPham::updateOrCreate(['id' => $data['id']], $data);
+
+        $dinh_muc = $request->dinh_muc;
+
+        if (!empty($dinh_muc)) {
+            foreach ($dinh_muc as $item) {
+                $item['san_pham_id'] = $sanpham->id;
+                $item['nguyen_lieu_id'] = $item['san_pham']['id'];
+                unset($item['san_pham']);
+                unset($item['don_vi_tinh']);
+                DinhMuc::updateOrCreate(['id' => $item['id']], $item);
+            }
+        }
     }
 
     public function delete(Request $request)

@@ -4,6 +4,7 @@ import MainLayout from "@/Layouts/MainLayout.vue";
 import {computed, onMounted, ref, watch} from "vue";
 import DuAnModal from "@/Pages/duan/DuAnModal.vue";
 import {router, useRemember} from "@inertiajs/vue3";
+import XemDuAnModal from "@/Pages/DuAn/XemDuAnModal.vue";
 
 const props = defineProps({
     du_an_list: Object,
@@ -16,6 +17,21 @@ let du_an = ref({
     ngay_bat_dau: "",
     ngay_ket_thuc: "",
     user_id: "",
+    nhan_vien: {},
+    mo_ta: "",
+    trang_thai: "",
+    parent_id: "",
+    children: [],
+    files: []
+})
+
+let hang_muc = ref({
+    id: "",
+    ten: "",
+    ngay_bat_dau: "",
+    ngay_ket_thuc: "",
+    user_id: "",
+    nhan_vien: {},
     mo_ta: "",
     trang_thai: "",
     parent_id: "",
@@ -25,8 +41,8 @@ let du_an = ref({
 
 let search = ref("")
 
-function openModal() {
-    du_an.value = {
+function openModal(id) {
+    hang_muc.value = {
         id: "",
         ten: "",
         ngay_bat_dau: "",
@@ -34,7 +50,7 @@ function openModal() {
         user_id: "",
         mo_ta: "",
         trang_thai: "",
-        parent_id: "",
+        parent_id: id,
         children: [],
         files: []
     }
@@ -42,7 +58,6 @@ function openModal() {
 }
 
 const allData = computed( () => {
-    console.log(props.du_an_list)
     return props.du_an_list
 })
 
@@ -60,8 +75,7 @@ function changePage(url) {
 
 
 function editModal(kh) {
-    console.log(search.value)
-    du_an.value = {
+    hang_muc.value = {
         id: kh.id,
         ten: kh.ten,
         ngay_bat_dau: kh.ngay_bat_dau,
@@ -90,6 +104,25 @@ function deleleduan(id) {
     }
 }
 
+function xemDuAnModal(id) {
+    const kh = props.du_an_list.find(item => item.id === id)
+    console.log(kh)
+    du_an.value = {
+        id: kh.id,
+        ten: kh.ten,
+        ngay_bat_dau: kh.ngay_bat_dau,
+        ngay_ket_thuc: kh.ngay_ket_thuc,
+        user_id: kh.user_id,
+        mo_ta: kh.mo_ta,
+        nhan_vien: kh.nhan_vien,
+        trang_thai: kh.trang_thai,
+        parent_id: kh.parent_id,
+        children: kh.children,
+        files: kh.files
+    }
+    $('#xemduanmodal').modal('show');
+}
+
 
 </script>
 
@@ -107,7 +140,7 @@ function deleleduan(id) {
                 <h4 class="txt-color mb-3 text-red">Danh sách dự án</h4>
                 <div class="row mt-3 mb-4">
                     <div class=" col-md-2">
-                        <a @click.prevent="openModal" class="btn btn-primary form-control">Thêm dự án</a>
+                        <a @click.prevent="openModal('')" class="btn btn-primary form-control">Thêm dự án</a>
                     </div>
                     <div class="col-md-10">
                         <form >
@@ -160,7 +193,7 @@ function deleleduan(id) {
                             <span v-else-if="kh.trang_thai == 2" class="badge badge-success">Hoàn thành</span>
                         </td>
                         <td >
-<!--                        <a class="btn btn-primary btn-sm d-inline-block mr-2" @click.prevent="themHangMuc(kh.id)">Thêm hạng mục</a>-->
+                            <a class="btn btn-primary btn-sm d-inline-block mr-2" @click.prevent="xemDuAnModal(kh.id)">Xem</a>
                             <a class="btn btn-primary btn-sm d-inline-block mr-2" @click.prevent="editModal(kh)">Sửa</a>
                             <a class="btn btn-danger btn-sm" @click.prevent="deleleduan(kh.id)">Xóa</a>
                         </td>
@@ -187,7 +220,15 @@ function deleleduan(id) {
 
             </div>
         </div>
-        <DuAnModal :du_an="du_an" :users="nhan_vien_list"/>
+        <DuAnModal
+            :du_an="hang_muc"
+            :users="nhan_vien_list"
+        />
+        <XemDuAnModal
+            :du_an="du_an"
+            @edit="editModal"
+            @add="openModal"
+        />
     </MainLayout>
 </template>
 <style scoped>

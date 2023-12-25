@@ -2,7 +2,6 @@
 import {watchEffect} from "vue";
 import {router, useForm} from "@inertiajs/vue3";
 import InputError from "@/Components/InputError.vue";
-import TreeItem from "@/Components/app/TreeItem.vue";
 
 const props = defineProps({
     du_an: Object,
@@ -38,7 +37,8 @@ const submit = () => {
     form.post(route('duan.store'), {
         onSuccess: () => {
             $('#duanmodal').modal('hide');
-            router.visit(route('duan.index'))
+            $('#xemduanmodal').modal('hide');
+            router.reload();
         },
         onError: () => {
             console.log(form.errors)
@@ -50,44 +50,21 @@ const closeModal = () => {
     $('#duanmodal').modal('hide');
     form.reset();
     form.clearErrors();
+    $('#files').val('');
 }
 
-const editHangMuc = (item) => {
-    form.id = item.id
-    form.ten = item.ten
-    form.ngay_bat_dau = item.ngay_bat_dau
-    form.ngay_ket_thuc = item.ngay_ket_thuc
-    form.user_id = item.user_id
-    form.mo_ta = item.mo_ta
-    form.trang_thai = item.trang_thai
-    form.parent_id = item.parent_id
-    form.files = item.files
-}
 
-const addHangMuc = (id) => {
-    form.parent_id = id
-    form.id = ""
-    form.ten = ""
-    form.ngay_bat_dau = ""
-    form.ngay_ket_thuc = ""
-    form.user_id = ""
-    form.mo_ta = ""
-    form.trang_thai = ""
-    form.files = []
-}
 </script>
 
 <template>
-    <div id="duanmodal" class="modal fade" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-lg" role="document">
+    <div id="duanmodal" class="modal fade" tabindex="-1" style="z-index: 1051" role="dialog">
+        <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <span v-if="du_an.id" class="txt-color mb-0 font-weight-bold">Sửa dự án</span>
                     <span v-else class="txt-color mb-0 font-weight-bold">Thêm dự án</span>
                     <button type="button" class="close" @click.prevent="closeModal">&times;</button>
                 </div>
-                <div class="row">
-                    <div class="col-8">
                         <form @submit.prevent="submit">
                             <div class="modal-body">
                                 <input type="hidden" v-model="form.id" id="id" class="form-control"/>
@@ -160,27 +137,10 @@ const addHangMuc = (id) => {
                                 <button type="button" class="btn btn-default" @click.prevent="closeModal">Hủy</button>
                             </div>
                         </form>
-                    </div>
-                    <div class="col-4">
-                        <div class="modal-body">
-                            <div class="d-flex justify-between">
-                                <label>Hạng mục</label>
-                                <a v-if="form.id || form.parent_id"  @click.prevent="addHangMuc(du_an.id)"><i class="fa fa-plus text-neutral-500"></i></a>
-                            </div>
-                            <TreeItem
-                                class="pl-[10px]"
-                                v-for="item in du_an.children"
-                                :key="item.id"
-                                :item="item"
-                                @edit="editHangMuc"
-                                @add="addHangMuc"
-                            />
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </div>
-    </div>
 </template>
 
 <style scoped>

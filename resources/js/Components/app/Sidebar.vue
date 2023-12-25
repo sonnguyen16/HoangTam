@@ -45,6 +45,13 @@ import NavLinkTree from "@/Components/app/NavLinkTree.vue";
                         </ul>
                     </li>
                     <hr class="m-2 mr-4 ml-3">
+                    <li class="nav-item menu-open ">
+                        <NavLink title="Đơn hàng"/>
+                        <ul class="nav nav-treeview">
+                            <NavItem :href="route('donhang.index',{ loai: 0})" title="Đơn mua"/>
+                            <NavItem :href="route('donhang.index',{ loai: 1})" title="Đơn bán"/>
+                        </ul>
+                    </li>
                 </ul>
             </nav>
         </div>

@@ -14,8 +14,8 @@ import NavLinkTree from "@/Components/app/NavLinkTree.vue";
                     <li class="nav-item menu-open">
                         <NavLink title="Đối tác"/>
                         <ul class="nav nav-treeview ">
-                            <NavItem :href="route('khachhang.index')" title="Quản lý khách hàng"/>
-                            <NavItem :href="route('nhacungcap.index')" title="Quản lý nhà cung cấp"/>
+                            <NavItem :href="route('khachhang.index')" title="Danh sách khách hàng"/>
+                            <NavItem :href="route('nhacungcap.index')" title="Danh sách nhà cung cấp"/>
                         </ul>
                     </li>
                     <hr class="m-2 mr-4 ml-3">
@@ -26,6 +26,7 @@ import NavLinkTree from "@/Components/app/NavLinkTree.vue";
                             <NavItem :href="route('kho.index')" title="Quản lý kho"/>
                             <NavItem :href="route('donvitinh.index')" title="Quản lý đơn vị tính"/>
                             <NavItem :href="route('duan.index')" title="Quản lý dự án"/>
+                            <NavItem :href="route('nhanvien.index')" title="Quản lý nhân viên"/>
                         </ul>
                     </li>
                     <hr class="m-2 mr-4 ml-3">

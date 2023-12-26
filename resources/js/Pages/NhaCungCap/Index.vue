@@ -79,8 +79,8 @@ function deleleNhaCungCap(id) {
     <MainLayout>
         <div class="card shadow">
             <div class="card-body card-brc">
-                <p class="txt-color mb-0 font-weight-bold">Danh mục quản lý <i
-                    class="fa fa-angle-right mr-2 ml-2"></i> Quản lý nhà cung cấp</p>
+                <p class="txt-color mb-0 font-weight-bold">Đối tác <i
+                    class="fa fa-angle-right mr-2 ml-2"></i> Danh sách nhà cung cấp</p>
             </div>
         </div>
 

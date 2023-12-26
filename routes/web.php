@@ -10,6 +10,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\HoaDonController;
 use App\Http\Controllers\DuAnController;
 use App\Http\Controllers\DonHangController;
+use App\Http\Controllers\NhanVienController;
 
 /*
 |--------------------------------------------------------------------------
@@ -74,6 +75,12 @@ Route::prefix('/duan')->middleware('auth')->group(function (){
     Route::get('/', [DuAnController::class, 'index'])->name('duan.index');
     Route::post('/store', [DuAnController::class, 'store'])->name('duan.store');
     Route::delete('/delete', [DuAnController::class, 'delete'])->name('duan.delete');
+});
+
+Route::prefix('/nhanvien')->middleware('auth')->group(function (){
+    Route::get('/', [NhanVienController::class, 'index'])->name('nhanvien.index');
+    Route::post('/store', [NhanVienController::class, 'store'])->name('nhanvien.store');
+    Route::delete('/delete', [NhanVienController::class, 'delete'])->name('nhanvien.delete');
 });
 
 

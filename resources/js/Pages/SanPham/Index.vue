@@ -91,7 +91,7 @@ function delelesanpham(id) {
 
         <div class="card shadow card-child" style="">
             <div class="card-body">
-                <h4 class="txt-color mb-3 text-red">Danh sách sản phẩm</h4>
+                <h4 class="txt-color mb-3">Danh sách sản phẩm</h4>
                 <div class="row mt-3 mb-4">
                     <div class=" col-md-2">
                         <a @click.prevent="openModal" class="btn btn-primary form-control">Thêm sản phẩm</a>
@@ -118,6 +118,7 @@ function delelesanpham(id) {
                         </form>
                     </div>
                 </div>
+
                 <table class="table table-bordered  table-responsive-md">
                     <thead>
                     <tr>

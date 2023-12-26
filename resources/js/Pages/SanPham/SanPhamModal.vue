@@ -157,7 +157,7 @@ function addDinhMuc(){
                                 <button @click.prevent="addDinhMuc()"  class="btn btn-primary mt-[28px]">Thêm</button>
                             </div>
                         </div>
-
+                        <h5 class="txt-color mb-3">Định mức</h5>
                         <table class="table table-bordered  table-responsive-md">
                             <thead>
                             <tr>

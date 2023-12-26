@@ -26,7 +26,7 @@ function toggle() {
 <template>
         <div>
             <div class="row mb-3">
-                <div :class="['col-3', {'child-container': isChild}]" :style="{ paddingLeft: `${level * 15}px` }">
+                <div :class="['col-lg-3 col-9', {'child-container': isChild}]" :style="{ paddingLeft: `${level * 15}px` }">
                     <span :style="{ width: `${level * 15}px` }" class="line-connector"></span>
                     <span v-if="isChild" class="vertical-line"></span>
                     <a @click.prevent="toggle"
@@ -36,23 +36,23 @@ function toggle() {
                         {{ item.ten }}
                     </a>
                 </div>
-                <div class="col-2">
+                <div class="col-lg-2 d-lg-block d-none">
                     <span>{{ item.ngay_bat_dau }}</span>
                 </div>
-                <div class="col-2">
+                <div class="col-lg-2 d-lg-block d-none">
                     <span>{{ item.ngay_ket_thuc }}</span>
                 </div>
-                <div class="col-2">
+                <div class="col-lg-2 d-lg-block d-none">
                     <span>
                         <span v-if="item.trang_thai == 0" class="badge badge-warning">Chưa thực hiện</span>
                         <span v-else-if="item.trang_thai == 1" class="badge badge-primary">Đang thực hiện</span>
                         <span v-else-if="item.trang_thai == 2" class="badge badge-success">Đã hoàn thành</span>
                     </span>
                 </div>
-                <div class="col-2">
+                <div class="col-lg-2 d-lg-block d-none">
                     <span>{{ item.nhan_vien?.name }}</span>
                 </div>
-                <div class="col">
+                <div class="col-lg-1 col-3">
                     <a @click.prevent=" emit('add', item.id);"><i class="fa fa-plus text-neutral-500 mr-3"></i></a>
                     <a @click.prevent=" emit('edit', item);"><i class="fa fa-edit text-neutral-500"></i></a>
                 </div>

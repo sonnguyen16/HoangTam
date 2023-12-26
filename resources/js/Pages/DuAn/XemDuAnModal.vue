@@ -32,36 +32,36 @@ const addHangMuc = (id) => {
                 </div>
                 <div class="modal-body space-y-2 px-4">
                     <div class="row">
-                        <div class="col-md-2">
+                        <div class="col-md-2 col-6">
                             <span class="font-bold ">Ngày bắt đầu</span>
                         </div>
-                        <div class="col-md-10">
+                        <div class="col-md-10 col-6">
                             <span>{{ du_an.ngay_bat_dau }}</span>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-2">
+                        <div class="col-md-2 col-6">
                             <span class="font-bold ">Ngày kết thúc</span>
                         </div>
-                        <div class="col-md-10">
+                        <div class="col-md-10 col-6">
                             <span>{{ du_an.ngay_ket_thuc }}</span>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-2 font-bold">Trạng thái</div>
-                        <div class="col-md-10">
+                        <div class="col-md-2 col-6 font-bold">Trạng thái</div>
+                        <div class="col-md-10 col-6">
                             <span v-if="du_an.trang_thai == 0" class="badge badge-warning">Chưa thực hiện</span>
                             <span v-else-if="du_an.trang_thai == 1" class="badge badge-primary">Đang thực hiện</span>
                             <span v-else-if="du_an.trang_thai == 2" class="badge badge-success">Đã hoàn thành</span>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-2 font-bold">Phụ trách</div>
-                        <div class="col-md-10">{{ du_an.nhan_vien?.name }}</div>
+                        <div class="col-md-2 col-6 font-bold">Phụ trách</div>
+                        <div class="col-md-10 col-6">{{ du_an.nhan_vien?.name }}</div>
                     </div>
                     <div class="row">
-                        <div class="col-md-2 font-bold">Mô tả</div>
-                        <div class="col-md-10">{{ du_an.mo_ta }}</div>
+                        <div class="col-md-2 col-6 font-bold">Mô tả</div>
+                        <div class="col-md-10 col-6">{{ du_an.mo_ta }}</div>
                     </div>
                     <div class="mt-4">
                         <div class="mb-3">

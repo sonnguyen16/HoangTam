@@ -69,7 +69,7 @@ const closeModal = () => {
 
                             <div class="form-group">
                                 <label for="password">Mật khẩu</label>
-                                <input :class="{ 'border-danger' : form.errors.password }" type="password" v-model="form.password" class="form-control" id="password" />
+                                <input autocomplete :class="{ 'border-danger' : form.errors.password }" type="password" v-model="form.password" class="form-control" id="password" />
                             </div>
                             <InputError :message="form.errors.password" />
 

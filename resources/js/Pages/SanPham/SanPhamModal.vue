@@ -7,7 +7,8 @@ import {cloneDeep} from "lodash";
 const props = defineProps({
     san_pham: Object,
     don_vi_tinh_list: Object,
-    san_pham_list: Object
+    san_pham_list: Object,
+    loai_san_pham_list: Object,
 })
 
 const form = useForm({
@@ -17,6 +18,7 @@ const form = useForm({
     gia_ban: 0,
     gia_nhap: 0,
     don_vi_tinh_id: "",
+    loai_san_pham_id: "",
     dinh_muc: [],
 })
 
@@ -34,6 +36,7 @@ watchEffect(() => {
     form.gia_ban = props.san_pham.gia_ban
     form.gia_nhap = props.san_pham.gia_nhap
     form.don_vi_tinh_id = props.san_pham.don_vi_tinh_id
+    form.loai_san_pham_id = props.san_pham.loai_san_pham_id
     form.mo_ta = props.san_pham.mo_ta
     form.dinh_muc = props.san_pham.dinh_muc
 })
@@ -161,6 +164,19 @@ onMounted(() => {
                                         </option>
                                     </select>
                                     <InputError :message="form.errors.don_vi_tinh_id" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Loại sản phẩm</label>
+                                <div>
+                                    <select :class="{ 'border-danger' : form.errors.loai_san_pham_id }" v-model="form.loai_san_pham_id" class="form-control" id="don_vi_tinh_id">
+                                        <option value="">Chọn loại sản phẩm</option>
+                                        <option v-for="loai_san_pham in loai_san_pham_list" :key="loai_san_pham.id" :value="loai_san_pham.id">
+                                            {{ loai_san_pham.ten }}
+                                        </option>
+                                    </select>
+                                    <InputError :message="form.errors.loai_san_pham_id" />
                                 </div>
                             </div>
                         </div>

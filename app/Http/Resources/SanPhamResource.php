@@ -20,6 +20,7 @@ class SanPhamResource extends JsonResource
             'gia_ban' => $this->gia_ban,
             'gia_nhap' => $this->gia_nhap,
             'don_vi_tinh' => $this->don_vi_tinh(),
+            'loai_san_pham' => $this->loai_san_pham(),
             'mo_ta' => $this->mo_ta,
             'dinh_muc' => DinhMucResource::collection($this->dinh_muc()),
         ];

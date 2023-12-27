@@ -2,7 +2,7 @@
 
 import NavLink from "@/Components/app/NavLink.vue";
 import NavItem from "@/Components/app/NavItem.vue";
-import NavLinkTree from "@/Components/app/NavLinkTree.vue";
+
 </script>
 
 <template>
@@ -22,6 +22,7 @@ import NavLinkTree from "@/Components/app/NavLinkTree.vue";
                     <li class="nav-item menu-open">
                         <NavLink title="Danh mục quản lý"/>
                         <ul class="nav nav-treeview ">
+                            <NavItem :href="route('loaisanpham.index')" title="Quản lý loại sản phẩm"/>
                             <NavItem :href="route('sanpham.index')" title="Quản lý sản phẩm"/>
                             <NavItem :href="route('kho.index')" title="Quản lý kho"/>
                             <NavItem :href="route('donvitinh.index')" title="Quản lý đơn vị tính"/>

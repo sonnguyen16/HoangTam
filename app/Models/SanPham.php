@@ -26,4 +26,9 @@ class SanPham extends Model
     {
         return $this->hasMany(DinhMuc::class, 'san_pham_id')->get();
     }
+
+    public function loai_san_pham()
+    {
+        return $this->belongsTo(LoaiSanPham::class, 'loai_san_pham_id')->first();
+    }
 }

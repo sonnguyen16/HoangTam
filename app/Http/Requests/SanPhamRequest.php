@@ -27,6 +27,7 @@ class SanPhamRequest extends FormRequest
             'gia_ban' => 'required|numeric|min:0',
             'gia_nhap' => 'required|numeric|min:0',
             'don_vi_tinh_id' => 'required|numeric',
+            'loai_san_pham_id' => 'required|numeric',
             'mo_ta' => 'required',
         ];
     }
@@ -44,6 +45,8 @@ class SanPhamRequest extends FormRequest
             'gia_nhap.min' => 'Giá nhập phải lớn hơn hoặc bằng 0',
             'don_vi_tinh_id.required' => 'Đơn vị tính không được để trống',
             'don_vi_tinh_id.numeric' => 'Đơn vị tính phải là số',
+            'loai_san_pham_id.required' => 'Loại sản phẩm không được để trống',
+            'loai_san_pham_id.numeric' => 'Loại sản phẩm phải là số',
             'mo_ta.required' => 'Mô tả không được để trống',
         ];
     }

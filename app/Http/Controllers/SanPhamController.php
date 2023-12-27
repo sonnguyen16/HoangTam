@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\SanPhamRequest;
 use App\Http\Resources\SanPhamResource;
 use App\Models\DinhMuc;
+use App\Models\LoaiSanPham;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -17,6 +18,7 @@ class SanPhamController extends Controller
     {
         $query = SanPham::query()->whereNull('deleted_at');
         $don_vi_tinh_list = DonViTinh::query()->whereNull('deleted_at')->get();
+        $loai_san_pham_list = LoaiSanPham::query()->whereNull('deleted_at')->get();
 
         if ($request->filled('search')) {
             $search = $request->search;
@@ -28,7 +30,7 @@ class SanPhamController extends Controller
         $san_pham_list = $query->paginate(10)->withQueryString();
         $san_pham_list = SanPhamResource::collection($san_pham_list);
 
-        return Inertia::render('SanPham/Index', compact('san_pham_list', 'don_vi_tinh_list'));
+        return Inertia::render('SanPham/Index', compact('san_pham_list', 'don_vi_tinh_list', 'loai_san_pham_list'));
     }
 
     public function store(SanPhamRequest $request)

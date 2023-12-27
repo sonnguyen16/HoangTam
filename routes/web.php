@@ -11,6 +11,7 @@ use App\Http\Controllers\HoaDonController;
 use App\Http\Controllers\DuAnController;
 use App\Http\Controllers\DonHangController;
 use App\Http\Controllers\NhanVienController;
+use App\Http\Controllers\LoaiSanPhamController;
 
 /*
 |--------------------------------------------------------------------------
@@ -81,6 +82,12 @@ Route::prefix('/nhanvien')->middleware('auth')->group(function (){
     Route::get('/', [NhanVienController::class, 'index'])->name('nhanvien.index');
     Route::post('/store', [NhanVienController::class, 'store'])->name('nhanvien.store');
     Route::delete('/delete', [NhanVienController::class, 'delete'])->name('nhanvien.delete');
+});
+
+Route::prefix('/loaisanpham')->middleware('auth')->group(function (){
+    Route::get('/', [LoaiSanPhamController::class, 'index'])->name('loaisanpham.index');
+    Route::post('/store', [LoaiSanPhamController::class, 'store'])->name('loaisanpham.store');
+    Route::delete('/delete', [LoaiSanPhamController::class, 'delete'])->name('loaisanpham.delete');
 });
 
 

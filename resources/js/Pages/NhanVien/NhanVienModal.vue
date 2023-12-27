@@ -53,25 +53,36 @@ const closeModal = () => {
                     <div class="modal-body">
                             <input type="hidden" v-model="form.id" id="id" class="form-control"/>
 
-                            <div class="form-group">
-                                <label for="name">Tên nhân viên</label>
-                                <input :class="{ 'border-danger' : form.errors.name }" type="text" v-model="form.name" class="form-control" id="ten" />
+                            <div class="form-group-container">
+                                <div class="form-group-title">
+                                    <span>Thông tin chung</span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="ten">Tên</label>
+                                    <div>
+                                        <input :class="{ 'border-danger' : form.errors.name }" type="text" v-model="form.name" class="form-control" id="ten" />
+                                        <InputError :message="form.errors.name" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <div>
+                                        <input :class="{ 'border-danger' : form.errors.email }" type="text" v-model="form.email" class="form-control" id="email" />
+                                        <InputError :message="form.errors.email" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="password">Mật khẩu</label>
+                                    <div>
+                                        <input autocomplete :class="{ 'border-danger' : form.errors.password }" type="password" v-model="form.password" class="form-control" id="password" />
+                                        <InputError :message="form.errors.password" />
+                                    </div>
+                                </div>
 
                             </div>
-                            <InputError :message="form.errors.name" />
-
-
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input :class="{ 'border-danger' : form.errors.email }" type="text" v-model="form.email" class="form-control" id="email" />
-                            </div>
-                            <InputError :message="form.errors.email" />
-
-                            <div class="form-group">
-                                <label for="password">Mật khẩu</label>
-                                <input autocomplete :class="{ 'border-danger' : form.errors.password }" type="password" v-model="form.password" class="form-control" id="password" />
-                            </div>
-                            <InputError :message="form.errors.password" />
 
                     </div>
                     <div class="modal-footer">

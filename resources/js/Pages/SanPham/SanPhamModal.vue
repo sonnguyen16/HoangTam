@@ -1,5 +1,5 @@
 <script setup>
-import {ref, watchEffect} from "vue";
+import {onMounted, ref, watchEffect} from "vue";
 import {router, useForm} from "@inertiajs/vue3";
 import InputError from "@/Components/InputError.vue";
 import {cloneDeep} from "lodash";
@@ -84,13 +84,21 @@ function addDinhMuc(){
         gia: 0,
         don_vi_tinh: {},
     }
+
+    $('#sanpham').val('').trigger('change');
 }
+
+onMounted(() => {
+    $('#sanpham').select2().on('change', function () {
+        item.value.san_pham = props.san_pham_list.data.find(sp => String(sp.id) === $(this).val())
+    })
+})
 
 </script>
 
 <template>
-    <div id="sanphammodal" class="modal fade" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
+    <div id="sanphammodal" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <span v-if="form.id" class="txt-color mb-0 font-weight-bold">Sửa sản phẩm</span>
@@ -101,89 +109,113 @@ function addDinhMuc(){
                     <div class="modal-body">
                         <input type="hidden" v-model="form.id" id="id" class="form-control"/>
 
-                        <div class="form-group">
-                            <label for="name">Tên sản phẩm</label>
-                            <input :class="{ 'border-danger' : form.errors.ten }" type="text" v-model="form.ten" class="form-control" id="ten" />
+                        <div class="form-group-container">
+                            <div class="form-group-title">
+                                <span>Thông tin chung</span>
+                            </div>
 
-                        </div>
-                        <InputError :message="form.errors.ten" />
+                            <div class="form-group">
+                                <label for="name">Tên sản phẩm</label>
+                                <div>
+                                    <input :class="{ 'border-danger' : form.errors.ten }" type="text" v-model="form.ten" class="form-control" id="ten" />
+                                    <InputError :message="form.errors.ten" />
+                                </div>
+                            </div>
 
-                        <div class="form-group">
-                            <label for="name">Mô tả</label>
-                            <input :class="{ 'border-danger' : form.errors.mo_ta }" type="text" v-model="form.mo_ta" class="form-control" id="mo_ta" />
-                        </div>
-                        <InputError :message="form.errors.mo_ta" />
+
+                            <div class="form-group">
+                                <label for="name">Mô tả</label>
+                                <div>
+                                    <textarea :class="{ 'border-danger' : form.errors.mo_ta }" type="text" v-model="form.mo_ta" class="form-control" id="mo_ta"></textarea>
+                                    <InputError :message="form.errors.mo_ta" />
+                                </div>
+                            </div>
 
 
-                        <div class="form-group">
-                            <label for="name">Giá nhập</label>
-                            <input :class="{ 'border-danger' : form.errors.gia_nhap }" type="number" v-model="form.gia_nhap" class="form-control" id="gia_nhap" />
-                        </div>
-                        <InputError :message="form.errors.gia_nhap" />
 
-                        <div class="form-group">
-                            <label for="name">Giá bán</label>
-                            <input :class="{ 'border-danger' : form.errors.gia_ban }" type="number" v-model="form.gia_ban" class="form-control" id="gia_ban" />
-                        </div>
-                        <InputError :message="form.errors.gia_ban" />
+                            <div class="form-group">
+                                <label for="name">Giá nhập</label>
+                                <div>
+                                    <input :class="{ 'border-danger' : form.errors.gia_nhap }" type="number" v-model="form.gia_nhap" class="form-control" id="gia_nhap" />
+                                    <InputError :message="form.errors.gia_nhap" />
+                                </div>
+                            </div>
 
-                        <div class="form-group">
-                            <label>Đơn vị tính</label>
-                            <select :class="{ 'border-danger' : form.errors.don_vi_tinh_id }" v-model="form.don_vi_tinh_id" class="form-control" id="don_vi_tinh_id">
-                                <option value="">Chọn đơn vị tính</option>
-                                <option v-for="don_vi_tinh in don_vi_tinh_list" :key="don_vi_tinh.id" :value="don_vi_tinh.id">
-                                    {{ don_vi_tinh.ten }}
-                                </option>
-                            </select>
-                        </div>
-                        <InputError :message="form.errors.don_vi_tinh_id" />
 
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    <label>Sản phẩm</label>
-                                    <select class="form-control" v-model="item.san_pham">
-                                        <option v-for="sp in san_pham_list.data" :value="sp">{{ sp.ten }}</option>
+                            <div class="form-group">
+                                <label for="name">Giá bán</label>
+                                <div>
+                                    <input :class="{ 'border-danger' : form.errors.gia_ban }" type="number" v-model="form.gia_ban" class="form-control" id="gia_ban" />
+                                    <InputError :message="form.errors.gia_ban" />
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label>Đơn vị tính</label>
+                                <div>
+                                    <select :class="{ 'border-danger' : form.errors.don_vi_tinh_id }" v-model="form.don_vi_tinh_id" class="form-control" id="don_vi_tinh_id">
+                                        <option value="">Chọn đơn vị tính</option>
+                                        <option v-for="don_vi_tinh in don_vi_tinh_list" :key="don_vi_tinh.id" :value="don_vi_tinh.id">
+                                            {{ don_vi_tinh.ten }}
+                                        </option>
                                     </select>
+                                    <InputError :message="form.errors.don_vi_tinh_id" />
                                 </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-group">
-                                    <label for="name">Số lượng</label>
-                                    <input type="number" v-model="item.so_luong" class="form-control" id="ghi_chu" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <button @click.prevent="addDinhMuc()"  class="btn btn-primary mt-[28px]">Thêm</button>
                             </div>
                         </div>
-                        <h5 class="txt-color mb-3">Định mức</h5>
-                        <table class="table table-bordered  table-responsive-md">
-                            <thead>
-                            <tr>
-                                <th>Sản phẩm</th>
-                                <th>Số lượng</th>
-                                <th>Đơn vị tính</th>
-                                <th>Thao tác</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr v-if="form.dinh_muc.length === 0">
-                                <td colspan="6" class="text-center">Không có dữ liệu</td>
-                            </tr>
 
-                            <tr :key="cthd.id" v-else v-for="cthd in form.dinh_muc">
-                                <td >{{ cthd?.san_pham?.ten }}</td>
-                                <td >{{ cthd?.so_luong }}</td>
-                                <td >{{ cthd?.don_vi_tinh?.ten }}</td>
-                                <td >
-                                    <a class="btn btn-danger btn-sm" @click.prevent="removeDinhMuc(cthd.id)">
-                                        <i class="fas fa-trash"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
+                        <div class="form-group-container mt-4">
+                            <div class="form-group-title">
+                                <span>Định mức</span>
+                            </div>
+
+                            <div class="row mb-4">
+                                <div class="col-5">
+                                    <div class="form-record">
+                                        <label>Sản phẩm</label>
+                                        <select class="form-control" v-model="item.san_pham" id="sanpham">
+                                            <option v-for="sp in san_pham_list.data" :value="sp.id">{{ sp.ten }}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-5">
+                                    <div class="form-record">
+                                        <label for="name">Số lượng</label>
+                                        <input type="number" v-model="item.so_luong" class="form-control" id="ghi_chu" />
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <button @click.prevent="addDinhMuc()"  class="btn btn-primary form-control">Thêm</button>
+                                </div>
+                            </div>
+                            <table class="table table-bordered  table-responsive-md">
+                                <thead>
+                                <tr>
+                                    <th>Sản phẩm</th>
+                                    <th>Số lượng</th>
+                                    <th>Đơn vị tính</th>
+                                    <th>Thao tác</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr v-if="form.dinh_muc.length === 0">
+                                    <td colspan="6" class="text-center">Không có dữ liệu</td>
+                                </tr>
+
+                                <tr :key="cthd.id" v-else v-for="cthd in form.dinh_muc">
+                                    <td >{{ cthd?.san_pham?.ten }}</td>
+                                    <td >{{ cthd?.so_luong }}</td>
+                                    <td >{{ cthd?.don_vi_tinh?.ten }}</td>
+                                    <td >
+                                        <a class="btn btn-danger btn-sm" @click.prevent="removeDinhMuc(cthd.id)">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" :disabled="form.processing" class="btn btn-primary" >Lưu</button>

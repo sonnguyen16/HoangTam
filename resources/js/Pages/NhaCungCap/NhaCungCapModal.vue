@@ -57,38 +57,51 @@ const closeModal = () => {
                     <div class="modal-body">
                         <input type="hidden" v-model="form.id" id="id" class="form-control"/>
 
-                        <div class="form-group">
-                            <label for="name">Tên nhà cung cấp</label>
-                            <input :class="{ 'border-danger' : form.errors.ten }" type="text" v-model="form.ten" class="form-control" id="ten" />
+                        <div class="form-group-container">
+                            <div class="form-group-title">
+                                <span>Thông tin chung</span>
+                            </div>
 
+                            <div class="form-group">
+                                <label for="ten">Tên</label>
+                                <div>
+                                    <input :class="{ 'border-danger' : form.errors.ten }" type="text" v-model="form.ten" class="form-control" id="ten" />
+                                    <InputError :message="form.errors.ten" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="dia_chi">Địa chỉ</label>
+                                <div>
+                                    <input :class="{ 'border-danger' : form.errors.dia_chi }" type="text" v-model="form.dia_chi" class="form-control" id="dia_chi" />
+                                    <InputError :message="form.errors.dia_chi" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="dien_thoai">Điện thoại</label>
+                                <div>
+                                    <input :class="{ 'border-danger' : form.errors.dien_thoai }" type="number" v-model="form.dien_thoai" class="form-control" id="dien_thoai" />
+                                    <InputError :message="form.errors.dien_thoai" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="website">Website</label>
+                                <div>
+                                    <input :class="{ 'border-danger' : form.errors.website }" type="text" v-model="form.website" class="form-control" id="website" />
+                                    <InputError :message="form.errors.website" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="ghi_chu">Ghi chú</label>
+                                <div>
+                                    <input type="text" v-model="form.ghi_chu" class="form-control" id="ghi_chu" />
+                                    <InputError :message="form.errors.ghi_chu" />
+                                </div>
+                            </div>
                         </div>
-                        <InputError :message="form.errors.ten" />
-
-
-                        <div class="form-group">
-                            <label for="name">Địa chỉ</label>
-                            <input :class="{ 'border-danger' : form.errors.dia_chi }" type="text" v-model="form.dia_chi" class="form-control" id="dia_chi" />
-
-                        </div>
-                        <InputError :message="form.errors.dia_chi" />
-
-                        <div class="form-group">
-                            <label for="name">Điện thoại</label>
-                            <input :class="{ 'border-danger' : form.errors.dien_thoai }" type="number" v-model="form.dien_thoai" class="form-control" id="dien_thoai" />
-                        </div>
-                        <InputError :message="form.errors.dien_thoai" />
-
-                        <div class="form-group">
-                            <label for="name">Website</label>
-                            <input :class="{ 'border-danger' : form.errors.website }" type="text" v-model="form.website" class="form-control" id="website" />
-                        </div>
-                        <InputError :message="form.errors.website" />
-
-                        <div class="form-group">
-                            <label for="name">Ghi chú</label>
-                            <input type="text" v-model="form.ghi_chu" class="form-control" id="ghi_chu" />
-                        </div>
-                        <InputError :message="form.errors.ghi_chu" />
 
                     </div>
                     <div class="modal-footer">

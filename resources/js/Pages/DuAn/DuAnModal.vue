@@ -58,7 +58,7 @@ const closeModal = () => {
 
 <template>
     <div id="duanmodal" class="modal fade" tabindex="-1" style="z-index: 1051" role="dialog">
-        <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <span v-if="du_an.id" class="txt-color mb-0 font-weight-bold">Sửa dự án</span>
@@ -69,67 +69,72 @@ const closeModal = () => {
                             <div class="modal-body">
                                 <input type="hidden" v-model="form.id" id="id" class="form-control"/>
 
-                                <div class="form-group">
-                                    <label for="name">Tên dự án</label>
-                                    <input :class="{ 'border-danger' : form.errors.ten }" type="text" v-model="form.ten" class="form-control" id="ten" />
+                                <div class="form-group-container">
+                                    <div class="form-group-title">
+                                        <span>Thông tin chung</span>
+                                    </div>
 
+                                    <div class="form-group">
+                                        <label for="name">Tên dự án</label>
+                                        <input :class="{ 'border-danger' : form.errors.ten }" type="text" v-model="form.ten" class="form-control" id="ten" />
+                                    </div>
+                                    <InputError :message="form.errors.ten" />
+
+                                    <div class="form-group">
+                                        <label for="name">Người phụ trách</label>
+                                        <select :class="{ 'border-danger' : form.errors.user_id }" v-model="form.user_id" class="form-control" id="user_id">
+                                            <option value="">Chọn người phụ trách</option>
+                                            <option v-for="user in users" :key="user.id" :value="user.id">{{ user.name }}</option>
+                                        </select>
+                                    </div>
+                                    <InputError :message="form.errors.user_id" />
+
+                                    <input type="hidden" v-model="form.parent_id">
+
+                                    <div class="form-group">
+                                        <label for="name">Ngày bắt đầu</label>
+                                        <input :class="{ 'border-danger' : form.errors.ngay_bat_dau }" type="date" v-model="form.ngay_bat_dau" class="form-control" id="ngay_bat_dau" />
+                                    </div>
+                                    <InputError :message="form.errors.ngay_bat_dau" />
+
+                                    <div class="form-group">
+                                        <label for="name">Ngày kết thúc</label>
+                                        <input :class="{ 'border-danger' : form.errors.ngay_ket_thuc }" type="date" v-model="form.ngay_ket_thuc" class="form-control" id="ngay_ket_thuc" />
+                                    </div>
+                                    <InputError :message="form.errors.ngay_ket_thuc" />
+
+                                    <div class="form-group">
+                                        <label for="name">Mô tả</label>
+                                        <textarea :class="{ 'border-danger' : form.errors.mo_ta }" type="text" v-model="form.mo_ta" class="form-control" id="mo_ta" ></textarea>
+                                    </div>
+                                    <InputError :message="form.errors.mo_ta" />
+
+                                    <div class="form-group">
+                                        <label for="name">Trạng thái</label>
+                                        <select :class="{ 'border-danger' : form.errors.trang_thai }" v-model="form.trang_thai" class="form-control" id="trang_thai">
+                                            <option value="">Chọn trạng thái</option>
+                                            <option value="0">Chưa triển khai</option>
+                                            <option value="1">Đang triển khai</option>
+                                            <option value="2">Đã hoàn thành</option>
+                                        </select>
+                                    </div>
+                                    <InputError :message="form.errors.trang_thai" />
+
+                                    <div class="form-group">
+                                        <label for="name">Tệp đính kèm</label>
+                                        <input accept=".png, .jpg, .jpeg, .gif, .bmp, .doc, .docx, .xls, .xlsx, .pdf"
+                                               type="file"
+                                               @input="form.files = $event.target.files"
+                                               id="files"
+                                               multiple/>
+                                    </div>
+
+                                    <ul>
+                                        <li v-for="file in form.files" :key="file.id">
+                                            <a :href="`/uploads/${file.ten}`" target="_blank">{{ file.ten }}</a>
+                                        </li>
+                                    </ul>
                                 </div>
-                                <InputError :message="form.errors.ten" />
-
-                                <input type="hidden" v-model="form.parent_id">
-
-                                <div class="form-group">
-                                    <label for="name">Ngày bắt đầu</label>
-                                    <input :class="{ 'border-danger' : form.errors.ngay_bat_dau }" type="date" v-model="form.ngay_bat_dau" class="form-control" id="ngay_bat_dau" />
-                                </div>
-                                <InputError :message="form.errors.ngay_bat_dau" />
-
-                                <div class="form-group">
-                                    <label for="name">Ngày kết thúc</label>
-                                    <input :class="{ 'border-danger' : form.errors.ngay_ket_thuc }" type="date" v-model="form.ngay_ket_thuc" class="form-control" id="ngay_ket_thuc" />
-                                </div>
-                                <InputError :message="form.errors.ngay_ket_thuc" />
-
-                                <div class="form-group">
-                                    <label for="name">Mô tả</label>
-                                    <textarea :class="{ 'border-danger' : form.errors.mo_ta }" type="text" v-model="form.mo_ta" class="form-control" id="mo_ta" ></textarea>
-                                </div>
-                                <InputError :message="form.errors.mo_ta" />
-
-                                <div class="form-group">
-                                    <label for="name">Trạng thái</label>
-                                    <select :class="{ 'border-danger' : form.errors.trang_thai }" v-model="form.trang_thai" class="form-control" id="trang_thai">
-                                        <option value="">Chọn trạng thái</option>
-                                        <option value="0">Chưa triển khai</option>
-                                        <option value="1">Đang triển khai</option>
-                                        <option value="2">Đã hoàn thành</option>
-                                    </select>
-                                </div>
-                                <InputError :message="form.errors.trang_thai" />
-
-                                <div class="form-group">
-                                    <label for="name">Người phụ trách</label>
-                                    <select :class="{ 'border-danger' : form.errors.user_id }" v-model="form.user_id" class="form-control" id="user_id">
-                                        <option value="">Chọn người phụ trách</option>
-                                        <option v-for="user in users" :key="user.id" :value="user.id">{{ user.name }}</option>
-                                    </select>
-                                </div>
-                                <InputError :message="form.errors.user_id" />
-
-                                <div class="form-group">
-                                    <label for="name">Tệp đính kèm</label>
-                                    <br>
-                                    <input accept=".png, .jpg, .jpeg, .gif, .bmp, .doc, .docx, .xls, .xlsx, .pdf"
-                                           type="file"
-                                           @input="form.files = $event.target.files"
-                                           id="files"
-                                           multiple/>
-                                </div>
-                                <ul>
-                                    <li v-for="file in form.files" :key="file.id">
-                                        <a :href="`/uploads/${file.ten}`" target="_blank">{{ file.ten }}</a>
-                                    </li>
-                                </ul>
 
                             </div>
                             <div class="modal-footer">
@@ -144,5 +149,7 @@ const closeModal = () => {
 </template>
 
 <style scoped>
-
+InputError{
+    margin-left: 130px;
+}
 </style>

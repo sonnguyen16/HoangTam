@@ -23,6 +23,7 @@ class SanPhamRequest extends FormRequest
     {
         return [
             'id' => '',
+            'ma' => 'required|max:255|unique:san_pham,ma',
             'ten' => 'required|max:255',
             'gia_ban' => 'required|numeric|min:0',
             'gia_nhap' => 'required|numeric|min:0',
@@ -35,6 +36,9 @@ class SanPhamRequest extends FormRequest
     public function messages()
     {
         return [
+            'ma.required' => 'Mã sản phẩm không được để trống',
+            'ma.max' => 'Mã sản phẩm không được quá 255 ký tự',
+            'ma.unique' => 'Mã sản phẩm đã tồn tại',
             'ten.required' => 'Tên sản phẩm không được để trống',
             'ten.max' => 'Tên sản phẩm không được quá 255 ký tự',
             'gia_ban.required' => 'Giá bán không được để trống',

@@ -1,7 +1,6 @@
 <script setup>
 import {watchEffect} from "vue";
 import {router, useForm} from "@inertiajs/vue3";
-import InputError from "@/Components/InputError.vue";
 
 const props = defineProps({
     nhan_vien: Object,
@@ -62,7 +61,7 @@ const closeModal = () => {
                                     <label for="ten">Tên</label>
                                     <div>
                                         <input :class="{ 'border-danger' : form.errors.name }" type="text" v-model="form.name" class="form-control" id="ten" />
-                                        <InputError :message="form.errors.name" />
+<!--                                        <InputError :message="form.errors.name" />-->
                                     </div>
                                 </div>
 
@@ -70,7 +69,7 @@ const closeModal = () => {
                                     <label for="email">Email</label>
                                     <div>
                                         <input :class="{ 'border-danger' : form.errors.email }" type="text" v-model="form.email" class="form-control" id="email" />
-                                        <InputError :message="form.errors.email" />
+<!--                                        <InputError :message="form.errors.email" />-->
                                     </div>
                                 </div>
 
@@ -78,7 +77,7 @@ const closeModal = () => {
                                     <label for="password">Mật khẩu</label>
                                     <div>
                                         <input autocomplete :class="{ 'border-danger' : form.errors.password }" type="password" v-model="form.password" class="form-control" id="password" />
-                                        <InputError :message="form.errors.password" />
+<!--                                        <InputError :message="form.errors.password" />-->
                                     </div>
                                 </div>
 

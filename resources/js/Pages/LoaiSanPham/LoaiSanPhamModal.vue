@@ -1,7 +1,6 @@
 <script setup>
 import {watchEffect} from "vue";
 import {router, useForm} from "@inertiajs/vue3";
-import InputError from "@/Components/InputError.vue";
 
 const props = defineProps({
     loai_san_pham: Object,
@@ -52,9 +51,8 @@ const closeModal = () => {
                         <div class="form-group">
                             <label for="name">Tên loại sản phẩm</label>
                             <input :class="{ 'border-danger' : form.errors.ten }" type="text" v-model="form.ten" class="form-control" id="ten" />
-
                         </div>
-                        <InputError :message="form.errors.ten" />
+<!--                        <InputError :message="form.errors.ten" />-->
 
                     </div>
                     <div class="modal-footer">

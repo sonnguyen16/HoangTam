@@ -78,7 +78,7 @@ const closeModal = () => {
                                         <label for="name">Tên dự án</label>
                                         <input :class="{ 'border-danger' : form.errors.ten }" type="text" v-model="form.ten" class="form-control" id="ten" />
                                     </div>
-                                    <InputError :message="form.errors.ten" />
+<!--                                    <InputError :message="form.errors.ten" />-->
 
                                     <div class="form-group">
                                         <label for="name">Người phụ trách</label>
@@ -87,7 +87,7 @@ const closeModal = () => {
                                             <option v-for="user in users" :key="user.id" :value="user.id">{{ user.name }}</option>
                                         </select>
                                     </div>
-                                    <InputError :message="form.errors.user_id" />
+<!--                                    <InputError :message="form.errors.user_id" />-->
 
                                     <input type="hidden" v-model="form.parent_id">
 
@@ -95,19 +95,19 @@ const closeModal = () => {
                                         <label for="name">Ngày bắt đầu</label>
                                         <input :class="{ 'border-danger' : form.errors.ngay_bat_dau }" type="date" v-model="form.ngay_bat_dau" class="form-control" id="ngay_bat_dau" />
                                     </div>
-                                    <InputError :message="form.errors.ngay_bat_dau" />
+<!--                                    <InputError :message="form.errors.ngay_bat_dau" />-->
 
                                     <div class="form-group">
                                         <label for="name">Ngày kết thúc</label>
                                         <input :class="{ 'border-danger' : form.errors.ngay_ket_thuc }" type="date" v-model="form.ngay_ket_thuc" class="form-control" id="ngay_ket_thuc" />
                                     </div>
-                                    <InputError :message="form.errors.ngay_ket_thuc" />
+<!--                                    <InputError :message="form.errors.ngay_ket_thuc" />-->
 
                                     <div class="form-group">
                                         <label for="name">Mô tả</label>
                                         <textarea :class="{ 'border-danger' : form.errors.mo_ta }" type="text" v-model="form.mo_ta" class="form-control" id="mo_ta" ></textarea>
                                     </div>
-                                    <InputError :message="form.errors.mo_ta" />
+<!--                                    <InputError :message="form.errors.mo_ta" />-->
 
                                     <div class="form-group">
                                         <label for="name">Trạng thái</label>
@@ -118,7 +118,7 @@ const closeModal = () => {
                                             <option value="2">Đã hoàn thành</option>
                                         </select>
                                     </div>
-                                    <InputError :message="form.errors.trang_thai" />
+<!--                                    <InputError :message="form.errors.trang_thai" />-->
 
                                     <div class="form-group">
                                         <label for="name">Tệp đính kèm</label>

@@ -1,7 +1,6 @@
 <script setup>
 import { ref, watchEffect, onMounted} from "vue";
 import {router, useForm} from "@inertiajs/vue3";
-import InputError from "@/Components/InputError.vue";
 import {cloneDeep} from "lodash";
 
 const props = defineProps({
@@ -118,7 +117,6 @@ onMounted(() => {
                                 <label for="ma">Mã đơn</label>
                                 <div>
                                     <input readonly :class="{ 'border-danger' : form.errors.ma }" type="text" v-model="form.ma" class="form-control" id="ma" />
-                                    <InputError :message="form.errors.ma" />
                                 </div>
                             </div>
 
@@ -129,7 +127,6 @@ onMounted(() => {
                                         <option value="">Chọn nhà cung cấp</option>
                                         <option v-for="ncc in nha_cung_cap_list" :key="ncc.id" :value="ncc.id">{{ ncc.ten }}</option>
                                     </select>
-                                    <InputError :message="form.errors.nha_cung_cap_id" />
                                 </div>
                             </div>
 
@@ -175,26 +172,28 @@ onMounted(() => {
                             <table class="table table-bordered  table-responsive-md">
                                 <thead>
                                 <tr>
-                                    <th>Sản phẩm</th>
+                                    <th>Mã sản phẩm</th>
+                                    <th>Tên sản phẩm</th>
                                     <th>Số lượng</th>
                                     <th>Đơn vị tính</th>
                                     <th>Đơn giá</th>
                                     <th>Thành tiền</th>
-                                    <th>Thao tác</th>
+                                    <th></th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr v-if="form.chi_tiet_don_hang.length === 0">
-                                    <td colspan="6" class="text-center">Không có dữ liệu</td>
+                                    <td colspan="7" class="text-center">Không có dữ liệu</td>
                                 </tr>
 
                                 <tr :key="cthd.id" v-else v-for="cthd in form.chi_tiet_don_hang">
-                                    <td >{{ cthd?.san_pham?.ten }}</td>
-                                    <td >{{ cthd?.so_luong }}</td>
-                                    <td >{{ cthd?.san_pham?.don_vi_tinh?.ten }}</td>
-                                    <td >{{ cthd?.gia.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</td>
-                                    <td >{{ cthd?.thanh_tien.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</td>
-                                    <td >
+                                    <td  class="ma">{{ cthd?.san_pham?.ma }}</td>
+                                    <td  class="ten">{{ cthd?.san_pham?.ten }}</td>
+                                    <td  class="quantity">{{ cthd?.so_luong }}</td>
+                                    <td  class="quantity">{{ cthd?.san_pham?.don_vi_tinh?.ten }}</td>
+                                    <td  class="money">{{ cthd?.gia.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</td>
+                                    <td  class="money">{{ cthd?.thanh_tien.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</td>
+                                    <td  class="action">
                                         <a class="btn btn-danger btn-sm" @click.prevent="removeChiTietdonhang(cthd.id)">
                                             <i class="fas fa-trash"></i>
                                         </a>

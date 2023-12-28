@@ -1,10 +1,10 @@
 <script setup>
 
 import MainLayout from "@/Layouts/MainLayout.vue";
-import {computed, onMounted, ref, watch} from "vue";
+import {computed,  ref, watch} from "vue";
 import SanPhamModal from "@/Pages/sanpham/sanphamModal.vue";
-import {router, useRemember} from "@inertiajs/vue3";
-import {useRoute} from "vue-router";
+import {router} from "@inertiajs/vue3";
+
 
 const props = defineProps({
     san_pham_list: Object,
@@ -14,6 +14,7 @@ const props = defineProps({
 
 let san_pham = ref({
     id: "",
+    ma: "",
     ten: "",
     gia_ban: 0,
     gia_nhap: 0,
@@ -28,6 +29,7 @@ let search = ref("")
 function openModal() {
     san_pham.value = {
         id: "",
+        ma: "",
         ten: "",
         gia_ban: 0,
         gia_nhap: 0,
@@ -58,6 +60,7 @@ function changePage(url) {
 function editModal(kh) {
     san_pham.value = {
         id: kh.id,
+        ma: kh.ma,
         ten: kh.ten,
         gia_ban: kh.gia_ban,
         gia_nhap: kh.gia_nhap,
@@ -128,6 +131,7 @@ function delelesanpham(id) {
                 <table class="table table-bordered  table-responsive-md">
                     <thead>
                     <tr>
+                        <th>Mã sản phẩm</th>
                         <th>Tên sản phẩm</th>
                         <th>Giá bán</th>
                         <th>Giá nhập</th>
@@ -137,11 +141,12 @@ function delelesanpham(id) {
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-if="allData?.data.length == 0">
+                    <tr v-if="allData?.data.length === 0">
                         <td colspan="5" class="text-center">Không có dữ liệu</td>
                     </tr>
 
                     <tr :key="kh.id" v-else v-for="kh in allData?.data">
+                        <td>{{kh.ma}}</td>
                         <td>{{kh.ten}}</td>
                         <td>{{kh.gia_ban.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</td>
                         <td>{{kh.gia_nhap.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</td>

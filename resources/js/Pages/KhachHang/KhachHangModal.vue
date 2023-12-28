@@ -1,7 +1,6 @@
 <script setup>
 import {watchEffect} from "vue";
 import {router, useForm} from "@inertiajs/vue3";
-import InputError from "@/Components/InputError.vue";
 
 const props = defineProps({
     khach_hang: Object,
@@ -66,7 +65,7 @@ const closeModal = () => {
                                    <label for="ten">Tên</label>
                                    <div>
                                        <input :class="{ 'border-danger' : form.errors.ten }" type="text" v-model="form.ten" class="form-control" id="ten" />
-                                       <InputError :message="form.errors.ten" />
+<!--                                       <InputError :message="form.errors.ten" />-->
                                    </div>
                                </div>
 
@@ -74,7 +73,7 @@ const closeModal = () => {
                                    <label for="dia_chi">Địa chỉ</label>
                                    <div>
                                        <input :class="{ 'border-danger' : form.errors.dia_chi }" type="text" v-model="form.dia_chi" class="form-control" id="dia_chi" />
-                                       <InputError :message="form.errors.dia_chi" />
+<!--                                       <InputError :message="form.errors.dia_chi" />-->
                                    </div>
                                </div>
 
@@ -82,7 +81,7 @@ const closeModal = () => {
                                    <label for="dien_thoai">Điện thoại</label>
                                    <div>
                                        <input :class="{ 'border-danger' : form.errors.dien_thoai }" type="number" v-model="form.dien_thoai" class="form-control" id="dien_thoai" />
-                                       <InputError :message="form.errors.dien_thoai" />
+<!--                                       <InputError :message="form.errors.dien_thoai" />-->
                                    </div>
                                </div>
 
@@ -90,7 +89,7 @@ const closeModal = () => {
                                    <label for="website">Website</label>
                                    <div>
                                        <input :class="{ 'border-danger' : form.errors.website }" type="text" v-model="form.website" class="form-control" id="website" />
-                                       <InputError :message="form.errors.website" />
+<!--                                       <InputError :message="form.errors.website" />-->
                                    </div>
                                </div>
 
@@ -98,7 +97,7 @@ const closeModal = () => {
                                    <label for="ghi_chu">Ghi chú</label>
                                    <div>
                                        <input type="text" v-model="form.ghi_chu" class="form-control" id="ghi_chu" />
-                                       <InputError :message="form.errors.ghi_chu" />
+<!--                                       <InputError :message="form.errors.ghi_chu" />-->
                                    </div>
                                </div>
                            </div>

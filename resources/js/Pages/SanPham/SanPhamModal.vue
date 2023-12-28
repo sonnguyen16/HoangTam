@@ -1,7 +1,6 @@
 <script setup>
 import {onMounted, ref, watchEffect} from "vue";
 import {router, useForm} from "@inertiajs/vue3";
-import InputError from "@/Components/InputError.vue";
 import {cloneDeep} from "lodash";
 
 const props = defineProps({
@@ -13,6 +12,7 @@ const props = defineProps({
 
 const form = useForm({
     id: "",
+    ma: "",
     ten: "",
     mo_ta: "",
     gia_ban: 0,
@@ -32,6 +32,7 @@ let item = ref({
 
 watchEffect(() => {
     form.id = props.san_pham.id
+    form.ma = props.san_pham.ma
     form.ten = props.san_pham.ten
     form.gia_ban = props.san_pham.gia_ban
     form.gia_nhap = props.san_pham.gia_nhap
@@ -118,10 +119,18 @@ onMounted(() => {
                             </div>
 
                             <div class="form-group">
+                                <label for="name">Mã sản phẩm</label>
+                                <div>
+                                    <input :class="{ 'border-danger' : form.errors.ma }" type="text" v-model="form.ma" class="form-control" id="ten" />
+                                    <!--                                    <InputError :message="form.errors.ten" />-->
+                                </div>
+                            </div>
+
+                            <div class="form-group">
                                 <label for="name">Tên sản phẩm</label>
                                 <div>
                                     <input :class="{ 'border-danger' : form.errors.ten }" type="text" v-model="form.ten" class="form-control" id="ten" />
-                                    <InputError :message="form.errors.ten" />
+<!--                                    <InputError :message="form.errors.ten" />-->
                                 </div>
                             </div>
 
@@ -130,7 +139,7 @@ onMounted(() => {
                                 <label for="name">Mô tả</label>
                                 <div>
                                     <textarea :class="{ 'border-danger' : form.errors.mo_ta }" type="text" v-model="form.mo_ta" class="form-control" id="mo_ta"></textarea>
-                                    <InputError :message="form.errors.mo_ta" />
+<!--                                    <InputError :message="form.errors.mo_ta" />-->
                                 </div>
                             </div>
 
@@ -140,7 +149,7 @@ onMounted(() => {
                                 <label for="name">Giá nhập</label>
                                 <div>
                                     <input :class="{ 'border-danger' : form.errors.gia_nhap }" type="number" v-model="form.gia_nhap" class="form-control" id="gia_nhap" />
-                                    <InputError :message="form.errors.gia_nhap" />
+<!--                                    <InputError :message="form.errors.gia_nhap" />-->
                                 </div>
                             </div>
 
@@ -149,7 +158,7 @@ onMounted(() => {
                                 <label for="name">Giá bán</label>
                                 <div>
                                     <input :class="{ 'border-danger' : form.errors.gia_ban }" type="number" v-model="form.gia_ban" class="form-control" id="gia_ban" />
-                                    <InputError :message="form.errors.gia_ban" />
+<!--                                    <InputError :message="form.errors.gia_ban" />-->
                                 </div>
                             </div>
 
@@ -163,7 +172,7 @@ onMounted(() => {
                                             {{ don_vi_tinh.ten }}
                                         </option>
                                     </select>
-                                    <InputError :message="form.errors.don_vi_tinh_id" />
+<!--                                    <InputError :message="form.errors.don_vi_tinh_id" />-->
                                 </div>
                             </div>
 
@@ -176,7 +185,7 @@ onMounted(() => {
                                             {{ loai_san_pham.ten }}
                                         </option>
                                     </select>
-                                    <InputError :message="form.errors.loai_san_pham_id" />
+<!--                                    <InputError :message="form.errors.loai_san_pham_id" />-->
                                 </div>
                             </div>
                         </div>
@@ -208,7 +217,8 @@ onMounted(() => {
                             <table class="table table-bordered  table-responsive-md">
                                 <thead>
                                 <tr>
-                                    <th>Sản phẩm</th>
+                                    <th>Mã sản phẩm</th>
+                                    <th>Tên sản phẩm</th>
                                     <th>Số lượng</th>
                                     <th>Đơn vị tính</th>
                                     <th>Thao tác</th>
@@ -220,10 +230,11 @@ onMounted(() => {
                                 </tr>
 
                                 <tr :key="cthd.id" v-else v-for="cthd in form.dinh_muc">
-                                    <td >{{ cthd?.san_pham?.ten }}</td>
-                                    <td >{{ cthd?.so_luong }}</td>
-                                    <td >{{ cthd?.don_vi_tinh?.ten }}</td>
-                                    <td >
+                                    <td class="ma">{{ cthd?.san_pham?.ma }}</td>
+                                    <td class="ten">{{ cthd?.san_pham?.ten }}</td>
+                                    <td class="quantity">{{ cthd?.so_luong }}</td>
+                                    <td class="quantity">{{ cthd?.don_vi_tinh?.ten }}</td>
+                                    <td class="action">
                                         <a class="btn btn-danger btn-sm" @click.prevent="removeDinhMuc(cthd.id)">
                                             <i class="fas fa-trash"></i>
                                         </a>

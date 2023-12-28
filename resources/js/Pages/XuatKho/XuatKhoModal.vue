@@ -1,7 +1,6 @@
 <script setup>
 import {onMounted, ref, watchEffect} from "vue";
 import {router, useForm} from "@inertiajs/vue3";
-import InputError from "@/Components/InputError.vue";
 import {cloneDeep} from "lodash";
 
 const props = defineProps({
@@ -61,7 +60,7 @@ const closeModal = () => {
 }
 
 function removeChiTietHoaDon(id) {
-    form.chi_tiet_hoa_don = form.chi_tiet_hoa_don.filter(cthd => cthd.id != id)
+    form.chi_tiet_hoa_don = form.chi_tiet_hoa_don.filter(cthd => cthd.id !== id)
 }
 
 function addChiTietHoaDon(){
@@ -121,7 +120,6 @@ onMounted(() => {
                                 <label for="ma">Mã phiếu</label>
                                 <div>
                                     <input readonly :class="{ 'border-danger' : form.errors.ma }" type="text" v-model="form.ma" class="form-control" id="ma" />
-                                    <InputError :message="form.errors.ma" />
                                 </div>
                             </div>
 
@@ -132,7 +130,6 @@ onMounted(() => {
                                         <option value="">Chọn khách hàng</option>
                                         <option v-for="kh in khach_hang_list" :key="kh.id" :value="kh.id">{{ kh.ten }}</option>
                                     </select>
-                                    <InputError :message="form.errors.khach_hang_id" />
                                 </div>
                             </div>
 
@@ -143,7 +140,6 @@ onMounted(() => {
                                         <option value="">Chọn kho</option>
                                         <option v-for="k in kho_list" :key="k.id" :value="k.id">{{ k.ten }}</option>
                                     </select>
-                                    <InputError :message="form.errors.kho_id" />
                                 </div>
                             </div>
 
@@ -189,26 +185,28 @@ onMounted(() => {
                             <table class="table table-bordered  table-responsive-md">
                                 <thead>
                                 <tr>
-                                    <th>Sản phẩm</th>
+                                    <th>Mã sản phẩm</th>
+                                    <th>Tên sản phẩm</th>
                                     <th>Số lượng</th>
                                     <th>Đơn vị tính</th>
                                     <th>Đơn giá</th>
                                     <th>Thành tiền</th>
-                                    <th>Thao tác</th>
+                                    <th></th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr v-if="form.chi_tiet_hoa_don.length == 0">
-                                    <td colspan="6" class="text-center">Không có dữ liệu</td>
+                                <tr v-if="form.chi_tiet_hoa_don.length === 0">
+                                    <td colspan="7" class="text-center">Không có dữ liệu</td>
                                 </tr>
 
                                 <tr :key="cthd.id" v-else v-for="cthd in form.chi_tiet_hoa_don">
-                                    <td >{{ cthd?.san_pham?.ten }}</td>
-                                    <td >{{ cthd?.so_luong }}</td>
-                                    <td >{{ cthd?.san_pham?.don_vi_tinh?.ten }}</td>
-                                    <td >{{ cthd?.gia.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</td>
-                                    <td >{{ cthd?.thanh_tien.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</td>
-                                    <td >
+                                    <td class="ma">{{ cthd?.san_pham?.ma }}</td>
+                                    <td class="ten" >{{ cthd?.san_pham?.ten }}</td>
+                                    <td class="quantity" >{{ cthd?.so_luong }}</td>
+                                    <td class="quantity">{{ cthd?.san_pham?.don_vi_tinh?.ten }}</td>
+                                    <td class="money">{{ cthd?.gia.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</td>
+                                    <td class="money">{{ cthd?.thanh_tien.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</td>
+                                    <td class="action" >
                                         <a class="btn btn-danger btn-sm" @click.prevent="removeChiTietHoaDon(cthd.id)">
                                             <i class="fas fa-trash"></i>
                                         </a>

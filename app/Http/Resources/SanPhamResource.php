@@ -16,6 +16,7 @@ class SanPhamResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'ma' => $this->ma,
             'ten' => $this->ten,
             'gia_ban' => $this->gia_ban,
             'gia_nhap' => $this->gia_nhap,

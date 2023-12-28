@@ -23,7 +23,8 @@ class SanPhamController extends Controller
         if ($request->filled('search')) {
             $search = $request->search;
             $query->where(function ($query) use ($search) {
-                $query->where('ten', 'like', "%{$search}%");
+                $query->where('ten', 'like', "%{$search}%")
+                    ->orWhere('ma', 'like', "%{$search}%");
             });
         }
 

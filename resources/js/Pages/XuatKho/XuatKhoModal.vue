@@ -2,12 +2,14 @@
 import {onMounted, ref, watchEffect} from "vue";
 import {router, useForm} from "@inertiajs/vue3";
 import {cloneDeep} from "lodash";
+import ChonDonHangModal from "@/Pages/XuatKho/ChonDonHangModal.vue";
 
 const props = defineProps({
     hoa_don: Object,
     khach_hang_list: Object,
     kho_list: Object,
-    san_pham_list: Object
+    san_pham_list: Object,
+    don_hang_ban_list: Object,
 })
 
 const form = useForm({
@@ -57,10 +59,12 @@ const closeModal = () => {
     form.reset();
     form.chi_tiet_hoa_don = [];
     form.clearErrors();
+    $('#sanpham').val(null).trigger('change');
+    $('#donhang').val(null).trigger('change');
 }
 
 function removeChiTietHoaDon(id) {
-    form.chi_tiet_hoa_don = form.chi_tiet_hoa_don.filter(cthd => cthd.id !== id)
+    form.chi_tiet_hoa_don = form.chi_tiet_hoa_don.filter((item, index) => index !== id)
 }
 
 function addChiTietHoaDon(){
@@ -91,10 +95,14 @@ function addChiTietHoaDon(){
 }
 
 onMounted(() => {
-    $('#sanpham').select2().on('change', function () {
+    $('#sanpham').select2({ placeholder: "Chọn sản phẩm" }).on('change', function () {
         item.value.san_pham = props.san_pham_list.data.find(sp => String(sp.id) === $(this).val())
     })
 })
+
+function xemDonHang() {
+    $('#chondonhangmodal').modal('show');
+}
 
 </script>
 
@@ -157,10 +165,16 @@ onMounted(() => {
                                 <span>Chi tiết phiếu xuất</span>
                             </div>
                             <div class="row mb-4">
-                                <div class="col-4">
+                                <div class="col-2">
+                                    <button @click.prevent="xemDonHang" class="btn form-control text-white">
+                                        Chọn đơn hàng
+                                    </button>
+                                </div>
+                                <div class="col-3">
                                     <div class="form-record">
                                         <label>Sản phẩm</label>
                                         <select class="form-control" v-model="item.san_pham" id="sanpham">
+                                            <option value="">Chọn sản phẩm</option>
                                             <option v-for="sp in san_pham_list.data" :value="sp.id">{{ sp.ten }}</option>
                                         </select>
                                     </div>
@@ -177,7 +191,7 @@ onMounted(() => {
                                         <input type="number" v-model="item.gia" class="form-control" id="gia" />
                                     </div>
                                 </div>
-                                <div class="col-2">
+                                <div class="col">
                                     <button @click.prevent="addChiTietHoaDon()"  class="btn btn-primary form-control">Thêm</button>
                                 </div>
                             </div>
@@ -195,11 +209,11 @@ onMounted(() => {
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr v-if="form.chi_tiet_hoa_don.length === 0">
+                                <tr v-if="form.chi_tiet_hoa_don?.length === 0">
                                     <td colspan="7" class="text-center">Không có dữ liệu</td>
                                 </tr>
 
-                                <tr :key="cthd.id" v-else v-for="cthd in form.chi_tiet_hoa_don">
+                                <tr :key="cthd.id" v-else v-for="(cthd,index) in form.chi_tiet_hoa_don">
                                     <td class="ma">{{ cthd?.san_pham?.ma }}</td>
                                     <td class="ten" >{{ cthd?.san_pham?.ten }}</td>
                                     <td class="quantity" >{{ cthd?.so_luong }}</td>
@@ -207,7 +221,7 @@ onMounted(() => {
                                     <td class="money">{{ cthd?.gia.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</td>
                                     <td class="money">{{ cthd?.thanh_tien.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</td>
                                     <td class="action" >
-                                        <a class="btn btn-danger btn-sm" @click.prevent="removeChiTietHoaDon(cthd.id)">
+                                        <a class="btn btn-danger btn-sm" @click.prevent="removeChiTietHoaDon(index)">
                                             <i class="fas fa-trash"></i>
                                         </a>
                                     </td>
@@ -225,6 +239,19 @@ onMounted(() => {
             </div>
         </div>
     </div>
+    <ChonDonHangModal
+        :don_hang_ban_list="don_hang_ban_list"
+        @addChiTietDonHang="form.chi_tiet_hoa_don.push(
+            ...$event.map(item => ({
+                id: '',
+                hoa_don_id: props.hoa_don.id,
+                san_pham: item.san_pham,
+                so_luong: item.so_luong,
+                gia: item.gia,
+                thanh_tien: item.gia * item.so_luong,
+            }))
+        )"
+    />
 </template>
 
 <style scoped>

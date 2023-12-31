@@ -11,4 +11,14 @@ class TonKho extends Model
 
     protected $table = 'ton_kho';
 
+    public function kho()
+    {
+        return $this->belongsTo(Kho::class, "kho_id");
+    }
+
+    public function san_pham()
+    {
+        return $this->belongsTo(SanPham::class, "san_pham_id");
+    }
+
 }

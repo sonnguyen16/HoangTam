@@ -34,6 +34,7 @@ import NavItem from "@/Components/app/NavItem.vue";
                     <li class="nav-item menu-open ">
                         <NavLink title="Nhập xuất kho"/>
                         <ul class="nav nav-treeview">
+                            <NavItem :href="route('tonkho.index')" title="Điều chỉnh tồn kho"/>
                             <NavItem :href="route('hoadon.index',{ loai: 0})" title="Phiếu nhập kho"/>
                             <NavItem :href="route('hoadon.index',{ loai: 1})" title="Phiếu xuất kho"/>
 <!--                            <li class="nav-item">-->

@@ -35,8 +35,8 @@ import NavItem from "@/Components/app/NavItem.vue";
                         <NavLink title="Nhập xuất kho"/>
                         <ul class="nav nav-treeview">
                             <NavItem :href="route('tonkho.index')" title="Điều chỉnh tồn kho"/>
-                            <NavItem :href="route('hoadon.index',{ loai: 0})" title="Phiếu nhập kho"/>
-                            <NavItem :href="route('hoadon.index',{ loai: 1})" title="Phiếu xuất kho"/>
+                            <NavItem :href="route('hoadon.index',{ loai: 'nhapkho'})" title="Phiếu nhập kho"/>
+                            <NavItem :href="route('hoadon.index',{ loai: 'xuatkho'})" title="Phiếu xuất kho"/>
 <!--                            <li class="nav-item">-->
 <!--                                <NavLinkTree title="Quản lý cư dân"/>-->
 <!--                                <ul class="nav nav-treeview ">-->
@@ -51,16 +51,16 @@ import NavItem from "@/Components/app/NavItem.vue";
                     <li class="nav-item menu-open ">
                         <NavLink title="Đơn hàng"/>
                         <ul class="nav nav-treeview">
-                            <NavItem :href="route('donhang.index',{ loai: 0})" title="Đơn mua"/>
-                            <NavItem :href="route('donhang.index',{ loai: 1})" title="Đơn bán"/>
+                            <NavItem :href="route('donhang.index',{ loai: 'donmua'})" title="Đơn mua"/>
+                            <NavItem :href="route('donhang.index',{ loai: 'donban'})" title="Đơn bán"/>
                         </ul>
                     </li>
                     <hr class="m-2 mr-4 ml-3">
                     <li class="nav-item menu-open ">
                         <NavLink title="Phiếu thu chi"/>
                         <ul class="nav nav-treeview">
-                            <NavItem :href="route('phieuthuchi.index',{ loai: 0})" title="Phiếu thu"/>
-                            <NavItem :href="route('phieuthuchi.index',{ loai: 1})" title="Phiếu chi"/>
+                            <NavItem :href="route('phieuthuchi.index',{ loai: 'phieuthu'})" title="Phiếu thu"/>
+                            <NavItem :href="route('phieuthuchi.index',{ loai: 'phieuchi'})" title="Phiếu chi"/>
                         </ul>
                     </li>
                 </ul>

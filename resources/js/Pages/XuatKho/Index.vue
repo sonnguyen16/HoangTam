@@ -1,9 +1,8 @@
 <script setup>
 
 import MainLayout from "@/Layouts/MainLayout.vue";
-import {computed, onMounted, ref, watch} from "vue";
-import HoaDonModal from "@/Pages/NhapKho/NhapKhoModal.vue";
-import {router, useRemember} from "@inertiajs/vue3";
+import {computed, ref, watch} from "vue";
+import {router} from "@inertiajs/vue3";
 import XuatKhoModal from "@/Pages/XuatKho/XuatKhoModal.vue";
 
 const props = defineProps({
@@ -42,7 +41,7 @@ const allData = computed( () => {
 })
 
 watch(search, (value) => {
-    router.visit(route('hoadon.index', {search: value, loai: 1}), {
+    router.visit(route('hoadon.index', {search: value, loai: 'xuatkho'}), {
         preserveState: true
     })
 })
@@ -69,7 +68,7 @@ function delelehoadon(id) {
     if (confirm('Bạn có chắc chắn muốn xóa hóa đơn này không?')) {
         router.delete(route('hoadon.delete', { id: id }), {
             onSuccess: () => {
-                router.visit(route('hoadon.index', { loai: 1 }))
+                router.visit(route('hoadon.index', { loai: 'xuatkho' }))
             },
             onError: () => {
                 console.log(form.errors)
@@ -131,7 +130,7 @@ function delelehoadon(id) {
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-if="allData?.data.length == 0">
+                    <tr v-if="allData?.data.length === 0">
                         <td colspan="7" class="text-center">Không có dữ liệu</td>
                     </tr>
 

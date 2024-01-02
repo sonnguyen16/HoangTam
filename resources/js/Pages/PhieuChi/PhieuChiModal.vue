@@ -23,7 +23,6 @@ const form = useForm({
     loai: 1,
 })
 
-
 watchEffect(() => {
     form.id = props.phieu_chi.id;
     form.ma = props.phieu_chi.ma;
@@ -42,7 +41,7 @@ const submit = () => {
     form.post(route('phieuthuchi.store'), {
         onSuccess: () => {
             $('#phieuthuchimodal').modal('hide');
-            router.visit(route('phieuthuchi.index', { loai: 1}))
+            router.visit(route('phieuthuchi.index', { loai: 'phieuchi'}))
         },
         onError: () => {
             console.log(form.errors)
@@ -60,21 +59,21 @@ onMounted(() => {
     $('#nha_cung_cap_id').select2({
         placeholder: "Chọn nhà cung cấp",
         width: '100%',
-    }).on('change', function (e) {
+    }).on('change', function () {
         form.nha_cung_cap_id = $(this).val();
     })
 
     $('#du_an_id').select2({
         placeholder: "Chọn dự án",
         width: '100%',
-    }).on('change', function (e) {
+    }).on('change', function () {
         form.du_an_id = $(this).val();
     })
 
     $('#nhan_vien_id').select2({
         placeholder: "Chọn nhân viên",
         width: '100%',
-    }).on('change', function (e) {
+    }).on('change', function () {
         form.nhan_vien_id = $(this).val();
     })
 })
@@ -124,7 +123,7 @@ onUpdated(() => {
                             </div>
 
                             <div class="form-group">
-                                <label for="nha_cung_cap_id">nhà cung cấp</label>
+                                <label for="nha_cung_cap_id">Nhà cung cấp</label>
                                 <div>
                                     <select :class="{'border-danger' : form.errors.nha_cung_cap_id }" v-model="form.nha_cung_cap_id" id="nha_cung_cap_id">
                                         <option value="">Chọn nhà cung cấp</option>

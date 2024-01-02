@@ -37,7 +37,7 @@ const allData = computed( () => {
 })
 
 watch(search, (value) => {
-    router.visit(route('donhang.index', {search: value, loai: 0}), {
+    router.visit(route('donhang.index', {search: value, loai: 'donmua'}), {
         preserveState: true
     })
 })
@@ -63,7 +63,7 @@ function deleledonhang(id) {
     if (confirm('Bạn có chắc chắn muốn xóa đơn hàng này không?')) {
         router.delete(route('donhang.delete', { id: id }), {
             onSuccess: () => {
-                router.visit(route('donhang.index', { loai: 0 }))
+                router.visit(route('donhang.index', { loai: 'donmua' }))
             },
             onError: () => {
                 console.log(form.errors)

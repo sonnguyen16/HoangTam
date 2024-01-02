@@ -1,9 +1,9 @@
 <script setup>
 
 import MainLayout from "@/Layouts/MainLayout.vue";
-import {computed, onMounted, ref, watch} from "vue";
+import {computed, ref, watch} from "vue";
 import DuAnModal from "@/Pages/duan/DuAnModal.vue";
-import {router, useRemember} from "@inertiajs/vue3";
+import {router} from "@inertiajs/vue3";
 import XemDuAnModal from "@/Pages/DuAn/XemDuAnModal.vue";
 
 const props = defineProps({
@@ -177,7 +177,7 @@ function xemDuAnModal(id) {
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-if="allData?.length == 0">
+                    <tr v-if="allData?.length === 0">
                         <td colspan="7" class="text-center">Không có dữ liệu</td>
                     </tr>
 
@@ -188,9 +188,9 @@ function xemDuAnModal(id) {
                         <td >{{ kh.nhan_vien.name }}</td>
                         <td >{{ kh.mo_ta }}</td>
                         <td >
-                            <span v-if="kh.trang_thai == 0" class="badge badge-warning">Chưa triển khai</span>
-                            <span v-else-if="kh.trang_thai == 1" class="badge badge-primary">Đang triển khai</span>
-                            <span v-else-if="kh.trang_thai == 2" class="badge badge-success">Hoàn thành</span>
+                            <span v-if="kh.trang_thai === 0" class="badge badge-warning">Chưa triển khai</span>
+                            <span v-else-if="kh.trang_thai === 1" class="badge badge-primary">Đang triển khai</span>
+                            <span v-else-if="kh.trang_thai === 2" class="badge badge-success">Hoàn thành</span>
                         </td>
                         <td >
                             <a class="btn btn-primary btn-sm d-inline-block mr-2" @click.prevent="xemDuAnModal(kh.id)">Xem</a>

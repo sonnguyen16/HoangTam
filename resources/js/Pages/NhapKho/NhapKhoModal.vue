@@ -44,7 +44,7 @@ const submit = () => {
     form.post(route('hoadon.store'), {
         onSuccess: () => {
             $('#hoadonmodal').modal('hide');
-            router.visit(route('hoadon.index', { loai: 0}))
+            router.visit(route('hoadon.index', { loai: 'nhapkho'}))
         },
         onError: () => {
             console.log(form.errors)

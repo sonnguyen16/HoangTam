@@ -47,7 +47,7 @@ const allData = computed( () => {
 })
 
 watch(search, (value) => {
-    router.visit(route('phieuthuchi.index', {search: value, loai: 0}), {
+    router.visit(route('phieuthuchi.index', {search: value, loai: 'phieuthu'}), {
         preserveState: true
     })
 })
@@ -77,7 +77,7 @@ function delelephieuthuchi(id) {
     if (confirm('Bạn có chắc chắn muốn xóa phiếu thu này không?')) {
         router.delete(route('phieuthuchi.delete', { id: id }), {
             onSuccess: () => {
-                router.visit(route('phieuthuchi.index', { loai: 1 }))
+                router.visit(route('phieuthuchi.index', { loai: 'phieuthu' }))
             },
             onError: () => {
                 console.log(form.errors)

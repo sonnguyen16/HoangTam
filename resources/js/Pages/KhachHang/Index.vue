@@ -1,10 +1,10 @@
 <script setup>
 
 import MainLayout from "@/Layouts/MainLayout.vue";
-import {computed, onMounted, ref, watch} from "vue";
+import {computed, ref, watch} from "vue";
 import KhachHangModal from "@/Pages/KhachHang/KhachHangModal.vue";
-import {router, useRemember} from "@inertiajs/vue3";
-import {useRoute} from "vue-router";
+import {router} from "@inertiajs/vue3";
+
 
 const props = defineProps({
     khach_hang_list: Object,
@@ -129,7 +129,7 @@ function deleleKhachHang(id) {
                         </tr>
                     </thead>
                     <tbody>
-                    <tr v-if="allData?.data?.length == 0">
+                    <tr v-if="allData?.data?.length === 0">
                         <td colspan="6" class="text-center">Không có dữ liệu</td>
                     </tr>
 

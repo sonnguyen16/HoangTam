@@ -1,9 +1,8 @@
 <script setup>
 
 import MainLayout from "@/Layouts/MainLayout.vue";
-import {computed, onMounted, ref, watch} from "vue";
-import {router, useRemember} from "@inertiajs/vue3";
-import {useRoute} from "vue-router";
+import {computed, ref, watch} from "vue";
+import {router} from "@inertiajs/vue3";
 import khoModal from "@/Pages/kho/khoModal.vue";
 
 const props = defineProps({
@@ -111,7 +110,7 @@ function delelekho(id) {
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-if="allData?.data.length == 0">
+                    <tr v-if="allData?.data.length === 0">
                         <td colspan="6" class="text-center">Không có dữ liệu</td>
                     </tr>
 

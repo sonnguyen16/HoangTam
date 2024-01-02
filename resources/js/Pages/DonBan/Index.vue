@@ -1,8 +1,8 @@
 <script setup>
 
 import MainLayout from "@/Layouts/MainLayout.vue";
-import {computed, onMounted, ref, watch} from "vue";
-import {router, useRemember} from "@inertiajs/vue3";
+import {computed, ref, watch} from "vue";
+import {router} from "@inertiajs/vue3";
 import DonBanModal from "@/Pages/DonBan/DonBanModal.vue";
 
 const props = defineProps({
@@ -37,7 +37,7 @@ const allData = computed( () => {
 })
 
 watch(search, (value) => {
-    router.visit(route('donhang.index', {search: value, loai: 1}), {
+    router.visit(route('donhang.index', {search: value, loai: 'donban'}), {
         preserveState: true
     })
 })
@@ -63,7 +63,7 @@ function deleledonhang(id) {
     if (confirm('Bạn có chắc chắn muốn xóa đơn hàng này không?')) {
         router.delete(route('donhang.delete', { id: id }), {
             onSuccess: () => {
-                router.visit(route('donhang.index', { loai: 0 }))
+                router.visit(route('donhang.index', { loai: 'donban' }))
             },
             onError: () => {
                 console.log(form.errors)
@@ -124,7 +124,7 @@ function deleledonhang(id) {
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-if="allData?.data.length == 0">
+                    <tr v-if="allData?.data.length === 0">
                         <td colspan="7" class="text-center">Không có dữ liệu</td>
                     </tr>
 

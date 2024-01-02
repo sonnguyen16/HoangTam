@@ -1,9 +1,9 @@
 <script setup>
 
 import MainLayout from "@/Layouts/MainLayout.vue";
-import {computed, onMounted, ref, watch} from "vue";
+import {computed, ref, watch} from "vue";
 import NhaCungCapModal from "@/Pages/NhaCungCap/NhaCungCapModal.vue";
-import {router, useRemember} from "@inertiajs/vue3";
+import {router} from "@inertiajs/vue3";
 
 const props = defineProps({
     nha_cung_cap_list: Object,
@@ -125,7 +125,7 @@ function deleleNhaCungCap(id) {
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-if="allData?.data.length == 0">
+                    <tr v-if="allData?.data.length === 0">
                         <td colspan="6" class="text-center">Không có dữ liệu</td>
                     </tr>
 

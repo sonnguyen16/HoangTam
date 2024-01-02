@@ -18,6 +18,7 @@ class DonHangController extends Controller
 {
     public function index(Request $request, $loai = null)
     {
+        $request->loai == 'donmua' ? $loai = '0' : $loai = '1';
         $query = DonHang::query()->whereNull('deleted_at')->where('loai', $loai);
         $nha_cung_cap_list = NhaCungCap::query()->whereNull('deleted_at')->get();
         $khach_hang_list = KhachHang::query()->whereNull('deleted_at')->get();

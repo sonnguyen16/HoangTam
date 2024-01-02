@@ -1,5 +1,5 @@
 <script setup>
-import {defineEmits, ref, watch, watchEffect} from "vue";
+import {defineEmits} from "vue";
 import TreeItem from "@/Components/app/TreeItem.vue";
 
 const props = defineProps({
@@ -50,9 +50,9 @@ const addHangMuc = (id) => {
                     <div class="row">
                         <div class="col-md-2 col-6 font-bold">Trạng thái</div>
                         <div class="col-md-10 col-6">
-                            <span v-if="du_an.trang_thai == 0" class="badge badge-warning">Chưa thực hiện</span>
-                            <span v-else-if="du_an.trang_thai == 1" class="badge badge-primary">Đang thực hiện</span>
-                            <span v-else-if="du_an.trang_thai == 2" class="badge badge-success">Đã hoàn thành</span>
+                            <span v-if="du_an.trang_thai === 0" class="badge badge-warning">Chưa thực hiện</span>
+                            <span v-else-if="du_an.trang_thai === 1" class="badge badge-primary">Đang thực hiện</span>
+                            <span v-else-if="du_an.trang_thai === 2" class="badge badge-success">Đã hoàn thành</span>
                         </div>
                     </div>
                     <div class="row">

@@ -40,7 +40,7 @@ const allData = computed( () => {
 })
 
 watch(search, (value) => {
-    router.visit(route('hoadon.index', {search: value, loai: 0}), {
+    router.visit(route('hoadon.index', {search: value, loai: 'nhapkho'}), {
         preserveState: true
     })
 })
@@ -67,7 +67,7 @@ function delelehoadon(id) {
     if (confirm('Bạn có chắc chắn muốn xóa hóa đơn này không?')) {
         router.delete(route('hoadon.delete', { id: id }), {
             onSuccess: () => {
-                router.visit(route('hoadon.index', { loai: 0 }))
+                router.visit(route('hoadon.index', { loai: 'nhapkho' }))
             },
             onError: () => {
                 console.log(form.errors)

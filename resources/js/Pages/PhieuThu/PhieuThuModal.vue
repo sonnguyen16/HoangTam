@@ -43,7 +43,7 @@ const submit = () => {
     form.post(route('phieuthuchi.store'), {
         onSuccess: () => {
             $('#phieuthuchimodal').modal('hide');
-            router.visit(route('phieuthuchi.index', { loai: 0}))
+            router.visit(route('phieuthuchi.index', { loai: 'phieuthu'}))
         },
         onError: () => {
             console.log(form.errors)
@@ -61,21 +61,21 @@ onMounted(() => {
     $('#khach_hang_id').select2({
         placeholder: "Chọn khách hàng",
         width: '100%',
-    }).on('change', function (e) {
+    }).on('change', function () {
         form.khach_hang_id = $(this).val();
     })
 
     $('#du_an_id').select2({
         placeholder: "Chọn dự án",
         width: '100%',
-    }).on('change', function (e) {
+    }).on('change', function () {
         form.du_an_id = $(this).val();
     })
 
     $('#nhan_vien_id').select2({
         placeholder: "Chọn nhân viên",
         width: '100%',
-    }).on('change', function (e) {
+    }).on('change', function () {
         form.nhan_vien_id = $(this).val();
     })
 })

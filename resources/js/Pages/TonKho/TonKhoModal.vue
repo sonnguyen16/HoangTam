@@ -1,5 +1,5 @@
 <script setup>
-import {onMounted, ref, watch, watchEffect} from "vue";
+import {onMounted,  watchEffect} from "vue";
 import {router, useForm} from "@inertiajs/vue3";
 
 const props = defineProps({

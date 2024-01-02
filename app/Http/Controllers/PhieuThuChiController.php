@@ -17,6 +17,7 @@ class PhieuThuChiController extends Controller
 {
     public function index(Request $request, $loai = null)
     {
+        $request->loai == 'phieuthu' ? $loai = '0' : $loai = '1';
         $query = PhieuThuChi::query()->whereNull('deleted_at')->where('loai', $loai)
             ->with(['nha_cung_cap', 'khach_hang', 'nhan_vien', 'du_an', 'loai_thu_chi']);
 

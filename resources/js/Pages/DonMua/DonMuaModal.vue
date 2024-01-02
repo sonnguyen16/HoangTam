@@ -36,7 +36,7 @@ watchEffect(() => {
 })
 const submit = () => {
     if(!props.don_hang.id){
-        form.ma = "DH" + new Date().getTime().toString();
+        form.ma = "DH" + Date.now().toString().slice(-6);
     }
     form.post(route('donhang.store'), {
         onSuccess: () => {

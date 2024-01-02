@@ -13,6 +13,7 @@ use App\Http\Controllers\DonHangController;
 use App\Http\Controllers\NhanVienController;
 use App\Http\Controllers\LoaiSanPhamController;
 use App\Http\Controllers\TonKhoController;
+use App\Http\Controllers\PhieuThuChiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -95,6 +96,12 @@ Route::prefix('/tonkho')->middleware('auth')->group(function (){
     Route::get('/', [TonKhoController::class, 'index'])->name('tonkho.index');
     Route::post('/store', [TonKhoController::class, 'store'])->name('tonkho.store');
     Route::delete('/delete', [TonKhoController::class, 'delete'])->name('tonkho.delete');
+});
+
+Route::prefix('/phieuthuchi')->middleware('auth')->group(function (){
+    Route::get('/{loai?}', [PhieuThuChiController::class, 'index'])->name('phieuthuchi.index');
+    Route::post('/store', [PhieuThuChiController::class, 'store'])->name('phieuthuchi.store');
+    Route::delete('/delete', [PhieuThuChiController::class, 'delete'])->name('phieuthuchi.delete');
 });
 
 

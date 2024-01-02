@@ -137,8 +137,8 @@ function delelehoadon(id) {
 
                     <tr :key="kh.id" v-else v-for="kh in allData?.data">
                         <td >{{ kh.ma }}</td>
-                        <td >{{ kh.khach_hang.ten }}</td>
-                        <td >{{ kh.kho.ten }}</td>
+                        <td >{{ kh.khach_hang?.ten }}</td>
+                        <td >{{ kh.kho?.ten }}</td>
                         <td >{{ kh.created_at }}</td>
                         <td >{{ kh.tong_tien.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</td>
                         <td >{{ kh.ghi_chu }}</td>

@@ -6,7 +6,7 @@ import NavItem from "@/Components/app/NavItem.vue";
 </script>
 
 <template>
-    <aside class="main-sidebar sidebar-collapse sidebar-light-primary elevation-3">
+    <aside class="main-sidebar sidebar-collapse sidebar-light-primary elevation-3 overflow-auto">
         <div class="sidebar">
             <nav class="mt-3">
                 <ul class="nav nav-pills nav-child-indent nav-sidebar flex-column" data-widget="treeview" role="menu"
@@ -53,6 +53,14 @@ import NavItem from "@/Components/app/NavItem.vue";
                         <ul class="nav nav-treeview">
                             <NavItem :href="route('donhang.index',{ loai: 0})" title="Đơn mua"/>
                             <NavItem :href="route('donhang.index',{ loai: 1})" title="Đơn bán"/>
+                        </ul>
+                    </li>
+                    <hr class="m-2 mr-4 ml-3">
+                    <li class="nav-item menu-open ">
+                        <NavLink title="Phiếu thu chi"/>
+                        <ul class="nav nav-treeview">
+                            <NavItem :href="route('phieuthuchi.index',{ loai: 0})" title="Phiếu thu"/>
+                            <NavItem :href="route('phieuthuchi.index',{ loai: 1})" title="Phiếu chi"/>
                         </ul>
                     </li>
                 </ul>

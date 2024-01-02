@@ -17,9 +17,9 @@ class HoaDonResource extends JsonResource
         return [
             'id' => $this->id,
             'ma' => $this->ma,
-            'nha_cung_cap' => $this->nha_cung_cap(),
-            'khach_hang' => $this->khach_hang(),
-            'kho' => $this->kho(),
+            'nha_cung_cap' => $this->nha_cung_cap()->first(),
+            'khach_hang' => $this->khach_hang()->first(),
+            'kho' => $this->kho()->first(),
             'chi_tiet_hoa_don' => ChiTietHoaDonResource::collection($this->chi_tiet_hoa_don()),
             'tong_tien' => $this->tong_tien(),
             'created_at' => $this->created_at->format('d/m/Y H:i:s'),

@@ -95,6 +95,11 @@ th, td{
     width: 20%;
 }
 
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+
 @media screen and (min-width: 1024px) {
   .main-sidebar {
     z-index: 1000;

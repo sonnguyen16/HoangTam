@@ -31,7 +31,14 @@ class HoaDonController extends Controller
         if ($request->filled('search')) {
             $search = $request->search;
             $query->where(function ($query) use ($search) {
-                $query->where('ma', 'like', "%{$search}%");
+                $query->where('ma', 'like', "%{$search}%")
+                    ->orWhereHas('nha_cung_cap', function ($query) use ($search) {
+                        $query->where('ten', 'like', "%{$search}%");
+                    })->orWhereHas('kho', function ($query) use ($search) {
+                        $query->where('ten', 'like', "%{$search}%");
+                    })->orWhereHas('khach_hang', function ($query) use ($search) {
+                        $query->where('ten', 'like', "%{$search}%");
+                    });
             });
         }
 

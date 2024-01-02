@@ -13,17 +13,17 @@ class HoaDon extends Model
 
     public function nha_cung_cap()
     {
-        return $this->belongsTo(NhaCungCap::class, 'nha_cung_cap_id')->first();
+        return $this->belongsTo(NhaCungCap::class, 'nha_cung_cap_id');
     }
 
     public function khach_hang()
     {
-        return $this->belongsTo(KhachHang::class, 'khach_hang_id')->first();
+        return $this->belongsTo(KhachHang::class, 'khach_hang_id');
     }
 
     public function kho()
     {
-        return $this->belongsTo(Kho::class, 'kho_id')->first();
+        return $this->belongsTo(Kho::class, 'kho_id');
     }
 
     public function chi_tiet_hoa_don()

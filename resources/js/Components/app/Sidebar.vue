@@ -2,6 +2,7 @@
 
 import NavLink from "@/Components/app/NavLink.vue";
 import NavItem from "@/Components/app/NavItem.vue";
+import NavLinkTree from "@/Components/app/NavLinkTree.vue";
 
 </script>
 
@@ -22,10 +23,15 @@ import NavItem from "@/Components/app/NavItem.vue";
                     <li class="nav-item menu-open">
                         <NavLink title="Danh mục quản lý"/>
                         <ul class="nav nav-treeview ">
-                            <NavItem :href="route('loaisanpham.index')" title="Quản lý loại sản phẩm"/>
-                            <NavItem :href="route('sanpham.index')" title="Quản lý sản phẩm"/>
-                            <NavItem :href="route('kho.index')" title="Quản lý kho"/>
-                            <NavItem :href="route('donvitinh.index')" title="Quản lý đơn vị tính"/>
+                            <li class="nav-item">
+                                <NavLinkTree title="Quản lý sản phẩm"/>
+                                <ul class="nav nav-treeview ">
+                                    <NavItem :href="route('donvitinh.index')" title="Quản lý đơn vị tính"/>
+                                    <NavItem :href="route('loaisanpham.index')" title="Quản lý loại sản phẩm"/>
+                                    <NavItem :href="route('sanpham.index')" title="Quản lý sản phẩm"/>
+                                </ul>
+                            </li>
+
                             <NavItem :href="route('duan.index')" title="Quản lý dự án"/>
                             <NavItem :href="route('nhanvien.index')" title="Quản lý nhân viên"/>
                         </ul>
@@ -34,17 +40,10 @@ import NavItem from "@/Components/app/NavItem.vue";
                     <li class="nav-item menu-open ">
                         <NavLink title="Nhập xuất kho"/>
                         <ul class="nav nav-treeview">
+                            <NavItem :href="route('kho.index')" title="Quản lý kho"/>
                             <NavItem :href="route('tonkho.index')" title="Điều chỉnh tồn kho"/>
                             <NavItem :href="route('hoadon.index',{ loai: 'nhapkho'})" title="Phiếu nhập kho"/>
                             <NavItem :href="route('hoadon.index',{ loai: 'xuatkho'})" title="Phiếu xuất kho"/>
-<!--                            <li class="nav-item">-->
-<!--                                <NavLinkTree title="Quản lý cư dân"/>-->
-<!--                                <ul class="nav nav-treeview ">-->
-<!--                                    <NavItem :is_child="true" href="" title="Quản lý thông tin cư dân"/>-->
-<!--                                    <NavItem :is_child="true" href="" title="Quản lý thông tin khách"/>-->
-<!--                                </ul>-->
-<!--                            </li>-->
-
                         </ul>
                     </li>
                     <hr class="m-2 mr-4 ml-3">
@@ -59,6 +58,7 @@ import NavItem from "@/Components/app/NavItem.vue";
                     <li class="nav-item menu-open ">
                         <NavLink title="Phiếu thu chi"/>
                         <ul class="nav nav-treeview">
+                            <NavItem :href="route('loaithuchi.index')" title="Loại thu chi"/>
                             <NavItem :href="route('phieuthuchi.index',{ loai: 'phieuthu'})" title="Phiếu thu"/>
                             <NavItem :href="route('phieuthuchi.index',{ loai: 'phieuchi'})" title="Phiếu chi"/>
                         </ul>

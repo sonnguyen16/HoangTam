@@ -14,17 +14,8 @@ use App\Http\Controllers\NhanVienController;
 use App\Http\Controllers\LoaiSanPhamController;
 use App\Http\Controllers\TonKhoController;
 use App\Http\Controllers\PhieuThuChiController;
+use App\Http\Controllers\LoaiThuChiController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 
 Route::prefix('/')->group(function (){
     Route::get('/', [AuthController::class, 'index'])->name('auth.index');
@@ -102,6 +93,12 @@ Route::prefix('/phieuthuchi')->middleware('auth')->group(function (){
     Route::get('/{loai?}', [PhieuThuChiController::class, 'index'])->name('phieuthuchi.index');
     Route::post('/store', [PhieuThuChiController::class, 'store'])->name('phieuthuchi.store');
     Route::delete('/delete', [PhieuThuChiController::class, 'delete'])->name('phieuthuchi.delete');
+});
+
+Route::prefix('/loaithuchi')->middleware('auth')->group(function (){
+    Route::get('/', [LoaiThuChiController::class, 'index'])->name('loaithuchi.index');
+    Route::post('/store', [LoaiThuChiController::class, 'store'])->name('loaithuchi.store');
+    Route::delete('/delete', [LoaiThuChiController::class, 'delete'])->name('loaithuchi.delete');
 });
 
 

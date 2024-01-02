@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watchEffect, onMounted} from "vue";
+import {ref, watchEffect, onMounted, onUpdated} from "vue";
 import {router, useForm} from "@inertiajs/vue3";
 import InputError from "@/Components/InputError.vue";
 import {cloneDeep} from "lodash";
@@ -91,6 +91,24 @@ function addChiTietdonhang(){
 onMounted(() => {
     $('#sanpham').select2().on('change', function () {
         item.value.san_pham = props.san_pham_list.data.find(sp => String(sp.id) === $(this).val())
+    })
+
+    $('#khach_hang_id').select2({
+        placeholder: "Chọn khách hàng",
+        width: '100%',
+    }).on('change', function () {
+        form.nha_cung_cap_id = $(this).val()
+    })
+})
+
+onUpdated(() => {
+    $('#kho_id').select2({
+        placeholder: "Chọn kho",
+        width: '100%',
+    })
+    $('#khach_hang_id').select2({
+        placeholder: "Chọn khách hàng",
+        width: '100%',
     })
 })
 

@@ -1,5 +1,5 @@
 <script setup>
-import {onMounted, ref, watchEffect} from "vue";
+import {onMounted,onUpdated, ref, watchEffect} from "vue";
 import {router, useForm} from "@inertiajs/vue3";
 import {cloneDeep} from "lodash";
 import ChonDonHangModal from "@/Pages/XuatKho/ChonDonHangModal.vue";
@@ -49,7 +49,7 @@ const submit = () => {
             router.visit(route('hoadon.index', { loai: 'xuatkho'}))
         },
         onError: () => {
-            console.log(form.errors)
+
         }
     })
 }
@@ -97,6 +97,32 @@ function addChiTietHoaDon(){
 onMounted(() => {
     $('#sanpham').select2({ placeholder: "Chọn sản phẩm" }).on('change', function () {
         item.value.san_pham = props.san_pham_list.data.find(sp => String(sp.id) === $(this).val())
+    })
+
+    $('#khach_hang_id').select2({
+        placeholder: "Chọn khách hàng",
+        width: '100%',
+    }).on('change', function () {
+        form.khach_hang_id = $(this).val()
+    })
+
+    $('#kho_id').select2({
+        placeholder: "Chọn kho",
+        width: '100%',
+    }).on('change', function () {
+        form.kho_id = $(this).val()
+    })
+})
+
+onUpdated(() => {
+    $('#khach_hang_id').select2({
+        placeholder: "Chọn khách hàng",
+        width: '100%',
+    })
+
+    $('#kho_id').select2({
+        placeholder: "Chọn kho",
+        width: '100%',
     })
 })
 
@@ -245,10 +271,10 @@ function xemDonHang() {
             ...$event.map(item => ({
                 id: '',
                 hoa_don_id: props.hoa_don.id,
-                san_pham: item.san_pham,
+                san_pham: cloneDeep(item.san_pham),
                 so_luong: item.so_luong,
                 gia: item.gia,
-                thanh_tien: item.gia * item.so_luong,
+                thanh_tien: item.gia * item.so_luong
             }))
         )"
     />

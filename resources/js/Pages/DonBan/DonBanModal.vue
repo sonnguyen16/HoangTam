@@ -89,7 +89,9 @@ function addChiTietdonhang(){
 }
 
 onMounted(() => {
-    $('#sanpham').select2().on('change', function () {
+    $('#sanpham').select2({
+        placeholder: "Chọn sản phẩm",
+    }).on('change', function () {
         item.value.san_pham = props.san_pham_list.data.find(sp => String(sp.id) === $(this).val())
     })
 
@@ -97,15 +99,11 @@ onMounted(() => {
         placeholder: "Chọn khách hàng",
         width: '100%',
     }).on('change', function () {
-        form.nha_cung_cap_id = $(this).val()
+        form.khach_hang_id = $(this).val()
     })
 })
 
 onUpdated(() => {
-    $('#kho_id').select2({
-        placeholder: "Chọn kho",
-        width: '100%',
-    })
     $('#khach_hang_id').select2({
         placeholder: "Chọn khách hàng",
         width: '100%',

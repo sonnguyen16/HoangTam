@@ -88,7 +88,9 @@ function addChiTietdonhang(){
 }
 
 onMounted(() => {
-    $('#sanpham').select2().on('change', function () {
+    $('#sanpham').select2({
+        placeholder: "Chọn sản phẩm",
+    }).on('change', function () {
         item.value.san_pham = props.san_pham_list.data.find(sp => String(sp.id) === $(this).val())
     })
 

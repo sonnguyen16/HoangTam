@@ -6,11 +6,11 @@ import '@/assets/css/style.css'
 import {numberToWords} from "@/assets/js/script.js";
 
 const data = defineProps({
-    hoa_don: Object,
+    don_hang: Object,
 })
 
 onMounted(() => {
-    console.log(data.hoa_don)
+    console.log(data.don_hang)
 })
 
 function formatDateForTemplate(date) {
@@ -35,9 +35,9 @@ function formatDateForTemplate(date) {
                     </div>
 
                     <div class="text-center mt-3">
-                        <h1 class="font-weight-bold" v-if="hoa_don.data.loai === 0">Phiếu nhập kho</h1>
-                        <h1 class="font-weight-bold" v-if="hoa_don.data.loai === 1">Phiếu xuất kho</h1>
-                        <p class="text-md font-italic">{{ formatDateForTemplate(new Date(hoa_don.data.created_at)) }}</p>
+                        <h1 class="font-weight-bold" v-if="don_hang.data.loai === 0">Đơn mua</h1>
+                        <h1 class="font-weight-bold" v-if="don_hang.data.loai === 1">Đơn bán</h1>
+                        <p class="text-md font-italic">{{ formatDateForTemplate(new Date(don_hang.data.created_at)) }}</p>
                     </div>
 
                     <div class="px-4 mt-4">
@@ -46,23 +46,23 @@ function formatDateForTemplate(date) {
                                 <label class="text-md">Số:</label>
                             </div>
                             <div class="col-9">
-                                <span>{{ hoa_don.data.ma }}</span>
+                                <span>{{ don_hang.data.ma }}</span>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-3">
-                                <label v-if="hoa_don.data.loai === 1" class="text-md">Khách hàng:</label>
-                                <label v-if="hoa_don.data.loai === 0" class="text-md">Nhà cung cấp:</label>
+                                <label v-if="don_hang.data.loai === 1" class="text-md">Khách hàng:</label>
+                                <label v-if="don_hang.data.loai === 0" class="text-md">Nhà cung cấp:</label>
                             </div>
                             <div class="col-9">
-                                <span v-if="hoa_don.data.loai === 1"
+                                <span v-if="don_hang.data.loai === 1"
                                       class="text-md">
-                                    {{ hoa_don.data.khach_hang?.ten }}
+                                    {{ don_hang.data.khach_hang?.ten }}
                                 </span>
-                                <span v-if="hoa_don.data.loai === 0"
+                                <span v-if="don_hang.data.loai === 0"
                                       class="text-md">
-                                    {{ hoa_don.data.nha_cung_cap?.ten }}
+                                    {{ don_hang.data.nha_cung_cap?.ten }}
                                 </span>
                             </div>
                         </div>
@@ -72,13 +72,13 @@ function formatDateForTemplate(date) {
                                 <label class="text-md">Địa chỉ:</label>
                             </div>
                             <div class="col-9">
-                                <span v-if="hoa_don.data.loai === 1"
+                                <span v-if="don_hang.data.loai === 1"
                                       class="text-md">
-                                    {{ hoa_don.data.khach_hang?.dia_chi }}
+                                    {{ don_hang.data.khach_hang?.dia_chi }}
                                 </span>
-                                <span v-if="hoa_don.data.loai === 0"
+                                <span v-if="don_hang.data.loai === 0"
                                       class="text-md">
-                                    {{ hoa_don.data.nha_cung_cap?.dia_chi }}
+                                    {{ don_hang.data.nha_cung_cap?.dia_chi }}
                                 </span>
                             </div>
                         </div>
@@ -88,13 +88,13 @@ function formatDateForTemplate(date) {
                                 <label class="text-md">Số điện thoại:</label>
                             </div>
                             <div class="col-9">
-                                 <span v-if="hoa_don.data.loai === 1"
+                                 <span v-if="don_hang.data.loai === 1"
                                        class="text-md">
-                                    {{ hoa_don.data.khach_hang?.dien_thoai }}
+                                    {{ don_hang.data.khach_hang?.dien_thoai }}
                                 </span>
-                                <span v-if="hoa_don.data.loai === 0"
+                                <span v-if="don_hang.data.loai === 0"
                                       class="text-md">
-                                    {{ hoa_don.data.nha_cung_cap?.dien_thoai }}
+                                    {{ don_hang.data.nha_cung_cap?.dien_thoai }}
                                 </span>
                             </div>
                         </div>
@@ -111,11 +111,11 @@ function formatDateForTemplate(date) {
                             </tr>
                             </thead>
                             <tbody>
-                            <tr v-if="hoa_don.data.chi_tiet_hoa_don.length === 0">
+                            <tr v-if="don_hang.data.chi_tiet_don_hang.length === 0">
                                 <td colspan="7" class="text-center">Không có dữ liệu</td>
                             </tr>
 
-                            <tr :key="cthd.id" v-else v-for="cthd in hoa_don.data.chi_tiet_hoa_don">
+                            <tr :key="cthd.id" v-else v-for="cthd in don_hang.data.chi_tiet_don_hang">
                                 <td class="ma">{{ cthd?.san_pham?.ma }}</td>
                                 <td class="ten">{{ cthd?.san_pham?.ten }}</td>
                                 <td class="quantity" >{{ cthd?.so_luong }}</td>
@@ -128,7 +128,7 @@ function formatDateForTemplate(date) {
                                     Tổng tiền
                                 </td>
                                 <td class="money">
-                                    {{ hoa_don.data.tong_tien.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}
+                                    {{ don_hang.data.tong_tien.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}
                                 </td>
                             </tr>
                             </tbody>
@@ -140,7 +140,7 @@ function formatDateForTemplate(date) {
                             </div>
                             <div class="col-9">
                                 <span class="text-md">
-                                {{ numberToWords(hoa_don.data.tong_tien) }} đồng
+                                {{ numberToWords(don_hang.data.tong_tien) }} đồng
                             </span>
                             </div>
                         </div>

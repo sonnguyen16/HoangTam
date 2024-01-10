@@ -23,6 +23,7 @@ class DonHangResource extends JsonResource
             'chi_tiet_don_hang' => ChiTietDonHangResource::collection($this->chi_tiet_don_hang()),
             'tong_tien' => $this->tong_tien(),
             'created_at' => $this->created_at,
+            'loai' => $this->loai,
             'updated_at' => $this->updated_at,
             'ghi_chu' => $this->ghi_chu,
         ];

@@ -61,9 +61,10 @@ Route::prefix('/hoadon')->middleware('auth')->group(function (){
 });
 
 Route::prefix('/donhang')->middleware('auth')->group(function (){
-    Route::get('/{loai?}', [DonHangController::class, 'index'])->name('donhang.index');
+    Route::get('/', [DonHangController::class, 'index'])->name('donhang.index');
     Route::post('/store', [DonHangController::class, 'store'])->name('donhang.store');
     Route::delete('/delete', [DonHangController::class, 'delete'])->name('donhang.delete');
+    Route::get('/print', [DonHangController::class, 'print'])->name('donhang.print');
 });
 
 Route::prefix('/duan')->middleware('auth')->group(function (){

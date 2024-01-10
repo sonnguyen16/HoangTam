@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\DonHangRequest;
 use App\Http\Resources\DonHangResource;
+use App\Http\Resources\HoaDonResource;
 use App\Http\Resources\SanPhamResource;
+use App\Models\HoaDon;
 use App\Models\NhaCungCap;
 use App\Models\SanPham;
 use Carbon\Carbon;
@@ -68,6 +70,13 @@ class DonHangController extends Controller
                 ChiTietDonHang::updateOrCreate(['id' => $item['id']], $item);
             }
         }
+    }
+
+    public function print(Request $request)
+    {
+        $don_hang = DonHang::query()->whereNull('deleted_at')->where('id', $request->id)->first();
+        $don_hang = new DonHangResource($don_hang);
+        return Inertia::render('DonMua/Print', compact('don_hang'));
     }
 
 

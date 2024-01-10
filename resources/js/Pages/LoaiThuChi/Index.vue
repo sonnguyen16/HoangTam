@@ -78,8 +78,7 @@ function deleleloai_thu_chi(id) {
 
         <div class="card shadow card-child" style="">
             <div class="card-body">
-                <h4 class="txt-color mb-3 text-red">Danh sách loại thu chi</h4>
-                <div class="row mt-3 mb-4">
+                <div class="row mb-3">
                     <div class=" col-md-2">
                         <a @click.prevent="openModal" class="btn btn-primary form-control">Thêm loại thu chi</a>
                     </div>
@@ -124,7 +123,7 @@ function deleleloai_thu_chi(id) {
                             <span v-if="kh.loai === 0">Thu</span>
                             <span v-else>Chi</span>
                         </td>
-                        <td >
+                        <td class="action">
                             <a class="btn btn-primary btn-sm d-inline-block mr-2" @click.prevent="editModal(kh)">Sửa</a>
                             <a class="btn btn-danger btn-sm" @click.prevent="deleleloai_thu_chi(kh.id)">Xóa</a>
                         </td>

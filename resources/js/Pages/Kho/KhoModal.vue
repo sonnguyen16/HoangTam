@@ -41,8 +41,6 @@ const closeModal = () => {
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <span v-if="kho.id" class="txt-color mb-0 font-weight-bold">Sửa kho</span>
-                    <span v-else class="txt-color mb-0 font-weight-bold">Thêm kho</span>
                     <button type="button" class="close" @click.prevent="closeModal">&times;</button>
                 </div>
                 <form @submit.prevent="submit">

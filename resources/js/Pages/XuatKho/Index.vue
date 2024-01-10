@@ -4,6 +4,8 @@ import MainLayout from "@/Layouts/MainLayout.vue";
 import {computed, ref, watch} from "vue";
 import {router} from "@inertiajs/vue3";
 import XuatKhoModal from "@/Pages/XuatKho/XuatKhoModal.vue";
+import Pagination from "@/Components/app/Pagination.vue";
+import {formatDate} from "@/assets/js/script.js";
 
 const props = defineProps({
     hoa_don_list: Object,
@@ -90,8 +92,7 @@ function delelehoadon(id) {
 
         <div class="card shadow card-child" style="">
             <div class="card-body">
-                <h4 class="txt-color mb-3 text-red">Danh sách phiếu xuất kho</h4>
-                <div class="row mt-3 mb-4">
+                <div class="row mb-3">
                     <div class=" col-md-2">
                         <a @click.prevent="openModal" class="btn btn-primary form-control">Thêm phiếu xuất kho</a>
                     </div>
@@ -123,9 +124,9 @@ function delelehoadon(id) {
                         <th>Mã phiếu</th>
                         <th>Khách hàng</th>
                         <th>Kho</th>
+                        <th>Ghi chú</th>
                         <th>Ngày tạo</th>
                         <th>Tổng tiền</th>
-                        <th>Ghi chú</th>
                         <th>Thao tác</th>
                     </tr>
                     </thead>
@@ -138,34 +139,17 @@ function delelehoadon(id) {
                         <td >{{ kh.ma }}</td>
                         <td >{{ kh.khach_hang?.ten }}</td>
                         <td >{{ kh.kho?.ten }}</td>
-                        <td >{{ kh.created_at }}</td>
-                        <td >{{ kh.tong_tien.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</td>
                         <td >{{ kh.ghi_chu }}</td>
-                        <td >
+                        <td class="date">{{ formatDate(kh.created_at) }}</td>
+                        <td class="money">{{ kh.tong_tien.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</td>
+                        <td class="action">
                             <a class="btn btn-primary btn-sm d-inline-block mr-2" @click.prevent="editModal(kh)">Sửa</a>
                             <a class="btn btn-danger btn-sm" @click.prevent="delelehoadon(kh.id)">Xóa</a>
                         </td>
                     </tr>
                     </tbody>
                 </table>
-                <div class="float-right mt-3 mb-0">
-                    <div class="row">
-                        <div class="col-md-12 col-lg-12 text-center">
-                            <ul v-if="allData?.total > 10" class="pagination">
-                                <li v-for="pageNumber in allData.links.slice(1, -1)" :key="pageNumber" class="page-item">
-                                    <a
-                                        class="page-link"
-                                        :class="{ 'bg-primary': pageNumber.label === allData.current_page.toString() }"
-                                        @click.prevent="changePage(pageNumber.url)"
-                                    >
-                                        {{ pageNumber.label }}
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
+                <Pagination :allData="allData" @changePage="changePage" />
             </div>
         </div>
         <XuatKhoModal

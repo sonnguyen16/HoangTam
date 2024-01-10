@@ -104,17 +104,15 @@ onUpdated(() => {
         <div class="modal-dialog  modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <span v-if="phieu_thu.id" class="txt-color mb-0 font-weight-bold">Sửa phiếu thu</span>
-                    <span v-else class="txt-color mb-0 font-weight-bold">Thêm phiếu thu</span>
                     <button type="button" class="close" @click.prevent="closeModal">&times;</button>
                 </div>
                 <form @submit.prevent="submit">
                     <div class="modal-body">
                         <input type="hidden" v-model="form.id" id="id" class="form-control"/>
-
                         <div class="form-group-container">
                             <div class="form-group-title">
-                                <span>Thông tin chung</span>
+                                <span v-if="phieu_thu.id" class="txt-color mb-0 font-weight-bold">Sửa phiếu thu</span>
+                                <span v-else class="txt-color mb-0 font-weight-bold">Thêm phiếu thu</span>
                             </div>
 
                             <div class="form-group">

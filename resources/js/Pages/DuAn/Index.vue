@@ -137,8 +137,7 @@ function xemDuAnModal(id) {
 
         <div class="card shadow card-child" style="">
             <div class="card-body">
-                <h4 class="txt-color mb-3 text-red">Danh sách dự án</h4>
-                <div class="row mt-3 mb-4">
+                <div class="row mb-3">
                     <div class=" col-md-2">
                         <a @click.prevent="openModal('')" class="btn btn-primary form-control">Thêm dự án</a>
                     </div>
@@ -183,8 +182,8 @@ function xemDuAnModal(id) {
 
                     <tr :key="kh.id" v-else v-for="kh in allData">
                         <td >{{ kh.ten }}</td>
-                        <td >{{ kh.ngay_bat_dau }}</td>
-                        <td >{{ kh.ngay_ket_thuc }}</td>
+                        <td >{{ new Date(kh.ngay_bat_dau).toLocaleDateString() }}</td>
+                        <td >{{ new Date(kh.ngay_bat_dau).toLocaleDateString() }}</td>
                         <td >{{ kh.nhan_vien.name }}</td>
                         <td >{{ kh.mo_ta }}</td>
                         <td >
@@ -192,7 +191,7 @@ function xemDuAnModal(id) {
                             <span v-else-if="kh.trang_thai === 1" class="badge badge-primary">Đang triển khai</span>
                             <span v-else-if="kh.trang_thai === 2" class="badge badge-success">Hoàn thành</span>
                         </td>
-                        <td >
+                        <td style="width: 9%">
                             <a class="btn btn-primary btn-sm d-inline-block mr-2" @click.prevent="xemDuAnModal(kh.id)">Xem</a>
                             <a class="btn btn-primary btn-sm d-inline-block mr-2" @click.prevent="editModal(kh)">Sửa</a>
                             <a class="btn btn-danger btn-sm" @click.prevent="deleleduan(kh.id)">Xóa</a>

@@ -4,6 +4,7 @@ import MainLayout from "@/Layouts/MainLayout.vue";
 import {computed, ref, watch} from "vue";
 import {router} from "@inertiajs/vue3";
 import DonMuaModal from "@/Pages/DonMua/DonMuaModal.vue";
+import {formatDate} from "@/assets/js/script.js";
 
 const props = defineProps({
     don_hang_list: Object,
@@ -85,8 +86,7 @@ function deleledonhang(id) {
 
         <div class="card shadow card-child" style="">
             <div class="card-body">
-                <h4 class="txt-color mb-3 text-red">Danh sách đơn mua</h4>
-                <div class="row mt-3 mb-4">
+                <div class="row mb-3">
                     <div class=" col-md-2">
                         <a @click.prevent="openModal" class="btn btn-primary form-control">Thêm đơn mua</a>
                     </div>
@@ -115,11 +115,11 @@ function deleledonhang(id) {
                 <table class="table table-bordered  table-responsive-md">
                     <thead>
                     <tr>
-                        <th>Mã phiếu</th>
+                        <th>Mã đơn</th>
                         <th>Nhà cung cấp</th>
-                        <th>Ngày tạo</th>
-                        <th>Tổng tiền</th>
                         <th>Ghi chú</th>
+                        <th>Tổng tiền</th>
+                            <th>Ngày tạo</th>
                         <th>Thao tác</th>
                     </tr>
                     </thead>
@@ -131,10 +131,10 @@ function deleledonhang(id) {
                     <tr :key="kh.id" v-else v-for="kh in allData?.data">
                         <td >{{ kh.ma }}</td>
                         <td >{{ kh.nha_cung_cap.ten }}</td>
-                        <td >{{ kh.created_at }}</td>
-                        <td >{{ kh.tong_tien.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</td>
                         <td >{{ kh.ghi_chu }}</td>
-                        <td >
+                        <td class="money">{{ kh.tong_tien.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</td>
+                        <td class="date">{{ formatDate(kh.created_at) }}</td>
+                        <td class="action">
                             <a class="btn btn-primary btn-sm d-inline-block mr-2" @click.prevent="editModal(kh)">Sửa</a>
                             <a class="btn btn-danger btn-sm" @click.prevent="deleledonhang(kh.id)">Xóa</a>
                         </td>

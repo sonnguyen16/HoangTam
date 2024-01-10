@@ -90,8 +90,7 @@ function deleleKhachHang(id) {
 
         <div class="card shadow card-child" style="">
             <div class="card-body">
-                <h4 class="txt-color mb-3 text-red">Danh sách khách hàng</h4>
-                <div class="row mt-3 mb-4">
+                <div class="row mb-3">
                     <div class=" col-md-2">
                         <a @click.prevent="openModal" class="btn btn-primary form-control">Thêm khách hàng</a>
                     </div>
@@ -138,8 +137,8 @@ function deleleKhachHang(id) {
                         <td>{{kh.dia_chi}}</td>
                         <td>{{kh.dien_thoai}}</td>
                         <td>{{kh.website}}</td>
-                        <td>{{kh.ghi_chu}}</td>
-                        <td >
+                        <td >{{kh.ghi_chu}}</td>
+                        <td class="action">
                             <a class="btn btn-primary btn-sm d-inline-block mr-2" @click.prevent="editModal(kh)">Sửa</a>
                             <a class="btn btn-danger btn-sm" @click.prevent="deleleKhachHang(kh.id)">Xóa</a>
                         </td>

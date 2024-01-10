@@ -1,5 +1,7 @@
 <script setup>
 
+import Pagination from "@/Components/app/Pagination.vue";
+
 const props = defineProps({
     don_hang_ban_list: Object,
 })
@@ -53,6 +55,7 @@ const closeModal = () => {
                                     </tr>
                                 </tbody>
                             </table>
+                            <Pagination :allData="props.don_hang_ban_list"/>
                         </div>
                     </div>
                 </div>

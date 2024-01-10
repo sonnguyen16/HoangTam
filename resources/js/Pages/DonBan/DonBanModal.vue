@@ -1,7 +1,6 @@
 <script setup>
 import {ref, watchEffect, onMounted, onUpdated} from "vue";
 import {router, useForm} from "@inertiajs/vue3";
-import InputError from "@/Components/InputError.vue";
 import {cloneDeep} from "lodash";
 
 const props = defineProps({
@@ -117,8 +116,6 @@ onUpdated(() => {
         <div class="modal-dialog  modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <span v-if="don_hang.id" class="txt-color mb-0 font-weight-bold">Sửa đơn hàng</span>
-                    <span v-else class="txt-color mb-0 font-weight-bold">Thêm đơn hàng</span>
                     <button type="button" class="close" @click.prevent="closeModal">&times;</button>
                 </div>
                 <form @submit.prevent="submit">
@@ -127,14 +124,15 @@ onUpdated(() => {
 
                         <div class="form-group-container">
                             <div class="form-group-title">
-                                <span>Thông tin chung</span>
+                                <span v-if="don_hang.id" class="txt-color mb-0 font-weight-bold">Sửa đơn hàng</span>
+                                <span v-else class="txt-color mb-0 font-weight-bold">Thêm đơn hàng</span>
                             </div>
 
                             <div class="form-group">
                                 <label for="ma">Mã đơn</label>
                                 <div>
                                     <input readonly :class="{ 'border-danger' : form.errors.ma }" type="text" v-model="form.ma" class="form-control" id="ma" />
-                                    <InputError :message="form.errors.ma" />
+<!--                                    <InputError :message="form.errors.ma" />-->
                                 </div>
                             </div>
 
@@ -145,7 +143,7 @@ onUpdated(() => {
                                         <option value="">Chọn khách hàng</option>
                                         <option v-for="ncc in khach_hang_list" :key="ncc.id" :value="ncc.id">{{ ncc.ten }}</option>
                                     </select>
-                                    <InputError :message="form.errors.khach_hang_id" />
+<!--                                    <InputError :message="form.errors.khach_hang_id" />-->
                                 </div>
                             </div>
 
@@ -162,7 +160,7 @@ onUpdated(() => {
                             <div class="form-group-title">
                                 <span>Chi tiết đơn bán</span>
                             </div>
-                            <div class="row mb-4">
+                            <div class="row mb-3">
                                 <div class="col-4">
                                     <div class="form-record">
                                         <label>Sản phẩm</label>
@@ -194,7 +192,7 @@ onUpdated(() => {
                                     <th>Mã sản phẩm</th>
                                     <th>Tên sản phẩm</th>
                                     <th>Số lượng</th>
-                                    <th>Đơn vị tính</th>
+                                    <th>ĐVT</th>
                                     <th>Đơn giá</th>
                                     <th>Thành tiền</th>
                                     <th></th>

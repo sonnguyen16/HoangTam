@@ -40,8 +40,6 @@ const closeModal = () => {
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <span v-if="loai_san_pham.id" class="txt-color mb-0 font-weight-bold">Sửa loại sản phẩm</span>
-                    <span v-else class="txt-color mb-0 font-weight-bold">Thêm loại sản phẩm</span>
                     <button type="button" class="close" @click.prevent="closeModal">&times;</button>
                 </div>
                 <form @submit.prevent="submit">
@@ -49,7 +47,7 @@ const closeModal = () => {
                         <input type="hidden" v-model="form.id" id="id" class="form-control"/>
 
                         <div class="form-group">
-                            <label for="name">Tên loại sản phẩm</label>
+                            <label for="name">Tên loại SP</label>
                             <input :class="{ 'border-danger' : form.errors.ten }" type="text" v-model="form.ten" class="form-control" id="ten" />
                         </div>
 <!--                        <InputError :message="form.errors.ten" />-->

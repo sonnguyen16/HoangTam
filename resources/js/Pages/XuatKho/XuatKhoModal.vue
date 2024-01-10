@@ -137,8 +137,6 @@ function xemDonHang() {
         <div class="modal-dialog  modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <span v-if="hoa_don.id" class="txt-color mb-0 font-weight-bold">Sửa hóa đơn</span>
-                    <span v-else class="txt-color mb-0 font-weight-bold">Thêm hóa đơn</span>
                     <button type="button" class="close" @click.prevent="closeModal">&times;</button>
                 </div>
                 <form @submit.prevent="submit">
@@ -147,7 +145,8 @@ function xemDonHang() {
 
                         <div class="form-group-container">
                             <div class="form-group-title">
-                                <span>Thông tin chung</span>
+                                <span v-if="hoa_don.id" class="txt-color mb-0 font-weight-bold">Sửa hóa đơn</span>
+                                <span v-else class="txt-color mb-0 font-weight-bold">Thêm hóa đơn</span>
                             </div>
 
                             <div class="form-group">
@@ -190,7 +189,7 @@ function xemDonHang() {
                             <div class="form-group-title">
                                 <span>Chi tiết phiếu xuất</span>
                             </div>
-                            <div class="row mb-4">
+                            <div class="row mb-3">
                                 <div class="col-2">
                                     <button @click.prevent="xemDonHang" class="btn form-control text-white">
                                         Chọn đơn hàng
@@ -228,7 +227,7 @@ function xemDonHang() {
                                     <th>Mã sản phẩm</th>
                                     <th>Tên sản phẩm</th>
                                     <th>Số lượng</th>
-                                    <th>Đơn vị tính</th>
+                                    <th>ĐVT</th>
                                     <th>Đơn giá</th>
                                     <th>Thành tiền</th>
                                     <th></th>

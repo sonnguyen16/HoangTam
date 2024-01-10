@@ -9,10 +9,10 @@
     import '@/assets/admin/plugins/bootstrap/js/bootstrap.bundle.min.js'
     import '@/assets/admin/dist/js/adminlte.min.js'
     import '@/assets/plugins/select2/js/select2.full.min.js'
-
     // components
     import Navbar from "@/Components/app/Navbar.vue";
     import Sidebar from "@/Components/app/Sidebar.vue";
+
 </script>
 
 <template>

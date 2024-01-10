@@ -105,8 +105,6 @@ onMounted(() => {
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <span v-if="form.id" class="txt-color mb-0 font-weight-bold">Sửa sản phẩm</span>
-                    <span v-else class="txt-color mb-0 font-weight-bold">Thêm sản phẩm</span>
                     <button type="button" class="close" @click.prevent="closeModal">&times;</button>
                 </div>
                 <form @submit.prevent="submit">
@@ -115,7 +113,8 @@ onMounted(() => {
 
                         <div class="form-group-container">
                             <div class="form-group-title">
-                                <span>Thông tin chung</span>
+                                <span v-if="form.id" class="txt-color mb-0 font-weight-bold">Sửa sản phẩm</span>
+                                <span v-else class="txt-color mb-0 font-weight-bold">Thêm sản phẩm</span>
                             </div>
 
                             <div class="form-group">

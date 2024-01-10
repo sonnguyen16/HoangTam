@@ -130,8 +130,7 @@ onUpdated(() => {
         <div class="modal-dialog  modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h6 v-if="hoa_don.id" class="txt-color mb-0 font-weight-bold">Sửa hóa đơn</h6>
-                    <h6 v-else class="txt-color mb-0 font-weight-bold">Thêm hóa đơn</h6>
+
                     <button type="button" class="close" @click.prevent="closeModal">&times;</button>
                 </div>
                 <form @submit.prevent="submit">
@@ -140,7 +139,8 @@ onUpdated(() => {
 
                         <div class="form-group-container">
                             <div class="form-group-title">
-                                <span>Thông tin chung</span>
+                                <span v-if="hoa_don.id" class="txt-color mb-0 font-weight-bold">Sửa hóa đơn</span>
+                                <span v-else class="txt-color mb-0 font-weight-bold">Thêm hóa đơn</span>
                             </div>
 
                             <div class="form-group">

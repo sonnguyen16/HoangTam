@@ -49,8 +49,6 @@ const closeModal = () => {
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <span v-if="nha_cung_cap.id" class="txt-color mb-0 font-weight-bold">Sửa nhà cung cấp</span>
-                    <span v-else class="txt-color mb-0 font-weight-bold">Thêm nhà cung cấp</span>
                     <button type="button" class="close" @click.prevent="closeModal">&times;</button>
                 </div>
                 <form @submit.prevent="submit">
@@ -59,7 +57,8 @@ const closeModal = () => {
 
                         <div class="form-group-container">
                             <div class="form-group-title">
-                                <span>Thông tin chung</span>
+                                <span v-if="nha_cung_cap.id" class="txt-color mb-0 font-weight-bold">Sửa nhà cung cấp</span>
+                                <span v-else class="txt-color mb-0 font-weight-bold">Thêm nhà cung cấp</span>
                             </div>
 
                             <div class="form-group">

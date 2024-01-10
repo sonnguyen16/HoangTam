@@ -76,8 +76,7 @@ function deleledonvitinh(id) {
 
         <div class="card shadow card-child" style="">
             <div class="card-body">
-                <h4 class="txt-color mb-3 text-red">Danh sách đơn vị tính</h4>
-                <div class="row mt-3 mb-4">
+                <div class="row mb-3">
                     <div class=" col-md-2">
                         <a @click.prevent="openModal" class="btn btn-primary form-control">Thêm đơn vị tính</a>
                     </div>
@@ -107,7 +106,7 @@ function deleledonvitinh(id) {
                     <thead>
                     <tr>
                         <th>Tên đơn vị tính</th>
-                        <th>Thao tác</th>
+                        <th class="action">Thao tác</th>
                     </tr>
                     </thead>
                     <tbody>

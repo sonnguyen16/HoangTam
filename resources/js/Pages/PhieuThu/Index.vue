@@ -4,6 +4,7 @@ import MainLayout from "@/Layouts/MainLayout.vue";
 import {computed, ref, watch} from "vue";
 import {router} from "@inertiajs/vue3";
 import PhieuThuModal from "@/Pages/PhieuThu/PhieuThuModal.vue";
+import {formatDate} from "@/assets/js/script.js";
 
 const props = defineProps({
     phieu_thu_chi_list: Object,
@@ -99,8 +100,7 @@ function delelephieuthuchi(id) {
 
         <div class="card shadow card-child" style="">
             <div class="card-body">
-                <h4 class="txt-color mb-3 text-red">Danh sách phiếu thu</h4>
-                <div class="row mt-3 mb-4">
+                <div class="row mb-3">
                     <div class=" col-md-2">
                         <a @click.prevent="openModal" class="btn btn-primary form-control">Thêm phiếu thu</a>
                     </div>
@@ -147,15 +147,15 @@ function delelephieuthuchi(id) {
                     <tr :key="kh.id" v-else v-for="kh in allData?.data">
                         <td>{{ kh.ma }}</td>
                         <td>{{ kh.khach_hang?.ten }}</td>
-                        <td>{{ kh.so_tien.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</td>
+                        <td class="money">{{ kh.so_tien.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</td>
                         <td>{{ kh.nhan_vien?.name }}</td>
                         <td>{{ kh.du_an?.ten }}</td>
                         <td>
                             <span v-if="kh.trang_thai === 0" class="badge badge-warning">Chưa thanh toán</span>
                             <span v-else class="badge badge-success">Đã thanh toán</span>
                         </td>
-                        <td>{{ kh.created_at.split('T')[0] + ' ' + kh.created_at.split('T')[1].split('.')[0] }}</td>
-                        <td >
+                        <td class="date">{{ formatDate(kh.created_at) }}</td>
+                        <td class="action">
                             <a class="btn btn-primary btn-sm d-inline-block mr-2" @click.prevent="editModal(kh)">Sửa</a>
                             <a class="btn btn-danger btn-sm" @click.prevent="delelephieuthuchi(kh.id)">Xóa</a>
                         </td>

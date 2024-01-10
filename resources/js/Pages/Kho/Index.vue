@@ -75,8 +75,7 @@ function delelekho(id) {
 
         <div class="card shadow card-child" style="">
             <div class="card-body">
-                <h4 class="txt-color mb-3 text-red">Danh sách kho</h4>
-                <div class="row mt-3 mb-4">
+                <div class="row mb-3">
                     <div class=" col-md-2">
                         <a @click.prevent="openModal" class="btn btn-primary form-control">Thêm kho</a>
                     </div>
@@ -116,7 +115,7 @@ function delelekho(id) {
 
                     <tr :key="kh.id" v-else v-for="kh in allData?.data">
                         <td>{{kh.ten}}</td>
-                        <td >
+                        <td class="action">
                             <a class="btn btn-primary btn-sm d-inline-block mr-2" @click.prevent="editModal(kh)">Sửa</a>
                             <a class="btn btn-danger btn-sm" @click.prevent="delelekho(kh.id)">Xóa</a>
                         </td>

@@ -1,10 +1,10 @@
 <script setup>
 
 import MainLayout from "@/Layouts/MainLayout.vue";
-import {computed,  ref, watch} from "vue";
+import {computed, ref, watch} from "vue";
 import TonKhoModal from "@/Pages/tonkho/TonKhoModal.vue";
 import {router} from "@inertiajs/vue3";
-
+import {formatDate} from "@/assets/js/script.js";
 
 const props = defineProps({
     san_pham_list: Object,
@@ -61,6 +61,8 @@ function deleletonkho(id) {
 
 
 
+
+
 </script>
 
 <template>
@@ -74,8 +76,7 @@ function deleletonkho(id) {
 
         <div class="card shadow card-child" style="">
             <div class="card-body">
-                <h4 class="txt-color mb-3">Danh sách tồn kho</h4>
-                <div class="row mt-3 mb-4">
+                <div class="row mb-3">
                     <div class="col-md-12">
                         <form >
                             <div class="row">
@@ -107,7 +108,8 @@ function deleletonkho(id) {
                     <thead>
                     <tr>
                         <th>Kho</th>
-                        <th>Sản phẩm</th>
+                        <th>Mã sản phẩm</th>
+                        <th>Tên sản phẩm</th>
                         <th>Số lượng</th>
                         <th>Ngày tạo</th>
                         <th>Ngày cập nhật</th>
@@ -121,11 +123,12 @@ function deleletonkho(id) {
 
                     <tr :key="kh.id" v-else v-for="kh in allData?.data">
                         <td >{{ kh.kho.ten }}</td>
+                        <td >{{ kh.san_pham.ma }}</td>
                         <td >{{ kh.san_pham.ten }}</td>
-                        <td >{{ kh.so_luong }}</td>
-                        <td >{{ kh.created_at.split('T')[0] + ' ' + kh.created_at.split('T')[1].split('.')[0] }}</td>
-                        <td >{{ kh.updated_at.split('T')[0] + ' ' + kh.updated_at.split('T')[1].split('.')[0] }}</td>
-                        <td >
+                        <td class="quantity">{{ kh.so_luong }}</td>
+                        <td class="date">{{ formatDate(kh.created_at) }}</td>
+                        <td class="date">{{ formatDate(kh.updated_at) }}</td>
+                        <td class="action">
                             <a class="btn btn-primary btn-sm d-inline-block mr-2" @click.prevent="editModal(kh)">Sửa</a>
                             <a class="btn btn-danger btn-sm" @click.prevent="deleletonkho(kh.id)">Xóa</a>
                         </td>

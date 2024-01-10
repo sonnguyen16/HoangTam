@@ -22,8 +22,8 @@ class HoaDonResource extends JsonResource
             'kho' => $this->kho()->first(),
             'chi_tiet_hoa_don' => ChiTietHoaDonResource::collection($this->chi_tiet_hoa_don()),
             'tong_tien' => $this->tong_tien(),
-            'created_at' => $this->created_at->format('d/m/Y H:i:s'),
-            'updated_at' => $this->updated_at->format('d/m/Y H:i:s'),
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
             'ghi_chu' => $this->ghi_chu,
         ];
     }

@@ -100,8 +100,7 @@ function delelesanpham(id) {
 
         <div class="card shadow card-child" style="">
             <div class="card-body">
-                <h4 class="txt-color mb-3">Danh sách sản phẩm</h4>
-                <div class="row mt-3 mb-4">
+                <div class="row mb-3">
                     <div class=" col-md-2">
                         <a @click.prevent="openModal" class="btn btn-primary form-control">Thêm sản phẩm</a>
                     </div>
@@ -152,7 +151,7 @@ function delelesanpham(id) {
                         <td>{{kh.gia_nhap.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</td>
                         <td>{{kh.don_vi_tinh?.ten}}</td>
                         <td>{{kh.loai_san_pham?.ten}}</td>
-                        <td >
+                        <td class="action">
                             <a class="btn btn-primary btn-sm d-inline-block mr-2" @click.prevent="editModal(kh)">Sửa</a>
                             <a class="btn btn-danger btn-sm" @click.prevent="delelesanpham(kh.id)">Xóa</a>
                         </td>

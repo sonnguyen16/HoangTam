@@ -27,7 +27,7 @@ class HoaDonController extends Controller
         $khach_hang_list = KhachHang::query()->whereNull('deleted_at')->get();
         $kho_list = Kho::query()->whereNull('deleted_at')->get();
         $san_pham_list = SanPham::query()->whereNull('deleted_at')->get();
-        $don_hang_ban_list = DonHang::query()->whereNull('deleted_at')->where('loai', 1)->get();
+        $don_hang_ban_list = DonHang::query()->whereNull('deleted_at')->where('loai', 1)->paginate(4);
 
         if ($request->filled('search')) {
             $search = $request->search;
@@ -43,7 +43,7 @@ class HoaDonController extends Controller
             });
         }
 
-        $hoa_don_list = $query->paginate(10)->withQueryString();
+        $hoa_don_list = $query->paginate(5)->withQueryString();
 
         $hoa_don_list = HoaDonResource::collection($hoa_don_list);
 

@@ -26,8 +26,8 @@ const addHangMuc = (id) => {
     <div id="xemduanmodal" class="modal fade" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="txt-color mb-0 font-weight-bold">{{ du_an.ten }}</h5>
+                <div class="modal-header pt-2">
+                    <h5 class="txt-color my-2 font-weight-bold">{{ du_an.ten }}</h5>
                     <button type="button" class="close" @click.prevent="closeModal">&times;</button>
                 </div>
                 <div class="modal-body space-y-2 px-4">
@@ -36,7 +36,7 @@ const addHangMuc = (id) => {
                             <span class="font-bold ">Ngày bắt đầu</span>
                         </div>
                         <div class="col-md-10 col-6">
-                            <span>{{ du_an.ngay_bat_dau }}</span>
+                            <span>{{ new Date(du_an.ngay_bat_dau).toLocaleDateString() }}</span>
                         </div>
                     </div>
                     <div class="row">
@@ -44,7 +44,7 @@ const addHangMuc = (id) => {
                             <span class="font-bold ">Ngày kết thúc</span>
                         </div>
                         <div class="col-md-10 col-6">
-                            <span>{{ du_an.ngay_ket_thuc }}</span>
+                            <span>{{ new Date(du_an.ngay_ket_thuc).toLocaleDateString() }}</span>
                         </div>
                     </div>
                     <div class="row">
@@ -63,8 +63,8 @@ const addHangMuc = (id) => {
                         <div class="col-md-2 col-6 font-bold">Mô tả</div>
                         <div class="col-md-10 col-6">{{ du_an.mo_ta }}</div>
                     </div>
-                    <div class="mt-4">
-                        <div class="mb-3">
+                    <div class="mt-3">
+                        <div class="mb-1">
                             <a class="btn btn-primary" @click.prevent="addHangMuc(du_an.id)">Thêm hạng mục</a>
                         </div>
                         <div class="p-2 pt-3 pl-3">
@@ -78,9 +78,6 @@ const addHangMuc = (id) => {
                             />
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" @click.prevent="closeModal">Hủy</button>
                 </div>
             </div>
         </div>

@@ -28,13 +28,13 @@ class HoaDon extends Model
 
     public function chi_tiet_hoa_don()
     {
-        return $this->hasMany(ChiTietHoaDon::class, 'hoa_don_id')->where('deleted_at', null)->get();
+        return $this->hasMany(ChiTietHoaDon::class, 'hoa_don_id')->where('deleted_at', null);
     }
 
     public function tong_tien()
     {
         $tong_tien = 0;
-        foreach ($this->chi_tiet_hoa_don() as $chi_tiet_hoa_don) {
+        foreach ($this->chi_tiet_hoa_don()->get() as $chi_tiet_hoa_don) {
             $tong_tien += $chi_tiet_hoa_don->so_luong * $chi_tiet_hoa_don->gia;
         }
         return $tong_tien;

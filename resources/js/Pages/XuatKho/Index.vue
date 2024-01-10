@@ -142,8 +142,9 @@ function delelehoadon(id) {
                         <td >{{ kh.ghi_chu }}</td>
                         <td class="date">{{ formatDate(kh.created_at) }}</td>
                         <td class="money">{{ kh.tong_tien.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</td>
-                        <td class="action">
+                        <td style="width: 9%">
                             <a class="btn btn-primary btn-sm d-inline-block mr-2" @click.prevent="editModal(kh)">Sửa</a>
+                            <a class="btn btn-primary btn-sm d-inline-block mr-2" :href="route('hoadon.print', { id: kh.id })">Xuất</a>
                             <a class="btn btn-danger btn-sm" @click.prevent="delelehoadon(kh.id)">Xóa</a>
                         </td>
                     </tr>

@@ -54,9 +54,10 @@ Route::prefix('/donvitinh')->middleware('auth')->group(function (){
 });
 
 Route::prefix('/hoadon')->middleware('auth')->group(function (){
-    Route::get('/{loai?}', [HoaDonController::class, 'index'])->name('hoadon.index');
+    Route::get('/', [HoaDonController::class, 'index'])->name('hoadon.index');
     Route::post('/store', [HoaDonController::class, 'store'])->name('hoadon.store');
     Route::delete('/delete', [HoaDonController::class, 'delete'])->name('hoadon.delete');
+    Route::get('/print', [HoaDonController::class, 'print'])->name('hoadon.print');
 });
 
 Route::prefix('/donhang')->middleware('auth')->group(function (){
@@ -90,9 +91,10 @@ Route::prefix('/tonkho')->middleware('auth')->group(function (){
 });
 
 Route::prefix('/phieuthuchi')->middleware('auth')->group(function (){
-    Route::get('/{loai?}', [PhieuThuChiController::class, 'index'])->name('phieuthuchi.index');
+    Route::get('/', [PhieuThuChiController::class, 'index'])->name('phieuthuchi.index');
     Route::post('/store', [PhieuThuChiController::class, 'store'])->name('phieuthuchi.store');
     Route::delete('/delete', [PhieuThuChiController::class, 'delete'])->name('phieuthuchi.delete');
+    Route::get('/print', [PhieuThuChiController::class, 'print'])->name('phieuthuchi.print');
 });
 
 Route::prefix('/loaithuchi')->middleware('auth')->group(function (){

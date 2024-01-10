@@ -21,7 +21,7 @@ const form = useForm({
     ly_do: "",
     so_tien: 0,
     trang_thai: "",
-    loai: 1,
+    loai: 0,
 })
 
 

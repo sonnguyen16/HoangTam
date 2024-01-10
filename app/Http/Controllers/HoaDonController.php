@@ -9,6 +9,7 @@ use App\Http\Resources\SanPhamResource;
 use App\Models\ChiTietHoaDon;
 use App\Models\DonHang;
 use App\Models\NhaCungCap;
+use App\Models\PhieuThuChi;
 use App\Models\SanPham;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -19,7 +20,7 @@ use App\Models\KhachHang;
 
 class HoaDonController extends Controller
 {
-    public function index(Request $request, $loai = null)
+    public function index(Request $request)
     {
         $request->loai == 'nhapkho' ? $loai = '0' : $loai = '1';
         $query = HoaDon::query()->whereNull('deleted_at')->where('loai', $loai);
@@ -64,7 +65,7 @@ class HoaDonController extends Controller
 
         $hoa_don = HoaDon::updateOrCreate(['id' => $data['id']], $data);
 
-        foreach ($hoa_don->chi_tiet_hoa_don() as $item) {
+        foreach ($hoa_don->chi_tiet_hoa_don()->get() as $item) {
             $item->delete();
         }
 
@@ -77,6 +78,13 @@ class HoaDonController extends Controller
                 ChiTietHoaDon::updateOrCreate(['id' => $item['id']], $item);
             }
         }
+    }
+
+    public function print(Request $request)
+    {
+        $hoa_don = HoaDon::query()->whereNull('deleted_at')->where('id', $request->id)->first();
+        $hoa_don = new HoaDonResource($hoa_don);
+        return Inertia::render('NhapKho/Print', compact('hoa_don'));
     }
 
 

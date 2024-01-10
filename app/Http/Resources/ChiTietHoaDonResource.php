@@ -17,7 +17,7 @@ class ChiTietHoaDonResource extends JsonResource
         return [
             'id' => $this->id,
             'hoa_don_id' => $this->hoa_don_id,
-            'san_pham' => new SanPhamResource($this->san_pham()),
+            'san_pham' => new SanPhamResource($this->san_pham()->first()),
             'so_luong' => $this->so_luong,
             'gia' => $this->gia,
             'thanh_tien' => $this->thanh_tien(),

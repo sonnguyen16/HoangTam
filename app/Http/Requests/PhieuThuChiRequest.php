@@ -35,7 +35,9 @@ class PhieuThuChiRequest extends FormRequest
 
         if($this->loai == 0) {
             $rules['khach_hang_id'] = 'required';
-        } else {
+        }
+
+        if($this->loai == 1) {
             $rules['nha_cung_cap_id'] = 'required';
         }
         return $rules;

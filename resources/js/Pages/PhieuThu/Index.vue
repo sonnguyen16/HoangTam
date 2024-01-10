@@ -155,8 +155,9 @@ function delelephieuthuchi(id) {
                             <span v-else class="badge badge-success">Đã thanh toán</span>
                         </td>
                         <td class="date">{{ formatDate(kh.created_at) }}</td>
-                        <td class="action">
+                        <td style="width: 9%">
                             <a class="btn btn-primary btn-sm d-inline-block mr-2" @click.prevent="editModal(kh)">Sửa</a>
+                            <a class="btn btn-primary btn-sm d-inline-block mr-2" :href="route('phieuthuchi.print', { id : kh.id })">Xuất</a>
                             <a class="btn btn-danger btn-sm" @click.prevent="delelephieuthuchi(kh.id)">Xóa</a>
                         </td>
                     </tr>

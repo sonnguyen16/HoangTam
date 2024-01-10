@@ -15,7 +15,7 @@ use Carbon\Carbon;
 
 class PhieuThuChiController extends Controller
 {
-    public function index(Request $request, $loai = null)
+    public function index(Request $request)
     {
         $request->loai == 'phieuthu' ? $loai = '0' : $loai = '1';
         $query = PhieuThuChi::query()->whereNull('deleted_at')->where('loai', $loai)
@@ -55,6 +55,14 @@ class PhieuThuChiController extends Controller
         $data = $request->validated();
         PhieuThuChi::updateOrCreate(['id' => $data['id']], $data);
     }
+
+    public function print(Request $request)
+    {
+        $phieu_thu_chi = PhieuThuChi::query()->whereNull('deleted_at')->where('id', $request->id)
+            ->with(['nha_cung_cap', 'khach_hang', 'nhan_vien', 'du_an', 'loai_thu_chi'])->first();
+        return Inertia::render('PhieuThu/Print', compact('phieu_thu_chi'));
+    }
+
 
     public function delete(Request $request)
     {

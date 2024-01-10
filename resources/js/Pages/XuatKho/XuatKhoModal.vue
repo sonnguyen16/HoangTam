@@ -64,7 +64,7 @@ const closeModal = () => {
 }
 
 function removeChiTietHoaDon(id) {
-    form.chi_tiet_hoa_don = form.chi_tiet_hoa_don.filter((item, index) => index !== id)
+    form.chi_tiet_hoa_don = form.chi_tiet_hoa_don.filter(item => item.id !== id)
 }
 
 function addChiTietHoaDon(){
@@ -238,7 +238,7 @@ function xemDonHang() {
                                     <td colspan="7" class="text-center">Không có dữ liệu</td>
                                 </tr>
 
-                                <tr :key="cthd.id" v-else v-for="(cthd,index) in form.chi_tiet_hoa_don">
+                                <tr :key="cthd.id" v-else v-for="cthd in form.chi_tiet_hoa_don">
                                     <td class="ma">{{ cthd?.san_pham?.ma }}</td>
                                     <td class="ten" >{{ cthd?.san_pham?.ten }}</td>
                                     <td class="quantity" >{{ cthd?.so_luong }}</td>
@@ -246,7 +246,7 @@ function xemDonHang() {
                                     <td class="money">{{ cthd?.gia.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</td>
                                     <td class="money">{{ cthd?.thanh_tien.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</td>
                                     <td class="action" >
-                                        <a class="btn btn-danger btn-sm" @click.prevent="removeChiTietHoaDon(index)">
+                                        <a class="btn btn-danger btn-sm" @click.prevent="removeChiTietHoaDon(cthd.id)">
                                             <i class="fas fa-trash"></i>
                                         </a>
                                     </td>

@@ -14,7 +14,7 @@ class ChiTietHoaDon extends Model
 
     public function san_pham()
     {
-        return $this->belongsTo(SanPham::class, 'san_pham_id')->first();
+        return $this->belongsTo(SanPham::class, 'san_pham_id');
     }
 
     public function thanh_tien()

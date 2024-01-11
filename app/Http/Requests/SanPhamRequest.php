@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\SanPham;
 use Illuminate\Foundation\Http\FormRequest;
 
 class SanPhamRequest extends FormRequest
@@ -21,16 +22,26 @@ class SanPhamRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        $rules = [
             'id' => '',
-            'ma' => 'required|max:255|unique:san_pham,ma',
+
             'ten' => 'required|max:255',
             'gia_ban' => 'required|numeric|min:0',
             'gia_nhap' => 'required|numeric|min:0',
             'don_vi_tinh_id' => 'required|numeric',
+            'ton_dau' => 'numeric|min:0',
             'loai_san_pham_id' => 'required|numeric',
             'mo_ta' => 'required',
         ];
+
+        if(isset($this->id)){
+            $san_pham = SanPham::find($this->id);
+            $rules['ma'] = $san_pham->ma != $this->ma ?
+                'required|max:255|unique:san_pham,ma'
+                : 'required|max:255';
+        }
+
+        return $rules;
     }
 
     public function messages()
@@ -49,6 +60,8 @@ class SanPhamRequest extends FormRequest
             'gia_nhap.min' => 'Giá nhập phải lớn hơn hoặc bằng 0',
             'don_vi_tinh_id.required' => 'Đơn vị tính không được để trống',
             'don_vi_tinh_id.numeric' => 'Đơn vị tính phải là số',
+            'ton_dau.numeric' => 'Tồn đầu phải là số',
+            'ton_dau.min' => 'Tồn đầu phải lớn hơn hoặc bằng 0',
             'loai_san_pham_id.required' => 'Loại sản phẩm không được để trống',
             'loai_san_pham_id.numeric' => 'Loại sản phẩm phải là số',
             'mo_ta.required' => 'Mô tả không được để trống',

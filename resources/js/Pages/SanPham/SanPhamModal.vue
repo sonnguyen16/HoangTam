@@ -17,6 +17,7 @@ const form = useForm({
     mo_ta: "",
     gia_ban: 0,
     gia_nhap: 0,
+    ton_dau: 0,
     don_vi_tinh_id: "",
     loai_san_pham_id: "",
     dinh_muc: [],
@@ -27,6 +28,7 @@ let item = ref({
     san_pham_id: props.san_pham.id,
     san_pham: {},
     so_luong: 0,
+    ton_dau: 0,
     don_vi_tinh: {},
 })
 
@@ -38,6 +40,7 @@ watchEffect(() => {
     form.gia_nhap = props.san_pham.gia_nhap
     form.don_vi_tinh_id = props.san_pham.don_vi_tinh_id
     form.loai_san_pham_id = props.san_pham.loai_san_pham_id
+    form.ton_dau = props.san_pham.ton_dau
     form.mo_ta = props.san_pham.mo_ta
     form.dinh_muc = props.san_pham.dinh_muc
 })
@@ -149,6 +152,14 @@ onMounted(() => {
                                 <div>
                                     <input :class="{ 'border-danger' : form.errors.gia_nhap }" type="number" v-model="form.gia_nhap" class="form-control" id="gia_nhap" />
 <!--                                    <InputError :message="form.errors.gia_nhap" />-->
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="name">Tồn đầu</label>
+                                <div>
+                                    <input :class="{ 'border-danger' : form.errors.ton_dau }" type="number" v-model="form.ton_dau" class="form-control" id="ton_dau" />
+                                    <!--                                    <InputError :message="form.errors.ton_dau" />-->
                                 </div>
                             </div>
 

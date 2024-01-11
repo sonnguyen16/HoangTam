@@ -31,4 +31,32 @@ class SanPham extends Model
     {
         return $this->belongsTo(LoaiSanPham::class, 'loai_san_pham_id')->first();
     }
+
+    public function so_luong_nhap(){
+        return $this->hasMany(ChiTietHoaDon::class, 'san_pham_id')
+            ->whereHas('hoa_don', function ($q) {
+                $q->where('loai', 0);
+            })->whereNull('deleted_at')
+            ->sum('so_luong');
+    }
+
+    public function so_luong_xuat(){
+        return $this->hasMany(ChiTietHoaDon::class, 'san_pham_id')
+            ->whereHas('hoa_don', function ($q) {
+                $q->where('loai', 1);
+            })->whereNull('deleted_at')
+            ->sum('so_luong');
+    }
+
+    public function dieu_chinh_kho(){
+        return $this->hasMany(TonKho::class, 'san_pham_id')
+            ->whereNull('deleted_at')
+            ->sum('so_luong');
+    }
+
+    public function ton_cuoi()
+    {
+        return $this->ton_dau + $this->so_luong_nhap() - $this->so_luong_xuat()
+            + $this->dieu_chinh_kho();
+    }
 }

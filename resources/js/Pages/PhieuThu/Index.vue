@@ -131,11 +131,11 @@ function delelephieuthuchi(id) {
                     <tr>
                         <th>Mã phiếu</th>
                         <th>Khách hàng</th>
-                        <th>Số tiền</th>
                         <th>Người chi</th>
                         <th>Dự án</th>
                         <th>Trạng thái</th>
                         <th>Ngày tạo</th>
+                        <th>Số tiền</th>
                         <th>Thao tác</th>
                     </tr>
                     </thead>
@@ -147,7 +147,7 @@ function delelephieuthuchi(id) {
                     <tr :key="kh.id" v-else v-for="kh in allData?.data">
                         <td>{{ kh.ma }}</td>
                         <td>{{ kh.khach_hang?.ten }}</td>
-                        <td class="money">{{ kh.so_tien.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</td>
+
                         <td>{{ kh.nhan_vien?.name }}</td>
                         <td>{{ kh.du_an?.ten }}</td>
                         <td>
@@ -155,6 +155,7 @@ function delelephieuthuchi(id) {
                             <span v-else class="badge badge-success">Đã thanh toán</span>
                         </td>
                         <td class="date">{{ formatDate(kh.created_at) }}</td>
+                        <td class="money">{{ kh.so_tien.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</td>
                         <td style="width: 9%">
                             <a class="btn btn-primary btn-sm d-inline-block mr-2" @click.prevent="editModal(kh)">Sửa</a>
                             <a class="btn btn-primary btn-sm d-inline-block mr-2" :href="route('phieuthuchi.print', { id : kh.id })">Xuất</a>

@@ -41,7 +41,7 @@ watchEffect(() => {
 })
 const submit = () => {
     if(!props.hoa_don.id){
-        form.ma = "XK" + new Date().getTime().toString();
+        form.ma = "XK" + Date.now().toString().slice(-6);
     }
     form.post(route('hoadon.store'), {
         onSuccess: () => {

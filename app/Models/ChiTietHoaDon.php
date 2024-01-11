@@ -21,4 +21,9 @@ class ChiTietHoaDon extends Model
     {
         return $this->so_luong * $this->gia;
     }
+
+    public function hoa_don()
+    {
+        return $this->belongsTo(HoaDon::class, 'hoa_don_id');
+    }
 }

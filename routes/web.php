@@ -15,7 +15,8 @@ use App\Http\Controllers\LoaiSanPhamController;
 use App\Http\Controllers\TonKhoController;
 use App\Http\Controllers\PhieuThuChiController;
 use App\Http\Controllers\LoaiThuChiController;
-
+use App\Http\Controllers\BaoCaoTonKhoController;
+use App\Http\Controllers\BaoCaoCongNoController;
 
 Route::prefix('/')->group(function (){
     Route::get('/', [AuthController::class, 'index'])->name('auth.index');
@@ -103,5 +104,15 @@ Route::prefix('/loaithuchi')->middleware('auth')->group(function (){
     Route::post('/store', [LoaiThuChiController::class, 'store'])->name('loaithuchi.store');
     Route::delete('/delete', [LoaiThuChiController::class, 'delete'])->name('loaithuchi.delete');
 });
+
+Route::prefix('/baocaotonkho')->middleware('auth')->group(function (){
+    Route::get('/', [BaoCaoTonKhoController::class, 'index'])->name('baocaotonkho.index');
+});
+
+Route::prefix('/baocaocongno')->middleware('auth')->group(function (){
+    Route::get('/', [BaoCaoCongNoController::class, 'index'])->name('baocaocongno.index');
+});
+
+
 
 

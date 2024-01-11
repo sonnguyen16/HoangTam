@@ -22,8 +22,9 @@ class DuAnController extends Controller
 
         if ($request->filled('search')) {
             $search = $request->search;
-            $query->where(function ($query) use ($search) {
-                $query->where('ten', 'like', "%{$search}%")
+            $query= $query->where(function ($query) use ($search) {
+                $query->where('parent_id', null)
+                    ->where('ten', 'like', "%{$search}%")
                     ->orWhereHas('nhan_vien', function ($q) use ($search) {
                         $q->where('name', 'like', "%{$search}%");
                     });

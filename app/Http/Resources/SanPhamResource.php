@@ -24,6 +24,10 @@ class SanPhamResource extends JsonResource
             'loai_san_pham' => $this->loai_san_pham(),
             'mo_ta' => $this->mo_ta,
             'dinh_muc' => DinhMucResource::collection($this->dinh_muc()),
+            'so_luong_nhap' => $this->so_luong_nhap(),
+            'so_luong_xuat' => $this->so_luong_xuat(),
+            'dieu_chinh_kho' => $this->dieu_chinh_kho(),
+            'ton_cuoi' => $this->ton_cuoi()
         ];
     }
 }

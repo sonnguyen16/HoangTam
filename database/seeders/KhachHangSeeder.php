@@ -13,7 +13,7 @@ class KhachHangSeeder extends Seeder
      */
     public function run(): void
     {
-        for ($i = 0; $i < 100; $i++) {
+        for ($i = 0; $i < 400; $i++) {
             DB::table('khach_hang')->insert([
                 'ten' => 'Khách hàng ' . $i,
                 'dia_chi' => 'Địa chỉ ' . $i,

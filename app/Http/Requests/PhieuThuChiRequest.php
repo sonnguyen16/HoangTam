@@ -28,7 +28,7 @@ class PhieuThuChiRequest extends FormRequest
             'so_tien' => 'required|numeric|min:0',
             'nhan_vien_id' => 'required',
             'trang_thai' => 'required',
-            'du_an_id' => 'required',
+//            'du_an_id' => 'required',
             'loai' => 'required',
             'loai_thu_chi_id' => 'required',
         ];

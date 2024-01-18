@@ -35,6 +35,13 @@ class DonViController extends Controller
             $file_name = time().'_'.$file->getClientOriginalName();
             $file->move(public_path('uploads'), $file_name);
             $data['logo'] = $file_name;
+        }else{
+            if(isset($data['id'])){
+                $don_vi = DonVi::find($data['id']);
+                $data['logo'] = $don_vi->logo;
+            }else{
+                $data['logo'] = 'logo-default.png';
+            }
         }
         DonVi::updateOrCreate(['id' => $data['id']], $data);
     }

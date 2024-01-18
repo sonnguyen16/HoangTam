@@ -2,6 +2,7 @@
 import DropdownLink from "@/Components/DropdownLink.vue";
 import {computed} from "vue";
 import {usePage} from "@inertiajs/vue3";
+import DonViModal from "@/Components/app/DonViModal.vue";
 
 const { props } = usePage();
 
@@ -12,6 +13,10 @@ const don_vi = computed(() => {
 const user = computed(() => {
     return props.user;
 });
+
+function showModal() {
+    $('#donvimodal1').modal('show');
+}
 
 </script>
 
@@ -41,16 +46,16 @@ const user = computed(() => {
                     <i class="fas fa-user"></i>
                 </a>
                 <div class="dropdown-menu dropdown-menu-md dropdown-menu-right border-0 shadow">
-                    <DropdownLink class=" dropdown-item" as="button">
-                        Xin chào, {{ user?.name }}
-                    </DropdownLink>
-                    <DropdownLink :href="route('auth.logout')" method="post" class=" dropdown-item" as="button">
+                    <a @click.prevent="showModal()" class=" dropdown-item px-4 py-2">
+                        Thông tin đơn vị
+                    </a>
+                    <DropdownLink :href="route('auth.logout')" method="post" class="dropdown-item" as="button">
                         Đăng xuất
                     </DropdownLink>
                 </div>
             </li>
-
         </ul>
     </nav>
+    <DonViModal :don_vi="don_vi" />
 </template>
 

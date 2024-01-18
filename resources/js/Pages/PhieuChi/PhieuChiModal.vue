@@ -131,15 +131,15 @@ onUpdated(() => {
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <label for="du_an_id">Dự án</label>
-                                <div>
-                                    <select :class="{ 'border-danger' : form.errors.du_an_id }" v-model="form.du_an_id" class="form-control" id="du_an_id">
-                                        <option value="">Chọn dự án</option>
-                                        <option v-for="da in du_an_list" :key="da.id" :value="da.id">{{ da.ten }}</option>
-                                    </select>
-                                </div>
-                            </div>
+<!--                            <div class="form-group">-->
+<!--                                <label for="du_an_id">Dự án</label>-->
+<!--                                <div>-->
+<!--                                    <select :class="{ 'border-danger' : form.errors.du_an_id }" v-model="form.du_an_id" class="form-control" id="du_an_id">-->
+<!--                                        <option value="">Chọn dự án</option>-->
+<!--                                        <option v-for="da in du_an_list" :key="da.id" :value="da.id">{{ da.ten }}</option>-->
+<!--                                    </select>-->
+<!--                                </div>-->
+<!--                            </div>-->
 
                             <div class="form-group">
                                 <label for="nhan_vien_id">Nhân viên</label>

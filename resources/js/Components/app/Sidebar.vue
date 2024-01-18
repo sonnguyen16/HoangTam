@@ -3,6 +3,18 @@
 import NavLink from "@/Components/app/NavLink.vue";
 import NavItem from "@/Components/app/NavItem.vue";
 import NavLinkTree from "@/Components/app/NavLinkTree.vue";
+import {usePage} from "@inertiajs/vue3";
+import {computed} from "vue";
+
+const { props } = usePage();
+
+const don_vi = computed(() => {
+    return props.don_vi;
+});
+
+const user = computed(() => {
+    return props.user;
+});
 
 </script>
 
@@ -13,27 +25,22 @@ import NavLinkTree from "@/Components/app/NavLinkTree.vue";
                 <ul class="nav nav-pills nav-child-indent nav-sidebar flex-column" data-widget="treeview" role="menu"
                     data-accordion="false">
                     <li class="nav-item menu-open">
-                        <NavLink title="Đối tác"/>
-                        <ul class="nav nav-treeview ">
-                            <NavItem :href="route('khachhang.index')" title="Danh sách khách hàng"/>
-                            <NavItem :href="route('nhacungcap.index')" title="Danh sách nhà cung cấp"/>
-                        </ul>
-                    </li>
-                    <hr class="m-2 mr-4 ml-3">
-                    <li class="nav-item menu-open">
                         <NavLink title="Danh mục quản lý"/>
                         <ul class="nav nav-treeview ">
-                            <li class="nav-item">
-                                <NavLinkTree title="Quản lý sản phẩm"/>
-                                <ul class="nav nav-treeview ">
-                                    <NavItem :href="route('donvitinh.index')" title="Quản lý đơn vị tính"/>
-                                    <NavItem :href="route('loaisanpham.index')" title="Quản lý loại sản phẩm"/>
-                                    <NavItem :href="route('sanpham.index')" title="Quản lý sản phẩm"/>
-                                </ul>
-                            </li>
-                            <NavItem :href="route('duan.index')" title="Quản lý dự án"/>
-                            <NavItem :href="route('nhanvien.index')" title="Quản lý nhân viên"/>
+<!--                            <li class="nav-item">-->
+<!--                                <NavLinkTree title="Quản lý sản phẩm"/>-->
+<!--                                <ul class="nav nav-treeview ">-->
+<!--                                   -->
+<!--                                </ul>-->
+<!--                            </li>-->
+                            <NavItem :href="route('loaisanpham.index')" title="Quản lý loại sản phẩm"/>
+                            <NavItem :href="route('donvitinh.index')" title="Quản lý đơn vị tính"/>
+                            <NavItem :href="route('sanpham.index')" title="Quản lý sản phẩm"/>
                             <NavItem :href="route('kho.index')" title="Quản lý kho"/>
+<!--                            <NavItem :href="route('duan.index')" title="Quản lý dự án"/>-->
+                            <NavItem :href="route('khachhang.index')" title="Danh sách khách hàng"/>
+                            <NavItem :href="route('nhacungcap.index')" title="Danh sách nhà cung cấp"/>
+                            <NavItem :href="route('nhanvien.index')" title="Quản lý nhân viên"/>
                         </ul>
                     </li>
                     <hr class="m-2 mr-4 ml-3">
@@ -65,7 +72,7 @@ import NavLinkTree from "@/Components/app/NavLinkTree.vue";
                         </ul>
                     </li>
                     <hr class="m-2 mr-4 ml-3">
-                    <li class="nav-item menu-open mb-5">
+                    <li v-if="user?.role == 0" class="nav-item menu-open mb-5">
                         <NavLink title="Hệ thống"/>
                         <ul class="nav nav-treeview">
                             <NavItem :href="route('donvi.index')" title="Danh sách đơn vị"/>

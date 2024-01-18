@@ -30,8 +30,8 @@ watchEffect(() => {
 const submit = () => {
     form.post(route('donvi.store'), {
         onSuccess: () => {
-            $('#donvimodal').modal('hide');
-            router.visit(route('donvi.index'))
+            $('#donvimodal1').modal('hide');
+            router.reload()
         },
         onError: () => {
             console.log(form.errors)
@@ -40,8 +40,7 @@ const submit = () => {
 }
 
 const closeModal = () => {
-    $('#donvimodal').modal('hide');
-    form.reset();
+    $('#donvimodal1').modal('hide');
     form.clearErrors();
 }
 
@@ -55,7 +54,7 @@ onMounted(function (){
 </script>
 
 <template>
-    <div id="donvimodal" class="modal fade" tabindex="-1" role="dialog">
+    <div id="donvimodal1" class="modal fade" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">

@@ -21,8 +21,14 @@ class SanPhamController extends Controller
             ->whereHas('created_by.don_vi', function ($query) {
                 $query->where('id', Auth::user()->don_vi_id);
             })->orderBy('id', 'desc');
-        $don_vi_tinh_list = DonViTinh::query()->whereNull('deleted_at')->get();
-        $loai_san_pham_list = LoaiSanPham::query()->whereNull('deleted_at')->get();
+        $don_vi_tinh_list = DonViTinh::query()->whereNull('deleted_at')
+            ->whereHas('created_by.don_vi', function ($query) {
+                $query->where('id', Auth::user()->don_vi_id);
+            })->orderBy('id', 'desc')->get();
+        $loai_san_pham_list = LoaiSanPham::query()->whereNull('deleted_at')
+            ->whereHas('created_by.don_vi', function ($query) {
+                $query->where('id', Auth::user()->don_vi_id);
+            })->orderBy('id', 'desc')->get();
 
         if ($request->filled('search')) {
             $search = $request->search;

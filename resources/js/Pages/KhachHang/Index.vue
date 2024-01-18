@@ -17,6 +17,7 @@ let khach_hang = ref({
     dien_thoai: "",
     website: "",
     ghi_chu: "",
+    ton_dau: 0,
 })
 
 let search = ref("")
@@ -29,6 +30,7 @@ function openModal() {
         dien_thoai: "",
         website: "",
         ghi_chu: "",
+        ton_dau: 0,
     }
     $('#khachhangmodal').modal('show');
 }
@@ -59,6 +61,7 @@ function editModal(kh) {
         dien_thoai: kh.dien_thoai,
         website: kh.website,
         ghi_chu: kh.ghi_chu,
+        ton_dau: kh.ton_dau,
     };
     $('#khachhangmodal').modal('show');
 }

@@ -33,14 +33,14 @@ const user = computed(() => {
 <!--                                   -->
 <!--                                </ul>-->
 <!--                            </li>-->
-                            <NavItem :href="route('loaisanpham.index')" title="Quản lý loại sản phẩm"/>
-                            <NavItem :href="route('donvitinh.index')" title="Quản lý đơn vị tính"/>
-                            <NavItem :href="route('sanpham.index')" title="Quản lý sản phẩm"/>
-                            <NavItem :href="route('kho.index')" title="Quản lý kho"/>
+                            <NavItem :href="route('loaisanpham.index')" title="Loại sản phẩm"/>
+                            <NavItem :href="route('donvitinh.index')" title="Đơn vị tính"/>
+                            <NavItem :href="route('sanpham.index')" title="Sản phẩm"/>
+                            <NavItem :href="route('kho.index')" title="Kho"/>
 <!--                            <NavItem :href="route('duan.index')" title="Quản lý dự án"/>-->
-                            <NavItem :href="route('khachhang.index')" title="Danh sách khách hàng"/>
-                            <NavItem :href="route('nhacungcap.index')" title="Danh sách nhà cung cấp"/>
-                            <NavItem :href="route('nhanvien.index')" title="Quản lý nhân viên"/>
+                            <NavItem :href="route('khachhang.index')" title="Khách hàng"/>
+                            <NavItem :href="route('nhacungcap.index')" title="Nhà cung cấp"/>
+                            <NavItem :href="route('nhanvien.index')" title="Nhân viên"/>
                         </ul>
                     </li>
                     <hr class="m-2 mr-4 ml-3">

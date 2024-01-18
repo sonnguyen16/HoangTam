@@ -13,6 +13,7 @@ const form = useForm({
     dien_thoai: "",
     website: "",
     ghi_chu: "",
+    ton_dau: 0,
 })
 
 watchEffect(() => {
@@ -22,6 +23,7 @@ watchEffect(() => {
     form.dien_thoai = props.khach_hang.dien_thoai
     form.website = props.khach_hang.website
     form.ghi_chu = props.khach_hang.ghi_chu
+    form.ton_dau = props.khach_hang.ton_dau
 })
 const submit = () => {
     form.post(route('khachhang.store'), {
@@ -93,12 +95,20 @@ const closeModal = () => {
                                </div>
 
                                <div class="form-group">
+                                   <label for="ton_dau">Tồn đầu</label>
+                                   <div>
+                                       <input :class="{ 'border-danger' : form.errors.ton_dau }" type="number" v-model="form.ton_dau" class="form-control" id="ton_dau" />
+                                   </div>
+                               </div>
+
+                               <div class="form-group">
                                    <label for="ghi_chu">Ghi chú</label>
                                    <div>
                                        <input type="text" v-model="form.ghi_chu" class="form-control" id="ghi_chu" />
 <!--                                       <InputError :message="form.errors.ghi_chu" />-->
                                    </div>
                                </div>
+
                            </div>
 
                     </div>

@@ -26,7 +26,7 @@ class KhachHangRequest extends FormRequest
             'ten' => 'required|max:255',
             'dia_chi' => 'required',
             'dien_thoai' => 'required|numeric',
-            'website' => 'required|url',
+            'website' => '',
             'ghi_chu' => ''
         ];
     }

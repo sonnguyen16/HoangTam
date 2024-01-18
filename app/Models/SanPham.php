@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class SanPham extends Model
 {
-    use HasFactory;
+    use HasFactory, HasCreatorAndUpdater;
 
     protected $table = 'san_pham';
 
@@ -36,27 +36,29 @@ class SanPham extends Model
         return $this->hasMany(ChiTietHoaDon::class, 'san_pham_id')
             ->whereHas('hoa_don', function ($q) {
                 $q->where('loai', 0);
-            })->whereNull('deleted_at')
-            ->sum('so_luong');
+            })->whereNull('deleted_at');
     }
 
     public function so_luong_xuat(){
         return $this->hasMany(ChiTietHoaDon::class, 'san_pham_id')
             ->whereHas('hoa_don', function ($q) {
                 $q->where('loai', 1);
-            })->whereNull('deleted_at')
-            ->sum('so_luong');
+            })->whereNull('deleted_at');
     }
 
     public function dieu_chinh_kho(){
         return $this->hasMany(TonKho::class, 'san_pham_id')
-            ->whereNull('deleted_at')
-            ->sum('so_luong');
+            ->whereNull('deleted_at');
     }
 
     public function ton_cuoi()
     {
-        return $this->ton_dau + $this->so_luong_nhap() - $this->so_luong_xuat()
-            + $this->dieu_chinh_kho();
+        return $this->ton_dau + $this->so_luong_nhap()->sum('so_luong') - $this->so_luong_xuat()->sum('so_luong')
+            + $this->dieu_chinh_kho()->sum('so_luong');
+    }
+
+    public function created_by()
+    {
+        return $this->belongsTo(User::class, "created_by");
     }
 }

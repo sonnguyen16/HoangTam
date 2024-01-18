@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Traits\HasCreatorAndUpdater;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Kalnoy\Nestedset\NodeTrait;
 
 class DuAn extends Model
 {
-    use HasFactory, NodeTrait;
+    use HasFactory, NodeTrait, HasCreatorAndUpdater;
 
     protected $table = 'du_an';
 
@@ -30,5 +31,10 @@ class DuAn extends Model
     public function files()
     {
         return $this->hasMany(FileDuAn::class, 'du_an_id');
+    }
+
+    public function created_by()
+    {
+        return $this->belongsTo(User::class, "created_by");
     }
 }

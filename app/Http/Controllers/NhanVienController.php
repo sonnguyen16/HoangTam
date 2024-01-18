@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use App\Http\Requests\NhanVienRequest;
 use App\Models\User;
@@ -12,7 +13,8 @@ class NhanVienController extends Controller
 {
     public function index(Request $request)
     {
-        $query = User::query()->whereNull('deleted_at')->where('role', 1);
+        $query = User::query()->whereNull('deleted_at')->where('role', 1)
+            ->where('don_vi_id', Auth::user()->don_vi_id)->orderBy('id', 'desc');
 
         if ($request->filled('search')) {
             $search = $request->search;
@@ -30,6 +32,7 @@ class NhanVienController extends Controller
     public function store(NhanVienRequest $request)
     {
         $data = $request->validated();
+        $data['don_vi_id'] = Auth::user()->don_vi_id;
         User::updateOrCreate(['id' => $data['id']], $data);
     }
 

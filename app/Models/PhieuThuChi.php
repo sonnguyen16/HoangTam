@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Traits\HasCreatorAndUpdater;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class PhieuThuChi extends Model
 {
-    use HasFactory;
+    use HasFactory, HasCreatorAndUpdater;
 
     protected $table = 'phieu_thu_chi';
 
@@ -34,5 +35,10 @@ class PhieuThuChi extends Model
     public function loai_thu_chi()
     {
         return $this->belongsTo(LoaiThuChi::class, 'loai_thu_chi_id');
+    }
+
+    public function created_by()
+    {
+        return $this->belongsTo(User::class, "created_by");
     }
 }

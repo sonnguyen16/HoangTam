@@ -13,14 +13,35 @@ class KhachHangSeeder extends Seeder
      */
     public function run(): void
     {
-        for ($i = 0; $i < 400; $i++) {
-            DB::table('khach_hang')->insert([
-                'ten' => 'Khách hàng ' . $i,
-                'dia_chi' => 'Địa chỉ ' . $i,
-                'dien_thoai' => rand(1000000000, 9999999999),
-                'website' => 'https://example.com',
-                'ghi_chu' => 'Ghi chú ' . $i,
-            ]);
-        }
+        DB::table('khach_hang')->insert([
+            [
+                'ten' => 'Khách hàng 1',
+                'dia_chi' => 'Địa chỉ 1',
+                'dien_thoai' => '0123456789',
+                'website' => 'https://www.google.com',
+                'created_by' => '2',
+            ],
+            [
+                'ten' => 'Khách hàng 2',
+                'dia_chi' => 'Địa chỉ 2',
+                'dien_thoai' => '0123456789',
+                'website' => 'https://www.google.com',
+                'created_by' => '2',
+            ],
+            [
+                'ten' => 'Khách hàng 3',
+                'dia_chi' => 'Địa chỉ 3',
+                'dien_thoai' => '0123456789',
+                'website' => 'https://www.google.com',
+                'created_by' => '3',
+            ],
+            [
+                'ten' => 'Khách hàng 4',
+                'dia_chi' => 'Địa chỉ 4',
+                'dien_thoai' => '0123456789',
+                'website' => 'https://www.google.com',
+                'created_by' => '3',
+            ]
+        ]);
     }
 }

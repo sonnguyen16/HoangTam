@@ -13,6 +13,7 @@ use App\Models\PhieuThuChi;
 use App\Models\SanPham;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use App\Models\HoaDon;
 use App\Models\Kho;
@@ -23,12 +24,30 @@ class HoaDonController extends Controller
     public function index(Request $request)
     {
         $request->loai == 'nhapkho' ? $loai = '0' : $loai = '1';
-        $query = HoaDon::query()->whereNull('deleted_at')->where('loai', $loai);
-        $nha_cung_cap_list = NhaCungCap::query()->whereNull('deleted_at')->get();
-        $khach_hang_list = KhachHang::query()->whereNull('deleted_at')->get();
-        $kho_list = Kho::query()->whereNull('deleted_at')->get();
-        $san_pham_list = SanPham::query()->whereNull('deleted_at')->get();
-        $don_hang_ban_list = DonHang::query()->whereNull('deleted_at')->where('loai', 1)->paginate(4);
+        $query = HoaDon::query()->whereNull('deleted_at')->where('loai', $loai)
+            ->whereHas('created_by.don_vi', function ($query) {
+                $query->where('id', Auth::user()->don_vi_id);
+            })->orderBy('id', 'desc');
+        $nha_cung_cap_list = NhaCungCap::query()->whereNull('deleted_at')
+            ->whereHas('created_by.don_vi', function ($query) {
+                $query->where('id', Auth::user()->don_vi_id);
+            })->get();
+        $khach_hang_list = KhachHang::query()->whereNull('deleted_at')
+            ->whereHas('created_by.don_vi', function ($query) {
+                $query->where('id', Auth::user()->don_vi_id);
+            })->get();
+        $kho_list = Kho::query()->whereNull('deleted_at')
+            ->whereHas('created_by.don_vi', function ($query) {
+                $query->where('id', Auth::user()->don_vi_id);
+            })->get();
+        $san_pham_list = SanPham::query()->whereNull('deleted_at')
+            ->whereHas('created_by.don_vi', function ($query) {
+                $query->where('id', Auth::user()->don_vi_id);
+            })->get();
+        $don_hang_ban_list = DonHang::query()->whereNull('deleted_at')->where('loai', 1)
+            ->whereHas('created_by.don_vi', function ($query) {
+                $query->where('id', Auth::user()->don_vi_id);
+            })->paginate(4);
 
         if ($request->filled('search')) {
             $search = $request->search;

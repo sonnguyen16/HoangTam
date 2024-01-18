@@ -17,11 +17,14 @@ use App\Http\Controllers\PhieuThuChiController;
 use App\Http\Controllers\LoaiThuChiController;
 use App\Http\Controllers\BaoCaoTonKhoController;
 use App\Http\Controllers\BaoCaoCongNoController;
+use App\Http\Controllers\DonViController;
+use App\Http\Controllers\NguoiDungController;
 
 Route::prefix('/')->group(function (){
     Route::get('/', [AuthController::class, 'index'])->name('auth.index');
     Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
     Route::post('/logout', [AuthController::class, 'destroy'])->name('auth.logout');
+    Route::get('/profile', [AuthController::class, 'getProfile'])->name('auth.profile')->middleware('auth');
 });
 
 Route::prefix('/khachhang')->middleware('auth')->group(function (){
@@ -103,6 +106,18 @@ Route::prefix('/loaithuchi')->middleware('auth')->group(function (){
     Route::get('/', [LoaiThuChiController::class, 'index'])->name('loaithuchi.index');
     Route::post('/store', [LoaiThuChiController::class, 'store'])->name('loaithuchi.store');
     Route::delete('/delete', [LoaiThuChiController::class, 'delete'])->name('loaithuchi.delete');
+});
+
+Route::prefix('/donvi')->middleware('auth')->group(function (){
+    Route::get('/', [DonViController::class, 'index'])->name('donvi.index');
+    Route::post('/store', [DonViController::class, 'store'])->name('donvi.store');
+    Route::delete('/delete', [DonViController::class, 'delete'])->name('donvi.delete');
+});
+
+Route::prefix('/nguoidung')->middleware('auth')->group(function (){
+    Route::get('/', [NguoiDungController::class, 'index'])->name('nguoidung.index');
+    Route::post('/store', [NguoiDungController::class, 'store'])->name('nguoidung.store');
+    Route::delete('/delete', [NguoiDungController::class, 'delete'])->name('nguoidung.delete');
 });
 
 Route::prefix('/baocaotonkho')->middleware('auth')->group(function (){

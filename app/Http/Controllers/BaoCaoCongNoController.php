@@ -5,13 +5,17 @@ namespace App\Http\Controllers;
 use App\Http\Resources\NhaCungCapResource;
 use App\Models\NhaCungCap;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class BaoCaoCongNoController extends Controller
 {
     public function index(Request $request)
     {
-        $query = NhaCungCap::query()->whereNull('deleted_at');
+        $query = NhaCungCap::query()->whereNull('deleted_at')
+            ->whereHas('created_by.don_vi', function ($query) {
+                $query->where('id', Auth::user()->don_vi_id);
+            })->orderBy('id', 'desc');
 
         if ($request->filled('search')) {
             $search = $request->search;

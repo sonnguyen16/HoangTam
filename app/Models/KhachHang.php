@@ -8,7 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class KhachHang extends Model
 {
-    use HasFactory;
+    use HasFactory, HasCreatorAndUpdater;
 
     protected $table = 'khach_hang';
+
+    public function created_by()
+    {
+        return $this->belongsTo(User::class, "created_by");
+    }
 }

@@ -14,7 +14,7 @@ class ModifyMoTaColumnInDuAnTable extends Migration
     public function up()
     {
         Schema::table('du_an', function (Blueprint $table) {
-            $table->text('mo_ta')->nullable()->change();
+            $table->string('mo_ta')->nullable('')->change();
         });
     }
 

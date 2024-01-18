@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Traits\HasCreatorAndUpdater;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class DonHang extends Model
 {
-    use HasFactory;
+    use HasFactory, HasCreatorAndUpdater;
 
     protected $table = 'don_hang';
 
@@ -34,5 +35,10 @@ class DonHang extends Model
             $tong_tien += $chi_tiet_don_hang->so_luong * $chi_tiet_don_hang->gia;
         }
         return $tong_tien;
+    }
+
+    public function created_by()
+    {
+        return $this->belongsTo(User::class, "created_by");
     }
 }

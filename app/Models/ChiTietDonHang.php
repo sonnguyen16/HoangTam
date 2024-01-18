@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Traits\HasCreatorAndUpdater;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class ChiTietDonHang extends Model
 {
-    use HasFactory;
+    use HasFactory, HasCreatorAndUpdater;
 
     protected $table = 'chi_tiet_don_hang';
 
@@ -19,5 +20,10 @@ class ChiTietDonHang extends Model
     public function thanh_tien()
     {
         return $this->so_luong * $this->gia;
+    }
+
+    public function created_by()
+    {
+        return $this->belongsTo(User::class, "created_by");
     }
 }

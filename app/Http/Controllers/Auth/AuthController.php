@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Inertia\Inertia;
 use Inertia\Response;
 use App\Http\Requests\LoginRequest;
@@ -46,5 +47,15 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
 
         return redirect('/');
+    }
+
+    public function getProfile()
+    {
+        $currentUser = Auth::guard('web')->user();
+        $donVi = $currentUser->don_vi()->first();
+        return response()->json([
+            'user' => $currentUser,
+            'don_vi' => $donVi
+        ]);
     }
 }

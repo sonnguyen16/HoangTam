@@ -3,7 +3,6 @@ import AuthLayout from "@/Layouts/AuthLayout.vue";
 import {useForm} from "@inertiajs/vue3";
 import InputError from "@/Components/InputError.vue";
 
-
 const form = useForm({
     email: "",
     password: ""
@@ -15,7 +14,6 @@ const submit = () => {
         },
     })
 }
-
 </script>
 
 <template>
@@ -34,7 +32,7 @@ const submit = () => {
                                 <p class="font-weight-bold mb-4 text-center text-lg txt-color" style="">Chào mừng đã trở lại!</p>
 
                                 <form @submit.prevent="submit">
-                                    <div class="input-group form-group" :class="{'border border-danger' : form.errors.email}">
+                                    <div class="input-group mb-1" :class="{'border border-danger' : form.errors.email}">
                                         <input v-model="form.email"
                                                type="text" id="email"
                                                class="form-control"
@@ -46,9 +44,9 @@ const submit = () => {
                                         </div>
                                     </div>
 
-                                        <InputError :message="form.errors.email" />
+                                    <InputError :message="form.errors.email" />
 
-                                    <div class="input-group form-group" :class="{'border border-danger' : form.errors.password}">
+                                    <div class="input-group mb-1" :class="{'border border-danger' : form.errors.password}">
                                         <input autocomplete=""
                                                v-model="form.password"
                                                type="password"
@@ -62,8 +60,7 @@ const submit = () => {
                                         </div>
                                     </div>
 
-                                        <InputError :message="form.errors.password" />
-
+                                    <InputError :message="form.errors.password" />
 
                                     <button :class="{ 'opacity-25': form.processing }" :disabled="form.processing" type="submit" class="btn btn-primary btn-block">Đăng nhập</button>
 
@@ -80,6 +77,8 @@ const submit = () => {
 </template>
 
 <style scoped>
+
+
 
 </style>
 

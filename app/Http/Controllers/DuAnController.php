@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\DuAnRequest;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use App\Models\DuAn;
 use App\Models\User;
@@ -17,8 +18,11 @@ class DuAnController extends Controller
 {
     public function index(Request $request)
     {
-        $query = DuAn::with(['nhan_vien', 'files'])->whereNull('deleted_at');
-        $nhan_vien_list = User::query()->where('role', 1)->get();
+        $query = DuAn::with(['nhan_vien', 'files'])->whereNull('deleted_at')
+            ->whereHas('created_by.don_vi', function ($query) {
+                $query->where('id', Auth::user()->don_vi_id);
+            })->orderBy('id', 'desc');
+        $nhan_vien_list = User::query()->where('role', 1)->where('don_vi_id', Auth::user()->don_vi_id)->get();
 
         if ($request->filled('search')) {
             $search = $request->search;

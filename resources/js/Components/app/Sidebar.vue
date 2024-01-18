@@ -64,6 +64,14 @@ import NavLinkTree from "@/Components/app/NavLinkTree.vue";
                             <NavItem :href="route('phieuthuchi.index',{ loai: 'phieuchi'})" title="Phiếu chi"/>
                         </ul>
                     </li>
+                    <hr class="m-2 mr-4 ml-3">
+                    <li class="nav-item menu-open mb-5">
+                        <NavLink title="Hệ thống"/>
+                        <ul class="nav nav-treeview">
+                            <NavItem :href="route('donvi.index')" title="Danh sách đơn vị"/>
+                            <NavItem :href="route('nguoidung.index')" title="Danh sách người dùng"/>
+                        </ul>
+                    </li>
                 </ul>
             </nav>
         </div>

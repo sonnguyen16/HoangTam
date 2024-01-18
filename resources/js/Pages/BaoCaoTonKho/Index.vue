@@ -9,6 +9,8 @@ const props = defineProps({
 })
 
 const search = ref('');
+const tu_ngay = ref('');
+const den_ngay = ref('');
 
 const allData = computed( () => {
     return props.san_pham_list
@@ -16,6 +18,18 @@ const allData = computed( () => {
 
 watch(search, (value) => {
     router.visit(route('baocaotonkho.index', {search: value}), {
+        preserveState: true
+    })
+})
+
+watch(tu_ngay, (value) => {
+    router.visit(route('baocaotonkho.index', {tu_ngay: value}), {
+        preserveState: true
+    })
+})
+
+watch(den_ngay, (value) => {
+    router.visit(route('baocaotonkho.index', {den_ngay: value, tu_ngay: tu_ngay}), {
         preserveState: true
     })
 })
@@ -43,9 +57,24 @@ function changePage(url) {
                     <div class="col-md-12">
                         <form >
                             <div class="row">
-                                <div class="col-md-3">
+                                <div class="col-md-5">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-record">
+                                                <label>Từ ngày</label>
+                                                <input type="date" v-model="tu_ngay" class="form-control" name="tu_ngay">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-record">
+                                                <label>Đến ngày</label>
+                                                <input type="date" v-model="den_ngay" class="form-control" name="den_ngay">
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-md-6"></div>
+                                <div class="col-md-4">
+                                </div>
                                 <div class="col-md-3">
                                     <div class="input-group">
                                         <input v-model="search" type="text" name="search"
@@ -77,20 +106,20 @@ function changePage(url) {
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-if="allData?.data.length === 0">
-                        <td colspan="8" class="text-center">Không có dữ liệu</td>
-                    </tr>
+                        <tr v-if="allData?.data.length === 0">
+                            <td colspan="8" class="text-center">Không có dữ liệu</td>
+                        </tr>
 
-                    <tr :key="kh.id" v-else v-for="kh in allData?.data">
-                        <td>{{kh.ma}}</td>
-                        <td>{{kh.ten}}</td>
-                        <td class="quantity">{{kh.don_vi_tinh?.ten}}</td>
-                        <td class="quantity">{{kh.ton_dau}}</td>
-                        <td class="quantity">{{kh.so_luong_nhap}}</td>
-                        <td class="quantity">{{kh.so_luong_xuat}}</td>
-                        <td class="quantity">{{kh.dieu_chinh_kho}}</td>
-                        <td class="quantity">{{kh.ton_cuoi}}</td>
-                    </tr>
+                        <tr :key="kh.id" v-else v-for="kh in allData?.data">
+                            <td>{{kh.ma}}</td>
+                            <td>{{kh.ten}}</td>
+                            <td class="quantity">{{kh.don_vi_tinh?.ten}}</td>
+                            <td class="quantity">{{kh.ton_dau}}</td>
+                            <td class="quantity">{{kh.so_luong_nhap}}</td>
+                            <td class="quantity">{{kh.so_luong_xuat}}</td>
+                            <td class="quantity">{{kh.dieu_chinh_kho}}</td>
+                            <td class="quantity">{{kh.ton_cuoi}}</td>
+                        </tr>
                     </tbody>
                 </table>
                 <div class="float-right mt-3 mb-0">

@@ -6,6 +6,7 @@ use App\Http\Requests\TonKhoRequest;
 use App\Models\DinhMuc;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use App\Models\TonKho;
 use App\Models\DonViTinh;
@@ -16,7 +17,10 @@ class TonKhoController extends Controller
 {
     public function index(Request $request)
     {
-        $query = TonKho::with(['kho','san_pham'])->whereNull('deleted_at');
+        $query = TonKho::with(['kho','san_pham'])->whereNull('deleted_at')
+            ->whereHas('created_by.don_vi', function ($query) {
+            $query->where('id', Auth::user()->don_vi_id);
+        })->orderBy('id', 'desc');
         $kho_list = Kho::query()->whereNull('deleted_at')->get();
         $san_pham_list = SanPham::query()->whereNull('deleted_at')->get();
 

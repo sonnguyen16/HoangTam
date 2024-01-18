@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class NhaCungCap extends Model
 {
-    use HasFactory;
+    use HasFactory, HasCreatorAndUpdater;
 
     protected $table = 'nha_cung_cap';
 
@@ -38,5 +38,10 @@ class NhaCungCap extends Model
     public function ton_cuoi()
     {
         return $this->ton_dau + $this->so_luong_nhap();
+    }
+
+    public function created_by()
+    {
+        return $this->belongsTo(User::class, "created_by");
     }
 }

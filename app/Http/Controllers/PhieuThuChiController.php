@@ -8,6 +8,7 @@ use App\Models\DuAn;
 use App\Models\User;
 use App\Models\LoaiThuChi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use App\Http\Requests\PhieuThuChiRequest;
 use App\Models\PhieuThuChi;
@@ -19,13 +20,31 @@ class PhieuThuChiController extends Controller
     {
         $request->loai == 'phieuthu' ? $loai = '0' : $loai = '1';
         $query = PhieuThuChi::query()->whereNull('deleted_at')->where('loai', $loai)
-            ->with(['nha_cung_cap', 'khach_hang', 'nhan_vien', 'du_an', 'loai_thu_chi']);
+            ->with(['nha_cung_cap', 'khach_hang', 'nhan_vien', 'du_an', 'loai_thu_chi'])
+            ->whereHas('created_by.don_vi', function ($query) {
+                $query->where('id', Auth::user()->don_vi_id);
+            })->orderBy('id', 'desc');
 
-        $nha_cung_cap_list = NhaCungCap::query()->whereNull('deleted_at')->get();
-        $khach_hang_list = KhachHang::query()->whereNull('deleted_at')->get();
-        $du_an_list = DuAn::query()->whereNull('parent_id')->whereNull('deleted_at')->get();
-        $nhan_vien_list = User::query()->whereNull('deleted_at')->where('role', 1)->get();
-        $loai_thu_chi_list = LoaiThuChi::query()->whereNull('deleted_at')->where('loai', $loai)->get();
+        $nha_cung_cap_list = NhaCungCap::query()->whereNull('deleted_at')
+            ->whereHas('created_by.don_vi', function ($query) {
+                $query->where('id', Auth::user()->don_vi_id);
+            })->get();
+        $khach_hang_list = KhachHang::query()->whereNull('deleted_at')
+            ->whereHas('created_by.don_vi', function ($query) {
+                $query->where('id', Auth::user()->don_vi_id);
+            })->get();
+        $du_an_list = DuAn::query()->whereNull('parent_id')->whereNull('deleted_at')
+            ->whereHas('created_by.don_vi', function ($query) {
+                $query->where('id', Auth::user()->don_vi_id);
+            })->get();
+        $nhan_vien_list = User::query()->whereNull('deleted_at')->where('role', 1)
+            ->whereHas('don_vi', function ($query) {
+                $query->where('id', Auth::user()->don_vi_id);
+            })->get();
+        $loai_thu_chi_list = LoaiThuChi::query()->whereNull('deleted_at')->where('loai', $loai)
+            ->whereHas('created_by.don_vi', function ($query) {
+                $query->where('id', Auth::user()->don_vi_id);
+            })->get();
 
         if ($request->filled('search')) {
             $search = $request->search;

@@ -1,9 +1,10 @@
 <script setup>
-import {defineProps, onMounted} from "vue";
+import {defineProps, onMounted, computed} from "vue";
 import '@/assets/admin/plugins/fontawesome-free/css/all.min.css'
 import '@/assets/admin/dist/css/adminlte.min.css'
 import '@/assets/css/style.css'
 import {numberToWords} from "@/assets/js/script.js";
+import {usePage} from "@inertiajs/vue3";
 
 const data = defineProps({
     hoa_don: Object,
@@ -12,6 +13,16 @@ const data = defineProps({
 onMounted(() => {
     console.log(data.hoa_don)
 })
+
+const { props } = usePage();
+
+const don_vi = computed(() => {
+    return props.don_vi;
+});
+
+const user = computed(() => {
+    return props.user;
+});
 
 function formatDateForTemplate(date) {
     return `Ngày ${date.getDate()} tháng ${date.getMonth() + 1} năm ${date.getFullYear()}`
@@ -24,13 +35,13 @@ function formatDateForTemplate(date) {
         <div class="container bg-white h-[100vh]">
             <div class="row">
                 <div class="col-12 mx-auto my-5 p-3">
-                    <div class="d-flex align-items-center">
-                        <img src="@/assets/img/3809b1b5c26b23357a7a.jpg" class="w-[200px]" alt="logo" />
+                    <div class="d-flex align-items-center gap-[20px]">
+                        <img :src="/uploads/ + don_vi.logo" class="w-[200px]" alt="logo" />
                         <div class="text-start">
-                            <h3 class="font-weight-bold mb-0">CÔNG TY TNHH HOÀNG TÂM</h3>
-                            <p class="font-weight-bold mb-0">Địa chỉ: 123 Trương Công Định, P8, Vũng Tàu</p>
-                            <p class="font-weight-bold mb-0">Điện thoại: 0123456789</p>
-                            <p class="font-weight-bold mb-0">Email: hoangtam@gmail.com </p>
+                            <h3 class="font-weight-bold mb-0">{{ don_vi?.ten }}</h3>
+                            <p class="font-weight-bold mb-0">Địa chỉ: {{ don_vi?.dia_chi }}</p>
+                            <p class="font-weight-bold mb-0">Điện thoại: {{ don_vi?.dien_thoai }}</p>
+                            <p class="font-weight-bold mb-0">Email: {{ don_vi?.email }} </p>
                         </div>
                     </div>
 

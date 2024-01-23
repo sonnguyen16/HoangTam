@@ -16,8 +16,8 @@ return new class extends Migration
             $table->id();
             $table->string('ten');
             $table->string('dia_chi');
-            $table->string('dien_thoai');
-            $table->string('email');
+            $table->string('dien_thoai')->nullable();
+            $table->string('email')->nullable();
             $table->string('stk_1')->nullable();
             $table->string('stk_2')->nullable();
             $table->foreignIdFor(\App\Models\User::class, 'created_by')->nullable();

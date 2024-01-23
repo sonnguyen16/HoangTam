@@ -26,6 +26,7 @@ class HoaDonRequest extends FormRequest
             'ma' => '',
             'loai' => 'required|numeric',
             'kho_id' => 'required',
+            'ngay' => 'required',
             'ghi_chu' => ''
         ];
 
@@ -46,6 +47,7 @@ class HoaDonRequest extends FormRequest
             'nha_cung_cap_id.required' => 'Nhà cung cấp không được để trống',
             'khach_hang_id.required' => 'Khách hàng không được để trống',
             'kho_id.required' => 'Kho không được để trống',
+            'ngay.required' => 'Ngày không được để trống'
         ];
     }
 }

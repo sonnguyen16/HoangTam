@@ -90,7 +90,7 @@ onMounted(function (){
                                <div class="form-group">
                                    <label for="dien_thoai">Điện thoại</label>
                                    <div>
-                                       <input :class="{ 'border-danger' : form.errors.dien_thoai }" type="number" v-model="form.dien_thoai" class="form-control" id="dien_thoai" />
+                                       <input :class="{ 'border-danger' : form.errors.dien_thoai }" type="text" v-model="form.dien_thoai" class="form-control" id="dien_thoai" />
 <!--                                       <InputError :message="form.errors.dien_thoai" />-->
                                    </div>
                                </div>

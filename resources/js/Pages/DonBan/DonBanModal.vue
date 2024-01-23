@@ -12,6 +12,7 @@ const props = defineProps({
 const form = useForm({
     id: "",
     ma: "",
+    ngay: "",
     khach_hang_id: "",
     ghi_chu: "",
     loai: 1,
@@ -30,6 +31,7 @@ let item = ref({
 watchEffect(() => {
     form.id = props.don_hang.id || ""
     form.ma = props.don_hang.ma || ""
+    form.ngay = props.don_hang.ngay || moment().format("YYYY-MM-DD")
     form.khach_hang_id = props.don_hang.khach_hang?.id || ""
     form.ghi_chu = props.don_hang.ghi_chu || ""
     form.chi_tiet_don_hang = props.don_hang.chi_tiet_don_hang || []
@@ -135,7 +137,12 @@ onUpdated(() => {
 <!--                                    <InputError :message="form.errors.ma" />-->
                                 </div>
                             </div>
-
+                            <div class="form-group">
+                                <label for="ngay">Ngày {{ form.ngay }}</label>
+                                <div>
+                                    <input :class="{ 'border-danger' : form.errors.date }" type="date" v-model="form.ngay" class="form-control" id="ngay" />
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <label for="name">Khách hàng</label>
                                 <div>

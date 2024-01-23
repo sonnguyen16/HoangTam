@@ -3,6 +3,7 @@ import {onMounted,onUpdated, ref, watchEffect} from "vue";
 import {router, useForm} from "@inertiajs/vue3";
 import {cloneDeep} from "lodash";
 import ChonDonHangModal from "@/Pages/XuatKho/ChonDonHangModal.vue";
+import moment from "moment";
 
 const props = defineProps({
     hoa_don: Object,
@@ -15,6 +16,7 @@ const props = defineProps({
 const form = useForm({
     id: "",
     ma: "",
+    ngay: "",
     khach_hang_id: "",
     kho_id: "",
     ghi_chu: "",
@@ -26,7 +28,7 @@ let item = ref({
     id: "",
     hoa_don_id: props.hoa_don.id,
     san_pham: {},
-    so_luong: 0,
+    so_luong: 1,
     gia: 0,
 })
 
@@ -34,6 +36,7 @@ let item = ref({
 watchEffect(() => {
     form.id = props.hoa_don.id || ""
     form.ma = props.hoa_don.ma || ""
+    form.ngay = props.hoa_don.ngay || moment().format("YYYY-MM-DD")
     form.khach_hang_id = props.hoa_don.khach_hang?.id || ""
     form.kho_id = props.hoa_don.kho.id || ""
     form.ghi_chu = props.hoa_don.ghi_chu || ""
@@ -77,7 +80,7 @@ function addChiTietHoaDon(){
     }
 
     form.chi_tiet_hoa_don.push({
-        id: "",
+        id: cloneDeep(item.value.san_pham).id,
         hoa_don_id: props.hoa_don.id,
         san_pham: cloneDeep(item.value.san_pham),
         so_luong: item.value.so_luong,
@@ -89,7 +92,7 @@ function addChiTietHoaDon(){
         id: "",
         hoa_don_id: props.hoa_don.id,
         san_pham: {},
-        so_luong: 0,
+        so_luong: 1,
         gia: 0,
     }
 }
@@ -97,6 +100,7 @@ function addChiTietHoaDon(){
 onMounted(() => {
     $('#sanpham').select2({ placeholder: "Chọn sản phẩm" }).on('change', function () {
         item.value.san_pham = props.san_pham_list.data.find(sp => String(sp.id) === $(this).val())
+        item.value.gia = item.value.san_pham.gia_ban;
     })
 
     $('#khach_hang_id').select2({
@@ -145,8 +149,8 @@ function xemDonHang() {
 
                         <div class="form-group-container">
                             <div class="form-group-title">
-                                <span v-if="hoa_don.id" class="txt-color mb-0 font-weight-bold">Sửa hóa đơn</span>
-                                <span v-else class="txt-color mb-0 font-weight-bold">Thêm hóa đơn</span>
+                                <span v-if="hoa_don.id" class="txt-color mb-0 font-weight-bold">Sửa phiếu xuất kho</span>
+                                <span v-else class="txt-color mb-0 font-weight-bold">Thêm phiếu xuất kho</span>
                             </div>
 
                             <div class="form-group">
@@ -155,7 +159,12 @@ function xemDonHang() {
                                     <input readonly :class="{ 'border-danger' : form.errors.ma }" type="text" v-model="form.ma" class="form-control" id="ma" />
                                 </div>
                             </div>
-
+                            <div class="form-group">
+                                <label for="ngay">Ngày</label>
+                                <div>
+                                    <input :class="{ 'border-danger' : form.errors.date }" type="date" v-model="form.ngay" class="form-control" id="ngay" />
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <label for="name">Khách hàng</label>
                                 <div>

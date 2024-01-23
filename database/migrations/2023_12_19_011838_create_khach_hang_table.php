@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('khach_hang', function (Blueprint $table) {
             $table->id();
             $table->string('ten');
-            $table->string('dia_chi');
-            $table->string('dien_thoai');
-            $table->string('website');
+            $table->string('dia_chi')->nullable();
+            $table->string('dien_thoai')->nullable();
+            $table->string('website')->nullable();
             $table->string('ghi_chu')->nullable();
             $table->softDeletes();
             $table->timestamps();

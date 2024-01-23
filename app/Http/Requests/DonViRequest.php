@@ -24,9 +24,9 @@ class DonViRequest extends FormRequest
         return [
             'id' => '',
             'ten' => 'required',
-            'dia_chi' => 'required',
-            'dien_thoai' => 'required',
-            'email' => 'required|email',
+            'dia_chi' => '',
+            'dien_thoai' => '',
+            'email' => '',
             'stk_1' => '',
             'stk_2' => '',
             'logo' => '',
@@ -43,10 +43,10 @@ class DonViRequest extends FormRequest
     {
         return [
             'ten.required' => 'Tên đơn vị không được để trống',
-            'dia_chi.required' => 'Địa chỉ không được để trống',
-            'dien_thoai.required' => 'Điện thoại không được để trống',
-            'email.required' => 'Email không được để trống',
-            'email.email' => 'Email không đúng định dạng',
+          //  'dia_chi.required' => 'Địa chỉ không được để trống',
+          //  'dien_thoai.required' => 'Điện thoại không được để trống',
+          //  'email.required' => 'Email không được để trống',
+           // 'email.email' => 'Email không đúng định dạng',
         ];
     }
 }

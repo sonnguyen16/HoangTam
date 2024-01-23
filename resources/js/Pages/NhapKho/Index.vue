@@ -5,6 +5,7 @@ import {computed, ref, watch} from "vue";
 import {router} from "@inertiajs/vue3";
 import NhapKhoModal from "@/Pages/NhapKho/NhapKhoModal.vue";
 import {formatDate} from "@/assets/js/script.js";
+import moment from "moment";
 
 const props = defineProps({
     hoa_don_list: Object,
@@ -37,6 +38,7 @@ function openModal() {
 }
 
 const allData = computed( () => {
+    console.log(props.hoa_don_list)
     return props.hoa_don_list
 })
 
@@ -60,6 +62,7 @@ function editModal(kh) {
         kho: kh.kho,
         ghi_chu: kh.ghi_chu,
         chi_tiet_hoa_don: kh.chi_tiet_hoa_don,
+        ngay: kh.ngay
     };
     $('#hoadonmodal').modal('show');
 }
@@ -119,13 +122,15 @@ function delelehoadon(id) {
                 <table class="table table-bordered  table-responsive-md">
                     <thead>
                     <tr>
-                        <th>Mã phiếu</th>
+                        <th width="50">STT</th>
+                        <th width="100">Ngày</th>
+                        <th width="100">Mã phiếu</th>
                         <th>Nhà cung cấp</th>
                         <th>Kho</th>
                         <th>Ghi chú</th>
-                        <th>Ngày tạo</th>
-                        <th>Tổng tiền</th>
-                        <th>Thao tác</th>
+                        <th width="100">Ngày tạo</th>
+                        <th width="100">Tổng tiền</th>
+                        <th width="153">Thao tác</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -133,17 +138,19 @@ function delelehoadon(id) {
                         <td colspan="7" class="text-center">Không có dữ liệu</td>
                     </tr>
 
-                    <tr :key="kh.id" v-else v-for="kh in allData?.data">
-                        <td >{{ kh.ma }}</td>
+                    <tr :key="kh.id" v-else v-for="(kh, index) in allData?.data">
+                        <td class="text-center">{{ index + 1 }}</td>
+                        <td class="text-center">{{ moment(kh.ngay).format("DD/MM/YYYY") }}</td>
+                        <td class="text-center">{{ kh.ma }}</td>
                         <td >{{ kh.nha_cung_cap?.ten }}</td>
                         <td >{{ kh.kho?.ten }}</td>
                         <td >{{ kh.ghi_chu }}</td>
-                        <td class="date">{{ formatDate(kh.created_at) }}</td>
+                        <td class="text-center">{{ moment(kh.created_at).format("DD/MM/YYYY") }}</td>
                         <td class="money">{{ kh.tong_tien.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</td>
 
-                        <td style="width: 9%">
+                        <td >
                             <a class="btn btn-primary btn-sm d-inline-block mr-2" @click.prevent="editModal(kh)">Sửa</a>
-                            <a class="btn btn-primary btn-sm d-inline-block mr-2" :href="route('hoadon.print', { id: kh.id })">Xuất</a>
+                            <a class="btn btn-primary btn-sm d-inline-block mr-2" target="_blank"  :href="route('hoadon.print', { id: kh.id })">In phiếu</a>
                             <a class="btn btn-danger btn-sm" @click.prevent="delelehoadon(kh.id)">Xóa</a>
                         </td>
                     </tr>

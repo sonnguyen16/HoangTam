@@ -11,6 +11,7 @@ const data = defineProps({
 })
 
 onMounted(() => {
+    window.print();
     console.log(data.phieu_thu_chi)
 })
 
@@ -33,27 +34,28 @@ function formatDateForTemplate(date) {
     <div class="bg-light-blue h-[100vh]">
         <div class="container bg-white h-[100vh]">
             <div class="row">
-                <div class="col-12 mx-auto my-5 p-3">
+                <div class="col-12 mx-auto "> <!--my-5 p-3-->
                     <div class="d-flex align-items-center gap-[20px]">
-                        <img :src="/uploads/ + don_vi.logo" class="w-[200px]" alt="logo" />
+                       <!-- <img :src="/uploads/ + don_vi.logo" class="w-[200px]" alt="logo" /> -->
                         <div class="text-start">
                             <h3 class="font-weight-bold mb-0">{{ don_vi?.ten }}</h3>
                             <p class="font-weight-bold mb-0">Địa chỉ: {{ don_vi?.dia_chi }}</p>
                             <p class="font-weight-bold mb-0">Điện thoại: {{ don_vi?.dien_thoai }}</p>
-                            <p class="font-weight-bold mb-0">Email: {{ don_vi?.email }} </p>
+                            <p class="font-weight-bold mb-0" v-if="don_vi?.email">Email: {{ don_vi?.email }} </p>
+                            <p class="font-weight-bold mb-0" v-if="don_vi?.stk_1">STK: {{ don_vi?.stk_1 }} </p>
                         </div>
                     </div>
 
                     <div class="text-center mt-3">
-                        <h1 class="font-weight-bold" v-if="phieu_thu_chi.loai === 0">Phiếu thu</h1>
-                        <h1 class="font-weight-bold" v-if="phieu_thu_chi.loai === 1">Phiếu chi</h1>
+                        <h1 class="font-weight-bold" v-if="phieu_thu_chi.loai === 0">PHIẾU THU</h1>
+                        <h1 class="font-weight-bold" v-if="phieu_thu_chi.loai === 1">PHIẾU CHI</h1>
                         <p class="text-md font-italic">{{ formatDateForTemplate(new Date(phieu_thu_chi.created_at)) }}</p>
                     </div>
 
                     <div class="px-4 mt-4">
 
                         <div class="row">
-                            <div class="col-3">
+                            <div class="col-2">
                                 <label v-if="phieu_thu_chi.loai === 0" class="text-md">Họ tên người nộp:</label>
                                 <label v-if="phieu_thu_chi.loai === 1" class="text-md">Nhà cung cấp:</label>
                             </div>
@@ -70,7 +72,7 @@ function formatDateForTemplate(date) {
                         </div>
 
                         <div class="row">
-                            <div class="col-3">
+                            <div class="col-2">
                                 <label class="text-md">Địa chỉ:</label>
                             </div>
                             <div class="col-9">
@@ -86,7 +88,7 @@ function formatDateForTemplate(date) {
                         </div>
 
                         <div class="row">
-                            <div class="col-3">
+                            <div class="col-2">
                                 <label class="text-md">Lý do:</label>
                             </div>
                             <div class="col-9">
@@ -95,7 +97,7 @@ function formatDateForTemplate(date) {
                                 </span>
                             </div>
                         </div>
-
+<!--
                         <div class="row">
                             <div class="col-3">
                                 <label class="text-md">Dự án:</label>
@@ -106,9 +108,9 @@ function formatDateForTemplate(date) {
                                 </span>
                             </div>
                         </div>
-
+-->
                         <div class="row">
-                            <div class="col-3">
+                            <div class="col-2">
                                 <label class="text-md">Số tiền:</label>
                             </div>
                             <div class="col-9 d-flex gap-[70px]">
@@ -116,20 +118,23 @@ function formatDateForTemplate(date) {
                                     {{ phieu_thu_chi.so_tien.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}
                                     VNĐ
                                 </span>
-
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-2">
+                                <label class="text-md">Bằng chữ:</label>
+                            </div>
+                           <div class="col-9 d-flex gap-[70px]">
                                 <div class="d-flex flex-1 gap-[50px]">
-                                    <label class="text-md">Bằng chữ:</label>
-
                                     <span class="text-md">
-                                        {{ numberToWords(phieu_thu_chi.so_tien) }} đồng
+                                       <i> {{ numberToWords(phieu_thu_chi.so_tien) }} đồng</i>
                                     </span>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="float-right mt-3">
+                       <!-- <div class="float-right mt-3">
                             <p class="text-md font-italic">{{ formatDateForTemplate(new Date()) }}</p>
-                        </div>
+                        </div> -->
 
                         <div class="d-flex mt-5 justify-content-between w-100">
                             <div class="space-y-[60px] text-center">
@@ -154,17 +159,18 @@ function formatDateForTemplate(date) {
                                 <p>(Ký, họ tên)</p>
                             </div>
                         </div>
-
+                        <!--
                         <div class="row mt-3">
                             <div class="col-3">
                                 <label class="text-md">Đã nhận đủ số tiền:</label>
                             </div>
+                            
                             <div class="col-9">
                                 <span class="text-md">
                                     {{ numberToWords(phieu_thu_chi.so_tien) }} đồng
                                 </span>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>

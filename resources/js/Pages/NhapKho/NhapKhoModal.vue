@@ -2,6 +2,7 @@
 import {onMounted, onUpdated, ref, watchEffect} from "vue";
 import {router, useForm} from "@inertiajs/vue3";
 import {cloneDeep} from "lodash";
+import moment from "moment";
 
 const props = defineProps({
     hoa_don: Object,
@@ -13,6 +14,7 @@ const props = defineProps({
 const form = useForm({
     id: "",
     ma: "",
+    ngay: "",
     nha_cung_cap_id: "",
     kho_id: "",
     ghi_chu: "",
@@ -24,7 +26,7 @@ let item = ref({
     id: "",
     hoa_don_id: props.hoa_don.id,
     san_pham: {},
-    so_luong: 0,
+    so_luong: 1,
     gia: 0,
 })
 
@@ -32,6 +34,7 @@ let item = ref({
 watchEffect(() => {
     form.id = props.hoa_don.id || ""
     form.ma = props.hoa_don.ma || ""
+    form.ngay = props.hoa_don.ngay || moment().format("YYYY-MM-DD")
     form.nha_cung_cap_id = props.hoa_don.nha_cung_cap?.id || ""
     form.kho_id = props.hoa_don.kho.id || ""
     form.ghi_chu = props.hoa_don.ghi_chu || ""
@@ -71,9 +74,8 @@ function addChiTietHoaDon(){
     if(item.value.so_luong === 0){
         return;
     }
-
     form.chi_tiet_hoa_don.push({
-        id: "",
+        id: cloneDeep(item.value.san_pham).id,
         hoa_don_id: props.hoa_don.id,
         san_pham: cloneDeep(item.value.san_pham),
         so_luong: item.value.so_luong,
@@ -85,7 +87,7 @@ function addChiTietHoaDon(){
         id: "",
         hoa_don_id: props.hoa_don.id,
         san_pham: {},
-        so_luong: 0,
+        so_luong: 1,
         gia: 0,
     }
 }
@@ -94,7 +96,8 @@ onMounted(() => {
     $('#sanpham').select2({
         placeholder: "Chọn sản phẩm",
     }).on('change', function () {
-        item.value.san_pham = props.san_pham_list.data.find(sp => String(sp.id) === $(this).val())
+        item.value.san_pham = props.san_pham_list.data.find(sp => String(sp.id) === $(this).val());
+       item.value.gia = item.value.san_pham.gia_nhap;
     })
 
     $('#kho_id').select2({
@@ -139,8 +142,8 @@ onUpdated(() => {
 
                         <div class="form-group-container">
                             <div class="form-group-title">
-                                <span v-if="hoa_don.id" class="txt-color mb-0 font-weight-bold">Sửa hóa đơn</span>
-                                <span v-else class="txt-color mb-0 font-weight-bold">Thêm hóa đơn</span>
+                                <span v-if="hoa_don.id" class="txt-color mb-0 font-weight-bold">Sửa phiếu nhập kho</span>
+                                <span v-else class="txt-color mb-0 font-weight-bold">Thêm phiếu nhập kho</span>
                             </div>
 
                             <div class="form-group">
@@ -149,7 +152,12 @@ onUpdated(() => {
                                     <input readonly :class="{ 'border-danger' : form.errors.ma }" type="text" v-model="form.ma" class="form-control" id="ma" />
                                 </div>
                             </div>
-
+                            <div class="form-group">
+                                <label for="ngay">Ngày</label>
+                                <div>
+                                    <input :class="{ 'border-danger' : form.errors.date }" type="date" v-model="form.ngay" class="form-control" id="ngay" />
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <label for="nha_cung_cap_id">Nhà cung cấp</label>
                                 <div>
@@ -226,7 +234,7 @@ onUpdated(() => {
                                    <td colspan="7" class="text-center">Không có dữ liệu</td>
                                </tr>
 
-                               <tr :key="cthd.id" v-else v-for="cthd in form.chi_tiet_hoa_don">
+                               <tr :key="cthd.id" v-else v-for="(cthd, index) in form.chi_tiet_hoa_don">
                                    <td class="ma">{{ cthd?.san_pham?.ma }}</td>
                                    <td class="ten">{{ cthd?.san_pham?.ten }}</td>
                                    <td class="quantity" >{{ cthd?.so_luong }}</td>

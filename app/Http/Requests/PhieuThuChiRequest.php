@@ -24,7 +24,8 @@ class PhieuThuChiRequest extends FormRequest
         $rules = [
             'id' => '',
             'ma' => 'required',
-            'ly_do' => 'required',
+            'ngay' => '',
+            'ly_do' => '',
             'so_tien' => 'required|numeric|min:0',
             'nhan_vien_id' => 'required',
             'trang_thai' => 'required',
@@ -53,13 +54,13 @@ class PhieuThuChiRequest extends FormRequest
     {
         return [
             'ma.required' => 'Mã phiếu thu chi không được để trống',
-            'ly_do.required' => 'Lý do không được để trống',
+           // 'ly_do.required' => 'Lý do không được để trống',
             'so_tien.required' => 'Số tiền không được để trống',
             'so_tien.numeric' => 'Số tiền phải là số',
             'so_tien.min' => 'Số tiền phải lớn hơn 0',
             'nhan_vien_id.required' => 'Nhân viên không được để trống',
             'trang_thai.required' => 'Trạng thái không được để trống',
-            'du_an_id.required' => 'Dự án không được để trống',
+           // 'du_an_id.required' => 'Dự án không được để trống',
             'loai.required' => 'Loại không được để trống',
             'loai_thu_chi_id.required' => 'Loại thu chi không được để trống',
             'khach_hang_id.required' => 'Khách hàng không được để trống',

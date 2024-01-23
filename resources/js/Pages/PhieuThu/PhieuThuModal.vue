@@ -1,7 +1,7 @@
 <script setup>
 import { watchEffect, onMounted, onUpdated} from "vue";
 import {router, useForm} from "@inertiajs/vue3";
-
+import moment from "moment";
 
 const props = defineProps({
     phieu_thu: Object,
@@ -14,6 +14,7 @@ const props = defineProps({
 const form = useForm({
     id: "",
     ma: "",
+    ngay: "",
     khach_hang_id: "",
     du_an_id: "",
     nhan_vien_id: "",
@@ -28,6 +29,7 @@ const form = useForm({
 watchEffect(() => {
     form.id = props.phieu_thu.id;
     form.ma = props.phieu_thu.ma;
+    form.ngay = props.phieu_thu.ngay;
     form.khach_hang_id = props.phieu_thu.khach_hang_id;
     form.du_an_id = props.phieu_thu.du_an_id;
     form.nhan_vien_id = props.phieu_thu.nhan_vien_id;

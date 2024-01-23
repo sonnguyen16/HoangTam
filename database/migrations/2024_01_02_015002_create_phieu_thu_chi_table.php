@@ -14,12 +14,13 @@ return new class extends Migration
         Schema::create('phieu_thu_chi', function (Blueprint $table) {
             $table->id();
             $table->string('ma');
-            $table->string('ly_do');
+            $table->date('ngay');
+            $table->string('ly_do')->nullable();;
             $table->foreignIdFor(App\Models\KhachHang::class, 'khach_hang_id')->nullable();
             $table->foreignIdFor(App\Models\NhaCungCap::class, 'nha_cung_cap_id')->nullable();
             $table->integer('so_tien');
             $table->foreignIdFor(App\Models\User::class, 'nhan_vien_id');
-            $table->foreignIdFor(App\Models\DuAn::class, 'du_an_id');
+            $table->foreignIdFor(App\Models\DuAn::class, 'du_an_id')->nullable();
             $table->integer('trang_thai')->default(0);
             $table->integer('loai')->default(0);
             $table->timestamps();

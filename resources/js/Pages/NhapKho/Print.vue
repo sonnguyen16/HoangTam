@@ -11,6 +11,7 @@ const data = defineProps({
 })
 
 onMounted(() => {
+    window.print();
     console.log(data.hoa_don)
 })
 
@@ -34,72 +35,65 @@ function formatDateForTemplate(date) {
     <div class="bg-light-blue h-[100vh]">
         <div class="container bg-white h-[100vh]">
             <div class="row">
-                <div class="col-12 mx-auto my-5 p-3">
+                <div class="col-12 mx-auto"> <!--  my-5 p-3-->
                     <div class="d-flex align-items-center gap-[20px]">
-                        <img :src="/uploads/ + don_vi.logo" class="w-[200px]" alt="logo" />
+                       <!--<img :src="/uploads/ + don_vi.logo" class="w-[200px]" alt="logo" />--> 
                         <div class="text-start">
-                            <h3 class="font-weight-bold mb-0">{{ don_vi?.ten }}</h3>
+                            <h3 class="font-weight-bold mb-0" style="text-transform: uppercase;">{{ don_vi?.ten }}</h3>
                             <p class="font-weight-bold mb-0">Địa chỉ: {{ don_vi?.dia_chi }}</p>
                             <p class="font-weight-bold mb-0">Điện thoại: {{ don_vi?.dien_thoai }}</p>
-                            <p class="font-weight-bold mb-0">Email: {{ don_vi?.email }} </p>
+                            <p class="font-weight-bold mb-0" v-if="don_vi?.email">Email: {{ don_vi?.email }} </p>
+                            <p class="font-weight-bold mb-0" v-if="don_vi?.stk_1">STK: {{ don_vi?.stk_1 }} </p>
                         </div>
                     </div>
 
                     <div class="text-center mt-3">
-                        <h1 class="font-weight-bold" v-if="hoa_don.data.loai === 0">Phiếu nhập kho</h1>
-                        <h1 class="font-weight-bold" v-if="hoa_don.data.loai === 1">Phiếu xuất kho</h1>
-                        <p class="text-md font-italic">{{ formatDateForTemplate(new Date(hoa_don.data.created_at)) }}</p>
+                        <h1 class="font-weight-bold" v-if="hoa_don.data.loai === 0">PHIẾU NHẬP KHO</h1>
+                        <h1 class="font-weight-bold" v-if="hoa_don.data.loai === 1">PHIẾU XUẤT KHO</h1>
+                        <p class="text-md font-italic">{{ formatDateForTemplate(new Date(hoa_don.data.ngay)) }}</p>
                     </div>
 
-                    <div class="px-4 mt-4">
+                    <div class=""> <!--px-4 mt-4-->
                         <div class="row">
-                            <div class="col-3">
-                                <label class="text-md">Số:</label>
-                            </div>
-                            <div class="col-9">
-                                <span>{{ hoa_don.data.ma }}</span>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-3">
-                                <label v-if="hoa_don.data.loai === 1" class="text-md">Khách hàng:</label>
-                                <label v-if="hoa_don.data.loai === 0" class="text-md">Nhà cung cấp:</label>
-                            </div>
-                            <div class="col-9">
-                                <span v-if="hoa_don.data.loai === 1"
+                            <div class="col-12">
+                                <table>
+                                    <tr>
+                                    <td v-if="hoa_don.data.loai === 1" class="text-md">
+                                        <b>Khách hàng:</b>
+                                     </td>
+                                    <td v-if="hoa_don.data.loai === 0" class="text-md">
+                                        <b>Nhà cung cấp:</b>
+                                    </td>
+                                    <td width="70%">
+                                        <span v-if="hoa_don.data.loai === 1"
                                       class="text-md">
-                                    {{ hoa_don.data.khach_hang?.ten }}
-                                </span>
-                                <span v-if="hoa_don.data.loai === 0"
+                                        {{ hoa_don.data.khach_hang?.ten }}
+                                        </span>
+                                        <span v-if="hoa_don.data.loai === 0"
+                                            class="text-md">
+                                            {{ hoa_don.data.nha_cung_cap?.ten }}
+                                        </span>
+                                    </td>
+                                    <td class="text-md"><b>Số Phiếu:</b></td>
+                                    <td>{{ hoa_don.data.ma }}</td>
+                                    </tr>
+                                    <tr>
+                                    <td class="text-md">
+                                        <b>Địa chỉ:</b>
+                                    </td>
+                                    <td>
+                                        <span v-if="hoa_don.data.loai === 1"
                                       class="text-md">
-                                    {{ hoa_don.data.nha_cung_cap?.ten }}
-                                </span>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-3">
-                                <label class="text-md">Địa chỉ:</label>
-                            </div>
-                            <div class="col-9">
-                                <span v-if="hoa_don.data.loai === 1"
-                                      class="text-md">
-                                    {{ hoa_don.data.khach_hang?.dia_chi }}
-                                </span>
-                                <span v-if="hoa_don.data.loai === 0"
-                                      class="text-md">
-                                    {{ hoa_don.data.nha_cung_cap?.dia_chi }}
-                                </span>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-3">
-                                <label class="text-md">Số điện thoại:</label>
-                            </div>
-                            <div class="col-9">
-                                 <span v-if="hoa_don.data.loai === 1"
+                                        {{ hoa_don.data.khach_hang?.ten }}
+                                        </span>
+                                        <span v-if="hoa_don.data.loai === 0"
+                                            class="text-md">
+                                            {{ hoa_don.data.nha_cung_cap?.ten }}
+                                        </span>
+                                    </td>
+                                    <td class="text-md"><b>Điện thoại:</b></td>
+                                    <td>
+                                        <span v-if="hoa_don.data.loai === 1"
                                        class="text-md">
                                     {{ hoa_don.data.khach_hang?.dien_thoai }}
                                 </span>
@@ -107,13 +101,15 @@ function formatDateForTemplate(date) {
                                       class="text-md">
                                     {{ hoa_don.data.nha_cung_cap?.dien_thoai }}
                                 </span>
+                                    </td>
+                                    </tr>
+                                </table>
                             </div>
                         </div>
-
                         <table class="table table-bordered  table-responsive-md">
                             <thead>
                             <tr>
-                                <th>Mã sản phẩm</th>
+                                <th width="50">STT</th>
                                 <th>Tên sản phẩm</th>
                                 <th>Số lượng</th>
                                 <th>ĐVT</th>
@@ -126,8 +122,8 @@ function formatDateForTemplate(date) {
                                 <td colspan="7" class="text-center">Không có dữ liệu</td>
                             </tr>
 
-                            <tr :key="cthd.id" v-else v-for="cthd in hoa_don.data.chi_tiet_hoa_don">
-                                <td class="ma">{{ cthd?.san_pham?.ma }}</td>
+                            <tr :key="cthd.id" v-else v-for="(cthd, index) in hoa_don.data.chi_tiet_hoa_don">
+                                <td class="ma">{{ index + 1 }}</td>
                                 <td class="ten">{{ cthd?.san_pham?.ten }}</td>
                                 <td class="quantity" >{{ cthd?.so_luong }}</td>
                                 <td class="quantity" >{{ cthd?.san_pham?.don_vi_tinh?.ten }}</td>
@@ -135,32 +131,27 @@ function formatDateForTemplate(date) {
                                 <td class="money" >{{ cthd?.thanh_tien.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</td>
                             </tr>
                             <tr>
-                                <td colspan="5">
-                                    Tổng tiền
+                                <td colspan="5"  class="text-md">
+                                     <b>Tổng tiền</b>
                                 </td>
-                                <td class="money">
-                                    {{ hoa_don.data.tong_tien.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}
+                                <td class="money text-md">
+                                    <b> {{ hoa_don.data.tong_tien.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</b>
                                 </td>
                             </tr>
                             </tbody>
                         </table>
 
                         <div class="row">
-                            <div class="col-3">
-                                <label class="text-md">Bằng chữ:</label>
-                            </div>
-                            <div class="col-9">
-                                <span class="text-md">
-                                {{ numberToWords(hoa_don.data.tong_tien) }} đồng
-                            </span>
+                            <div class="col-12">
+                                <b>Bằng chữ:</b><i>{{ numberToWords(hoa_don.data.tong_tien) }} đồng</i>
                             </div>
                         </div>
 
-                        <div class="float-right">
+                        <!-- <div class="float-right">
                             <p class="text-md font-italic">{{ formatDateForTemplate(new Date()) }}</p>
-                        </div>
+                        </div> -->
 
-                        <div class="d-flex mt-5 justify-content-between w-100">
+                        <div class="d-flex justify-content-between w-100 mt-2"> <!--mt-5 -->
                             <div class="space-y-[60px] text-center">
                                 <p class="font-weight-bold text-md">Người giao hàng</p>
                                 <p>(Ký, họ tên)</p>

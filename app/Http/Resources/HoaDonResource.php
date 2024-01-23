@@ -20,6 +20,7 @@ class HoaDonResource extends JsonResource
             'nha_cung_cap' => $this->nha_cung_cap()->first(),
             'khach_hang' => $this->khach_hang()->first(),
             'loai' => $this->loai,
+            'ngay' => $this->ngay,
             'kho' => $this->kho()->first(),
             'chi_tiet_hoa_don' => ChiTietHoaDonResource::collection($this->chi_tiet_hoa_don()->get()),
             'tong_tien' => $this->tong_tien(),

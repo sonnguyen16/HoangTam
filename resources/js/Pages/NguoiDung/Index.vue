@@ -129,7 +129,7 @@ function delelenguoidung(id) {
                     <tr :key="kh.id" v-else v-for="kh in allData?.data">
                         <td>{{kh.name}}</td>
                         <td>{{kh.email}}</td>
-                        <td>{{kh.don_vi.ten}}</td>
+                        <td> <span v-if="kh.don_vi">{{kh.don_vi.ten}}</span></td>
                         <td class="action">
                             <a class="btn btn-primary btn-sm d-inline-block mr-2" @click.prevent="editModal(kh)">Sửa</a>
                             <a class="btn btn-danger btn-sm" @click.prevent="delelenguoidung(kh.id)">Xóa</a>

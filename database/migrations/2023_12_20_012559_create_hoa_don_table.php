@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('hoa_don', function (Blueprint $table) {
             $table->id();
             $table->string('ma');
+            $table->date('ngay');
             $table->integer('loai');
             $table->foreignIdFor(\App\Models\NhaCungCap::class, 'nha_cung_cap_id')->nullable();
             $table->foreignIdFor(\App\Models\KhachHang::class, 'khach_hang_id')->nullable();

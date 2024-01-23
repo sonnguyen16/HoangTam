@@ -157,7 +157,7 @@ function delelephieuthuchi(id) {
                         <td class="money">{{ kh.so_tien.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</td>
                         <td style="width: 9%">
                             <a class="btn btn-primary btn-sm d-inline-block mr-2" @click.prevent="editModal(kh)">Sửa</a>
-                            <a class="btn btn-primary btn-sm d-inline-block mr-2" :href="route('phieuthuchi.print', { id : kh.id })">Xuất</a>
+                            <a class="btn btn-primary btn-sm d-inline-block mr-2" target="_blank"  :href="route('phieuthuchi.print', { id : kh.id })">In Phiếu</a>
                             <a class="btn btn-danger btn-sm" @click.prevent="delelephieuthuchi(kh.id)">Xóa</a>
                         </td>
                     </tr>

@@ -79,7 +79,7 @@ class HoaDonController extends Controller
 
     public function store(HoaDonRequest $request)
     {
-        $data = $request->validated();
+       $data = $request->validated();
         $chi_tiet_hoa_don = $request->chi_tiet_hoa_don;
 
         $hoa_don = HoaDon::updateOrCreate(['id' => $data['id']], $data);

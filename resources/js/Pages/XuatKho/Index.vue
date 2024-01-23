@@ -6,6 +6,7 @@ import {router} from "@inertiajs/vue3";
 import XuatKhoModal from "@/Pages/XuatKho/XuatKhoModal.vue";
 import Pagination from "@/Components/app/Pagination.vue";
 import {formatDate} from "@/assets/js/script.js";
+import moment from "moment";
 
 const props = defineProps({
     hoa_don_list: Object,
@@ -121,6 +122,8 @@ function delelehoadon(id) {
                 <table class="table table-bordered  table-responsive-md">
                     <thead>
                     <tr>
+                        <th width="50">STT</th>
+                        <th width="100">Ngày</th>
                         <th>Mã phiếu</th>
                         <th>Khách hàng</th>
                         <th>Kho</th>
@@ -135,7 +138,9 @@ function delelehoadon(id) {
                         <td colspan="7" class="text-center">Không có dữ liệu</td>
                     </tr>
 
-                    <tr :key="kh.id" v-else v-for="kh in allData?.data">
+                    <tr :key="kh.id" v-else v-for="(kh,index) in allData?.data">
+                        <td >{{ index + 1 }}</td>
+                        <td class="text-center">{{ moment(kh.ngay).format("DD/MM/YYYY") }}</td>
                         <td >{{ kh.ma }}</td>
                         <td >{{ kh.khach_hang?.ten }}</td>
                         <td >{{ kh.kho?.ten }}</td>
@@ -144,7 +149,7 @@ function delelehoadon(id) {
                         <td class="money">{{ kh.tong_tien.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</td>
                         <td style="width: 9%">
                             <a class="btn btn-primary btn-sm d-inline-block mr-2" @click.prevent="editModal(kh)">Sửa</a>
-                            <a class="btn btn-primary btn-sm d-inline-block mr-2" :href="route('hoadon.print', { id: kh.id })">Xuất</a>
+                            <a class="btn btn-primary btn-sm d-inline-block mr-2" target="_blank" :href="route('hoadon.print', { id: kh.id })">Xuất</a>
                             <a class="btn btn-danger btn-sm" @click.prevent="delelehoadon(kh.id)">Xóa</a>
                         </td>
                     </tr>

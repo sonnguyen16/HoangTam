@@ -24,6 +24,7 @@ class DonHangRequest extends FormRequest
         $rule = [
             'id' => '',
             'ma' => '',
+            'ngay' => '',
             'loai' => 'required|numeric',
             'ghi_chu' => ''
         ];

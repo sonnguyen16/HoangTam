@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('ten');
             $table->foreignIdFor(\App\Models\DonViTinh::class, 'don_vi_tinh_id');
-            $table->string('mo_ta');
+            $table->string('mo_ta')->nullable();;
             $table->string('gia_ban');
             $table->string('gia_nhap');
             $table->softDeletes();

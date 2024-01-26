@@ -15,7 +15,7 @@ const allData = computed( () => {
 })
 
 watch(search, (value) => {
-    router.visit(route('baocaocongno.index', {search: value}), {
+    router.visit(route('baocaocongno.khachhang', {search: value}), {
         preserveState: true
     })
 })
@@ -33,7 +33,7 @@ function changePage(url) {
         <div class="card shadow">
             <div class="card-body card-brc">
                 <p class="txt-color mb-0 font-weight-bold">Phiếu thu chi <i
-                    class="fa fa-angle-right mr-2 ml-2"></i> Báo cáo công nợ</p>
+                    class="fa fa-angle-right mr-2 ml-2"></i> Báo cáo công nợ khách hàng</p>
             </div>
         </div>
 
@@ -70,7 +70,7 @@ function changePage(url) {
                         <th>Số điện thoại</th>
                         <th>Địa chỉ</th>
                         <th>Tồn đầu</th>
-                        <th>Chi</th>
+                        <th>Thu</th>
                         <th>Tồn cuối</th>
                     </tr>
                     </thead>
@@ -85,7 +85,7 @@ function changePage(url) {
                         <td>{{kh.dien_thoai}}</td>
                         <td>{{kh.dia_chi}}</td>
                         <td class="quantity">{{kh.ton_dau}}</td>
-                        <td class="money">{{kh.chi.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</td>
+                        <td class="money">{{kh.thu.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</td>
                         <td class="quantity">{{kh.ton_cuoi}}</td>
                     </tr>
                     </tbody>

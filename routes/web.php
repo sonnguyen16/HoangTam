@@ -128,6 +128,9 @@ Route::prefix('/baocaocongno')->middleware('auth')->group(function (){
     Route::get('/', [BaoCaoCongNoController::class, 'index'])->name('baocaocongno.index');
 });
 
+Route::prefix('/baocaocongno/khachhang')->middleware('auth')->group(function (){
+    Route::get('/', [BaoCaoCongNoController::class, 'khachhang'])->name('baocaocongno.khachhang');
+});
 
 
 

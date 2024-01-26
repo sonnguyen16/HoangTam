@@ -33,7 +33,7 @@ function formatDateForTemplate(date) {
 
 <template>
     <div class="bg-light-blue h-[100vh]">
-        <div class="container bg-white h-[100vh]">
+        <div class="container bg-white h-[100vh]" style="font-size: 15px">
             <div class="row">
                 <div class="col-12 mx-auto"> <!--  my-5 p-3-->
                     <div class="d-flex align-items-center gap-[20px]">

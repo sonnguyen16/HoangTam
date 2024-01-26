@@ -38,7 +38,7 @@ class SanPhamController extends Controller
             });
         }
 
-        $san_pham_list = $query->paginate(10)->withQueryString();
+        $san_pham_list = $query->paginate(500)->withQueryString();
         $san_pham_list = SanPhamResource::collection($san_pham_list);
 
         return Inertia::render('SanPham/Index', compact('san_pham_list', 'don_vi_tinh_list', 'loai_san_pham_list'));

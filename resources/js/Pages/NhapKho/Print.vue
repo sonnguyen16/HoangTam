@@ -85,11 +85,11 @@ function formatDateForTemplate(date) {
                                     <td>
                                         <span v-if="hoa_don.data.loai === 1"
                                       class="text-md font-in">
-                                        {{ hoa_don.data.khach_hang?.ten }}
+                                        {{ hoa_don.data.khach_hang?.dia_chi }}
                                         </span>
                                         <span v-if="hoa_don.data.loai === 0"
                                             class="text-md font-in">
-                                            {{ hoa_don.data.nha_cung_cap?.ten }}
+                                            {{ hoa_don.data.nha_cung_cap?.dia_chi }}
                                         </span>
                                     </td>
                                     <td class="text-md font-in"><b>Điện thoại:</b></td>

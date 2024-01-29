@@ -27,7 +27,7 @@ class BaoCaoCongNoController extends Controller
                 GROUP BY ncc.id
             )
             SELECT ncc.id, ncc.ten, ncc.dien_thoai, ncc.dia_chi, c.chi,
-                COALESCE(SUM(CASE WHEN hd.ngay <= ? THEN cthd.so_luong ELSE 0 END), 0) AS ton_dau,
+                COALESCE(SUM(CASE WHEN hd.ngay < ? THEN cthd.so_luong ELSE 0 END), 0) AS ton_dau,
                 COALESCE(SUM(CASE WHEN hd.ngay <= ? THEN cthd.so_luong ELSE 0 END), 0) AS ton_cuoi
             FROM nha_cung_cap ncc
             LEFT JOIN hoa_don hd ON ncc.id = hd.nha_cung_cap_id
@@ -56,7 +56,7 @@ class BaoCaoCongNoController extends Controller
                 GROUP BY kh.id
             )
             SELECT kh.id, kh.ten, kh.dien_thoai, kh.dia_chi, t.thu,
-                COALESCE(SUM(CASE WHEN hd.ngay <= ? THEN cthd.so_luong ELSE 0 END), 0) AS ton_dau,
+                COALESCE(SUM(CASE WHEN hd.ngay < ? THEN cthd.so_luong ELSE 0 END), 0) AS ton_dau,
                 COALESCE(SUM(CASE WHEN hd.ngay <= ? THEN cthd.so_luong ELSE 0 END), 0) AS ton_cuoi
             FROM khach_hang kh
             LEFT JOIN hoa_don hd ON kh.id = hd.khach_hang_id

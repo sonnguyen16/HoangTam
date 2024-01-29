@@ -23,7 +23,7 @@ class BaoCaoCongNoController extends Controller
                 SELECT ncc.id, COALESCE(SUM(ptc.so_tien), 0) AS chi
                 FROM nha_cung_cap ncc
                 LEFT JOIN phieu_thu_chi ptc ON ncc.id = ptc.nha_cung_cap_id
-                WHERE (? IS NULL OR ptc.ngay BETWEEN ? AND ?)
+                WHERE (ptc.ngay BETWEEN ? AND ?)
                 GROUP BY ncc.id
             )
             SELECT ncc.id, ncc.ten, ncc.dien_thoai, ncc.dia_chi, c.chi,
@@ -37,7 +37,7 @@ class BaoCaoCongNoController extends Controller
             GROUP BY ncc.id, ncc.ten, ncc.dien_thoai, ncc.dia_chi
         ";
 
-        $nha_cung_cap_list = DB::select($query, [$ngayBatDau, $ngayBatDau, $ngayKetThuc, $ngayBatDau, $ngayKetThuc]);
+        $nha_cung_cap_list = DB::select($query, [$ngayBatDau, $ngayKetThuc, $ngayBatDau, $ngayKetThuc]);
 
         return Inertia::render('BaoCaoCongNo/Index', compact('nha_cung_cap_list'));
     }

@@ -5,13 +5,15 @@ import {computed, ref, watch} from "vue";
 import {router} from "@inertiajs/vue3";
 
 const props = defineProps({
-    nha_cung_cap_list: Object,
+    khach_hang_list: Object,
 })
 
 let search = ref("")
+const ngay_bat_dau = ref(null);
+const ngay_ket_thuc = ref(null);
 
 const allData = computed( () => {
-    return props.nha_cung_cap_list
+    return props.khach_hang_list
 })
 
 watch(search, (value) => {
@@ -19,6 +21,29 @@ watch(search, (value) => {
         preserveState: true
     })
 })
+
+watch(ngay_bat_dau, (value, oldValue) => {
+    if(ngay_ket_thuc.value < value) {
+        alert('Ngày bắt đầu không được lớn hơn ngày kết thúc')
+        ngay_bat_dau.value = oldValue
+        return
+    }
+    router.visit(route('baocaocongno.khachhang', {ngay_bat_dau: value, ngay_ket_thuc: ngay_ket_thuc.value}), {
+        preserveState: true
+    })
+})
+
+watch(ngay_ket_thuc, (value, oldValue) => {
+    if(ngay_bat_dau.value > value) {
+        alert('Ngày kết thúc không được nhỏ hơn ngày bắt đầu')
+        ngay_ket_thuc.value = oldValue
+        return
+    }
+    router.visit(route('baocaocongno.khachhang', {ngay_ket_thuc: value, ngay_bat_dau: ngay_bat_dau.value}), {
+        preserveState: true
+    })
+})
+
 
 function changePage(url) {
     router.visit(url, {
@@ -43,9 +68,23 @@ function changePage(url) {
                     <div class="col-md-12">
                         <form >
                             <div class="row">
-                                <div class="col-md-3">
+                                <div class="col-md-5">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-record">
+                                                <label>Từ ngày</label>
+                                                <input type="date" v-model="ngay_bat_dau" class="form-control" name="ngay_bat_dau">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-record">
+                                                <label>Đến ngày</label>
+                                                <input type="date" v-model="ngay_ket_thuc" class="form-control" name="ngay_ket_thuc">
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-md-6"></div>
+                                <div class="col-md-4"></div>
                                 <div class="col-md-3">
                                     <div class="input-group">
                                         <input v-model="search" type="text" name="search"
@@ -75,17 +114,17 @@ function changePage(url) {
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-if="allData?.data.length === 0">
-                        <td colspan="6" class="text-center">Không có dữ liệu</td>
+                    <tr v-if="allData?.length === 0">
+                        <td colspan="7" class="text-center">Không có dữ liệu</td>
                     </tr>
 
-                    <tr :key="kh.id" v-else v-for="(kh, index) in allData?.data">
+                    <tr :key="kh.id" v-else v-for="(kh, index) in allData">
                         <td class="quantity">{{index + 1}}</td>
                         <td>{{kh.ten}}</td>
                         <td>{{kh.dien_thoai}}</td>
                         <td>{{kh.dia_chi}}</td>
                         <td class="quantity">{{kh.ton_dau}}</td>
-                        <td class="money">{{kh.thu.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</td>
+                        <td class="money">{{kh.thu?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") || 0}}</td>
                         <td class="quantity">{{kh.ton_cuoi}}</td>
                     </tr>
                     </tbody>

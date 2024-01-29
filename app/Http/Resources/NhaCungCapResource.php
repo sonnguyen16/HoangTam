@@ -19,11 +19,6 @@ class NhaCungCapResource extends JsonResource
             'ten' => $this->ten,
             'dia_chi' => $this->dia_chi,
             'dien_thoai' => $this->dien_thoai,
-            'chi' => $this->chi(),
-            'ton_dau' => $this->ton_dau,
-            'thu' => $this->thu(),
-            'so_luong_nhap' => $this->so_luong_nhap(),
-            'ton_cuoi' => $this->ton_cuoi(),
         ];
     }
 }

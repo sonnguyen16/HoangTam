@@ -53,7 +53,6 @@ function formatDateForTemplate(date) {
                         <h1 class="font-weight-bold" v-if="hoa_don.data.loai === 1">PHIẾU XUẤT KHO</h1>
                         <p class="text-md font-italic">Ngày {{ moment(hoa_don.data.ngay).format("DD") }} tháng {{ moment(hoa_don.data.ngay).format("MM") }} năm {{ moment(hoa_don.data.ngay).format("YYYY") }}</p>
                     </div>
-
                     <div class=""> <!--px-4 mt-4-->
                         <div class="row">
                             <div class="col-12">

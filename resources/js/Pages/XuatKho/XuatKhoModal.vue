@@ -66,8 +66,8 @@ const closeModal = () => {
     $('#donhang').val(null).trigger('change');
 }
 
-function removeChiTietHoaDon(id) {
-    form.chi_tiet_hoa_don = form.chi_tiet_hoa_don.filter(item => item.id !== id)
+function removeChiTietHoaDon(index) {
+    form.chi_tiet_hoa_don = form.chi_tiet_hoa_don.filter((item, i) => i !== index)
 }
 
 function addChiTietHoaDon(){
@@ -80,7 +80,7 @@ function addChiTietHoaDon(){
     }
 
     form.chi_tiet_hoa_don.push({
-        id: cloneDeep(item.value.san_pham).id,
+        id: '',
         hoa_don_id: props.hoa_don.id,
         san_pham: cloneDeep(item.value.san_pham),
         so_luong: item.value.so_luong,
@@ -100,7 +100,7 @@ function addChiTietHoaDon(){
 onMounted(() => {
     $('#sanpham').select2({ placeholder: "Chọn sản phẩm" }).on('change', function () {
         item.value.san_pham = props.san_pham_list.data.find(sp => String(sp.id) === $(this).val())
-        item.value.gia = item.value.san_pham.gia_ban;
+        item.value.gia = item.value.san_pham?.gia_ban;
     })
 
     $('#khach_hang_id').select2({
@@ -247,7 +247,7 @@ function xemDonHang() {
                                     <td colspan="7" class="text-center">Không có dữ liệu</td>
                                 </tr>
 
-                                <tr :key="cthd.id" v-else v-for="cthd in form.chi_tiet_hoa_don">
+                                <tr :key="cthd.id" v-else v-for="(cthd, index) in form.chi_tiet_hoa_don">
                                     <td class="ma">{{ cthd?.san_pham?.ma }}</td>
                                     <td class="ten" >{{ cthd?.san_pham?.ten }}</td>
                                     <td class="quantity" >{{ cthd?.so_luong }}</td>
@@ -255,7 +255,7 @@ function xemDonHang() {
                                     <td class="money">{{ cthd?.gia.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</td>
                                     <td class="money">{{ cthd?.thanh_tien.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</td>
                                     <td class="action" >
-                                        <a class="btn btn-danger btn-sm" @click.prevent="removeChiTietHoaDon(cthd.id)">
+                                        <a class="btn btn-danger btn-sm" @click.prevent="removeChiTietHoaDon(index)">
                                             <i class="fas fa-trash"></i>
                                         </a>
                                     </td>

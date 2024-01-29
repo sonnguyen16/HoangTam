@@ -2,6 +2,7 @@
 import {ref, watchEffect, onMounted, onUpdated} from "vue";
 import {router, useForm} from "@inertiajs/vue3";
 import {cloneDeep} from "lodash";
+import moment from "moment";
 
 const props = defineProps({
     don_hang: Object,
@@ -12,6 +13,7 @@ const props = defineProps({
 const form = useForm({
     id: "",
     ma: "",
+    ngay: "",
     nha_cung_cap_id: "",
     ghi_chu: "",
     loai: 0,
@@ -30,6 +32,7 @@ let item = ref({
 watchEffect(() => {
     form.id = props.don_hang.id || ""
     form.ma = props.don_hang.ma || ""
+    form.ngay = props.don_hang.ngay || moment().format("YYYY-MM-DD")
     form.nha_cung_cap_id = props.don_hang.nha_cung_cap?.id || ""
     form.ghi_chu = props.don_hang.ghi_chu || ""
     form.chi_tiet_don_hang = props.don_hang.chi_tiet_don_hang || []
@@ -56,8 +59,8 @@ const closeModal = () => {
     form.clearErrors();
 }
 
-function removeChiTietdonhang(id) {
-    form.chi_tiet_don_hang = form.chi_tiet_don_hang.filter(cthd => cthd.id !== id)
+function removeChiTietdonhang(index) {
+    form.chi_tiet_don_hang = form.chi_tiet_don_hang.filter((item, i) => i !== index)
 }
 
 function addChiTietdonhang(){
@@ -201,7 +204,7 @@ onUpdated(() => {
                                     <td colspan="7" class="text-center">Không có dữ liệu</td>
                                 </tr>
 
-                                <tr :key="cthd.id" v-else v-for="cthd in form.chi_tiet_don_hang">
+                                <tr :key="cthd.id" v-else v-for="(cthd, index) in form.chi_tiet_don_hang">
                                     <td  class="ma">{{ cthd?.san_pham?.ma }}</td>
                                     <td  class="ten">{{ cthd?.san_pham?.ten }}</td>
                                     <td  class="quantity">{{ cthd?.so_luong }}</td>
@@ -209,7 +212,7 @@ onUpdated(() => {
                                     <td  class="money">{{ cthd?.gia.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</td>
                                     <td  class="money">{{ cthd?.thanh_tien.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</td>
                                     <td  class="action">
-                                        <a class="btn btn-danger btn-sm" @click.prevent="removeChiTietdonhang(cthd.id)">
+                                        <a class="btn btn-danger btn-sm" @click.prevent="removeChiTietdonhang(index)">
                                             <i class="fas fa-trash"></i>
                                         </a>
                                     </td>

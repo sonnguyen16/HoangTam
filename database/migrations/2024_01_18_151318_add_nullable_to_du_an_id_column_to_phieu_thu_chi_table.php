@@ -21,8 +21,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('phieu_thu_chi', function (Blueprint $table) {
-            $table->foreignIdFor(App\Models\DuAn::class, 'du_an_id')->change();
-        });
+
     }
 };

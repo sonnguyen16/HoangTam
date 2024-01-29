@@ -15,6 +15,7 @@ const props = defineProps({
 let don_hang = ref({
     id: "",
     ma: "",
+    ngay: "",
     khach_hang: {},
     ghi_chu: "",
     chi_tiet_don_hang: [],
@@ -26,6 +27,7 @@ function openModal() {
     don_hang.value = {
         id: "",
         ma: "",
+        ngay: "",
         khach_hang: {},
         ghi_chu: "",
         chi_tiet_don_hang: [],
@@ -54,6 +56,7 @@ function editModal(kh) {
         id: kh.id,
         ma: kh.ma,
         khach_hang: kh.khach_hang,
+        ngay: kh.ngay,
         ghi_chu: kh.ghi_chu,
         chi_tiet_don_hang: kh.chi_tiet_don_hang,
     };

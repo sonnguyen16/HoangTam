@@ -84,11 +84,11 @@ class HoaDonController extends Controller
 
         $hoa_don = HoaDon::updateOrCreate(['id' => $data['id']], $data);
 
-        foreach ($hoa_don->chi_tiet_hoa_don()->get() as $item) {
-            $item->delete();
-        }
-
         if (!empty($chi_tiet_hoa_don)) {
+            foreach ($hoa_don->chi_tiet_hoa_don()->get() as $item) {
+                $item->delete();
+            }
+
             foreach ($chi_tiet_hoa_don as $item) {
                 $item['hoa_don_id'] = $hoa_don->id;
                 $item['san_pham_id'] = $item['san_pham']['id'];

@@ -1,6 +1,7 @@
 <script setup>
 import { watchEffect, onMounted, onUpdated} from "vue";
 import {router, useForm} from "@inertiajs/vue3";
+import moment from "moment";
 
 const props = defineProps({
     phieu_chi: Object,
@@ -13,6 +14,7 @@ const props = defineProps({
 const form = useForm({
     id: "",
     ma: "",
+    ngay: "",
     nha_cung_cap_id: "",
     du_an_id: "",
     nhan_vien_id: "",
@@ -24,15 +26,16 @@ const form = useForm({
 })
 
 watchEffect(() => {
-    form.id = props.phieu_chi.id;
-    form.ma = props.phieu_chi.ma;
-    form.nha_cung_cap_id = props.phieu_chi.nha_cung_cap_id;
-    form.du_an_id = props.phieu_chi.du_an_id;
-    form.nhan_vien_id = props.phieu_chi.nhan_vien_id;
-    form.loai_thu_chi_id = props.phieu_chi.loai_thu_chi_id;
-    form.ly_do = props.phieu_chi.ly_do;
-    form.so_tien = props.phieu_chi.so_tien;
-    form.trang_thai = props.phieu_chi.trang_thai;
+    form.id = props.phieu_chi.id || "";
+    form.ma = props.phieu_chi.ma || "";
+    form.ngay = props.phieu_chi.ngay || moment().format("YYYY-MM-DD");
+    form.nha_cung_cap_id = props.phieu_chi.nha_cung_cap_id || "";
+    form.du_an_id = props.phieu_chi.du_an_id || "";
+    form.nhan_vien_id = props.phieu_chi.nhan_vien_id || "";
+    form.loai_thu_chi_id = props.phieu_chi.loai_thu_chi_id || "";
+    form.ly_do = props.phieu_chi.ly_do || "";
+    form.so_tien = props.phieu_chi.so_tien || 0;
+    form.trang_thai = props.phieu_chi.trang_thai || "";
 })
 const submit = () => {
     if(!props.phieu_chi.id){
@@ -118,6 +121,13 @@ onUpdated(() => {
                                 <label for="ma">Mã phiếu</label>
                                 <div>
                                     <input readonly :class="{ 'border-danger' : form.errors.ma }" type="text" v-model="form.ma" class="form-control" id="ma" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="ngay">Ngày</label>
+                                <div>
+                                    <input :class="{ 'border-danger' : form.errors.ngay }" type="date" v-model="form.ngay" class="form-control" id="ngay" />
                                 </div>
                             </div>
 

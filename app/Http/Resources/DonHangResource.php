@@ -18,6 +18,7 @@ class DonHangResource extends JsonResource
         return [
             'id' => $this->id,
             'ma' => $this->ma,
+            'ngay' => $this->ngay,
             'nha_cung_cap' => $this->nha_cung_cap()->first(),
             'khach_hang' =>  $this->khach_hang()->first(),
             'chi_tiet_don_hang' => ChiTietDonHangResource::collection($this->chi_tiet_don_hang()),

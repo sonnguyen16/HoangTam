@@ -17,6 +17,7 @@ const props = defineProps({
 let phieu_chi = ref({
     id: "",
     ma: "",
+    ngay: "",
     nha_cung_cap_id: "",
     du_an_id: "",
     nhan_vien_id: "",
@@ -32,6 +33,7 @@ function openModal() {
     phieu_chi.value = {
         id: "",
         ma: "",
+        ngay: "",
         nha_cung_cap_id: "",
         du_an_id: "",
         nhan_vien_id: "",
@@ -63,6 +65,7 @@ function editModal(kh) {
     phieu_chi.value = {
         id: kh.id,
         ma: kh.ma,
+        ngay: kh.ngay,
         nha_cung_cap_id: kh.nha_cung_cap_id,
         du_an_id: kh.du_an_id,
         nhan_vien_id: kh.nhan_vien_id,

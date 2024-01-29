@@ -19,7 +19,7 @@ class KhachHang extends Model
     public function thu()
     {
         return $this->hasMany(PhieuThuChi::class, 'khach_hang_id')
-            ->where('loai', 2)
+            ->where('loai', 0)
             ->whereNull('deleted_at')
             ->sum('so_tien');
     }
@@ -49,5 +49,5 @@ class KhachHang extends Model
         return $this->ton_dau + $this->so_luong_nhap();
     }
 
-   
+
 }

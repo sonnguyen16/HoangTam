@@ -62,8 +62,8 @@ const closeModal = () => {
     form.clearErrors();
 }
 
-function removeChiTietHoaDon(id) {
-    form.chi_tiet_hoa_don = form.chi_tiet_hoa_don.filter(cthd => cthd.id !== id)
+function removeChiTietHoaDon(index) {
+    form.chi_tiet_hoa_don = form.chi_tiet_hoa_don.filter((item, i) => i !== index)
 }
 
 function addChiTietHoaDon(){
@@ -242,7 +242,7 @@ onUpdated(() => {
                                    <td class="money" >{{ cthd?.gia.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</td>
                                    <td class="money" >{{ cthd?.thanh_tien.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</td>
                                    <td class="action">
-                                       <a class="btn btn-danger btn-sm" @click.prevent="removeChiTietHoaDon(cthd.id)">
+                                       <a class="btn btn-danger btn-sm" @click.prevent="removeChiTietHoaDon(index)">
                                            <i class="fas fa-trash"></i>
                                        </a>
                                    </td>

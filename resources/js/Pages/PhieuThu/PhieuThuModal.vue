@@ -27,16 +27,16 @@ const form = useForm({
 
 
 watchEffect(() => {
-    form.id = props.phieu_thu.id;
-    form.ma = props.phieu_thu.ma;
-    form.ngay = props.phieu_thu.ngay;
-    form.khach_hang_id = props.phieu_thu.khach_hang_id;
-    form.du_an_id = props.phieu_thu.du_an_id;
-    form.nhan_vien_id = props.phieu_thu.nhan_vien_id;
-    form.loai_thu_chi_id = props.phieu_thu.loai_thu_chi_id;
-    form.ly_do = props.phieu_thu.ly_do;
-    form.so_tien = props.phieu_thu.so_tien;
-    form.trang_thai = props.phieu_thu.trang_thai;
+    form.id = props.phieu_thu.id || "";
+    form.ma = props.phieu_thu.ma || "";
+    form.ngay = props.phieu_thu.ngay || moment().format("YYYY-MM-DD");
+    form.khach_hang_id = props.phieu_thu.khach_hang_id || "";
+    form.du_an_id = props.phieu_thu.du_an_id || "";
+    form.nhan_vien_id = props.phieu_thu.nhan_vien_id || "";
+    form.loai_thu_chi_id = props.phieu_thu.loai_thu_chi_id || "";
+    form.ly_do = props.phieu_thu.ly_do || "";
+    form.so_tien = props.phieu_thu.so_tien || 0;
+    form.trang_thai = props.phieu_thu.trang_thai || "";
 })
 const submit = () => {
     if(!props.phieu_thu.id){
@@ -121,6 +121,13 @@ onUpdated(() => {
                                 <label for="ma">Mã phiếu</label>
                                 <div>
                                     <input readonly :class="{ 'border-danger' : form.errors.ma }" type="text" v-model="form.ma" class="form-control" id="ma" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="ngay">Ngày</label>
+                                <div>
+                                    <input :class="{ 'border-danger' : form.errors.ngay }" type="date" v-model="form.ngay" class="form-control" id="ngay" />
                                 </div>
                             </div>
 

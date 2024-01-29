@@ -118,7 +118,7 @@ function deleletonkho(id) {
                     </thead>
                     <tbody>
                     <tr v-if="allData?.data.length === 0">
-                        <td colspan="6" class="text-center">Không có dữ liệu</td>
+                        <td colspan="7" class="text-center">Không có dữ liệu</td>
                     </tr>
 
                     <tr :key="kh.id" v-else v-for="kh in allData?.data">

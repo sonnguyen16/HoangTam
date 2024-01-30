@@ -63,7 +63,7 @@ class HoaDonController extends Controller
             });
         }
 
-        $hoa_don_list = $query->paginate(5)->withQueryString();
+        $hoa_don_list = $query->paginate(100)->withQueryString();
 
         $hoa_don_list = HoaDonResource::collection($hoa_don_list);
 

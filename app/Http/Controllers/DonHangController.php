@@ -51,7 +51,7 @@ class DonHangController extends Controller
             });
         }
 
-        $don_hang_list = $query->paginate(10)->withQueryString();
+        $don_hang_list = $query->paginate(100)->withQueryString();
 
         $san_pham_list = SanPhamResource::collection($san_pham_list);
 

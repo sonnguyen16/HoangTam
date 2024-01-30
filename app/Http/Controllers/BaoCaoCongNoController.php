@@ -34,7 +34,7 @@ class BaoCaoCongNoController extends Controller
             LEFT JOIN chi_tiet_hoa_don cthd ON hd.id = cthd.hoa_don_id
             LEFT JOIN Chi c ON ncc.id = c.id
             WHERE ncc.ten LIKE '%$search%' OR ncc.dien_thoai LIKE '%$search%' OR ncc.dia_chi LIKE '%$search%'
-            GROUP BY ncc.id, ncc.ten, ncc.dien_thoai, ncc.dia_chi
+            GROUP BY ncc.id, ncc.ten, ncc.dien_thoai, ncc.dia_chi, c.chi
         ";
 
         $nha_cung_cap_list = DB::select($query, [$ngayBatDau, $ngayKetThuc, $ngayBatDau, $ngayKetThuc]);
@@ -63,7 +63,7 @@ class BaoCaoCongNoController extends Controller
             LEFT JOIN chi_tiet_hoa_don cthd ON hd.id = cthd.hoa_don_id
             LEFT JOIN Thu t ON kh.id = t.id
             WHERE kh.ten LIKE '%$search%' OR kh.dien_thoai LIKE '%$search%' OR kh.dia_chi LIKE '%$search%'
-            GROUP BY kh.id, kh.ten, kh.dien_thoai, kh.dia_chi
+            GROUP BY kh.id, kh.ten, kh.dien_thoai, kh.dia_chi, t.thu
         ";
 
         $khach_hang_list = DB::select($query, [$ngayBatDau, $ngayKetThuc, $ngayBatDau, $ngayKetThuc]);

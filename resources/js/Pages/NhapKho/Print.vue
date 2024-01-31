@@ -38,7 +38,7 @@ function formatDateForTemplate(date) {
             <div class="row">
                 <div class="col-12 mx-auto"> <!--  my-5 p-3-->
                     <div class="d-flex align-items-center gap-[20px]">
-                       <!--<img :src="/uploads/ + don_vi.logo" class="w-[200px]" alt="logo" />--> 
+                       <!--<img :src="/uploads/ + don_vi.logo" class="w-[200px]" alt="logo" />-->
                         <div class="text-start">
                             <h3 class="font-weight-bold mb-0" style="text-transform: uppercase;">{{ don_vi?.ten }}</h3>
                             <p class=" font-in" style="margin-bottom:0px">Địa chỉ: {{ don_vi?.dia_chi }}</p>
@@ -109,12 +109,12 @@ function formatDateForTemplate(date) {
                         <table class="table table-bordered"> <!-- table-bordered  table-responsive-md-->
                             <thead>
                             <tr>
-                                <!--<th style="width: 60px!important;" class="font-in" >STT</th> -->
+                                <th class="font-in" >STT</th>
                                 <th class="font-in">Tên sản phẩm</th>
-                                <th width="100" class="font-in">Số lượng</th>
-                                <th width="80" class="font-in">ĐVT</th>
-                                <th width="120" class="font-in">Đơn giá</th>
-                                <th width="120" class="font-in">Thành tiền</th>
+                                <th class="font-in">Số lượng</th>
+                                <th class="font-in">ĐVT</th>
+                                <th class="font-in">Đơn giá</th>
+                                <th class="font-in">Thành tiền</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -123,15 +123,15 @@ function formatDateForTemplate(date) {
                             </tr>
 
                             <tr :key="cthd.id" v-else v-for="(cthd, index) in hoa_don.data.chi_tiet_hoa_don">
-                               <!-- <td class="ma font-in">{{ index + 1 }}</td> -->
-                                <td class="ten font-in">{{ index + 1 }}. {{ cthd?.san_pham?.ten }}</td>
+                                <td class="font-in quantity">{{ index + 1 }}</td>
+                                <td class="ten font-in">{{ cthd?.san_pham?.ten }}</td>
                                 <td class="quantity font-in" >{{ cthd?.so_luong }}</td>
                                 <td class="quantity font-in" >{{ cthd?.san_pham?.don_vi_tinh?.ten }}</td>
                                 <td class="money font-in" >{{ cthd?.gia.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</td>
                                 <td class="money font-in" >{{ cthd?.thanh_tien.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</td>
                             </tr>
                             <tr>
-                                <td colspan="4"  class="text-md font-in">
+                                <td colspan="5"  class="text-md font-in">
                                      <b>Tổng tiền</b>
                                 </td>
                                 <td class="money text-md font-in">

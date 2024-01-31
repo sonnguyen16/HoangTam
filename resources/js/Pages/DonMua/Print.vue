@@ -114,6 +114,7 @@ function formatDateForTemplate(date) {
                         <table class="table table-bordered  table-responsive-md">
                             <thead>
                             <tr>
+                                <th>STT</th>
                                 <th>Mã sản phẩm</th>
                                 <th>Tên sản phẩm</th>
                                 <th>Số lượng</th>
@@ -127,7 +128,8 @@ function formatDateForTemplate(date) {
                                 <td colspan="7" class="text-center">Không có dữ liệu</td>
                             </tr>
 
-                            <tr :key="cthd.id" v-else v-for="cthd in don_hang.data.chi_tiet_don_hang">
+                            <tr :key="cthd.id" v-else v-for="(cthd, index) in don_hang.data.chi_tiet_don_hang">
+                                <td class="quantity">{{ index + 1 }}</td>
                                 <td class="ma">{{ cthd?.san_pham?.ma }}</td>
                                 <td class="ten">{{ cthd?.san_pham?.ten }}</td>
                                 <td class="quantity" >{{ cthd?.so_luong }}</td>
@@ -136,7 +138,7 @@ function formatDateForTemplate(date) {
                                 <td class="money" >{{ cthd?.thanh_tien.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</td>
                             </tr>
                             <tr>
-                                <td colspan="5">
+                                <td colspan="6">
                                     Tổng tiền
                                 </td>
                                 <td class="money">

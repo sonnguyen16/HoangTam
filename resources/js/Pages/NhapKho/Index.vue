@@ -127,7 +127,6 @@ function delelehoadon(id) {
                         <th width="100">Mã phiếu</th>
                         <th>Nhà cung cấp</th>
                         <th>Kho</th>
-                        <th>Ghi chú</th>
                         <th width="100">Ngày tạo</th>
                         <th width="100">Tổng tiền</th>
                         <th width="153">Thao tác</th>
@@ -135,7 +134,7 @@ function delelehoadon(id) {
                     </thead>
                     <tbody>
                     <tr v-if="allData?.data.length === 0">
-                        <td colspan="7" class="text-center">Không có dữ liệu</td>
+                        <td colspan="9" class="text-center">Không có dữ liệu</td>
                     </tr>
 
                     <tr :key="kh.id" v-else v-for="(kh, index) in allData?.data">
@@ -144,7 +143,6 @@ function delelehoadon(id) {
                         <td class="text-center">{{ kh.ma }}</td>
                         <td >{{ kh.nha_cung_cap?.ten }}</td>
                         <td >{{ kh.kho?.ten }}</td>
-                        <td >{{ kh.ghi_chu }}</td>
                         <td class="text-center">{{ moment(kh.created_at).format("DD/MM/YYYY") }}</td>
                         <td class="money">{{ kh.tong_tien.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</td>
 

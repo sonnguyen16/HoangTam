@@ -1,7 +1,7 @@
 <script setup>
 import {ref, watchEffect, onMounted, onUpdated} from "vue";
 import {router, useForm} from "@inertiajs/vue3";
-import {cloneDeep} from "lodash";
+import {cloneDeep, isEmpty} from "lodash";
 import moment from "moment";
 
 const props = defineProps({
@@ -24,7 +24,7 @@ let item = ref({
     id: "",
     don_hang_id: props.don_hang.id,
     san_pham: {},
-    so_luong: 0,
+    so_luong: 1,
     gia: 0,
 })
 
@@ -64,7 +64,7 @@ function removeChiTietdonhang(index) {
 }
 
 function addChiTietdonhang(){
-    if(!item.value.san_pham){
+    if(isEmpty(item.value.san_pham)){
         return;
     }
 
@@ -88,6 +88,7 @@ function addChiTietdonhang(){
         so_luong: 0,
         gia: 0,
     }
+    $('#sanpham').val(null).trigger('change');
 }
 
 onMounted(() => {

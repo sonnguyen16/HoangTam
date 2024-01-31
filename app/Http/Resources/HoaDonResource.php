@@ -18,6 +18,7 @@ class HoaDonResource extends JsonResource
             'id' => $this->id,
             'ma' => $this->ma,
             'nha_cung_cap' => $this->nha_cung_cap()->first(),
+            'du_an_id' => $this->du_an_id,
             'khach_hang' => $this->khach_hang()->first(),
             'loai' => $this->loai,
             'ngay' => $this->ngay,

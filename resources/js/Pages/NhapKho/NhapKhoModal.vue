@@ -1,7 +1,7 @@
 <script setup>
 import {onMounted, onUpdated, ref, watchEffect} from "vue";
 import {router, useForm} from "@inertiajs/vue3";
-import {cloneDeep} from "lodash";
+import {cloneDeep, isEmpty} from "lodash";
 import moment from "moment";
 
 const props = defineProps({
@@ -67,7 +67,7 @@ function removeChiTietHoaDon(index) {
 }
 
 function addChiTietHoaDon(){
-    if(!item.value.san_pham){
+    if(isEmpty(item.value.san_pham)){
         return;
     }
 
@@ -90,6 +90,7 @@ function addChiTietHoaDon(){
         so_luong: 1,
         gia: 0,
     }
+    $('#sanpham').val(null).trigger('change');
 }
 
 onMounted(() => {
@@ -97,7 +98,7 @@ onMounted(() => {
         placeholder: "Chọn sản phẩm",
     }).on('change', function () {
         item.value.san_pham = props.san_pham_list.data.find(sp => String(sp.id) === $(this).val());
-       item.value.gia = item.value.san_pham.gia_nhap;
+        item.value.gia = item.value.san_pham?.gia_nhap;
     })
 
     $('#kho_id').select2({

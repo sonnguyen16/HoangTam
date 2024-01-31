@@ -29,7 +29,7 @@ class PhieuThuChiRequest extends FormRequest
             'so_tien' => 'required|numeric|min:0',
             'nhan_vien_id' => 'required',
             'trang_thai' => 'required',
-//            'du_an_id' => 'required',
+            'du_an_id' => 'required',
             'loai' => 'required',
             'loai_thu_chi_id' => 'required',
         ];
@@ -60,7 +60,7 @@ class PhieuThuChiRequest extends FormRequest
             'so_tien.min' => 'Số tiền phải lớn hơn 0',
             'nhan_vien_id.required' => 'Nhân viên không được để trống',
             'trang_thai.required' => 'Trạng thái không được để trống',
-           // 'du_an_id.required' => 'Dự án không được để trống',
+            'du_an_id.required' => 'Dự án không được để trống',
             'loai.required' => 'Loại không được để trống',
             'loai_thu_chi_id.required' => 'Loại thu chi không được để trống',
             'khach_hang_id.required' => 'Khách hàng không được để trống',

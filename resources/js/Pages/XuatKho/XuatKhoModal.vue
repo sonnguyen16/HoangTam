@@ -1,7 +1,7 @@
 <script setup>
 import {onMounted,onUpdated, ref, watchEffect} from "vue";
 import {router, useForm} from "@inertiajs/vue3";
-import {cloneDeep} from "lodash";
+import {cloneDeep, isEmpty} from "lodash";
 import ChonDonHangModal from "@/Pages/XuatKho/ChonDonHangModal.vue";
 import moment from "moment";
 
@@ -51,8 +51,8 @@ const submit = () => {
             $('#hoadonmodal').modal('hide');
             router.visit(route('hoadon.index', { loai: 'xuatkho'}))
         },
-        onError: () => {
-
+        onError: (error) => {
+            console.log(error)
         }
     })
 }
@@ -71,7 +71,7 @@ function removeChiTietHoaDon(index) {
 }
 
 function addChiTietHoaDon(){
-    if(!item.value.san_pham){
+    if(isEmpty(item.value.san_pham)){
         return;
     }
 
@@ -95,6 +95,7 @@ function addChiTietHoaDon(){
         so_luong: 1,
         gia: 0,
     }
+    $('#sanpham').val(null).trigger('change');
 }
 
 onMounted(() => {

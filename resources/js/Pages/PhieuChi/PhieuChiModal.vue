@@ -35,7 +35,7 @@ watchEffect(() => {
     form.loai_thu_chi_id = props.phieu_chi.loai_thu_chi_id || "";
     form.ly_do = props.phieu_chi.ly_do || "";
     form.so_tien = props.phieu_chi.so_tien || 0;
-    form.trang_thai = props.phieu_chi.trang_thai || "";
+    form.trang_thai = props.phieu_chi.trang_thai;
 })
 const submit = () => {
     if(!props.phieu_chi.id){

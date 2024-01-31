@@ -36,7 +36,7 @@ watchEffect(() => {
     form.loai_thu_chi_id = props.phieu_thu.loai_thu_chi_id || "";
     form.ly_do = props.phieu_thu.ly_do || "";
     form.so_tien = props.phieu_thu.so_tien || 0;
-    form.trang_thai = props.phieu_thu.trang_thai || "";
+    form.trang_thai = props.phieu_thu.trang_thai;
 })
 const submit = () => {
     if(!props.phieu_thu.id){
@@ -141,15 +141,15 @@ onUpdated(() => {
                                 </div>
                             </div>
 
-<!--                            <div class="form-group">-->
-<!--                                <label for="du_an_id">Dự án</label>-->
-<!--                                <div>-->
-<!--                                    <select :class="{ 'border-danger' : form.errors.du_an_id }" v-model="form.du_an_id" class="form-control" id="du_an_id">-->
-<!--                                        <option value="">Chọn dự án</option>-->
-<!--                                        <option v-for="da in du_an_list" :key="da.id" :value="da.id">{{ da.ten }}</option>-->
-<!--                                    </select>-->
-<!--                                </div>-->
-<!--                            </div>-->
+                            <div class="form-group">
+                                <label for="du_an_id">Dự án</label>
+                                <div>
+                                    <select :class="{ 'border-danger' : form.errors.du_an_id }" v-model="form.du_an_id" class="form-control" id="du_an_id">
+                                        <option value="">Chọn dự án</option>
+                                        <option v-for="da in du_an_list" :key="da.id" :value="da.id">{{ da.ten }}</option>
+                                    </select>
+                                </div>
+                            </div>
 
                             <div class="form-group">
                                 <label for="nhan_vien_id">Nhân viên</label>
@@ -190,7 +190,6 @@ onUpdated(() => {
                                 <label for="trang_thai">Trạng thái</label>
                                 <div>
                                     <select :class="{ 'border-danger' : form.errors.trang_thai }" v-model="form.trang_thai" class="form-control" id="trang_thai">
-                                        <option value="">Chọn trạng thái</option>
                                         <option value="0">Chưa thanh toán</option>
                                         <option value="1">Đã thanh toán</option>
                                     </select>

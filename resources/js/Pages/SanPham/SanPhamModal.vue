@@ -62,8 +62,8 @@ const closeModal = () => {
     form.clearErrors();
 }
 
-function removeDinhMuc(id) {
-    form.dinh_muc = form.dinh_muc.filter(dm => dm.id !== id)
+function removeDinhMuc(index) {
+    form.dinh_muc = form.dinh_muc.filter((item, i) => i !== index)
 }
 
 function addDinhMuc(){
@@ -80,7 +80,7 @@ function addDinhMuc(){
         san_pham_id: props.san_pham.id,
         san_pham: cloneDeep(item.value.san_pham),
         so_luong: item.value.so_luong,
-        don_vi_tinh: item.value.san_pham.don_vi_tinh,
+        don_vi_tinh: cloneDeep(item.value.san_pham.don_vi_tinh),
     })
 
     item.value = {
@@ -239,13 +239,13 @@ onMounted(() => {
                                     <td colspan="6" class="text-center">Không có dữ liệu</td>
                                 </tr>
 
-                                <tr :key="cthd.id" v-else v-for="cthd in form.dinh_muc">
+                                <tr :key="cthd.id" v-else v-for="(cthd, index) in form.dinh_muc">
                                     <td class="ma">{{ cthd?.san_pham?.ma }}</td>
                                     <td class="ten">{{ cthd?.san_pham?.ten }}</td>
                                     <td class="quantity">{{ cthd?.so_luong }}</td>
                                     <td class="quantity">{{ cthd?.don_vi_tinh?.ten }}</td>
                                     <td class="action">
-                                        <a class="btn btn-danger btn-sm" @click.prevent="removeDinhMuc(cthd.id)">
+                                        <a class="btn btn-danger btn-sm" @click.prevent="removeDinhMuc(index)">
                                             <i class="fas fa-trash"></i>
                                         </a>
                                     </td>

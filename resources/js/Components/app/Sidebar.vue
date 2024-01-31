@@ -44,7 +44,7 @@ const user = computed(() => {
               <NavItem :href="route('donvitinh.index')" title="Đơn vị tính" />
               <NavItem :href="route('sanpham.index')" title="Sản phẩm" />
               <NavItem :href="route('kho.index')" title="Kho" />
-              <!--                            <NavItem :href="route('duan.index')" title="Quản lý dự án"/>-->
+              <NavItem :href="route('duan.index')" title="Dự án"/>
               <NavItem :href="route('khachhang.index')" title="Khách hàng" />
               <NavItem :href="route('nhacungcap.index')" title="Nhà cung cấp" />
               <NavItem :href="route('nhanvien.index')" title="Nhân viên" />
@@ -102,7 +102,7 @@ const user = computed(() => {
             </ul>
           </li>
           <hr class="m-2 mr-4 ml-3" />
-          <li class="nav-item menu-open mb-5">
+          <li class="nav-item menu-open">
             <NavLink title="Báo cáo" />
             <ul class="nav nav-treeview">
               <NavItem

@@ -78,7 +78,7 @@ function addChiTietHoaDon(){
         return;
     }
     form.chi_tiet_hoa_don.push({
-        id: cloneDeep(item.value.san_pham).id,
+        id: "",
         hoa_don_id: props.hoa_don.id,
         san_pham: cloneDeep(item.value.san_pham),
         so_luong: item.value.so_luong,

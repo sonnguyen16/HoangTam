@@ -11,7 +11,8 @@ const props = defineProps({
     hoa_don_list: Object,
     nha_cung_cap_list: Object,
     kho_list: Object,
-    san_pham_list: Object
+    san_pham_list: Object,
+    du_an_list: Object,
 })
 
 let hoa_don = ref({
@@ -21,6 +22,7 @@ let hoa_don = ref({
     kho: {},
     ghi_chu: "",
     chi_tiet_hoa_don: [],
+    du_an_id: "",
 })
 
 let search = ref("")
@@ -33,6 +35,7 @@ function openModal() {
         kho: {},
         ghi_chu: "",
         chi_tiet_hoa_don: [],
+        du_an_id: "",
     }
     $('#hoadonmodal').modal('show');
 }
@@ -62,7 +65,8 @@ function editModal(kh) {
         kho: kh.kho,
         ghi_chu: kh.ghi_chu,
         chi_tiet_hoa_don: kh.chi_tiet_hoa_don,
-        ngay: kh.ngay
+        ngay: kh.ngay,
+        du_an_id: kh.du_an_id,
     };
     $('#hoadonmodal').modal('show');
 }
@@ -178,6 +182,7 @@ function delelehoadon(id) {
             :nha_cung_cap_list="nha_cung_cap_list"
             :kho_list="kho_list"
             :san_pham_list="san_pham_list"
+            :du_an_list="du_an_list"
         />
     </MainLayout>
 </template>

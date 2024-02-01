@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('nha_cung_cap', function (Blueprint $table) {
-            $table->integer('ton_dau')->default(0);
+            $table->double('ton_dau',15,2)->default(0);
         });
     }
 

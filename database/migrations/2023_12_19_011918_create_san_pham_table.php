@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('ten');
             $table->foreignIdFor(\App\Models\DonViTinh::class, 'don_vi_tinh_id');
             $table->string('mo_ta')->nullable();;
-            $table->string('gia_ban');
-            $table->string('gia_nhap');
+            $table->double('gia_ban',15,2);
+            $table->double('gia_nhap',15,2);
             $table->softDeletes();
             $table->timestamps();
         });

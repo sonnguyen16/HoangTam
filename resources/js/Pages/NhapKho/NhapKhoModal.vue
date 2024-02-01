@@ -8,7 +8,8 @@ const props = defineProps({
     hoa_don: Object,
     nha_cung_cap_list: Object,
     kho_list: Object,
-    san_pham_list: Object
+    san_pham_list: Object,
+    du_an_list: Object,
 })
 
 const form = useForm({
@@ -20,6 +21,7 @@ const form = useForm({
     ghi_chu: "",
     loai: 0,
     chi_tiet_hoa_don: [],
+    du_an_id: "",
 })
 
 let item = ref({
@@ -39,6 +41,7 @@ watchEffect(() => {
     form.kho_id = props.hoa_don.kho.id || ""
     form.ghi_chu = props.hoa_don.ghi_chu || ""
     form.chi_tiet_hoa_don = props.hoa_don.chi_tiet_hoa_don || []
+    form.du_an_id = props.hoa_don.du_an_id || ""
 })
 const submit = () => {
     if(!props.hoa_don.id){
@@ -114,6 +117,13 @@ onMounted(() => {
     }).on('change', function () {
         form.nha_cung_cap_id = $(this).val()
     })
+
+    $('#du_an_id').select2({
+        placeholder: "Chọn dự án",
+        width: '100%',
+    }).on('change', function () {
+        form.du_an_id = $(this).val()
+    })
 })
 
 onUpdated(() => {
@@ -123,6 +133,11 @@ onUpdated(() => {
     })
     $('#nha_cung_cap_id').select2({
         placeholder: "Chọn nhà cung cấp",
+        width: '100%',
+    })
+
+    $('#du_an_id').select2({
+        placeholder: "Chọn dự án",
         width: '100%',
     })
 })
@@ -153,6 +168,17 @@ onUpdated(() => {
                                     <input readonly :class="{ 'border-danger' : form.errors.ma }" type="text" v-model="form.ma" class="form-control" id="ma" />
                                 </div>
                             </div>
+
+                            <div class="form-group">
+                                <label for="du_an_id">Dự án</label>
+                                <div>
+                                    <select :class="{ 'border-danger' : form.errors.du_an_id }" v-model="form.du_an_id" class="form-control" id="du_an_id">
+                                        <option value="">Chọn dự án</option>
+                                        <option v-for="da in du_an_list" :key="da.id" :value="da.id">{{ da.ten }}</option>
+                                    </select>
+                                </div>
+                            </div>
+
                             <div class="form-group">
                                 <label for="ngay">Ngày</label>
                                 <div>

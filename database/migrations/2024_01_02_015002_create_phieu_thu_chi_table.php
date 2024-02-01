@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('ly_do')->nullable();;
             $table->foreignIdFor(App\Models\KhachHang::class, 'khach_hang_id')->nullable();
             $table->foreignIdFor(App\Models\NhaCungCap::class, 'nha_cung_cap_id')->nullable();
-            $table->integer('so_tien');
+            $table->double('so_tien',15,2);
             $table->foreignIdFor(App\Models\User::class, 'nhan_vien_id');
             $table->foreignIdFor(App\Models\DuAn::class, 'du_an_id')->nullable();
             $table->integer('trang_thai')->default(0);

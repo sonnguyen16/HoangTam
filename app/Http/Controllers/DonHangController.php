@@ -70,11 +70,11 @@ class DonHangController extends Controller
 
         $don_hang = DonHang::updateOrCreate(['id' => $data['id']], $data);
 
-        if (!empty($chi_tiet_don_hang)) {
-            foreach ($don_hang->chi_tiet_don_hang() as $item) {
-                $item->delete();
-            }
+        foreach ($don_hang->chi_tiet_don_hang() as $item) {
+            $item->delete();
+        }
 
+        if (!empty($chi_tiet_don_hang)) {
             foreach ($chi_tiet_don_hang as $item) {
                 $item['don_hang_id'] = $don_hang->id;
                 $item['san_pham_id'] = $item['san_pham']['id'];
@@ -83,6 +83,9 @@ class DonHangController extends Controller
                 ChiTietDonHang::updateOrCreate(['id' => $item['id']], $item);
             }
         }
+
+        $don_hang->tong_tien = $don_hang->tong_tien();
+        $don_hang->save();
     }
 
     public function print(Request $request)

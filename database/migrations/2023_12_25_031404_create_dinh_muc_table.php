@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(\App\Models\SanPham::class, 'san_pham_id');
             $table->foreignIdFor(\App\Models\SanPham::class, 'nguyen_lieu_id');
-            $table->integer('so_luong');
+            $table->double('so_luong',15,2);
             $table->timestamps();
             $table->softDeletes();
         });

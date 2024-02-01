@@ -8,6 +8,7 @@ use App\Http\Resources\HoaDonResource;
 use App\Http\Resources\SanPhamResource;
 use App\Models\ChiTietHoaDon;
 use App\Models\DonHang;
+use App\Models\DuAn;
 use App\Models\NhaCungCap;
 use App\Models\PhieuThuChi;
 use App\Models\SanPham;
@@ -44,6 +45,10 @@ class HoaDonController extends Controller
             ->whereHas('created_by.don_vi', function ($query) {
                 $query->where('id', Auth::user()->don_vi_id);
             })->get();
+        $du_an_list = DuAn::query()->whereNull('parent_id')->whereNull('deleted_at')
+            ->whereHas('created_by.don_vi', function ($query) {
+                $query->where('id', Auth::user()->don_vi_id);
+            })->get();
         $don_hang_ban_list = DonHang::query()->whereNull('deleted_at')->where('loai', 1)
             ->whereHas('created_by.don_vi', function ($query) {
                 $query->where('id', Auth::user()->don_vi_id);
@@ -74,7 +79,7 @@ class HoaDonController extends Controller
         $component = $loai == 0 ? 'NhapKho/Index' : 'XuatKho/Index';
 
         return Inertia::render($component,
-            compact('hoa_don_list', 'nha_cung_cap_list', 'kho_list', 'san_pham_list', 'khach_hang_list', 'don_hang_ban_list'));
+            compact('hoa_don_list','du_an_list', 'nha_cung_cap_list', 'kho_list', 'san_pham_list', 'khach_hang_list', 'don_hang_ban_list'));
     }
 
     public function store(HoaDonRequest $request)
@@ -84,11 +89,11 @@ class HoaDonController extends Controller
 
         $hoa_don = HoaDon::updateOrCreate(['id' => $data['id']], $data);
 
-        if (!empty($chi_tiet_hoa_don)) {
-            foreach ($hoa_don->chi_tiet_hoa_don()->get() as $item) {
-                $item->delete();
-            }
+        foreach ($hoa_don->chi_tiet_hoa_don()->get() as $item) {
+            $item->delete();
+        }
 
+        if (!empty($chi_tiet_hoa_don)) {
             foreach ($chi_tiet_hoa_don as $item) {
                 $item['hoa_don_id'] = $hoa_don->id;
                 $item['san_pham_id'] = $item['san_pham']['id'];
@@ -97,6 +102,9 @@ class HoaDonController extends Controller
                 ChiTietHoaDon::updateOrCreate(['id' => $item['id']], $item);
             }
         }
+
+        $hoa_don->tong_tien = $hoa_don->tong_tien();
+        $hoa_don->save();
     }
 
     public function print(Request $request)

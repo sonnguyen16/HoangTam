@@ -110,7 +110,7 @@ onMounted(() => {
                 <div class="modal-header">
                     <button type="button" class="close" @click.prevent="closeModal">&times;</button>
                 </div>
-                <form @submit.prevent="submit">
+                <form @submit.prevent="submit" novalidate>
                     <div class="modal-body">
                         <input type="hidden" v-model="form.id" id="id" class="form-control"/>
 
@@ -158,7 +158,7 @@ onMounted(() => {
                             <div class="form-group">
                                 <label for="name">Tồn đầu</label>
                                 <div>
-                                    <input :class="{ 'border-danger' : form.errors.ton_dau }" type="number" v-model="form.ton_dau" class="form-control" id="ton_dau" />
+                                    <input :class="{ 'border-danger' : form.errors.ton_dau }" type="number" v-model="form.ton_dau" class="form-control" id="ton_dau"/>
                                     <!--                                    <InputError :message="form.errors.ton_dau" />-->
                                 </div>
                             </div>

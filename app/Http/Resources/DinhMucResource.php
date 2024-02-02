@@ -18,7 +18,7 @@ class DinhMucResource extends JsonResource
             'id' => $this->id,
             'san_pham' => $this->san_pham(),
             'so_luong' => $this->so_luong,
-            'don_vi_tinh' => $this->san_pham()->don_vi_tinh(),
+            'don_vi_tinh' => $this->san_pham()->first()->don_vi_tinh(),
         ];
     }
 }

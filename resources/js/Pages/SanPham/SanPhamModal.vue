@@ -243,7 +243,7 @@ onMounted(() => {
                                     <td class="ma">{{ cthd?.san_pham?.ma }}</td>
                                     <td class="ten">{{ cthd?.san_pham?.ten }}</td>
                                     <td class="quantity">{{ cthd?.so_luong }}</td>
-                                    <td class="quantity">{{ cthd?.don_vi_tinh?.ten }}</td>
+                                    <td class="quantity">{{ cthd?.san_pham?.don_vi_tinh?.ten }}</td>
                                     <td class="action">
                                         <a class="btn btn-danger btn-sm" @click.prevent="removeDinhMuc(index)">
                                             <i class="fas fa-trash"></i>

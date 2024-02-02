@@ -14,7 +14,7 @@ class DinhMuc extends Model
 
     public function san_pham()
     {
-        return $this->belongsTo(SanPham::class, 'nguyen_lieu_id')->first();
+        return $this->belongsTo(SanPham::class, 'nguyen_lieu_id');
     }
 
     public function created_by()

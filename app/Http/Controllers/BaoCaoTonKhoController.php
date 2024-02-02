@@ -28,12 +28,12 @@ class BaoCaoTonKhoController extends Controller
                 SELECT cthd.san_pham_id, hd.ngay , cthd.so_luong AS nhap, 0 AS xuat, 0 AS dieu_chinh
                 FROM hoa_don hd
                 LEFT JOIN chi_tiet_hoa_don cthd ON cthd.hoa_don_id = hd.id
-                WHERE HD.LOAI = 0
+                WHERE LOAI = 0
                 UNION ALL
                 SELECT cthd.san_pham_id, hd.ngay , 0 AS nhap, cthd.so_luong AS xuat, 0 AS dieu_chinh
                 FROM hoa_don hd
                 LEFT JOIN chi_tiet_hoa_don cthd ON cthd.hoa_don_id = hd.id
-                WHERE HD.LOAI = 1
+                WHERE LOAI = 1
                 UNION ALL
                 SELECT tk.san_pham_id, DATE_SUB(tk.updated_at,INTERVAL 7 HOUR) AS ngay, 0 as nhap, 0 AS xuat, tk.so_luong AS dieu_chinh
                 FROM ton_kho tk
@@ -42,7 +42,7 @@ class BaoCaoTonKhoController extends Controller
             SELECT SP.ma, SP.ten, DVT.ten dvt, COALESCE(td.ton_dau, 0) as ton_dau, COALESCE(nx.nhap, 0) as nhap, COALESCE(nx.xuat, 0) as xuat, COALESCE(nx.dieu_chinh, 0) as dieu_chinh,
                      SUM(COALESCE(td.ton_dau, 0) + COALESCE(nx.nhap, 0) - COALESCE(nx.xuat, 0) + COALESCE(nx.dieu_chinh, 0)) ton_cuoi
             FROM san_pham SP
-            JOIN users u ON sp.created_by = u.id AND u.don_vi_id = ?
+            JOIN users u ON SP.created_by = u.id AND u.don_vi_id = ?
             LEFT JOIN don_vi_tinh DVT ON DVT.id = SP.don_vi_tinh_id
             LEFT JOIN ( SELECT NXT.id , SUM(COALESCE(NXT.NHAP, 0) - COALESCE(NXT.XUAT, 0) + COALESCE(NXT.dieu_chinh, 0)) as ton_dau
                         FROM NHAP_XUAT_TON NXT

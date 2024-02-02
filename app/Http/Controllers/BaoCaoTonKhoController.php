@@ -54,7 +54,7 @@ class BaoCaoTonKhoController extends Controller
                         WHERE NGAY >= ? AND NGAY <= ?
                         GROUP BY NXT.id
                         ) nx ON nx.id = SP.id
-            WHERE SP.ten LIKE CONCAT('%', ?, '%') OR SP.ma LIKE CONCAT('%', ?, '%')
+            WHERE SP.ten LIKE '%$search%' OR SP.ma LIKE '%$search%'
             GROUP BY SP.ma, SP.ten, DVT.ten, td.ton_dau, nx.nhap, nx.xuat, nx.dieu_chinh
         ";
 

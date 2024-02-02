@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class TonKho extends Model
 {
-    use HasFactory, HasCreatorAndUpdater, EditTimeZone;
+    use HasFactory, HasCreatorAndUpdater;
 
     protected $table = 'ton_kho';
 

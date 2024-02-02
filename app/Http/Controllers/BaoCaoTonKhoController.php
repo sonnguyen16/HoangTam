@@ -39,23 +39,23 @@ class BaoCaoTonKhoController extends Controller
                 FROM ton_kho tk
                 WHERE DELETED_AT IS NULL
             )
-            SELECT SP.ma, SP.ten, DVT.ten dvt,td.ton_dau, nx.nhap, nx.xuat, nx.dieu_chinh,
-                     SUM(td.ton_dau + nx.nhap - nx.xuat + nx.dieu_chinh) ton_cuoi
+            SELECT SP.ma, SP.ten, DVT.ten dvt, COALESCE(td.ton_dau, 0) as ton_dau, COALESCE(nx.nhap, 0) as nhap, COALESCE(nx.xuat, 0) as xuat, COALESCE(nx.dieu_chinh, 0) as dieu_chinh,
+                     SUM(COALESCE(td.ton_dau, 0) + COALESCE(nx.nhap, 0) - COALESCE(nx.xuat, 0) + COALESCE(nx.dieu_chinh, 0)) ton_cuoi
             FROM san_pham SP
             JOIN users u ON sp.created_by = u.id AND u.don_vi_id = ?
             LEFT JOIN don_vi_tinh DVT ON DVT.id = SP.don_vi_tinh_id
-            LEFT JOIN ( SELECT NXT.id , SUM(NXT.NHAP - NXT.XUAT + NXT.dieu_chinh) as ton_dau
+            LEFT JOIN ( SELECT NXT.id , SUM(COALESCE(NXT.NHAP, 0) - COALESCE(NXT.XUAT, 0) + COALESCE(NXT.dieu_chinh, 0)) as ton_dau
                         FROM NHAP_XUAT_TON NXT
                         WHERE NGAY < ?
                         GROUP BY NXT.id
                         ) td ON td.id = SP.id
-            LEFT JOIN ( SELECT NXT.id ,SUM(NXT.NHAP) nhap, SUM(NXT.XUAT) xuat, SUM(NXT.dieu_chinh) dieu_chinh
+            LEFT JOIN ( SELECT NXT.id ,SUM(COALESCE(NXT.NHAP, 0)) nhap, SUM(COALESCE(NXT.XUAT, 0)) xuat, SUM(COALESCE(NXT.dieu_chinh, 0)) dieu_chinh
                         FROM NHAP_XUAT_TON NXT
                         WHERE NGAY >= ? AND NGAY <= ?
                         GROUP BY NXT.id
                         ) nx ON nx.id = SP.id
-            WHERE SP.ten LIKE '%$search%' OR SP.ma LIKE '%$search%'
-            GROUP BY SP.ma, SP.ten, DVT.ten,td.ton_dau, nx.nhap, nx.xuat, nx.dieu_chinh
+            WHERE SP.ten LIKE CONCAT('%', ?, '%') OR SP.ma LIKE CONCAT('%', ?, '%')
+            GROUP BY SP.ma, SP.ten, DVT.ten, td.ton_dau, nx.nhap, nx.xuat, nx.dieu_chinh
         ";
 
         $san_pham_list = DB::select($query, [ $don_vi_id, $ngayBatDau, $ngayBatDau, $ngayKetThuc]);

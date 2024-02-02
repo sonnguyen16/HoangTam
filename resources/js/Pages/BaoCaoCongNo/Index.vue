@@ -17,7 +17,7 @@ const allData = computed( () => {
 })
 
 watch(search, (value) => {
-    router.visit(route('baocaocongno.index', {search: value}), {
+    router.visit(route('baocaocongno.index', {search: value, ngay_bat_dau: ngay_bat_dau.value, ngay_ket_thuc: ngay_ket_thuc.value}), {
         preserveState: true
     })
 })
@@ -28,7 +28,7 @@ watch(ngay_bat_dau, (value, oldValue) => {
         ngay_bat_dau.value = oldValue
         return
     }
-    router.visit(route('baocaocongno.khachhang', {ngay_bat_dau: value, ngay_ket_thuc: ngay_ket_thuc.value}), {
+    router.visit(route('baocaocongno.index', {ngay_bat_dau: value, ngay_ket_thuc: ngay_ket_thuc.value}), {
         preserveState: true
     })
 })
@@ -39,7 +39,7 @@ watch(ngay_ket_thuc, (value, oldValue) => {
         ngay_ket_thuc.value = oldValue
         return
     }
-    router.visit(route('baocaocongno.khachhang', {ngay_ket_thuc: value, ngay_bat_dau: ngay_bat_dau.value}), {
+    router.visit(route('baocaocongno.index', {ngay_ket_thuc: value, ngay_bat_dau: ngay_bat_dau.value}), {
         preserveState: true
     })
 })
@@ -56,8 +56,7 @@ function changePage(url) {
     <MainLayout>
         <div class="card shadow">
             <div class="card-body card-brc">
-                <p class="txt-color mb-0 font-weight-bold">Phiếu thu chi <i
-                    class="fa fa-angle-right mr-2 ml-2"></i> Báo cáo công nợ <i class="fa fa-angle-right mr-2 ml-2"></i> Công nợ nhà cung cấp</p>
+                <p class="txt-color mb-0 font-weight-bold">Báo cáo <i class="fa fa-angle-right mr-2 ml-2"></i> Công nợ nhà cung cấp</p>
             </div>
         </div>
 

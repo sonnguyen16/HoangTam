@@ -9,27 +9,37 @@ const props = defineProps({
 })
 
 const search = ref('');
-const tu_ngay = ref('');
-const den_ngay = ref('');
+const ngay_bat_dau = ref(null);
+const ngay_ket_thuc = ref(null);
 
 const allData = computed( () => {
     return props.san_pham_list
 })
 
 watch(search, (value) => {
-    router.visit(route('baocaotonkho.index', {search: value}), {
+    router.visit(route('baocaotonkho.index', {search: value, ngay_bat_dau: ngay_bat_dau.value, ngay_ket_thuc: ngay_ket_thuc.value}), {
         preserveState: true
     })
 })
 
-watch(tu_ngay, (value) => {
-    router.visit(route('baocaotonkho.index', {tu_ngay: value}), {
+watch(ngay_bat_dau, (value) => {
+    if(ngay_ket_thuc.value < value) {
+        alert('Ngày bắt đầu không được lớn hơn ngày kết thúc')
+        ngay_bat_dau.value = oldValue
+        return
+    }
+    router.visit(route('baocaotonkho.index', {ngay_bat_dau: value, ngay_ket_thuc: ngay_ket_thuc.value}), {
         preserveState: true
     })
 })
 
-watch(den_ngay, (value) => {
-    router.visit(route('baocaotonkho.index', {den_ngay: value, tu_ngay: tu_ngay}), {
+watch(ngay_ket_thuc, (value) => {
+    if(ngay_bat_dau.value > value) {
+        alert('Ngày kết thúc không được nhỏ hơn ngày bắt đầu')
+        ngay_ket_thuc.value = oldValue
+        return
+    }
+    router.visit(route('baocaotonkho.index', {ngay_ket_thuc: value, ngay_bat_dau: ngay_bat_dau.value}), {
         preserveState: true
     })
 })
@@ -46,8 +56,8 @@ function changePage(url) {
     <MainLayout>
         <div class="card shadow">
             <div class="card-body card-brc">
-                <p class="txt-color mb-0 font-weight-bold">Nhập xuất kho <i
-                    class="fa fa-angle-right mr-2 ml-2"></i> Xem tồn kho</p>
+                <p class="txt-color mb-0 font-weight-bold">Báo cáo <i
+                    class="fa fa-angle-right mr-2 ml-2"></i> Nhập xuất tồn</p>
             </div>
         </div>
 
@@ -62,13 +72,13 @@ function changePage(url) {
                                         <div class="col-lg-6">
                                             <div class="form-record">
                                                 <label>Từ ngày</label>
-                                                <input type="date" v-model="tu_ngay" class="form-control" name="tu_ngay">
+                                                <input type="date" v-model="ngay_bat_dau" class="form-control" name="tu_ngay">
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-record">
                                                 <label>Đến ngày</label>
-                                                <input type="date" v-model="den_ngay" class="form-control" name="den_ngay">
+                                                <input type="date" v-model="ngay_ket_thuc" class="form-control" name="den_ngay">
                                             </div>
                                         </div>
                                     </div>
@@ -106,19 +116,19 @@ function changePage(url) {
                     </tr>
                     </thead>
                     <tbody>
-                        <tr v-if="allData?.data.length === 0">
+                        <tr v-if="allData?.length === 0">
                             <td colspan="8" class="text-center">Không có dữ liệu</td>
                         </tr>
 
-                        <tr :key="kh.id" v-else v-for="kh in allData?.data">
+                        <tr :key="kh.id" v-else v-for="kh in allData">
                             <td>{{kh.ma}}</td>
                             <td>{{kh.ten}}</td>
-                            <td class="quantity">{{kh.don_vi_tinh?.ten}}</td>
-                            <td class="quantity">{{kh.ton_dau}}</td>
-                            <td class="quantity">{{kh.so_luong_nhap}}</td>
-                            <td class="quantity">{{kh.so_luong_xuat}}</td>
-                            <td class="quantity">{{kh.dieu_chinh_kho}}</td>
-                            <td class="quantity">{{kh.ton_cuoi}}</td>
+                            <td class="quantity">{{kh.dvt}}</td>
+                            <td class="quantity">{{kh.ton_dau || 0}}</td>
+                            <td class="quantity">{{kh.nhap || 0}}</td>
+                            <td class="quantity">{{kh.xuat || 0}}</td>
+                            <td class="quantity">{{kh.dieu_chinh || 0}}</td>
+                            <td class="quantity">{{kh.ton_cuoi || 0}}</td>
                         </tr>
                     </tbody>
                 </table>

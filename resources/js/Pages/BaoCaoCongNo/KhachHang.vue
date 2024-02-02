@@ -17,7 +17,7 @@ const allData = computed( () => {
 })
 
 watch(search, (value) => {
-    router.visit(route('baocaocongno.khachhang', {search: value}), {
+    router.visit(route('baocaocongno.khachhang', {search: value, ngay_bat_dau: ngay_bat_dau.value, ngay_ket_thuc: ngay_ket_thuc.value}), {
         preserveState: true
     })
 })
@@ -57,8 +57,8 @@ function changePage(url) {
     <MainLayout>
         <div class="card shadow">
             <div class="card-body card-brc">
-                <p class="txt-color mb-0 font-weight-bold">Phiếu thu chi <i
-                    class="fa fa-angle-right mr-2 ml-2"></i> Báo cáo công nợ khách hàng</p>
+                <p class="txt-color mb-0 font-weight-bold">Báo cáo  <i
+                    class="fa fa-angle-right mr-2 ml-2"></i>Công nợ khách hàng</p>
             </div>
         </div>
 

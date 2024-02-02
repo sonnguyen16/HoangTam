@@ -23,6 +23,7 @@ let hoa_don = ref({
     khach_hang: {},
     kho: {},
     ghi_chu: "",
+    ngay: "",
     du_an_id: "",
     chi_tiet_hoa_don: [],
 })
@@ -37,6 +38,7 @@ function openModal() {
         kho: {},
         ghi_chu: "",
         du_an_id: "",
+        ngay: "",
         chi_tiet_hoa_don: [],
     }
     $('#hoadonmodal').modal('show');
@@ -66,6 +68,7 @@ function editModal(kh) {
         kho: kh.kho,
         ghi_chu: kh.ghi_chu,
         du_an_id: kh.du_an_id,
+        ngay: kh.ngay,
         chi_tiet_hoa_don: kh.chi_tiet_hoa_don,
     };
     $('#hoadonmodal').modal('show');

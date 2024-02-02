@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Traits\EditTimeZone;
 use App\Traits\HasCreatorAndUpdater;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class TonKho extends Model
 {
-    use HasFactory, HasCreatorAndUpdater;
+    use HasFactory, HasCreatorAndUpdater, EditTimeZone;
 
     protected $table = 'ton_kho';
 

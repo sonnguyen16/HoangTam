@@ -17,6 +17,7 @@ class BaoCaoCongNoController extends Controller
         $ngayBatDau = !$request->input('ngay_bat_dau') ? '2024-1-1' : $request->input('ngay_bat_dau');
         $ngayKetThuc = !$request->input('ngay_ket_thuc') ? '2025-1-1' : $request->input('ngay_ket_thuc');
         $search = !$request->input('search') ? '' : $request->input('search');
+        $don_vi_id = Auth::user()->don_vi_id;
 
         $query = "
             WITH Chi AS (
@@ -27,9 +28,10 @@ class BaoCaoCongNoController extends Controller
                 GROUP BY ncc.id
             )
             SELECT ncc.id, ncc.ten, ncc.dien_thoai, ncc.dia_chi, c.chi,
-                COALESCE(SUM(CASE WHEN hd.ngay < ? THEN cthd.so_luong ELSE 0 END), 0) AS ton_dau,
-                COALESCE(SUM(CASE WHEN hd.ngay <= ? THEN cthd.so_luong ELSE 0 END), 0) AS ton_cuoi
+                ncc.ton_dau + COALESCE(SUM(CASE WHEN hd.ngay < ? THEN cthd.so_luong ELSE 0 END), 0) AS ton_dau,
+                ncc.ton_dau + COALESCE(SUM(CASE WHEN hd.ngay <= ? THEN cthd.so_luong ELSE 0 END), 0) AS ton_cuoi
             FROM nha_cung_cap ncc
+            JOIN users u ON ncc.created_by = u.id AND u.don_vi_id = ?
             LEFT JOIN hoa_don hd ON ncc.id = hd.nha_cung_cap_id
             LEFT JOIN chi_tiet_hoa_don cthd ON hd.id = cthd.hoa_don_id
             LEFT JOIN Chi c ON ncc.id = c.id
@@ -37,7 +39,7 @@ class BaoCaoCongNoController extends Controller
             GROUP BY ncc.id, ncc.ten, ncc.dien_thoai, ncc.dia_chi, c.chi
         ";
 
-        $nha_cung_cap_list = DB::select($query, [$ngayBatDau, $ngayKetThuc, $ngayBatDau, $ngayKetThuc]);
+        $nha_cung_cap_list = DB::select($query, [$ngayBatDau, $ngayKetThuc, $ngayBatDau, $ngayKetThuc, $don_vi_id]);
 
         return Inertia::render('BaoCaoCongNo/Index', compact('nha_cung_cap_list'));
     }
@@ -46,6 +48,7 @@ class BaoCaoCongNoController extends Controller
         $ngayBatDau = !$request->input('ngay_bat_dau') ? '2024-1-1' : $request->input('ngay_bat_dau');
         $ngayKetThuc = !$request->input('ngay_ket_thuc') ? '2025-1-1' : $request->input('ngay_ket_thuc');
         $search = !$request->input('search') ? '' : $request->input('search');
+        $don_vi_id = Auth::user()->don_vi_id;
 
         $query = "
             WITH Thu AS (
@@ -56,9 +59,10 @@ class BaoCaoCongNoController extends Controller
                 GROUP BY kh.id
             )
             SELECT kh.id, kh.ten, kh.dien_thoai, kh.dia_chi, t.thu,
-                COALESCE(SUM(CASE WHEN hd.ngay < ? THEN cthd.so_luong ELSE 0 END), 0) AS ton_dau,
-                COALESCE(SUM(CASE WHEN hd.ngay <= ? THEN cthd.so_luong ELSE 0 END), 0) AS ton_cuoi
+                kh.ton_dau + COALESCE(SUM(CASE WHEN hd.ngay < ? THEN cthd.so_luong ELSE 0 END), 0) AS ton_dau,
+                kh.ton_dau + COALESCE(SUM(CASE WHEN hd.ngay <= ? THEN cthd.so_luong ELSE 0 END), 0) AS ton_cuoi
             FROM khach_hang kh
+            JOIN users u ON kh.created_by = u.id AND u.don_vi_id = ?
             LEFT JOIN hoa_don hd ON kh.id = hd.khach_hang_id
             LEFT JOIN chi_tiet_hoa_don cthd ON hd.id = cthd.hoa_don_id
             LEFT JOIN Thu t ON kh.id = t.id
@@ -66,7 +70,7 @@ class BaoCaoCongNoController extends Controller
             GROUP BY kh.id, kh.ten, kh.dien_thoai, kh.dia_chi, t.thu
         ";
 
-        $khach_hang_list = DB::select($query, [$ngayBatDau, $ngayKetThuc, $ngayBatDau, $ngayKetThuc]);
+        $khach_hang_list = DB::select($query, [$ngayBatDau, $ngayKetThuc, $ngayBatDau, $ngayKetThuc, $don_vi_id]);
 
         return Inertia::render('BaoCaoCongNo/KhachHang', compact('khach_hang_list'));
     }

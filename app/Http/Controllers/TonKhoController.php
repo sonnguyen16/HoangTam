@@ -21,8 +21,16 @@ class TonKhoController extends Controller
             ->whereHas('created_by.don_vi', function ($query) {
             $query->where('id', Auth::user()->don_vi_id);
         })->orderBy('id', 'desc');
-        $kho_list = Kho::query()->whereNull('deleted_at')->get();
-        $san_pham_list = SanPham::query()->whereNull('deleted_at')->get();
+        $kho_list = Kho::query()->whereNull('deleted_at')
+            ->whereHas('created_by.don_vi', function ($query) {
+                $query->where('id', Auth::user()->don_vi_id);
+            })->orderBy('id', 'desc')
+            ->get();
+        $san_pham_list = SanPham::query()->whereNull('deleted_at')
+            ->whereHas('created_by.don_vi', function ($query) {
+                $query->where('id', Auth::user()->don_vi_id);
+            })->orderBy('id', 'desc')
+            ->get();
 
 
         if ($request->filled('search')) {

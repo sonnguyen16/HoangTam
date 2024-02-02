@@ -55,10 +55,6 @@ const user = computed(() => {
             <NavLink title="Nhập xuất kho" />
             <ul class="nav nav-treeview">
               <NavItem
-                :href="route('baocaotonkho.index')"
-                title="Xem tồn kho"
-              />
-              <NavItem
                 :href="route('tonkho.index')"
                 title="Điều chỉnh tồn kho"
               />
@@ -105,6 +101,10 @@ const user = computed(() => {
           <li class="nav-item menu-open">
             <NavLink title="Báo cáo" />
             <ul class="nav nav-treeview">
+                <NavItem
+                    :href="route('baocaotonkho.index')"
+                    title="Nhập xuất tồn"
+                />
               <NavItem
                 :href="route('baocaocongno.index')"
                 title="Công nợ nhà cung cấp"

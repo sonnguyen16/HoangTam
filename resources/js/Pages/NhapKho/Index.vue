@@ -18,6 +18,7 @@ const props = defineProps({
 let hoa_don = ref({
     id: "",
     ma: "",
+    ngay: "",
     nha_cung_cap: {},
     kho: {},
     ghi_chu: "",
@@ -31,6 +32,7 @@ function openModal() {
     hoa_don.value = {
         id: "",
         ma: "",
+        ngay: "",
         nha_cung_cap: {},
         kho: {},
         ghi_chu: "",

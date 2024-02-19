@@ -24,19 +24,33 @@ class BaoCaoCongNoController extends Controller
                 SELECT ncc.id, COALESCE(SUM(ptc.so_tien), 0) AS chi
                 FROM nha_cung_cap ncc
                 LEFT JOIN phieu_thu_chi ptc ON ncc.id = ptc.nha_cung_cap_id
-                WHERE (ptc.ngay BETWEEN ? AND ?)
+                WHERE ptc.ngay BETWEEN ? AND ?
                 GROUP BY ncc.id
+            ),
+            TonDau AS (
+                SELECT ncc.id,
+                       ncc.ton_dau + COALESCE(SUM(CASE WHEN hd.ngay < ? THEN cthd.so_luong ELSE 0 END), 0) AS ton_dau
+                FROM nha_cung_cap ncc
+                LEFT JOIN hoa_don hd ON ncc.id = hd.nha_cung_cap_id
+                LEFT JOIN chi_tiet_hoa_don cthd ON hd.id = cthd.hoa_don_id
+                GROUP BY ncc.id, ncc.ton_dau
+            ),
+            TonCuoi AS (
+                SELECT ncc.id,
+                       ncc.ton_dau + COALESCE(SUM(CASE WHEN hd.ngay <= ? THEN cthd.so_luong ELSE 0 END), 0) AS ton_cuoi
+                FROM nha_cung_cap ncc
+                LEFT JOIN hoa_don hd ON ncc.id = hd.nha_cung_cap_id
+                LEFT JOIN chi_tiet_hoa_don cthd ON hd.id = cthd.hoa_don_id
+                GROUP BY ncc.id, ncc.ton_dau
             )
-            SELECT ncc.id, ncc.ten, ncc.dien_thoai, ncc.dia_chi, c.chi,
-                ncc.ton_dau + COALESCE(SUM(CASE WHEN hd.ngay < ? THEN cthd.so_luong ELSE 0 END), 0) AS ton_dau,
-                ncc.ton_dau + COALESCE(SUM(CASE WHEN hd.ngay <= ? THEN cthd.so_luong ELSE 0 END), 0) AS ton_cuoi
+            SELECT ncc.id, ncc.ten, ncc.dien_thoai, ncc.dia_chi, c.chi, td.ton_dau, tc.ton_cuoi
             FROM nha_cung_cap ncc
             JOIN users u ON ncc.created_by = u.id AND u.don_vi_id = ?
-            LEFT JOIN hoa_don hd ON ncc.id = hd.nha_cung_cap_id
-            LEFT JOIN chi_tiet_hoa_don cthd ON hd.id = cthd.hoa_don_id
             LEFT JOIN Chi c ON ncc.id = c.id
-            WHERE ncc.ten LIKE '%$search%' OR ncc.dien_thoai LIKE '%$search%' OR ncc.dia_chi LIKE '%$search%'
-            GROUP BY ncc.id, ncc.ten, ncc.dien_thoai, ncc.dia_chi, c.chi
+            LEFT JOIN TonDau td ON ncc.id = td.id
+            LEFT JOIN TonCuoi tc ON ncc.id = tc.id
+            WHERE ncc.ten LIKE '%%' OR ncc.dien_thoai LIKE '%%' OR ncc.dia_chi LIKE '%%'
+            GROUP BY ncc.id, ncc.ten, ncc.dien_thoai, ncc.dia_chi, c.chi, td.ton_dau, tc.ton_cuoi
         ";
 
         $nha_cung_cap_list = DB::select($query, [$ngayBatDau, $ngayKetThuc, $ngayBatDau, $ngayKetThuc, $don_vi_id]);

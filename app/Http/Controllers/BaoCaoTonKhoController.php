@@ -56,6 +56,7 @@ class BaoCaoTonKhoController extends Controller
                         ) nx ON nx.id = SP.id
             WHERE SP.ten LIKE '%$search%' OR SP.ma LIKE '%$search%'
             GROUP BY SP.ma, SP.ten, DVT.ten, td.ton_dau, nx.nhap, nx.xuat, nx.dieu_chinh
+            HAVING COALESCE(td.ton_dau, 0) + COALESCE(nx.nhap, 0) + COALESCE(nx.xuat, 0) + COALESCE(nx.dieu_chinh, 0) != 0
         ";
 
         $san_pham_list = DB::select($query, [ $don_vi_id, $ngayBatDau, $ngayBatDau, $ngayKetThuc]);

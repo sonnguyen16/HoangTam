@@ -98,7 +98,7 @@ class BaoCaoCongNoController extends Controller
             SELECT kh.id, kh.ten, kh.dien_thoai, kh.dia_chi, t.thu, td.ton_dau, tc.ton_cuoi
             FROM khach_hang kh
             JOIN users u ON kh.created_by = u.id AND u.don_vi_id = ?
-            LEFT JOIN Thu t ON kh.id = c.id
+            LEFT JOIN Thu t ON kh.id = t.id
             LEFT JOIN TonDau td ON kh.id = td.id
             LEFT JOIN TonCuoi tc ON kh.id = tc.id
             WHERE kh.ten LIKE '%$search%' OR kh.dien_thoai LIKE '%%' OR kh.dia_chi LIKE '%$search%'

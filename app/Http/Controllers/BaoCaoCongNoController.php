@@ -50,7 +50,7 @@ class BaoCaoCongNoController extends Controller
             LEFT JOIN TonDau td ON ncc.id = td.id
             LEFT JOIN TonCuoi tc ON ncc.id = tc.id
             WHERE ncc.ten LIKE '%%' OR ncc.dien_thoai LIKE '%%' OR ncc.dia_chi LIKE '%%'
-            WHERE ncc.DELETED_AT IS NULL
+            AND ncc.DELETED_AT IS NULL
             GROUP BY ncc.id, ncc.ten, ncc.dien_thoai, ncc.dia_chi, c.chi, td.ton_dau, tc.ton_cuoi
             HAVING
                 SUM(
@@ -89,7 +89,7 @@ class BaoCaoCongNoController extends Controller
         LEFT JOIN Thu t ON kh.id = t.id
         LEFT JOIN phieu_thu_chi ptc ON kh.id = ptc.khach_hang_id
         WHERE kh.ten LIKE '%$search%' OR kh.dien_thoai LIKE '%$search%' OR kh.dia_chi LIKE '%$search%'
-        WHERE kh.DELETED_AT IS NULL
+        AND kh.DELETED_AT IS NULL
         GROUP BY kh.id, kh.ten, kh.dien_thoai, kh.dia_chi, t.thu, kh.ton_dau
         HAVING
             SUM(

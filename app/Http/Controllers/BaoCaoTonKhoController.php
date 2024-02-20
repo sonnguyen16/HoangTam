@@ -56,7 +56,7 @@ class BaoCaoTonKhoController extends Controller
                         WHERE NGAY >= ? AND NGAY <= ?
                         GROUP BY NXT.id
                         ) nx ON nx.id = SP.id
-            WHERE SP.ten LIKE '%$search%' OR SP.ma LIKE '%$search%'
+            WHERE (SP.ten LIKE '%$search%' OR SP.ma LIKE '%$search%')
             AND SP.DELETED_AT IS NULL
             GROUP BY SP.ma, SP.ten, DVT.ten, td.ton_dau, nx.nhap, nx.xuat, nx.dieu_chinh
             HAVING COALESCE(td.ton_dau, 0) + COALESCE(nx.nhap, 0) + COALESCE(nx.xuat, 0) + COALESCE(nx.dieu_chinh, 0) != 0

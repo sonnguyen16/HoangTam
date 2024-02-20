@@ -43,12 +43,12 @@ class HoaDon extends Model
 
     public function tong_tien_nhap()
     {
-        return $this->where('loai', 0)->sum('tong_tien');
+        return $this->where('loai', 0)->whereNull('deleted_at')->sum('tong_tien');
     }
 
     public function tong_tien_xuat()
     {
-        return $this->where('loai', 1)->sum('tong_tien');
+        return $this->where('loai', 1)->whereNull('deleted_at')->sum('tong_tien');
     }
 
     public function created_by()

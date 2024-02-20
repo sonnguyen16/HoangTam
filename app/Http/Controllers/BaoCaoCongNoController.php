@@ -24,6 +24,7 @@ class BaoCaoCongNoController extends Controller
                 SELECT ncc.id, COALESCE(SUM(ptc.so_tien), 0) AS chi
                 FROM nha_cung_cap ncc
                 LEFT JOIN phieu_thu_chi ptc ON ncc.id = ptc.nha_cung_cap_id
+                AND ptc.DELETED_AT IS NULL
                 WHERE ptc.ngay BETWEEN ? AND ?
                 GROUP BY ncc.id
             ),
@@ -32,6 +33,7 @@ class BaoCaoCongNoController extends Controller
                        ncc.ton_dau + COALESCE(SUM(CASE WHEN hd.ngay < ? THEN cthd.so_luong ELSE 0 END), 0) AS ton_dau
                 FROM nha_cung_cap ncc
                 LEFT JOIN hoa_don hd ON ncc.id = hd.nha_cung_cap_id
+                AND hd.DELETED_AT IS NULL
                 LEFT JOIN chi_tiet_hoa_don cthd ON hd.id = cthd.hoa_don_id
                 GROUP BY ncc.id, ncc.ton_dau
             ),
@@ -40,6 +42,7 @@ class BaoCaoCongNoController extends Controller
                        ncc.ton_dau + COALESCE(SUM(CASE WHEN hd.ngay <= ? THEN cthd.so_luong ELSE 0 END), 0) AS ton_cuoi
                 FROM nha_cung_cap ncc
                 LEFT JOIN hoa_don hd ON ncc.id = hd.nha_cung_cap_id
+                AND hd.DELETED_AT IS NULL
                 LEFT JOIN chi_tiet_hoa_don cthd ON hd.id = cthd.hoa_don_id
                 GROUP BY ncc.id, ncc.ton_dau
             )
@@ -76,6 +79,7 @@ class BaoCaoCongNoController extends Controller
                 SELECT kh.id, COALESCE(SUM(ptc.so_tien), 0) AS thu
                 FROM khach_hang kh
                 LEFT JOIN phieu_thu_chi ptc ON kh.id = ptc.khach_hang_id
+                AND ptc.DELETED_AT IS NULL
                 WHERE ptc.ngay BETWEEN ? AND ?
                 GROUP BY kh.id
             ),
@@ -84,6 +88,7 @@ class BaoCaoCongNoController extends Controller
                        kh.ton_dau + COALESCE(SUM(CASE WHEN hd.ngay < ? THEN cthd.so_luong ELSE 0 END), 0) AS ton_dau
                 FROM khach_hang kh
                 LEFT JOIN hoa_don hd ON kh.id = hd.khach_hang_id
+                AND hd.DELETED_AT IS NULL
                 LEFT JOIN chi_tiet_hoa_don cthd ON hd.id = cthd.hoa_don_id
                 GROUP BY kh.id, kh.ton_dau
             ),
@@ -92,6 +97,7 @@ class BaoCaoCongNoController extends Controller
                        kh.ton_dau + COALESCE(SUM(CASE WHEN hd.ngay <= ? THEN cthd.so_luong ELSE 0 END), 0) AS ton_cuoi
                 FROM khach_hang kh
                 LEFT JOIN hoa_don hd ON kh.id = hd.khach_hang_id
+                AND hd.DELETED_AT IS NULL
                 LEFT JOIN chi_tiet_hoa_don cthd ON hd.id = cthd.hoa_don_id
                 GROUP BY kh.id, kh.ton_dau
             )

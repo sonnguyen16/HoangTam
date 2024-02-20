@@ -147,6 +147,20 @@ function formatDateForTemplate(date) {
                             </div>
                         </div>
 
+                        <div class="row">
+                            <div class="col-6 font-in">
+                                <b v-if="hoa_don.data.loai === 0"  class="font-in">Nợ cũ:</b><i>{{ hoa_don.data.no_cu_ncc.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }} đồng</i>
+                                <b v-if="hoa_don.data.loai === 1"  class="font-in">Nợ cũ:</b><i>{{ hoa_don.data.no_cu_kh.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }} đồng</i>
+                            </div>
+
+                            <div class="col-6 font-in">
+                                <b v-if="hoa_don.data.loai === 0"  class="font-in">Nợ mới:</b><i>{{ hoa_don.data.no_moi_ncc.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }} đồng</i>
+                                <b v-if="hoa_don.data.loai === 1"  class="font-in">Nợ mới:</b><i>{{ hoa_don.data.no_moi_kh.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }} đồng</i>
+                            </div>
+                        </div>
+
+
+
                         <!-- <div class="float-right">
                             <p class="text-md font-italic">{{ formatDateForTemplate(new Date()) }}</p>
                         </div> -->

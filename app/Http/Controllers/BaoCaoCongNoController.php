@@ -24,6 +24,7 @@ class BaoCaoCongNoController extends Controller
                 SELECT ncc.id, COALESCE(SUM(ptc.so_tien), 0) AS chi
                 FROM nha_cung_cap ncc
                 LEFT JOIN phieu_thu_chi ptc ON ncc.id = ptc.nha_cung_cap_id
+                AND ncc.DELETED_AT IS NULL
                 WHERE ptc.ngay BETWEEN ? AND ?
                 AND ptc.DELETED_AT IS NULL
                 GROUP BY ncc.id
@@ -33,6 +34,7 @@ class BaoCaoCongNoController extends Controller
                        ncc.ton_dau + COALESCE(SUM(CASE WHEN hd.ngay < ? THEN cthd.so_luong ELSE 0 END), 0) AS ton_dau
                 FROM nha_cung_cap ncc
                 LEFT JOIN hoa_don hd ON ncc.id = hd.nha_cung_cap_id
+                AND ncc.DELETED_AT IS NULL
                 LEFT JOIN chi_tiet_hoa_don cthd ON hd.id = cthd.hoa_don_id
                 AND hd.DELETED_AT IS NULL
                 GROUP BY ncc.id, ncc.ton_dau
@@ -42,6 +44,7 @@ class BaoCaoCongNoController extends Controller
                        ncc.ton_dau + COALESCE(SUM(CASE WHEN hd.ngay <= ? THEN cthd.so_luong ELSE 0 END), 0) AS ton_cuoi
                 FROM nha_cung_cap ncc
                 LEFT JOIN hoa_don hd ON ncc.id = hd.nha_cung_cap_id
+                AND ncc.DELETED_AT IS NULL
                 LEFT JOIN chi_tiet_hoa_don cthd ON hd.id = cthd.hoa_don_id
                 AND hd.DELETED_AT IS NULL
                 GROUP BY ncc.id, ncc.ton_dau
@@ -53,7 +56,6 @@ class BaoCaoCongNoController extends Controller
             LEFT JOIN TonDau td ON ncc.id = td.id
             LEFT JOIN TonCuoi tc ON ncc.id = tc.id
             WHERE ncc.ten LIKE '%$search%' OR ncc.dien_thoai LIKE '%%' OR ncc.dia_chi LIKE '%$search%'
-            AND ncc.DELETED_AT IS NULL
             GROUP BY ncc.id, ncc.ten, ncc.dien_thoai, ncc.dia_chi, c.chi, td.ton_dau, tc.ton_cuoi
             HAVING
                 SUM(
@@ -79,7 +81,9 @@ class BaoCaoCongNoController extends Controller
                 SELECT kh.id, COALESCE(SUM(ptc.so_tien), 0) AS thu
                 FROM khach_hang kh
                 LEFT JOIN phieu_thu_chi ptc ON kh.id = ptc.khach_hang_id
+                AND kh.DELETED_AT IS NULL
                 WHERE ptc.ngay BETWEEN ? AND ?
+                AND ptc.DELETED_AT IS NULL
                 GROUP BY kh.id
             ),
             TonDau AS (
@@ -87,7 +91,9 @@ class BaoCaoCongNoController extends Controller
                        kh.ton_dau + COALESCE(SUM(CASE WHEN hd.ngay < ? THEN cthd.so_luong ELSE 0 END), 0) AS ton_dau
                 FROM khach_hang kh
                 LEFT JOIN hoa_don hd ON kh.id = hd.khach_hang_id
+                AND kh.DELETED_AT IS NULL
                 LEFT JOIN chi_tiet_hoa_don cthd ON hd.id = cthd.hoa_don_id
+                AND hd.DELETED_AT IS NULL
                 GROUP BY kh.id, kh.ton_dau
             ),
             TonCuoi AS (
@@ -95,7 +101,9 @@ class BaoCaoCongNoController extends Controller
                        kh.ton_dau + COALESCE(SUM(CASE WHEN hd.ngay <= ? THEN cthd.so_luong ELSE 0 END), 0) AS ton_cuoi
                 FROM khach_hang kh
                 LEFT JOIN hoa_don hd ON kh.id = hd.khach_hang_id
+                AND kh.DELETED_AT IS NULL
                 LEFT JOIN chi_tiet_hoa_don cthd ON hd.id = cthd.hoa_don_id
+                AND hd.DELETED_AT IS NULL
                 GROUP BY kh.id, kh.ton_dau
             )
             SELECT kh.id, kh.ten, kh.dien_thoai, kh.dia_chi, t.thu, td.ton_dau, tc.ton_cuoi
@@ -105,7 +113,6 @@ class BaoCaoCongNoController extends Controller
             LEFT JOIN TonDau td ON kh.id = td.id
             LEFT JOIN TonCuoi tc ON kh.id = tc.id
             WHERE kh.ten LIKE '%$search%' OR kh.dien_thoai LIKE '%%' OR kh.dia_chi LIKE '%$search%'
-            AND kh.DELETED_AT IS NULL
             GROUP BY kh.id, kh.ten, kh.dien_thoai, kh.dia_chi, t.thu, td.ton_dau, tc.ton_cuoi
             HAVING
                 SUM(

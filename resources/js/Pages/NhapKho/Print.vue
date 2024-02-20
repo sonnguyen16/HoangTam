@@ -148,10 +148,10 @@ function formatDateForTemplate(date) {
                             <div class="col-4 font in"></div>
                             <div class="col-2 font-in">
                                 <p v-if="hoa_don.data.loai === 0"  ><b class="font-in">
-                                    Nợ cũ: </b>{{ hoa_don.data.no_cu_ncc.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}
+                                    Nợ cũ: </b>{{ hoa_don.data.no_cu_ncc < 0 ? 0 : hoa_don.data.no_cu_ncc.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}
                                 </p>
                                 <p v-if="hoa_don.data.loai === 1"  ><b class="font-in">
-                                    Nợ cũ: </b>{{ hoa_don.data.no_cu_kh.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}
+                                    Nợ cũ: </b>{{ hoa_don.data.no_cu_kh < 0 ? 0 : hoa_don.data.no_cu_kh.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}
                                 </p>
                                 <p v-if="hoa_don.data.loai === 0"  ><b class="font-in">
                                     Tổng công nợ: </b>{{ hoa_don.data.no_moi_ncc.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}

@@ -149,13 +149,24 @@ function formatDateForTemplate(date) {
 
                         <div class="row">
                             <div class="col-6 font-in">
-                                <b v-if="hoa_don.data.loai === 0"  class="font-in">Nợ cũ:</b><i>{{ hoa_don.data.no_cu_ncc.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }} đồng</i>
-                                <b v-if="hoa_don.data.loai === 1"  class="font-in">Nợ cũ:</b><i>{{ hoa_don.data.no_cu_kh.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }} đồng</i>
+                                <p v-if="hoa_don.data.loai === 0"  ><b class="font-in">
+                                    Nợ cũ: </b>{{ hoa_don.data.no_cu_ncc.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}
+                                    ( <i>{{ numberToWords(hoa_don.data.no_cu_ncc) }} đồng</i> )
+                                </p>
+                                <p v-if="hoa_don.data.loai === 1"  ><b class="font-in">
+                                    Nợ cũ: </b>{{ hoa_don.data.no_cu_kh.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}
+                                    ( <i>{{ numberToWords(hoa_don.data.no_cu_kh) }} đồng</i> )
+                                </p>
                             </div>
-
                             <div class="col-6 font-in">
-                                <b v-if="hoa_don.data.loai === 0"  class="font-in">Nợ mới:</b><i>{{ hoa_don.data.no_moi_ncc.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }} đồng</i>
-                                <b v-if="hoa_don.data.loai === 1"  class="font-in">Nợ mới:</b><i>{{ hoa_don.data.no_moi_kh.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }} đồng</i>
+                                <p v-if="hoa_don.data.loai === 0"  ><b class="font-in">
+                                    Nợ mới: </b>{{ hoa_don.data.no_moi_ncc.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}
+                                    ( <i>{{ numberToWords(hoa_don.data.no_moi_ncc) }} đồng</i> )
+                                </p>
+                                <p v-if="hoa_don.data.loai === 1"  ><b class="font-in">
+                                    Nợ mới: </b>{{ hoa_don.data.no_moi_kh.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}
+                                    ( <i>{{ numberToWords(hoa_don.data.no_moi_kh) }} đồng</i> )
+                                </p>
                             </div>
                         </div>
 

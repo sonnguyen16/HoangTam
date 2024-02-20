@@ -21,21 +21,24 @@ class KhachHang extends Model
         return $this->hasMany(PhieuThuChi::class, 'khach_hang_id')
             ->where('loai', 0)
             ->whereNull('deleted_at')
-            ->where('trang_thai', 1)
-            ->sum('so_tien');
+            ->where('trang_thai', 1);
+
     }
 
     public function cong_no()
     {
         return $this->hasMany(HoaDon::class, 'khach_hang_id')
             ->whereNull('deleted_at')
-            ->where('loai', 1)
-            ->sum('tong_tien');
+            ->where('loai', 1);
+
     }
 
     public function no_moi()
     {
-        return $this->cong_no - $this->thu;
+        $thuTotal = $this->thu()->sum('so_tien');
+        $congNoTotal = $this->cong_no()->sum('tong_tien');
+        return $congNoTotal - $thuTotal;
     }
+
 
 }

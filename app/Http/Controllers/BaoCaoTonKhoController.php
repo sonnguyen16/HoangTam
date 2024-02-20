@@ -29,11 +29,13 @@ class BaoCaoTonKhoController extends Controller
                 FROM hoa_don hd
                 LEFT JOIN chi_tiet_hoa_don cthd ON cthd.hoa_don_id = hd.id
                 WHERE LOAI = 0
+                AND hd.DELETED_AT IS NULL
                 UNION ALL
                 SELECT cthd.san_pham_id, hd.ngay , 0 AS nhap, cthd.so_luong AS xuat, 0 AS dieu_chinh
                 FROM hoa_don hd
                 LEFT JOIN chi_tiet_hoa_don cthd ON cthd.hoa_don_id = hd.id
                 WHERE LOAI = 1
+                AND hd.DELETED_AT IS NULL
                 UNION ALL
                 SELECT tk.san_pham_id, DATE_SUB(tk.updated_at,INTERVAL 7 HOUR) AS ngay, 0 as nhap, 0 AS xuat, tk.so_luong AS dieu_chinh
                 FROM ton_kho tk

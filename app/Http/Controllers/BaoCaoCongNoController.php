@@ -25,6 +25,7 @@ class BaoCaoCongNoController extends Controller
                 FROM nha_cung_cap ncc
                 LEFT JOIN phieu_thu_chi ptc ON ncc.id = ptc.nha_cung_cap_id
                 WHERE ptc.ngay BETWEEN ? AND ?
+                AND ptc.DELETED_AT IS NULL
                 GROUP BY ncc.id
             ),
             TonDau AS (
@@ -33,6 +34,7 @@ class BaoCaoCongNoController extends Controller
                 FROM nha_cung_cap ncc
                 LEFT JOIN hoa_don hd ON ncc.id = hd.nha_cung_cap_id
                 LEFT JOIN chi_tiet_hoa_don cthd ON hd.id = cthd.hoa_don_id
+                AND hd.DELETED_AT IS NULL
                 GROUP BY ncc.id, ncc.ton_dau
             ),
             TonCuoi AS (
@@ -41,6 +43,7 @@ class BaoCaoCongNoController extends Controller
                 FROM nha_cung_cap ncc
                 LEFT JOIN hoa_don hd ON ncc.id = hd.nha_cung_cap_id
                 LEFT JOIN chi_tiet_hoa_don cthd ON hd.id = cthd.hoa_don_id
+                AND hd.DELETED_AT IS NULL
                 GROUP BY ncc.id, ncc.ton_dau
             )
             SELECT ncc.id, ncc.ten, ncc.dien_thoai, ncc.dia_chi, c.chi, td.ton_dau, tc.ton_cuoi

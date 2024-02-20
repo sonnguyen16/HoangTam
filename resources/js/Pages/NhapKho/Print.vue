@@ -142,36 +142,25 @@ function formatDateForTemplate(date) {
                         </table>
 
                         <div class="row">
-                            <div class="col-12 font-in">
+                            <div class="col-6 font-in">
                                 <b  class="font-in">Bằng chữ:</b><i>{{ numberToWords(hoa_don.data.tong_tien) }} đồng</i>
                             </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-6 font-in">
+                            <div class="col-4 font in"></div>
+                            <div class="col-2 font-in">
                                 <p v-if="hoa_don.data.loai === 0"  ><b class="font-in">
                                     Nợ cũ: </b>{{ hoa_don.data.no_cu_ncc.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}
-                                    ( <i>{{ numberToWords(hoa_don.data.no_cu_ncc) }} đồng</i> )
                                 </p>
                                 <p v-if="hoa_don.data.loai === 1"  ><b class="font-in">
                                     Nợ cũ: </b>{{ hoa_don.data.no_cu_kh.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}
-                                    ( <i>{{ numberToWords(hoa_don.data.no_cu_kh) }} đồng</i> )
                                 </p>
-                            </div>
-                            <div class="col-6 font-in">
                                 <p v-if="hoa_don.data.loai === 0"  ><b class="font-in">
-                                    Nợ mới: </b>{{ hoa_don.data.no_moi_ncc.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}
-                                    ( <i>{{ numberToWords(hoa_don.data.no_moi_ncc) }} đồng</i> )
+                                    Tổng công nợ: </b>{{ hoa_don.data.no_moi_ncc.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}
                                 </p>
                                 <p v-if="hoa_don.data.loai === 1"  ><b class="font-in">
-                                    Nợ mới: </b>{{ hoa_don.data.no_moi_kh.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}
-                                    ( <i>{{ numberToWords(hoa_don.data.no_moi_kh) }} đồng</i> )
+                                    Tổng công nợ: </b>{{ hoa_don.data.no_moi_kh.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}
                                 </p>
                             </div>
                         </div>
-
-
-
                         <!-- <div class="float-right">
                             <p class="text-md font-italic">{{ formatDateForTemplate(new Date()) }}</p>
                         </div> -->
@@ -207,5 +196,8 @@ function formatDateForTemplate(date) {
 }
 .font-in {
     font-size: 14px;;
+}
+p{
+    margin-bottom: 5px;
 }
 </style>

@@ -24,6 +24,7 @@ class SanPhamResource extends JsonResource
             'loai_san_pham' => $this->loai_san_pham()->first(),
             'mo_ta' => $this->mo_ta,
             'ton_dau' => $this->ton_dau,
+            'canh_bao' => $this->canh_bao,
             'dinh_muc' => DinhMucResource::collection($this->dinh_muc()->get()),
         ];
     }

@@ -30,6 +30,7 @@ class SanPhamRequest extends FormRequest
             'gia_nhap' => 'required|numeric|min:0',
             'don_vi_tinh_id' => 'required|numeric',
             'ton_dau' => 'numeric|min:0',
+            'canh_bao' => 'numeric|min:0',
             'loai_san_pham_id' => 'required|numeric',
             'mo_ta' => '',
         ];
@@ -62,6 +63,9 @@ class SanPhamRequest extends FormRequest
             'don_vi_tinh_id.numeric' => 'Đơn vị tính phải là số',
             'ton_dau.numeric' => 'Tồn đầu phải là số',
             'ton_dau.min' => 'Tồn đầu phải lớn hơn hoặc bằng 0',
+            'canh_bao.numeric' => 'Cảnh báo phải là số',
+            'canh_bao.min' => 'Cảnh báo phải lớn hơn hoặc bằng 0',
+            'canh_bao.required' => 'Cảnh báo không được để trống',
             'loai_san_pham_id.required' => 'Loại sản phẩm không được để trống',
             'loai_san_pham_id.numeric' => 'Loại sản phẩm phải là số',
             // 'mo_ta.required' => 'Mô tả không được để trống',

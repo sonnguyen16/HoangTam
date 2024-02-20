@@ -13,7 +13,10 @@ const ngay_bat_dau = ref(null);
 const ngay_ket_thuc = ref(null);
 
 const allData = computed( () => {
-    return props.san_pham_list
+    if(viewAll.value)
+        return props.san_pham_list
+    else
+        return props.san_pham_list.filter(item => item.ton_cuoi > 0 || item.nhap > 0 || item.xuat > 0 || item.dieu_chinh > 0)
 })
 
 watch(search, (value) => {
@@ -50,6 +53,20 @@ function changePage(url) {
     })
 }
 
+let ton_cuoi = computed(() => {
+    return allData.value.reduce((acc, item) => {
+        return acc + item.ton_cuoi
+    }, 0)
+})
+
+const viewAll = ref(false);
+
+function  border_red (sp) {
+    if(sp.ton_cuoi < sp.canh_bao || sp.ton_cuoi === 0) {
+        return 'background-color: #f38e8e !important'
+    }
+}
+
 </script>
 
 <template>
@@ -83,7 +100,10 @@ function changePage(url) {
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-4 d-flex align-items-center">
+                                    <input v-model="viewAll" type="checkbox" class="me-3">
+                                    <span class="font-weight-bold me-5">Xem tất cả</span>
+                                    <span class="font-weight-bold me-2 ms-5">Tổng tồn cuối:</span>{{ton_cuoi}}
                                 </div>
                                 <div class="col-md-3">
                                     <div class="input-group">
@@ -105,6 +125,7 @@ function changePage(url) {
                 <table class="table table-bordered  table-responsive-md">
                     <thead>
                     <tr>
+                        <th>STT</th>
                         <th>Mã sản phẩm</th>
                         <th>Tên sản phẩm</th>
                         <th>Đơn vị tính</th>
@@ -117,18 +138,19 @@ function changePage(url) {
                     </thead>
                     <tbody>
                         <tr v-if="allData?.length === 0">
-                            <td colspan="8" class="text-center">Không có dữ liệu</td>
+                            <td colspan="9" class="text-center">Không có dữ liệu</td>
                         </tr>
 
-                        <tr :key="kh.id" v-else v-for="kh in allData">
-                            <td>{{kh.ma}}</td>
-                            <td>{{kh.ten}}</td>
-                            <td class="quantity">{{kh.dvt}}</td>
-                            <td class="quantity">{{kh.ton_dau || 0}}</td>
-                            <td class="quantity">{{kh.nhap || 0}}</td>
-                            <td class="quantity">{{kh.xuat || 0}}</td>
-                            <td class="quantity">{{kh.dieu_chinh || 0}}</td>
-                            <td class="quantity">{{kh.ton_cuoi || 0}}</td>
+                        <tr :key="kh.id" v-else v-for="(kh, index) in allData">
+                            <td :style="border_red(kh)" class="quantity">{{index + 1}}</td>
+                            <td :style="border_red(kh)">{{kh.ma}}</td>
+                            <td :style="border_red(kh)">{{kh.ten}}</td>
+                            <td :style="border_red(kh)" class="quantity">{{kh.dvt}}</td>
+                            <td :style="border_red(kh)" class="quantity">{{kh.ton_dau || 0}}</td>
+                            <td :style="border_red(kh)" class="quantity">{{kh.nhap || 0}}</td>
+                            <td :style="border_red(kh)" class="quantity">{{kh.xuat || 0}}</td>
+                            <td :style="border_red(kh)" class="quantity">{{kh.dieu_chinh || 0}}</td>
+                            <td :style="border_red(kh)" class="quantity">{{kh.ton_cuoi || 0}}</td>
                         </tr>
                     </tbody>
                 </table>

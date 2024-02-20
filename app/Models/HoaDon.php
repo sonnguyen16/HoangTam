@@ -41,6 +41,16 @@ class HoaDon extends Model
         return $tong_tien;
     }
 
+    public function tong_tien_nhap()
+    {
+        return $this->where('loai', 0)->sum('tong_tien');
+    }
+
+    public function tong_tien_xuat()
+    {
+        return $this->where('loai', 1)->sum('tong_tien');
+    }
+
     public function created_by()
     {
         return $this->belongsTo(User::class, "created_by");

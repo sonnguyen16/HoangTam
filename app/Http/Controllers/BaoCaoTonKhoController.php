@@ -41,7 +41,7 @@ class BaoCaoTonKhoController extends Controller
                 FROM ton_kho tk
                 WHERE DELETED_AT IS NULL
             )
-            SELECT SP.ma, SP.ten, DVT.ten dvt, COALESCE(td.ton_dau, 0) as ton_dau, COALESCE(nx.nhap, 0) as nhap, COALESCE(nx.xuat, 0) as xuat, COALESCE(nx.dieu_chinh, 0) as dieu_chinh,
+            SELECT SP.ma, SP.ten,SP.canh_bao, DVT.ten dvt, COALESCE(td.ton_dau, 0) as ton_dau, COALESCE(nx.nhap, 0) as nhap, COALESCE(nx.xuat, 0) as xuat, COALESCE(nx.dieu_chinh, 0) as dieu_chinh,
                      SUM(COALESCE(td.ton_dau, 0) + COALESCE(nx.nhap, 0) - COALESCE(nx.xuat, 0) + COALESCE(nx.dieu_chinh, 0)) ton_cuoi
             FROM san_pham SP
             JOIN users u ON SP.created_by = u.id AND u.don_vi_id = ?
@@ -58,8 +58,7 @@ class BaoCaoTonKhoController extends Controller
                         ) nx ON nx.id = SP.id
             WHERE (SP.ten LIKE '%$search%' OR SP.ma LIKE '%$search%')
             AND SP.DELETED_AT IS NULL
-            GROUP BY SP.ma, SP.ten, DVT.ten, td.ton_dau, nx.nhap, nx.xuat, nx.dieu_chinh
-            HAVING COALESCE(td.ton_dau, 0) + COALESCE(nx.nhap, 0) + COALESCE(nx.xuat, 0) + COALESCE(nx.dieu_chinh, 0) != 0
+            GROUP BY SP.ma, SP.ten,SP.canh_bao, DVT.ten, td.ton_dau, nx.nhap, nx.xuat, nx.dieu_chinh
         ";
 
         $san_pham_list = DB::select($query, [ $don_vi_id, $ngayBatDau, $ngayBatDau, $ngayKetThuc]);

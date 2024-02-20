@@ -26,6 +26,8 @@ class HoaDonResource extends JsonResource
             'no_moi_ncc' => optional($this->nha_cung_cap()->first())->no_moi(),
             'loai' => $this->loai,
             'ngay' => $this->ngay,
+            'tong_tien_nhap' => $this->tong_tien_nhap(),
+            'tong_tien_xuat' => $this->tong_tien_xuat(),
             'kho' => $this->kho()->first(),
             'chi_tiet_hoa_don' => ChiTietHoaDonResource::collection($this->chi_tiet_hoa_don()->get()),
             'tong_tien' => $this->tong_tien,

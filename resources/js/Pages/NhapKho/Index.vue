@@ -103,7 +103,10 @@ function delelehoadon(id) {
                     <div class=" col-md-2">
                         <a @click.prevent="openModal" class="btn btn-primary form-control">Thêm phiếu nhập kho</a>
                     </div>
-                    <div class="col-md-10">
+                    <div class="col-md-2 d-flex align-items-center">
+                        <b>Tổng tiền nhập: </b> {{ hoa_don_list.data[0].tong_tien_nhap.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}
+                    </div>
+                    <div class="col-md-8">
                         <form >
                             <div class="row">
                                 <div class="col-md-3">

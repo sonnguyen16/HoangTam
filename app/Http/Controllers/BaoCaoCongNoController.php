@@ -98,6 +98,12 @@ class BaoCaoCongNoController extends Controller
             WHERE (kh.ten LIKE '%$search%' OR kh.dien_thoai LIKE '%%' OR kh.dia_chi LIKE '%$search%')
             AND kh.DELETED_AT IS NULL
             GROUP BY kh.id, kh.ten, kh.dien_thoai, kh.dia_chi, t.thu, td.ton_dau, tc.ton_cuoi
+            HAVING
+                SUM(
+                    IFNULL(t.thu, 0) +
+                    IFNULL(td.ton_dau, 0) +
+                    IFNULL(tc.ton_cuoi, 0)
+                ) != 0
         ";
 
         $khach_hang_list = DB::select($query, [$ngayBatDau, $ngayKetThuc, $ngayBatDau, $ngayKetThuc, $don_vi_id]);

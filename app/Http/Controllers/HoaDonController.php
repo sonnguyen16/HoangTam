@@ -52,7 +52,7 @@ class HoaDonController extends Controller
         $don_hang_ban_list = DonHang::query()->whereNull('deleted_at')->where('loai', 1)
             ->whereHas('created_by.don_vi', function ($query) {
                 $query->where('id', Auth::user()->don_vi_id);
-            })->paginate(4);
+            })->paginate(10);
 
         if ($request->filled('search')) {
             $search = $request->search;

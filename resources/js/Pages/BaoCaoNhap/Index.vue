@@ -3,9 +3,26 @@
 import MainLayout from "@/Layouts/MainLayout.vue";
 import {computed, ref, watch} from "vue";
 import {router} from "@inertiajs/vue3";
+import moment from "moment";
+import NhapKhoModal from "@/Pages/BaoCaoNhap/NhapKhoModal.vue";
 
 const props = defineProps({
     hoa_don_list: Object,
+    nha_cung_cap_list: Object,
+    kho_list: Object,
+    san_pham_list: Object,
+    du_an_list: Object,
+})
+
+let hoa_don = ref({
+    id: "",
+    ma: "",
+    ngay: "",
+    nha_cung_cap: {},
+    kho: {},
+    ghi_chu: "",
+    chi_tiet_hoa_don: [],
+    du_an_id: "",
 })
 
 const search = ref('');
@@ -48,6 +65,20 @@ function changePage(url) {
     router.visit(url, {
         preserveState: true
     })
+}
+
+function editModal(kh) {
+    hoa_don.value = {
+        id: kh.id,
+        ma: kh.ma,
+        nha_cung_cap: kh.nha_cung_cap,
+        kho: kh.kho,
+        ghi_chu: kh.ghi_chu,
+        chi_tiet_hoa_don: kh.chi_tiet_hoa_don,
+        ngay: kh.ngay,
+        du_an_id: kh.du_an_id,
+    };
+    $('#hoadonmodal').modal('show');
 }
 
 </script>
@@ -114,6 +145,7 @@ function changePage(url) {
                         <th>Số lượng</th>
                         <th>Đơn giá</th>
                         <th>Thành tiền</th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -123,14 +155,17 @@ function changePage(url) {
 
                         <template v-for="kh in allData.data">
                             <tr v-for="cthd in kh.chi_tiet_hoa_don" :key="cthd.id">
-                                <td>{{ kh.ngay }}</td>
+                                <td>{{ moment(kh.ngay).format("DD/MM/YYYY") }}</td>
                                 <td>{{ kh.ma }}</td>
                                 <td>{{ kh.nha_cung_cap.ten }}</td>
                                 <td>{{ cthd.san_pham.ma }}</td>
                                 <td>{{ cthd.san_pham.don_vi_tinh.ten }}</td>
-                                <td>{{ cthd.so_luong }}</td>
-                                <td>{{ cthd.gia.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</td>
-                                <td>{{ cthd.thanh_tien.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</td>
+                                <td class="quantity">{{ cthd.so_luong }}</td>
+                                <td class="money">{{ cthd.gia.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</td>
+                                <td class="money">{{ cthd.thanh_tien.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</td>
+                                <td class="quantity">
+                                    <a class="btn btn-primary btn-sm d-inline-block mr-2" @click.prevent="editModal(kh)">Sửa</a>
+                                </td>
                             </tr>
                         </template>
 
@@ -155,6 +190,13 @@ function changePage(url) {
                 </div>
             </div>
         </div>
+        <NhapKhoModal
+            :hoa_don="hoa_don"
+            :nha_cung_cap_list="nha_cung_cap_list"
+            :kho_list="kho_list"
+            :san_pham_list="san_pham_list"
+            :du_an_list="du_an_list"
+        />
     </MainLayout>
 </template>
 <style scoped>

@@ -103,7 +103,7 @@ function  border_red (sp) {
                                 <div class="col-md-4 d-flex align-items-center">
                                     <input v-model="viewAll" type="checkbox" class="me-3">
                                     <span class="font-weight-bold me-5">Xem tất cả</span>
-                                    <span class="font-weight-bold me-2 ms-5">Tổng tồn cuối:</span>{{ton_cuoi}}
+                                    <span class="font-weight-bold me-2 ms-5">Tổng tồn cuối:</span>{{ton_cuoi.toFixed(1)}}
                                 </div>
                                 <div class="col-md-3">
                                     <div class="input-group">
@@ -146,11 +146,11 @@ function  border_red (sp) {
                             <td :style="border_red(kh)">{{kh.ma}}</td>
                             <td :style="border_red(kh)">{{kh.ten}}</td>
                             <td :style="border_red(kh)" class="quantity">{{kh.dvt}}</td>
-                            <td :style="border_red(kh)" class="quantity">{{kh.ton_dau || 0}}</td>
-                            <td :style="border_red(kh)" class="quantity">{{kh.nhap || 0}}</td>
-                            <td :style="border_red(kh)" class="quantity">{{kh.xuat || 0}}</td>
-                            <td :style="border_red(kh)" class="quantity">{{kh.dieu_chinh || 0}}</td>
-                            <td :style="border_red(kh)" class="quantity">{{kh.ton_cuoi || 0}}</td>
+                            <td :style="border_red(kh)" class="quantity">{{kh.ton_dau.toFixed(1) || 0}}</td>
+                            <td :style="border_red(kh)" class="quantity">{{kh.nhap.toFixed(1) || 0}}</td>
+                            <td :style="border_red(kh)" class="quantity">{{kh.xuat.toFixed(1) || 0}}</td>
+                            <td :style="border_red(kh)" class="quantity">{{kh.dieu_chinh.toFixed(1) || 0}}</td>
+                            <td :style="border_red(kh)" class="quantity">{{kh.ton_cuoi.toFixed(1) || 0}}</td>
                         </tr>
                     </tbody>
                 </table>

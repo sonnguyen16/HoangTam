@@ -161,9 +161,9 @@ function changePage(url) {
                                 <td>{{ kh.khach_hang.ten }}</td>
                                 <td>{{ cthd.san_pham.ma }}</td>
                                 <td>{{ cthd.san_pham.don_vi_tinh.ten }}</td>
-                                <td class="quantity">{{ cthd.so_luong }}</td>
-                                <td class="money">{{ cthd.gia.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</td>
-                                <td class="money">{{ cthd.thanh_tien.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</td>
+                                <td class="quantity">{{ cthd.so_luong.toFixed(1) }}</td>
+                                <td class="money">{{ cthd.gia.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</td>
+                                <td class="money">{{ cthd.thanh_tien.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</td>
                                 <td class="quantity">
                                     <a @click.prevent="editModal(kh)" class="btn btn-primary btn-sm">Sửa</a>
                                 </td>

@@ -121,9 +121,9 @@ function changePage(url) {
                         <td>{{kh.ten}}</td>
                         <td>{{kh.dien_thoai}}</td>
                         <td>{{kh.dia_chi}}</td>
-                        <td class="quantity">{{kh.ton_dau}}</td>
-                        <td class="money">{{kh.chi?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") || 0}}</td>
-                        <td class="quantity">{{kh.ton_cuoi}}</td>
+                        <td class="quantity">{{kh.ton_dau.toFixed(1)}}</td>
+                        <td class="money">{{kh.chi?.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") || 0}}</td>
+                        <td class="quantity">{{kh.ton_cuoi.toFixed(1)}}</td>
                     </tr>
                     </tbody>
                 </table>

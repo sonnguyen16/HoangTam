@@ -1,7 +1,6 @@
 <script setup>
 import NavLink from "@/Components/app/NavLink.vue";
 import NavItem from "@/Components/app/NavItem.vue";
-import NavLinkTree from "@/Components/app/NavLinkTree.vue";
 import { usePage } from "@inertiajs/vue3";
 import { computed } from "vue";
 
@@ -113,10 +112,18 @@ const user = computed(() => {
                 :href="route('baocaocongno.khachhang')"
                 title="Công nợ khách hàng"
               />
+                <NavItem
+                    :href="route('baocaonhapxuat.index', { loai: 'nhap' })"
+                    title="Báo cáo nhập"
+                />
+                <NavItem
+                    :href="route('baocaonhapxuat.index', { loai: 'xuat' })"
+                    title="Báo cáo xuất"
+                />
             </ul>
           </li>
           <hr class="m-2 mr-4 ml-3" />
-          <li v-if="user?.role == 0" class="nav-item menu-open mb-5">
+          <li v-if="user?.role === 0" class="nav-item menu-open mb-5">
             <NavLink title="Hệ thống" />
             <ul class="nav nav-treeview">
               <NavItem :href="route('donvi.index')" title="Danh sách đơn vị" />

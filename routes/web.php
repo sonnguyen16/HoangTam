@@ -19,6 +19,7 @@ use App\Http\Controllers\BaoCaoTonKhoController;
 use App\Http\Controllers\BaoCaoCongNoController;
 use App\Http\Controllers\DonViController;
 use App\Http\Controllers\NguoiDungController;
+use App\Http\Controllers\BaoCaoNhapXuatController;
 
 Route::prefix('/')->group(function (){
     Route::get('/', [AuthController::class, 'index'])->name('auth.index');
@@ -130,6 +131,10 @@ Route::prefix('/baocaocongno')->middleware('auth')->group(function (){
 
 Route::prefix('/baocaocongno/khachhang')->middleware('auth')->group(function (){
     Route::get('/', [BaoCaoCongNoController::class, 'khachhang'])->name('baocaocongno.khachhang');
+});
+
+Route::prefix('/baocaonhapxuat')->middleware('auth')->group(function (){
+    Route::get('/', [BaoCaoNhapXuatController::class, 'index'])->name('baocaonhapxuat.index');
 });
 
 

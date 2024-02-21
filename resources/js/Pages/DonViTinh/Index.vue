@@ -4,6 +4,7 @@ import MainLayout from "@/Layouts/MainLayout.vue";
 import {computed, ref, watch} from "vue";
 import {router} from "@inertiajs/vue3";
 import DonViTinhModal from "@/Pages/DonViTinh/DonViTinhModal.vue";
+import Pagination from "@/Components/app/Pagination.vue";
 
 const props = defineProps({
     don_vi_tinh_list: Object,
@@ -123,23 +124,7 @@ function deleledonvitinh(id) {
                     </tr>
                     </tbody>
                 </table>
-                <div class="float-right mt-3 mb-0">
-                    <div class="row">
-                        <div class="col-md-12 col-lg-12 text-center">
-                            <ul v-if="allData?.total > 10" class="pagination">
-                                <li v-for="pageNumber in allData.links.slice(1, -1)" :key="pageNumber" class="page-item">
-                                    <a
-                                        class="page-link"
-                                        :class="{ 'bg-primary': pageNumber.label === allData.current_page.toString() }"
-                                        @click.prevent="changePage(pageNumber.url)"
-                                    >
-                                        {{ pageNumber.label }}
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+                <Pagination :data="allData" @changePage="changePage"/>
 
             </div>
         </div>

@@ -4,7 +4,6 @@ import MainLayout from "@/Layouts/MainLayout.vue";
 import {computed, ref, watch} from "vue";
 import {router} from "@inertiajs/vue3";
 import XuatKhoModal from "@/Pages/XuatKho/XuatKhoModal.vue";
-import Pagination from "@/Components/app/Pagination.vue";
 import {formatDate} from "@/assets/js/script.js";
 import moment from "moment";
 
@@ -132,8 +131,8 @@ function delelehoadon(id) {
                 <table class="table table-bordered  table-responsive-md">
                     <thead>
                     <tr>
-                        <th width="50">STT</th>
-                        <th width="100">Ngày</th>
+                        <th>STT</th>
+                        <th>Ngày</th>
                         <th>Mã phiếu</th>
                         <th>Khách hàng</th>
                         <th>Kho</th>
@@ -163,7 +162,23 @@ function delelehoadon(id) {
                     </tr>
                     </tbody>
                 </table>
-                <Pagination :allData="allData" @changePage="changePage" />
+                <div class="float-right mt-3 mb-0">
+                    <div class="row">
+                        <div class="col-md-12 col-lg-12 text-center">
+                            <ul v-if="allData?.meta.total > allData?.meta.per_page" class="pagination">
+                                <li v-for="pageNumber in allData.meta.links.slice(1, -1)" :key="pageNumber" class="page-item">
+                                    <a
+                                        class="page-link"
+                                        :class="{ 'bg-primary': pageNumber.label === allData.meta.current_page.toString() }"
+                                        @click.prevent="changePage(pageNumber.url)"
+                                    >
+                                        {{ pageNumber.label }}
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <XuatKhoModal

@@ -4,6 +4,7 @@ import MainLayout from "@/Layouts/MainLayout.vue";
 import {computed, ref, watch} from "vue";
 import NhanVienModal from "@/Pages/NhanVien/NhanVienModal.vue";
 import {router} from "@inertiajs/vue3";
+import Pagination from "@/Components/app/Pagination.vue";
 
 const props = defineProps({
     nhan_vien_list: Object,
@@ -148,7 +149,7 @@ function deleleNhanVien(id) {
                         </div>
                     </div>
                 </div>
-
+                <Pagination :data="allData" @changePage="changePage"/>
             </div>
         </div>
         <NhanVienModal :nhan_vien="nhan_vien"/>

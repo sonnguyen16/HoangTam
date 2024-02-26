@@ -103,7 +103,7 @@ function delelehoadon(id) {
                         <a @click.prevent="openModal" class="btn btn-primary form-control">Thêm phiếu nhập kho</a>
                     </div>
                     <div class="col-md-2 d-flex align-items-center">
-                        <b>Tổng tiền nhập: </b> {{ hoa_don_list.data[0].tong_tien_nhap.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}
+                        <b>Tổng tiền nhập: </b> {{ hoa_don_list.data[0]?.tong_tien_nhap.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") || 0 }}
                     </div>
                     <div class="col-md-8">
                         <form >
@@ -154,7 +154,7 @@ function delelehoadon(id) {
                         <td class="text-center">{{ moment(kh.created_at).format("DD/MM/YYYY") }}</td>
                         <td class="money">{{ kh.tong_tien.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</td>
 
-                        <td >
+                        <td style="width: 10%">
                             <a class="btn btn-primary btn-sm d-inline-block mr-2" @click.prevent="editModal(kh)">Sửa</a>
                             <a class="btn btn-primary btn-sm d-inline-block mr-2" target="_blank"  :href="route('hoadon.print', { id: kh.id })">In phiếu</a>
                             <a class="btn btn-danger btn-sm" @click.prevent="delelehoadon(kh.id)">Xóa</a>

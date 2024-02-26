@@ -30,7 +30,7 @@ const allData = computed( () => {
 })
 
 watch(search, (value) => {
-    router.visit(route('loai_san_pham.index', {search: value}), {
+    router.visit(route('loaisanpham.index', {search: value}), {
         preserveState: true
     })
 })

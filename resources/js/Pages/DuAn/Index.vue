@@ -104,9 +104,7 @@ function deleleduan(id) {
     }
 }
 
-function xemDuAnModal(id) {
-    const kh = props.du_an_list.find(item => item.id === id)
-    console.log(kh)
+function xemDuAnModal(kh) {
     du_an.value = {
         id: kh.id,
         ten: kh.ten,
@@ -192,7 +190,7 @@ function xemDuAnModal(id) {
                             <span v-else-if="kh.trang_thai === 2" class="badge badge-success">Hoàn thành</span>
                         </td>
                         <td style="width: 9%">
-                            <a class="btn btn-primary btn-sm d-inline-block mr-2" @click.prevent="xemDuAnModal(kh.id)">Xem</a>
+                            <a class="btn btn-primary btn-sm d-inline-block mr-2" @click.prevent="xemDuAnModal(kh)">Xem</a>
                             <a class="btn btn-primary btn-sm d-inline-block mr-2" @click.prevent="editModal(kh)">Sửa</a>
                             <a class="btn btn-danger btn-sm" @click.prevent="deleleduan(kh.id)">Xóa</a>
                         </td>
@@ -207,7 +205,7 @@ function xemDuAnModal(id) {
         />
         <XemDuAnModal
             :du_an="du_an"
-            @edit="editModal"
+            @edit="xemDuAnModal"
             @add="openModal"
         />
     </MainLayout>

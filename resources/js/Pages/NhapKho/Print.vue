@@ -41,10 +41,10 @@ function formatDateForTemplate(date) {
                        <!--<img :src="/uploads/ + don_vi.logo" class="w-[200px]" alt="logo" />-->
                         <div class="text-start">
                             <h3 class="font-weight-bold mb-0" style="text-transform: uppercase;">{{ don_vi?.ten }}</h3>
-                            <p class=" font-in" style="margin-bottom:0px">Địa chỉ: {{ don_vi?.dia_chi }}</p>
-                            <p class=" font-in" style="margin-bottom:0px">Điện thoại: {{ don_vi?.dien_thoai }}</p>
-                            <p class="font-in" style="margin-bottom:0px" v-if="don_vi?.email">Email: {{ don_vi?.email }} </p>
-                            <p class="font-in" style="margin-bottom:0px" v-if="don_vi?.stk_1">STK: {{ don_vi?.stk_1 }} </p>
+                            <p class=" font-in" style="margin-bottom:0">Địa chỉ: {{ don_vi?.dia_chi }}</p>
+                            <p class=" font-in" style="margin-bottom:0">Điện thoại: {{ don_vi?.dien_thoai }}</p>
+                            <p class="font-in" style="margin-bottom:0" v-if="don_vi?.email">Email: {{ don_vi?.email }} </p>
+                            <p class="font-in" style="margin-bottom:0" v-if="don_vi?.stk_1">STK: {{ don_vi?.stk_1 }} </p>
                         </div>
                     </div>
 
@@ -64,7 +64,7 @@ function formatDateForTemplate(date) {
                                     <td v-if="hoa_don.data.loai === 0" class="text-md font-in">
                                         <b>Nhà cung cấp:</b>
                                     </td>
-                                    <td width="70% " class="font-in">
+                                    <td class="font-in">
                                         <span v-if="hoa_don.data.loai === 1"
                                       class="text-md font-in">
                                         {{ hoa_don.data.khach_hang?.ten }}
@@ -145,8 +145,8 @@ function formatDateForTemplate(date) {
                             <div class="col-6 font-in">
                                 <b  class="font-in">Bằng chữ: </b><i>{{ numberToWords(hoa_don.data.tong_tien) }} đồng</i>
                             </div>
-                            <div class="col-2 font in"></div>
-                            <div class="col-4 font-in">
+                            <div class="col-3 font in"></div>
+                            <div class="col-3 font-in d-flex flex-column">
                                 <p class="cong-no" v-if="hoa_don.data.loai === 0"  ><b class="cong-no">
                                     Nợ cũ: </b>{{ hoa_don.data.no_cu_ncc < 0 ? 0 : hoa_don.data.no_cu_ncc.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}
                                 </p>
@@ -202,6 +202,6 @@ p{
 }
 
 .cong-no{
-    font-size: 26px;
+    font-size: 19px;
 }
 </style>

@@ -63,6 +63,16 @@ const addHangMuc = (id) => {
                         <div class="col-md-2 col-6 font-bold">Mô tả</div>
                         <div class="col-md-10 col-6">{{ du_an.mo_ta }}</div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-2 col-6 font-bold">File</div>
+                        <div class="col-md-10 col-6">
+                            <ul>
+                                <li v-for="file in du_an.files" :key="file.id">
+                                    <a :href="`/uploads/${file.ten}`" target="_blank">{{ file.ten }}</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                     <div class="mt-3">
                         <div class="mb-1">
                             <a class="btn btn-primary" @click.prevent="addHangMuc(du_an.id)">Thêm hạng mục</a>

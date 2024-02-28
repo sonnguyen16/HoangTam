@@ -109,25 +109,28 @@ class BaoCaoCongNoController extends Controller
     public function chiTietKhachHang(Request $request)
     {
         $id = $request->input('id');
-        $query = "(SELECT KH.ten as ten_kh, KH.dia_chi, KH.dien_thoai, HD.ngay, HD.ma, SP.ten AS san_pham, DVT.ten AS dvt,
+        $query = "(SELECT NCC.ten as ten_ncc, NCC.dia_chi, NCC.dien_thoai, HD.ngay, HD.ma, SP.ten AS san_pham, DVT.ten AS dvt,
                            CTHD.so_luong, CTHD.gia, CTHD.so_luong * CTHD.gia AS thanh_tien
                     FROM hoa_don HD
-                    LEFT JOIN khach_hang KH ON HD.khach_hang_id = KH.id
+                    LEFT JOIN nha_cung_cap NCC ON HD.nha_cung_cap_id = NCC.id
                     LEFT JOIN chi_tiet_hoa_don CTHD ON CTHD.hoa_don_id = HD.id
                     LEFT JOIN san_pham SP ON CTHD.san_pham_id = SP.id
                     LEFT JOIN don_vi_tinh DVT ON SP.don_vi_tinh_id = DVT.id
                     WHERE HD.deleted_at IS NULL
-                    AND HD.loai = 1
-                    AND HD.khach_hang_id = ?
+                    AND HD.nha_cung_cap_id = ?
+                    AND HD.loai = 0)
+
                     UNION
-                    SELECT KH.ten, KH.dia_chi, KH.dien_thoai, PTC.ngay, PTC.ma,'','','','', PTC.so_tien
+
+                    (SELECT NCC.ten, NCC.dia_chi, NCC.dien_thoai, PTC.ngay, PTC.ma,'','','','', PTC.so_tien
                     FROM phieu_thu_chi PTC
-                    LEFT JOIN khach_hang KH ON PTC.khach_hang_id = KH.id
+                    LEFT JOIN nha_cung_cap NCC ON PTC.nha_cung_cap_id = NCC.id
                     WHERE PTC.deleted_at IS NULL
-                    AND PTC.loai = 0
-                    AND PTC.khach_hang_id = ?
-                    )
-                    ORDER BY NGAY DESC";
+                    AND PTC.loai = 1
+                    AND PTC.nha_cung_cap_id = ?)
+
+                    ORDER BY ngay DESC
+                    ";
         $khach_hang = DB::select($query, [$id, $id]);
         return response()->json($khach_hang);
     }

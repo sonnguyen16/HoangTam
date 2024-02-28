@@ -127,12 +127,13 @@ Route::prefix('/baocaotonkho')->middleware('auth')->group(function (){
 });
 
 Route::prefix('/baocaocongno')->middleware('auth')->group(function (){
-    Route::get('/', [BaoCaoCongNoController::class, 'index'])->name('baocaocongno.index');
+    Route::get('/nhacungcap', [BaoCaoCongNoController::class, 'index'])->name('baocaocongno.index');
+    Route::get('/nhacungcap/detail', [BaoCaoCongNoController::class, 'chiTietNhaCungCap'])->name('baocaocongno.chitietncc');
+    Route::get('/khachhang', [BaoCaoCongNoController::class, 'khachhang'])->name('baocaocongno.khachhang');
+    Route::get('/khachhang/detail', [BaoCaoCongNoController::class, 'chiTietKhachHang'])->name('baocaocongno.chitietkh');
+    Route::post('/print', [BaoCaoCongNoController::class, 'print'])->name('baocaocongno.print');
 });
 
-Route::prefix('/baocaocongno/khachhang')->middleware('auth')->group(function (){
-    Route::get('/', [BaoCaoCongNoController::class, 'khachhang'])->name('baocaocongno.khachhang');
-});
 
 Route::prefix('/baocaonhapxuat')->middleware('auth')->group(function (){
     Route::get('/', [BaoCaoNhapXuatController::class, 'index'])->name('baocaonhapxuat.index');

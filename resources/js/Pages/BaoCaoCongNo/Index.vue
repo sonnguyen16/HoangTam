@@ -3,14 +3,16 @@
 import MainLayout from "@/Layouts/MainLayout.vue";
 import {computed, ref, watch} from "vue";
 import {router} from "@inertiajs/vue3";
+import ChiTietNhaCungCap from "@/Pages/BaoCaoCongNo/ChiTietNhaCungCap.vue";
 
 const props = defineProps({
     nha_cung_cap_list: Object,
 })
 
-let search = ref("")
-const ngay_bat_dau = ref(null);
-const ngay_ket_thuc = ref(null);
+const search = ref('')
+const ngay_bat_dau = ref('2024-01-01');
+const ngay_ket_thuc = ref('2025-01-01');
+let nha_cung_cap = ref(null);
 
 const allData = computed( () => {
     return props.nha_cung_cap_list
@@ -23,6 +25,10 @@ watch(search, (value) => {
 })
 
 watch(ngay_bat_dau, (value, oldValue) => {
+    if(!value){
+        ngay_bat_dau.value = oldValue
+        return
+    }
     if(ngay_ket_thuc.value < value) {
         alert('Ngày bắt đầu không được lớn hơn ngày kết thúc')
         ngay_bat_dau.value = oldValue
@@ -34,6 +40,10 @@ watch(ngay_bat_dau, (value, oldValue) => {
 })
 
 watch(ngay_ket_thuc, (value, oldValue) => {
+    if(!value){
+        ngay_ket_thuc.value = oldValue
+        return
+    }
     if(ngay_bat_dau.value > value) {
         alert('Ngày kết thúc không được nhỏ hơn ngày bắt đầu')
         ngay_ket_thuc.value = oldValue
@@ -48,6 +58,18 @@ function changePage(url) {
     router.visit(url, {
         preserveState: true
     })
+}
+
+async function chiTietNhaCungCap(id) {
+    nha_cung_cap.value = await axios({
+        method: 'get',
+        url: route('baocaocongno.chitietncc', {id: id})
+    }).then(response => {
+        return response.data
+    }).catch(error => {
+        console.log(error)
+    })
+    $('#chitietnccmodal').modal('show');
 }
 
 </script>
@@ -109,11 +131,12 @@ function changePage(url) {
                         <th>Tồn đầu</th>
                         <th>Chi</th>
                         <th>Tồn cuối</th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr v-if="allData.length === 0">
-                        <td colspan="7" class="text-center">Không có dữ liệu</td>
+                        <td colspan="8" class="text-center">Không có dữ liệu</td>
                     </tr>
 
                     <tr :key="kh.id" v-else v-for="(kh, index) in allData">
@@ -122,8 +145,11 @@ function changePage(url) {
                         <td>{{kh.dien_thoai}}</td>
                         <td>{{kh.dia_chi}}</td>
                         <td class="quantity">{{kh.ton_dau.toFixed(1)}}</td>
-                        <td class="money">{{kh.chi?.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") || 0}}</td>
+                        <td class="money">{{kh.chi?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") || 0}}</td>
                         <td class="quantity">{{kh.ton_cuoi.toFixed(1)}}</td>
+                        <td style="width: 4%">
+                            <button @click.prevent="chiTietNhaCungCap(kh.id)" class="btn btn-primary btn-sm">Chi tiết</button>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
@@ -147,7 +173,11 @@ function changePage(url) {
 
             </div>
         </div>
-
+        <ChiTietNhaCungCap
+            :nha_cung_cap="nha_cung_cap"
+            :ngay_bat_dau="ngay_bat_dau"
+            :ngay_ket_thuc="ngay_ket_thuc"
+        />
     </MainLayout>
 </template>
 <style scoped>

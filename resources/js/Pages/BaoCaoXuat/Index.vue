@@ -27,8 +27,8 @@ let hoa_don = ref({
 })
 
 const search = ref('');
-const ngay_bat_dau = ref(null);
-const ngay_ket_thuc = ref(null);
+const ngay_bat_dau = ref('2024-01-01');
+const ngay_ket_thuc = ref('2025-01-01');
 
 const allData = computed( () => {
     return props.hoa_don_list
@@ -40,7 +40,11 @@ watch(search, (value) => {
     })
 })
 
-watch(ngay_bat_dau, (value) => {
+watch(ngay_bat_dau, (value, oldValue) => {
+    if (!value) {
+        ngay_bat_dau.value = oldValue
+        return
+    }
     if(ngay_ket_thuc.value < value) {
         alert('Ngày bắt đầu không được lớn hơn ngày kết thúc')
         ngay_bat_dau.value = oldValue
@@ -51,7 +55,11 @@ watch(ngay_bat_dau, (value) => {
     })
 })
 
-watch(ngay_ket_thuc, (value) => {
+watch(ngay_ket_thuc, (value, oldValue) => {
+    if (!value) {
+        ngay_ket_thuc.value = oldValue
+        return
+    }
     if(ngay_bat_dau.value > value) {
         alert('Ngày kết thúc không được nhỏ hơn ngày bắt đầu')
         ngay_ket_thuc.value = oldValue

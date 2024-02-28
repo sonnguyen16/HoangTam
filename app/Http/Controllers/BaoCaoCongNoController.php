@@ -26,6 +26,7 @@ class BaoCaoCongNoController extends Controller
                 LEFT JOIN phieu_thu_chi ptc ON ncc.id = ptc.nha_cung_cap_id
                 AND ptc.DELETED_AT IS NULL
                 WHERE ptc.ngay BETWEEN ? AND ?
+                AND ptc.trang_thai = 1
                 GROUP BY ncc.id
             ),
             TonDau AS (
@@ -67,6 +68,69 @@ class BaoCaoCongNoController extends Controller
 
         return Inertia::render('BaoCaoCongNo/Index', compact('nha_cung_cap_list'));
     }
+
+    public function chiTietNhaCungCap(Request $request)
+    {
+        $id = $request->input('id');
+        $query = "(SELECT NCC.ten as ten_ncc, NCC.dia_chi, NCC.dien_thoai, HD.ngay, HD.ma, SP.ten AS san_pham, DVT.ten AS dvt,
+                           CTHD.so_luong, CTHD.gia, CTHD.so_luong * CTHD.gia AS thanh_tien
+                    FROM hoa_don HD
+                    LEFT JOIN nha_cung_cap NCC ON HD.nha_cung_cap_id = NCC.id
+                    LEFT JOIN chi_tiet_hoa_don CTHD ON CTHD.hoa_don_id = HD.id
+                    LEFT JOIN san_pham SP ON CTHD.san_pham_id = SP.id
+                    LEFT JOIN don_vi_tinh DVT ON SP.don_vi_tinh_id = DVT.id
+                    WHERE HD.deleted_at IS NULL
+                    AND HD.nha_cung_cap_id = ?
+                    AND HD.loai = 0
+
+                    UNION
+                    SELECT NCC.ten, NCC.dia_chi, NCC.dien_thoai, PTC.ngay, PTC.ma,'','','','', PTC.so_tien
+                    FROM phieu_thu_chi PTC
+                    LEFT JOIN nha_cung_cap NCC ON PTC.nha_cung_cap_id = NCC.id
+                    WHERE PTC.deleted_at IS NULL
+                    AND PTC.loai = 1
+                    AND PTC.nha_cung_cap_id = ?
+                    )
+                    ORDER BY NGAY DESC";
+        $nha_cung_cap = DB::select($query, [$id, $id]);
+        return response()->json($nha_cung_cap);
+    }
+
+    public function print(Request $request)
+    {
+        $ngay_bat_dau = $request->input('ngay_bat_dau');
+        $ngay_ket_thuc = $request->input('ngay_ket_thuc');
+        $hdpc = $request->input('hdpc');
+        $ton_dau = $request->input('ton_dau');
+        $ton_cuoi = $request->input('ton_cuoi');
+        return Inertia::render('BaoCaoCongNo/Print', compact('ngay_bat_dau', 'ngay_ket_thuc', 'hdpc', 'ton_dau', 'ton_cuoi'));
+    }
+
+    public function chiTietKhachHang(Request $request)
+    {
+        $id = $request->input('id');
+        $query = "(SELECT KH.ten as ten_kh, KH.dia_chi, KH.dien_thoai, HD.ngay, HD.ma, SP.ten AS san_pham, DVT.ten AS dvt,
+                           CTHD.so_luong, CTHD.gia, CTHD.so_luong * CTHD.gia AS thanh_tien
+                    FROM hoa_don HD
+                    LEFT JOIN khach_hang KH ON HD.khach_hang_id = KH.id
+                    LEFT JOIN chi_tiet_hoa_don CTHD ON CTHD.hoa_don_id = HD.id
+                    LEFT JOIN san_pham SP ON CTHD.san_pham_id = SP.id
+                    LEFT JOIN don_vi_tinh DVT ON SP.don_vi_tinh_id = DVT.id
+                    WHERE HD.deleted_at IS NULL
+                    AND HD.loai = 1
+                    AND HD.khach_hang_id = ?
+                    UNION
+                    SELECT KH.ten, KH.dia_chi, KH.dien_thoai, PTC.ngay, PTC.ma,'','','','', PTC.so_tien
+                    FROM phieu_thu_chi PTC
+                    LEFT JOIN khach_hang KH ON PTC.khach_hang_id = KH.id
+                    WHERE PTC.deleted_at IS NULL
+                    AND PTC.loai = 0
+                    AND PTC.khach_hang_id = ?
+                    )
+                    ORDER BY NGAY DESC";
+        $khach_hang = DB::select($query, [$id, $id]);
+        return response()->json($khach_hang);
+    }
     public function khachhang(Request $request)
     {
         $ngayBatDau = !$request->input('ngay_bat_dau') ? '2024-1-1' : $request->input('ngay_bat_dau');
@@ -81,6 +145,7 @@ class BaoCaoCongNoController extends Controller
                 LEFT JOIN phieu_thu_chi ptc ON kh.id = ptc.khach_hang_id
                 AND ptc.DELETED_AT IS NULL
                 WHERE ptc.ngay BETWEEN ? AND ?
+                AND ptc.trang_thai = 1
                 GROUP BY kh.id
             ),
             TonDau AS (

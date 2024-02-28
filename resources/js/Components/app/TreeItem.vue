@@ -13,7 +13,7 @@ const props = defineProps({
     }
 })
 
-let isOpen = ref(false);
+let isOpen = ref(true);
 
 const emit = defineEmits(['edit', 'add']);
 

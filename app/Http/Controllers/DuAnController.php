@@ -40,6 +40,20 @@ class DuAnController extends Controller
         return Inertia::render('DuAn/Index', compact('du_an_list', 'nhan_vien_list'));
     }
 
+    public function detail(Request $request)
+    {
+        $query = DuAn::with(['nhan_vien', 'files'])->whereNull('deleted_at')
+            ->whereHas('created_by.don_vi', function ($query) {
+                $query->where('id', Auth::user()->don_vi_id);
+            })
+            ->orderBy('id', 'desc');
+        $du_an = $query->get()->toTree();
+        $du_an_id = $request->id;
+        $nhan_vien_list = User::query()->where('role', 1)->where('don_vi_id', Auth::user()->don_vi_id)->get();
+
+        return Inertia::render('DuAn/BieuDo', compact('du_an', 'du_an_id', 'nhan_vien_list'));
+    }
+
     public function store(DuAnRequest $request)
     {
         $data = $request->validated();

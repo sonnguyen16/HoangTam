@@ -189,10 +189,11 @@ function xemDuAnModal(kh) {
                             <span v-else-if="kh.trang_thai === 1" class="badge badge-primary">Đang triển khai</span>
                             <span v-else-if="kh.trang_thai === 2" class="badge badge-success">Hoàn thành</span>
                         </td>
-                        <td style="width: 9%">
+                        <td style="width: 13%">
                             <a class="btn btn-primary btn-sm d-inline-block mr-2" @click.prevent="xemDuAnModal(kh)">Xem</a>
                             <a class="btn btn-primary btn-sm d-inline-block mr-2" @click.prevent="editModal(kh)">Sửa</a>
-                            <a class="btn btn-danger btn-sm" @click.prevent="deleleduan(kh.id)">Xóa</a>
+                            <a class="btn btn-danger btn-sm mr-2" @click.prevent="deleleduan(kh.id)">Xóa</a>
+                            <a class="btn btn-primary btn-sm" :href="route('duan.detail', {id: kh.id})">Chi tiết</a>
                         </td>
                     </tr>
                     </tbody>
@@ -205,7 +206,7 @@ function xemDuAnModal(kh) {
         />
         <XemDuAnModal
             :du_an="du_an"
-            @edit="xemDuAnModal"
+            @edit="editModal"
             @add="openModal"
         />
     </MainLayout>

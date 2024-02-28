@@ -76,6 +76,7 @@ Route::prefix('/duan')->middleware('auth')->group(function (){
     Route::get('/', [DuAnController::class, 'index'])->name('duan.index');
     Route::post('/store', [DuAnController::class, 'store'])->name('duan.store');
     Route::delete('/delete', [DuAnController::class, 'delete'])->name('duan.delete');
+    Route::get('/detail', [DuAnController::class, 'detail'])->name('duan.detail');
 });
 
 Route::prefix('/nhanvien')->middleware('auth')->group(function (){

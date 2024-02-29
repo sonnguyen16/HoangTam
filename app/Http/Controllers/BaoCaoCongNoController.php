@@ -91,7 +91,7 @@ class BaoCaoCongNoController extends Controller
                     AND PTC.trang_thai = 1
                     AND PTC.nha_cung_cap_id = ?
                     )
-                    ORDER BY NGAY DESC";
+                    ORDER BY NGAY ASC";
         $nha_cung_cap = DB::select($query, [$id, $id]);
         return response()->json($nha_cung_cap);
     }
@@ -129,7 +129,7 @@ class BaoCaoCongNoController extends Controller
                     AND PTC.trang_thai = 1
                     AND PTC.khach_hang_id = ?
                     )
-                    ORDER BY NGAY DESC";
+                    ORDER BY NGAY ASC";
         $khach_hang = DB::select($query, [$id, $id]);
         return response()->json($khach_hang);
     }

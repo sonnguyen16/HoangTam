@@ -114,7 +114,7 @@ function formatDateForTemplate(date) {
                                                 {{ hdpc[0]?.dien_thoai }}
                                             </span>
                                         </td>
-                                        <td style="width: 52%"></td>
+                                        <td style="width: 31%"></td>
                                         <td class="text-md font-in"><b class="text-lg">Nợ cũ:</b></td>
                                         <td>
                                             <span class="text-lg font-in">

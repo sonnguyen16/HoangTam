@@ -47,6 +47,7 @@ onMounted(() => {
         language: "en",
         bar_height: 30,
         header_height: 45,
+        date_format: 'YYYY-MM-DD',
     })
 })
 

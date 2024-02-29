@@ -41,7 +41,7 @@ const so_tien_nhap_cu = computed(() => {
 
 const so_tien_chi_cu = computed(() => {
     return phieu_chi?.value?.filter(item => item.ngay < props.ngay_bat_dau)
-        .reduce((acc, item) => acc + item.thanh_tien, 0)
+        .reduce((acc, item) => acc + item.thu, 0)
 })
 
 const so_tien_nhap_moi = computed(() => {
@@ -51,7 +51,7 @@ const so_tien_nhap_moi = computed(() => {
 
 const so_tien_chi_moi = computed(() => {
     return phieu_chi?.value?.filter(item => item.ngay >= props.ngay_bat_dau && item.ngay <= props.ngay_ket_thuc)
-        .reduce((acc, item) => acc + item.thanh_tien, 0)
+        .reduce((acc, item) => acc + item.thu, 0)
 })
 
 function print() {
@@ -61,7 +61,8 @@ function print() {
         ngay_ket_thuc: props.ngay_ket_thuc,
         hdpc: hdpc.value,
         ton_dau: so_tien_nhap_cu.value - so_tien_chi_cu.value,
-        ton_cuoi: so_tien_nhap_moi.value - so_tien_chi_moi.value
+        so_tien_nhap_moi: so_tien_nhap_moi.value,
+        so_tien_chi_moi: so_tien_chi_moi.value,
     })
 }
 
@@ -94,6 +95,7 @@ function print() {
                                 <th>Số lượng</th>
                                 <th>Đơn giá</th>
                                 <th>Thành tiền</th>
+                                <th>Thu</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -105,11 +107,17 @@ function print() {
                                 <td class="text-center">{{ hd.dvt }}</td>
                                 <td class="quantity" style="width: 8%">{{ hd.so_luong }}</td>
                                 <td class="money">{{ hd.gia.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</td>
-                                <td class="money">{{ hd.thanh_tien.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</td>
+                                <td class="money">{{ hd.thanh_tien?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</td>
+                                <td class="money">{{ hd.thu?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="7" class="font-weight-bold text-end">Tổng cộng</td>
+                                <td class="money">{{ so_tien_nhap_moi?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") || 0 }}</td>
+                                <td class="money">{{ so_tien_chi_moi?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") || 0 }}</td>
                             </tr>
                             <tr>
                                 <td colspan="7" class="font-weight-bold text-end">Nợ mới</td>
-                                <td class="money">{{ (so_tien_nhap_moi - so_tien_chi_moi).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") || 0 }}</td>
+                                <td colspan="2" class="money">{{ (so_tien_nhap_moi - so_tien_chi_moi)?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") || 0 }}</td>
                             </tr>
                             </tbody>
                         </table>

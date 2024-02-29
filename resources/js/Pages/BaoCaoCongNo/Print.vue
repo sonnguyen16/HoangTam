@@ -20,7 +20,11 @@ const data = defineProps({
         type: Number,
         default: 0
     },
-    ton_cuoi: {
+    so_tien_nhap_moi: {
+        type: Number,
+        default: 0
+    },
+    so_tien_chi_moi: {
         type: Number,
         default: 0
     },
@@ -67,7 +71,7 @@ function formatDateForTemplate(date) {
                     </div>
 
                     <div class="text-center mt-3">
-                        <h1 class="font-weight-bold" >Chi tiết công nợ</h1>
+                        <h1 class="font-weight-bold text-uppercase" >Chi tiết công nợ</h1>
                         <div class="d-flex gap-[20px] mb-2 justify-content-center">
                             <p class="font-in" style="margin-bottom:0">Từ ngày: {{ moment(ngay_bat_dau).format('DD/MM/YYYY') }}</p>
                             <p class="font-in" style="margin-bottom:0">đến ngày: {{ moment(ngay_ket_thuc).format('DD/MM/YYYY') }}</p>
@@ -110,10 +114,10 @@ function formatDateForTemplate(date) {
                                                 {{ hdpc[0]?.dien_thoai }}
                                             </span>
                                         </td>
-                                        <td style="width: 10%"></td>
-                                        <td class="text-md font-in"><b>Nợ cũ:</b></td>
+                                        <td style="width: 52%"></td>
+                                        <td class="text-md font-in"><b class="text-lg">Nợ cũ:</b></td>
                                         <td>
-                                            <span class="text-md font-in">
+                                            <span class="text-lg font-in">
                                                 {{ ton_dau }}
                                             </span>
                                         </td>
@@ -133,6 +137,12 @@ function formatDateForTemplate(date) {
                                     <th>Số lượng</th>
                                     <th>Đơn giá</th>
                                     <th>Thành tiền</th>
+                                    <th v-if="hdpc[0]?.ma.startsWith('XK') || hdpc[0]?.ma.startsWith('PT')">
+                                        Thu
+                                    </th>
+                                    <th v-else>
+                                        Chi
+                                    </th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -145,10 +155,16 @@ function formatDateForTemplate(date) {
                                     <td class="quantity" style="width: 8%">{{ hd.so_luong }}</td>
                                     <td class="money">{{ hd.gia?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</td>
                                     <td class="money">{{ hd.thanh_tien?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</td>
+                                    <td class="money">{{ hd.thu?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</td>
                                 </tr>
                                 <tr>
-                                    <td colspan="7" class="font-weight-bold text-end">Nợ mới</td>
-                                    <td class="money">{{ ton_cuoi.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") || 0 }}</td>
+                                    <td colspan="7" class="font-weight-bold text-end">Tổng cộng</td>
+                                    <td class="money">{{ so_tien_nhap_moi?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") || 0 }}</td>
+                                    <td class="money">{{ so_tien_chi_moi?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") || 0 }}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="7" class="font-weight-bold text-end text-lg">Nợ mới</td>
+                                    <td colspan="2" class="money  text-lg">{{ (so_tien_nhap_moi - so_tien_chi_moi)?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") || 0 }}</td>
                                 </tr>
                                 </tbody>
                             </table>

@@ -149,7 +149,7 @@ function deleleKhachHang(id) {
                     </tr>
                     </tbody>
                 </table>
-                <Pagination :all-data="allData" @changePage="changePage"/>
+                <Pagination :allData="allData" @changePage="changePage"/>
             </div>
         </div>
         <KhachHangModal :khach_hang="khach_hang"/>

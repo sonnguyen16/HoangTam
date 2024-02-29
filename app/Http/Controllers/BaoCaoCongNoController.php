@@ -112,7 +112,7 @@ class BaoCaoCongNoController extends Controller
                 AND hd.loai = 1
             )
 
-            SELECT kh.id, kh.ten, kh.dia_chi, kh.dien_thoai,
+            SELECT KH.id, KH.ten, KH.dia_chi, KH.dien_thoai,
                     SUM(CASE WHEN NC.ngay < ? THEN NC.xuat ELSE 0 END)
                     - SUM(CASE WHEN NC.ngay < ? THEN NC.thu ELSE 0 END)
                     AS ton_dau,
@@ -122,11 +122,11 @@ class BaoCaoCongNoController extends Controller
                     - SUM(CASE WHEN NC.ngay < ? THEN NC.thu ELSE 0 END)
                     + SUM(CASE WHEN NC.ngay >= ? AND NC.ngay <= ? THEN NC.xuat ELSE 0 END)
                     - SUM(CASE WHEN NC.ngay >= ? AND NC.ngay <= ? THEN NC.thu ELSE 0 END) AS ton_cuoi
-            FROM khach_hang kh
-            JOIN users u ON kh.created_by = u.id AND u.don_vi_id = ?
-            LEFT JOIN XUAT_THU NC ON NC.id = kh.id
+            FROM khach_hang KH
+            JOIN users u ON KH.created_by = u.id AND u.don_vi_id = ?
+            LEFT JOIN XUAT_THU NC ON NC.id = KH.id
             WHERE (KH.ten LIKE '%$search%' OR KH.dien_thoai LIKE '%$search%' OR KH.dia_chi LIKE '%$search%')
-            GROUP BY kh.id, kh.ten, kh.dia_chi, kh.dien_thoai
+            GROUP BY KH.id, KH.ten, KH.dia_chi, KH.dien_thoai
             HAVING xuat > 0 OR thu > 0 OR ton_dau > 0 OR ton_cuoi > 0
         ";
 

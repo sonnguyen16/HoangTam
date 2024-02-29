@@ -81,10 +81,9 @@ class BaoCaoCongNoController extends Controller
                     LEFT JOIN don_vi_tinh DVT ON SP.don_vi_tinh_id = DVT.id
                     WHERE HD.deleted_at IS NULL
                     AND HD.nha_cung_cap_id = ?
-                    AND HD.loai = 0
-
+                    AND HD.loai = 0)
                     UNION
-                    SELECT NCC.ten, NCC.dia_chi, NCC.dien_thoai, PTC.ngay, PTC.ma,'','','','', PTC.so_tien
+                    (SELECT NCC.ten, NCC.dia_chi, NCC.dien_thoai, PTC.ngay, PTC.ma,'','','','', PTC.so_tien
                     FROM phieu_thu_chi PTC
                     LEFT JOIN nha_cung_cap NCC ON PTC.nha_cung_cap_id = NCC.id
                     WHERE PTC.deleted_at IS NULL
@@ -118,9 +117,9 @@ class BaoCaoCongNoController extends Controller
                     LEFT JOIN don_vi_tinh DVT ON SP.don_vi_tinh_id = DVT.id
                     WHERE HD.deleted_at IS NULL
                     AND HD.loai = 1
-                    AND HD.khach_hang_id = ?
+                    AND HD.khach_hang_id = ?)
                     UNION
-                    SELECT KH.ten, KH.dia_chi, KH.dien_thoai, PTC.ngay, PTC.ma,'','','','', PTC.so_tien
+                    (SELECT KH.ten, KH.dia_chi, KH.dien_thoai, PTC.ngay, PTC.ma,'','','','', PTC.so_tien
                     FROM phieu_thu_chi PTC
                     LEFT JOIN khach_hang KH ON PTC.khach_hang_id = KH.id
                     WHERE PTC.deleted_at IS NULL

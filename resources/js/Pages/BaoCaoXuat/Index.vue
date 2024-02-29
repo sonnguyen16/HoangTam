@@ -146,7 +146,6 @@ function changePage(url) {
                 <table class="table table-bordered  table-responsive-md">
                     <thead>
                     <tr>
-                        <th>STT</th>
                         <th>Ngày</th>
                         <th>Số phiếu</th>
                         <th>Khách hàng</th>
@@ -164,8 +163,7 @@ function changePage(url) {
                         </tr>
 
                         <template v-for="kh in allData.data">
-                            <tr v-for="(cthd,index) in kh.chi_tiet_hoa_don" :key="cthd.id">
-                                <td class="quantity">{{index + 1}}</td>
+                            <tr v-for="cthd in kh.chi_tiet_hoa_don" :key="cthd.id">
                                 <td>{{ moment(kh.ngay).format("DD/MM/YYYY") }}</td>
                                 <td>{{ kh.ma }}</td>
                                 <td>{{ kh.khach_hang.ten }}</td>

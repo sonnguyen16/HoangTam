@@ -27,7 +27,7 @@ class KhachHangController extends Controller
             });
         }
 
-        $khach_hang_list = $query->paginate(100)->withQueryString();
+        $khach_hang_list = $query->paginate(50)->withQueryString();
 
         return Inertia::render('KhachHang/Index', compact('khach_hang_list'));
     }

@@ -27,7 +27,7 @@ class NhaCungCapController extends Controller
             });
         }
 
-        $nha_cung_cap_list = $query->paginate(20)->withQueryString();
+        $nha_cung_cap_list = $query->paginate(50)->withQueryString();
 
         return Inertia::render('NhaCungCap/Index', compact('nha_cung_cap_list'));
     }

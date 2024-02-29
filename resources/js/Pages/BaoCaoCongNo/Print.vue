@@ -155,7 +155,8 @@ function formatDateForTemplate(date) {
                                     <td class="quantity" style="width: 8%">{{ hd.so_luong }}</td>
                                     <td class="money">{{ hd.gia?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</td>
                                     <td class="money">{{ hd.thanh_tien?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</td>
-                                    <td class="money">{{ hd.thu?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</td>
+                                    <td v-if="hdpc[0]?.ma.startsWith('XK') || hdpc[0]?.ma.startsWith('PT')" class="money">{{ hd.thu?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</td>
+                                    <td v-else class="money">{{ hd.chi?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</td>
                                 </tr>
                                 <tr>
                                     <td colspan="7" class="font-weight-bold text-end">Tổng cộng</td>
@@ -164,7 +165,7 @@ function formatDateForTemplate(date) {
                                 </tr>
                                 <tr>
                                     <td colspan="7" class="font-weight-bold text-end text-lg">Nợ mới</td>
-                                    <td colspan="2" class="money  text-lg">{{ (so_tien_nhap_moi - so_tien_chi_moi)?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") || 0 }}</td>
+                                    <td colspan="2" class="money  text-lg">{{ (ton_dau + so_tien_nhap_moi - so_tien_chi_moi)?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") || 0 }}</td>
                                 </tr>
                                 </tbody>
                             </table>

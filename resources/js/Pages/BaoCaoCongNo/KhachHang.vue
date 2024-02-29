@@ -131,6 +131,7 @@ async function chiTietKhachHang(id) {
                         <th>Số điện thoại</th>
                         <th>Địa chỉ</th>
                         <th>Tồn đầu</th>
+                        <th>Xuất</th>
                         <th>Thu</th>
                         <th>Tồn cuối</th>
                         <th></th>
@@ -146,9 +147,10 @@ async function chiTietKhachHang(id) {
                         <td>{{kh.ten}}</td>
                         <td>{{kh.dien_thoai}}</td>
                         <td>{{kh.dia_chi}}</td>
-                        <td class="quantity">{{kh.ton_dau.toFixed(1)}}</td>
+                        <td class="quantity">{{kh.ton_dau?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") || 0}}</td>
+                        <td class="money">{{kh.xuat?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") || 0}}</td>
                         <td class="money">{{kh.thu?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") || 0}}</td>
-                        <td class="quantity">{{kh.ton_cuoi.toFixed(1)}}</td>
+                        <td class="quantity">{{kh.ton_cuoi?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") || 0}}</td>
                         <td style="width: 4%">
                             <button @click.prevent="chiTietKhachHang(kh.id)" class="btn btn-primary btn-sm">Chi tiết</button>
                         </td>

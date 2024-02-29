@@ -145,7 +145,7 @@ function deleleNhaCungCap(id) {
                     </tr>
                     </tbody>
                 </table>
-                <Pagination :data="allData" @changePage="changePage"/>
+                <Pagination :allData="allData" @changePage="changePage"/>
 
             </div>
         </div>

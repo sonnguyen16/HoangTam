@@ -77,6 +77,7 @@ function print() {
                     <button type="button" class="close" @click.prevent="closeModal">&times;</button>
                 </div>
                 <div class="modal-body space-y-2 px-4 mt-2">
+                    <p v-if="props.nha_cung_cap?.length > 0"><b class="mr-2">Nhà cung cấp:</b>{{ props.nha_cung_cap[0].ten_ncc  }}</p>
                     <div class="d-flex space-x-[80px] align-items-center">
                         <p><b class="mr-2">Từ ngày: </b>{{ moment(ngay_bat_dau).format('DD/MM/YYYY') }}</p>
                         <p><b class="mr-2">Đến ngày: </b>{{ moment(ngay_ket_thuc).format('DD/MM/YYYY') }}</p>
@@ -117,7 +118,7 @@ function print() {
                                 </tr>
                                 <tr>
                                     <td colspan="7" class="font-weight-bold text-end">Nợ mới</td>
-                                    <td colspan="2" class="money">{{ (so_tien_nhap_moi - so_tien_chi_moi)?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") || 0 }}</td>
+                                    <td colspan="2" class="money">{{ (so_tien_nhap_cu - so_tien_chi_cu + so_tien_nhap_moi - so_tien_chi_moi)?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") || 0 }}</td>
                                 </tr>
                             </tbody>
                         </table>

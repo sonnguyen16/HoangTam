@@ -62,7 +62,7 @@ class PhieuThuChiController extends Controller
             });
         }
 
-        $phieu_thu_chi_list = $query->paginate(10)->withQueryString();
+        $phieu_thu_chi_list = $query->paginate(20)->withQueryString();
 
         $component = $loai == '0' ? 'PhieuThu/Index' : 'PhieuChi/Index';
 

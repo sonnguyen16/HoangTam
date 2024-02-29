@@ -25,7 +25,7 @@ class LoaiSanPhamController extends Controller
             });
         }
 
-        $loai_san_pham_list = $query->paginate(10)->withQueryString();
+        $loai_san_pham_list = $query->paginate(20)->withQueryString();
 
         return Inertia::render('LoaiSanPham/Index', compact('loai_san_pham_list'));
     }

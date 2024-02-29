@@ -25,7 +25,7 @@ class DonViTinhController extends Controller
             });
         }
 
-        $don_vi_tinh_list = $query->paginate(10)->withQueryString();
+        $don_vi_tinh_list = $query->paginate(20)->withQueryString();
         return Inertia::render('DonViTinh/Index', compact('don_vi_tinh_list'));
     }
 

@@ -25,7 +25,7 @@ class LoaiThuChiController extends Controller
             });
         }
 
-        $loai_thu_chi_list = $query->paginate(10)->withQueryString();
+        $loai_thu_chi_list = $query->paginate(20)->withQueryString();
 
         return Inertia::render('LoaiThuChi/Index', compact('loai_thu_chi_list'));
     }

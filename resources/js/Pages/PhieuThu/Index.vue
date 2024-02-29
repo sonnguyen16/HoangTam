@@ -133,6 +133,7 @@ function delelephieuthuchi(id) {
                 <table class="table table-bordered  table-responsive-md">
                     <thead>
                     <tr>
+                        <th>STT</th>
                         <th>Mã phiếu</th>
                         <th>Khách hàng</th>
                         <th>Người thu</th>
@@ -148,7 +149,8 @@ function delelephieuthuchi(id) {
                         <td colspan="9" class="text-center">Không có dữ liệu</td>
                     </tr>
 
-                    <tr :key="kh.id" v-else v-for="kh in allData?.data">
+                    <tr :key="kh.id" v-else v-for="(kh, index) in allData?.data">
+                        <td>{{ index + 1 }}</td>
                         <td>{{ kh.ma }}</td>
                         <td>{{ kh.khach_hang?.ten }}</td>
 

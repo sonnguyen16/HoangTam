@@ -145,6 +145,7 @@ function editModal(kh) {
                 <table class="table table-bordered  table-responsive-md">
                     <thead>
                     <tr>
+                        <th>STT</th>
                         <th>Ngày</th>
                         <th>Số phiếu</th>
                         <th>Nhà cung cấp</th>
@@ -162,7 +163,8 @@ function editModal(kh) {
                         </tr>
 
                         <template v-for="kh in allData.data">
-                            <tr v-for="cthd in kh.chi_tiet_hoa_don" :key="cthd.id">
+                            <tr v-for="(cthd, index) in kh.chi_tiet_hoa_don" :key="cthd.id">
+                                <td class="quantity">{{ index + 1 }}</td>
                                 <td>{{ moment(kh.ngay).format("DD/MM/YYYY") }}</td>
                                 <td>{{ kh.ma }}</td>
                                 <td>{{ kh.nha_cung_cap.ten }}</td>

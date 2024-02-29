@@ -44,7 +44,7 @@ class TonKhoController extends Controller
             });
         }
 
-        $ton_kho_list = $query->paginate(10)->withQueryString();
+        $ton_kho_list = $query->paginate(20)->withQueryString();
 
         return Inertia::render('TonKho/Index', compact('ton_kho_list', 'kho_list', 'san_pham_list'));
     }

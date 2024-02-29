@@ -24,7 +24,7 @@ class NguoiDungController extends Controller
             });
         }
 
-        $nguoi_dung_list = $query->paginate(10)->withQueryString();
+        $nguoi_dung_list = $query->paginate(20)->withQueryString();
 
         return Inertia::render('NguoiDung/Index', compact('nguoi_dung_list', 'don_vi_list'));
     }

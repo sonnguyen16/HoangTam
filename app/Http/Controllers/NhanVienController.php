@@ -24,7 +24,7 @@ class NhanVienController extends Controller
             });
         }
 
-        $nhan_vien_list = $query->paginate(10)->withQueryString();
+        $nhan_vien_list = $query->paginate(20)->withQueryString();
 
         return Inertia::render('NhanVien/Index', compact('nhan_vien_list'));
     }

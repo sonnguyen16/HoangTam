@@ -25,7 +25,7 @@ class KhoController extends Controller
             });
         }
 
-        $kho_list = $query->paginate(10)->withQueryString();
+        $kho_list = $query->paginate(20)->withQueryString();
 
         return Inertia::render('Kho/Index', compact('kho_list'));
     }

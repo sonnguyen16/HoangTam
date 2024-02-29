@@ -23,7 +23,7 @@ class DonViController extends Controller
             });
         }
 
-        $don_vi_list = $query->paginate(10)->withQueryString();
+        $don_vi_list = $query->paginate(20)->withQueryString();
         return Inertia::render('DonVi/Index', compact('don_vi_list'));
     }
 

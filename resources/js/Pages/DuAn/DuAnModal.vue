@@ -37,7 +37,7 @@ const submit = () => {
     form.post(route('duan.store'), {
         onSuccess: () => {
             $('#duanmodal').modal('hide');
-            $('#xemduanmodal').modal('hide');
+            $('#files').val('');
             router.reload();
         },
         onError: () => {

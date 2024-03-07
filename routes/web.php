@@ -20,6 +20,7 @@ use App\Http\Controllers\BaoCaoCongNoController;
 use App\Http\Controllers\DonViController;
 use App\Http\Controllers\NguoiDungController;
 use App\Http\Controllers\BaoCaoNhapXuatController;
+use App\Http\Controllers\BinhLuanController;
 
 Route::prefix('/')->group(function (){
     Route::get('/', [AuthController::class, 'index'])->name('auth.index');
@@ -77,6 +78,7 @@ Route::prefix('/duan')->middleware('auth')->group(function (){
     Route::post('/store', [DuAnController::class, 'store'])->name('duan.store');
     Route::delete('/delete', [DuAnController::class, 'delete'])->name('duan.delete');
     Route::get('/detail', [DuAnController::class, 'detail'])->name('duan.detail');
+    Route::delete('/file/delete', [DuAnController::class, 'deleteFile'])->name('duan.file.delete');
 });
 
 Route::prefix('/nhanvien')->middleware('auth')->group(function (){
@@ -138,6 +140,12 @@ Route::prefix('/baocaocongno')->middleware('auth')->group(function (){
 Route::prefix('/baocaonhapxuat')->middleware('auth')->group(function (){
     Route::get('/', [BaoCaoNhapXuatController::class, 'index'])->name('baocaonhapxuat.index');
 });
+
+Route::prefix('/binhluan')->middleware('auth')->group(function (){
+    Route::post('/', [BinhLuanController::class, 'store'])->name('binhluan.store');
+});
+
+
 
 
 

@@ -33,6 +33,11 @@ class DuAn extends Model
         return $this->hasMany(FileDuAn::class, 'du_an_id');
     }
 
+    public function binh_luan()
+    {
+        return $this->hasMany(BinhLuan::class, 'du_an_id');
+    }
+
     public function created_by()
     {
         return $this->belongsTo(User::class, "created_by");

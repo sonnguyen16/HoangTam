@@ -1,9 +1,10 @@
 <script setup>
 import Gantt from "frappe-gantt";
 import DuAnModal from "@/Pages/DuAn/DuAnModal.vue";
+import ChiTiet from "@/Pages/DuAn/ChiTiet.vue";
 import MainLayout from "@/Layouts/MainLayout.vue";
 import TreeItem1 from "@/Components/app/TreeItem1.vue";
-import {computed, ref, onMounted, onUpdated} from "vue";
+import {computed, onMounted, onUpdated, ref} from "vue";
 
 const props = defineProps({
     du_an: Object,
@@ -33,7 +34,7 @@ const tasks = computed(() => {
             }, ...subTasks];
         });
     }
-    // Gọi hàm đệ quy cho mảng ban đầu
+    // Gọi hàm đệ quy cho mảng ban đầu và sau đó sắp xếp theo ID tăng dần
     return mapChildren(du_an.value.children);
 })
 
@@ -45,9 +46,8 @@ onMounted(() => {
         },
         view_mode: "Day",
         language: "en",
-        bar_height: 30,
         header_height: 45,
-        date_format: 'YYYY-MM-DD',
+        padding: 13,
     })
 })
 
@@ -58,9 +58,9 @@ onUpdated(() => {
         },
         view_mode: "Day",
         language: "en",
-        bar_height: 30,
         header_height: 45,
-        })
+        padding: 13,
+   })
 })
 
 let hang_muc = ref({
@@ -74,10 +74,12 @@ let hang_muc = ref({
     trang_thai: "",
     parent_id: "",
     children: [],
-    files: []
+    files: [],
+    binh_luan: []
 })
 
 function openModal(id) {
+    $('#chitietdamodal').modal('hide');
     hang_muc.value = {
         id: "",
         ten: "",
@@ -88,7 +90,8 @@ function openModal(id) {
         trang_thai: "",
         parent_id: id,
         children: [],
-        files: []
+        files: [],
+        binh_luan: []
     }
     $('#duanmodal').modal('show');
 }
@@ -104,9 +107,10 @@ function editModal(kh) {
         trang_thai: kh.trang_thai,
         parent_id: kh.parent_id,
         children: kh.children,
-        files: kh.files
+        files: kh.files,
+        binh_luan: kh.binh_luan
     }
-    $('#duanmodal').modal('show');
+    $('#chitietdamodal').modal('show');
 }
 
 </script>
@@ -126,49 +130,75 @@ function editModal(kh) {
             <div class="card-body">
                 <div class="">
                     <div class="">
-                        <h5 class="txt-color mb-2 font-weight-bold">{{  du_an.ten }}</h5>
+                        <h4 class="txt-color mb-2 font-weight-bold">{{  du_an.ten }}</h4>
                     </div>
-                    <div class="space-y-2">
+                    <div class="mt-2">
                         <div class="row">
-                            <div class="col-md-2 col-6">
-                                <span class="font-bold ">Ngày bắt đầu</span>
+                            <div class="col-3 space-y-2">
+                                <div class="row">
+                                    <div class="col-md-3 col-6">
+                                        <span class="font-bold ">Ngày bắt đầu</span>
+                                    </div>
+                                    <div class="col-md-9 col-6">
+                                        <span>{{ new Date( du_an.ngay_bat_dau).toLocaleDateString() }}</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3 col-6">
+                                        <span class="font-bold ">Ngày kết thúc</span>
+                                    </div>
+                                    <div class="col-md-9 col-6">
+                                        <span>{{ new Date( du_an.ngay_ket_thuc).toLocaleDateString() }}</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3 col-6 font-bold">
+                                <span>
+                                    Trạng thái
+                                </span>
+                                    </div>
+                                    <div class="col-md-9 col-6">
+                                        <span v-if=" du_an.trang_thai === 0" class="badge badge-warning">Chưa thực hiện</span>
+                                        <span v-else-if=" du_an.trang_thai === 1" class="badge badge-primary">Đang thực hiện</span>
+                                        <span v-else-if=" du_an.trang_thai === 2" class="badge badge-success">Đã hoàn thành</span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-md-10 col-6">
-                                <span>{{ new Date( du_an.ngay_bat_dau).toLocaleDateString() }}</span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-2 col-6">
-                                <span class="font-bold ">Ngày kết thúc</span>
-                            </div>
-                            <div class="col-md-10 col-6">
-                                <span>{{ new Date( du_an.ngay_ket_thuc).toLocaleDateString() }}</span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-2 col-6 font-bold">Trạng thái</div>
-                            <div class="col-md-10 col-6">
-                                <span v-if=" du_an.trang_thai === 0" class="badge badge-warning">Chưa thực hiện</span>
-                                <span v-else-if=" du_an.trang_thai === 1" class="badge badge-primary">Đang thực hiện</span>
-                                <span v-else-if=" du_an.trang_thai === 2" class="badge badge-success">Đã hoàn thành</span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-2 col-6 font-bold">Phụ trách</div>
-                            <div class="col-md-10 col-6">{{  du_an.nhan_vien?.name }}</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-2 col-6 font-bold">Mô tả</div>
-                            <div class="col-md-10 col-6">{{  du_an.mo_ta }}</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-2 col-6 font-bold">File</div>
-                            <div class="col-md-10 col-6">
-                                <ul>
-                                    <li v-for="file in  du_an.files" :key="file.id">
-                                        <a :href="`/uploads/${file.ten}`" target="_blank">{{ file.ten }}</a>
-                                    </li>
-                                </ul>
+                            <div class="col-3 space-y-2">
+                                <div class="row">
+                                    <div class="col-md-3 col-6 font-bold">
+                                        <span>
+                                            Người nhận
+                                        </span>
+                                    </div>
+                                    <div class="col-md-9 col-6">
+                                        <span>{{  du_an.nhan_vien?.name }}</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3 col-6 font-bold">
+                                <span>
+                                    Mô tả
+                                </span>
+                                    </div>
+                                    <div class="col-md-9 col-6">
+                                        <span>{{  du_an.mo_ta }}</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3 col-6 font-bold">
+                                <span>
+                                    Tệp đính kèm
+                                </span>
+                                    </div>
+                                    <div class="col-md-9 col-6">
+                                        <ul>
+                                            <li v-for="file in  du_an.files" :key="file.id">
+                                                <a :href="`/uploads/${file.ten}`" target="_blank">{{ file.ten }}</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="mt-2">
@@ -177,7 +207,7 @@ function editModal(kh) {
                             </div>
                             <div class="p-2 pt-3 pl-3">
                                 <div class="row ">
-                                    <div class="col-md-4">
+                                    <div class="col-md-5">
                                         <div style="height: 56px">
                                             <div class="row h-100 border">
                                                 <div class="col-4 d-flex align-items-center">
@@ -189,10 +219,10 @@ function editModal(kh) {
                                                 <div class="col-2 d-flex align-items-center">
                                                     Kết thúc
                                                 </div>
-                                                <div class="col-2 d-flex align-items-center">
-                                                   Trạng thái
+                                                <div class="col-2 d-flex align-items-center justify-content-center">
+                                                   Người nhận
                                                 </div>
-                                                <div class="col-2 d-flex align-items-center">
+                                                <div class="col-2 d-flex align-items-center justify-content-center">
                                                     Thao tác
                                                 </div>
                                             </div>
@@ -207,7 +237,7 @@ function editModal(kh) {
                                         />
 
                                     </div>
-                                    <div class="col-md-8">
+                                    <div class="col-md-7">
                                         <div class="gantt-target border"></div>
                                     </div>
                                 </div>
@@ -217,6 +247,12 @@ function editModal(kh) {
                 </div>
             </div>
         </div>
+        <ChiTiet
+            :du_an="hang_muc"
+            :users="nhan_vien_list"
+            @add="openModal"
+            @edit="editModal"
+        />
         <DuAnModal
             :du_an="hang_muc"
             :users="nhan_vien_list"
@@ -237,6 +273,11 @@ function editModal(kh) {
 
 .gantt .success .bar{
     fill: #28a745;
+}
+
+.today-highlight{
+    fill: #007bff !important;
+    opacity: 0.3 !important;
 }
 
 </style>

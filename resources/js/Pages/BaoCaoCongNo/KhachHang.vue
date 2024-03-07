@@ -151,7 +151,7 @@ async function chiTietKhachHang(id) {
                         <td class="money">{{kh.xuat?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") || 0}}</td>
                         <td class="money">{{kh.thu?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") || 0}}</td>
                         <td class="quantity">{{kh.ton_cuoi?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") || 0}}</td>
-                        <td style="width: 4%">
+                        <td style="width: 5%">
                             <button @click.prevent="chiTietKhachHang(kh.id)" class="btn btn-primary btn-sm">Chi tiết</button>
                         </td>
                     </tr>

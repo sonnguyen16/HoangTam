@@ -1,6 +1,6 @@
 <script setup>
     // css
-    import '@/assets/admin/plugins/fontawesome-free/css/all.min.css'
+    import '@/assets/admin/plugins/fontawesome-free/css/all.css'
     import '@/assets/admin/dist/css/adminlte.min.css'
     import '@/assets/plugins/select2/css/select2.min.css'
     import '@/assets/css/style.css'

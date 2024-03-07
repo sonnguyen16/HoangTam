@@ -1,5 +1,6 @@
 <script setup>
-import {ref, defineProps, defineEmits} from "vue";
+import {ref, defineProps, defineEmits } from "vue";
+import moment from "moment";
 
 const props = defineProps({
     item: Object,
@@ -16,7 +17,6 @@ const props = defineProps({
 let isOpen = ref(true);
 
 const emit = defineEmits(['edit', 'add']);
-
 function toggle() {
     isOpen.value = !isOpen.value;
 }
@@ -25,22 +25,19 @@ function toggle() {
 
 <template>
     <div>
-        <div class="row " style="height: 48px;">
+        <div :class="['row', {'bg-second font-weight-bold': !isChild}] " style="height: 33px;">
             <div :class="['col-lg-4 col-9 d-flex align-items-center', {'child-container': isChild}]" :style="{ paddingLeft: `${level * 15}px` }">
-                <span :style="{ width: `${level * 15}px` }" class="line-connector"></span>
-                <span v-if="isChild" class="vertical-line"></span>
                 <a @click.prevent="toggle"
                    :class="item.children ? 'cursor-pointer' : 'cursor-text' "
-                   class="mb-2 text-black">
-                    <i v-if="item.children" class="fa fa-folder mr-2 text-amber-400 text-lg" :class="isOpen ? 'fa-folder-open' : 'fa-folder-closed' "></i>
+                   class="text-black ml-3">
                     {{ item.ten }}
                 </a>
             </div>
             <div class="col-lg-2 d-flex align-items-center">
-                <span>{{ item.ngay_bat_dau }}</span>
+                <span>{{ new Date(item.ngay_bat_dau).toLocaleDateString() }}</span>
             </div>
             <div class="col-lg-2 d-flex align-items-center">
-                <span>{{ item.ngay_ket_thuc }}</span>
+                <span>{{ new Date(item.ngay_ket_thuc).toLocaleDateString() }}</span>
             </div>
 <!--            <div class="col-lg-2 d-flex align-items-center">-->
 <!--                    <span>-->
@@ -73,26 +70,13 @@ function toggle() {
 </template>
 
 <style scoped>
-.line-connector {
-    position: absolute;
-    top: 16px;
-    left: 0;
-    height: 1px;
-    background-color: #ccc;
-}
-
-.vertical-line {
-    position: absolute;
-    top: -32px;
-    left: 0;
-    width: 1px;
-    background-color: #ccc;
-    height: 48px;
-}
-
 .child-container {
     position: relative;
     padding-left: 20px;
+}
+
+.bg-second{
+    background-color: #e6e6e6;
 }
 </style>
 

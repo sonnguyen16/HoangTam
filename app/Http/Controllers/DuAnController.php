@@ -18,10 +18,10 @@ class DuAnController extends Controller
 {
     public function index(Request $request)
     {
-        $query = DuAn::with(['nhan_vien', 'files'])->whereNull('deleted_at')
+        $query = DuAn::with(['parent','nhan_vien', 'files'])->whereNull('deleted_at')
             ->whereHas('created_by.don_vi', function ($query) {
                 $query->where('id', Auth::user()->don_vi_id);
-            })->orderBy('id', 'desc');
+            })->orderBy('id', 'asc');
         $nhan_vien_list = User::query()->where('role', 1)->where('don_vi_id', Auth::user()->don_vi_id)->get();
 
         if ($request->filled('search')) {
@@ -42,7 +42,7 @@ class DuAnController extends Controller
 
     public function detail(Request $request)
     {
-        $query = DuAn::with(['nhan_vien', 'files'])->whereNull('deleted_at')
+        $query = DuAn::with(['nhan_vien', 'files','binh_luan.nguoi_dung'])->whereNull('deleted_at')
             ->whereHas('created_by.don_vi', function ($query) {
                 $query->where('id', Auth::user()->don_vi_id);
             })
@@ -79,6 +79,12 @@ class DuAnController extends Controller
                 $file_du_an->save();
             }
         }
+    }
+
+    public function deleteFile(Request $request)
+    {
+        $file = FileDuAn::find($request->id);
+        $file->delete();
     }
 
     public function delete(Request $request)

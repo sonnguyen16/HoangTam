@@ -177,7 +177,7 @@ function addBinhLuan(){
                                                     </thead>
                                                     <tbody>
                                                     <tr v-for="file in files_temp" :key="file.id">
-                                                        <td>{{ file.ten }}</td>
+                                                        <td>{{ file.ten.length > 30 ? file.ten.slice(0,30) + '...' : file.ten }}</td>
                                                         <td class="d-flex gap-[5px] justify-content-center">
                                                             <a v-if="file.id" :href="`/uploads/${file.ten}`" target="_blank" class="btn btn-primary btn-sm">View</a>
                                                             <a v-if="file.id" @click.prevent="deleteFile(file.id)" class="btn btn-sm btn-danger">Delete</a>

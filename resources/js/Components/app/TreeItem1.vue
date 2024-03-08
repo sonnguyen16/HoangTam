@@ -1,6 +1,5 @@
 <script setup>
 import {ref, defineProps, defineEmits } from "vue";
-import moment from "moment";
 
 const props = defineProps({
     item: Object,
@@ -25,7 +24,7 @@ function toggle() {
 
 <template>
     <div>
-        <div :class="['row', {'bg-second font-weight-bold': !isChild}] " style="height: 33px;">
+        <div @click.prevent="emit('edit', item)" :class="['row p-0', {'bg-second font-weight-bold': !isChild}] " style="height: 33px;">
             <div :class="['col-lg-4 col-9 d-flex align-items-center', {'child-container': isChild}]" :style="{ paddingLeft: `${level * 15}px` }">
                 <a @click.prevent="toggle"
                    :class="item.children ? 'cursor-pointer' : 'cursor-text' "
@@ -50,8 +49,8 @@ function toggle() {
                 <span>{{ item.nhan_vien?.name }}</span>
             </div>
             <div class="col-lg-2 col-3 d-flex justify-content-center d-flex align-items-center">
-                <a @click.prevent=" emit('add', item.id);"><i class="fa fa-plus text-neutral-500 mr-2"></i></a>
-                <a @click.prevent=" emit('edit', item);"><i class="fa fa-edit text-neutral-500"></i></a>
+                <a @click.prevent.stop=" emit('add', item.id);"><i class="fa fa-plus text-neutral-500 mr-2"></i></a>
+                <a @click.prevent.stop=" emit('edit', item);"><i class="fa fa-edit text-neutral-500"></i></a>
             </div>
         </div>
         <div>

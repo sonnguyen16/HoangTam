@@ -133,65 +133,71 @@ function editModal(kh) {
                         <h4 class="txt-color mb-2 font-weight-bold">{{  du_an.ten }}</h4>
                     </div>
                     <div class="mt-2">
-                        <div class="row">
-                            <div class="col-3 space-y-2">
-                                <div class="row">
-                                    <div class="col-md-3 col-6">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item" >
+                                <a class="nav-link " data-toggle="pill" role="tab" aria-current="page" href="#tongquan">Tổng quan</a>
+                            </li>
+                            <li class="nav-item " data-toggle="pill" role="tab">
+                                <a class="nav-link active" data-toggle="pill" role="tab" href="#chitiet">Chi tiết</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane fade space-y-3" id="tongquan" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
+                                <div class="row mt-3 text-md">
+                                    <div class="col-md-2 col-6">
                                         <span class="font-bold ">Ngày bắt đầu</span>
                                     </div>
-                                    <div class="col-md-9 col-6">
+                                    <div class="col-md-10 col-6">
                                         <span>{{ new Date( du_an.ngay_bat_dau).toLocaleDateString() }}</span>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-3 col-6">
+                                    <div class="col-md-2 col-6">
                                         <span class="font-bold ">Ngày kết thúc</span>
                                     </div>
-                                    <div class="col-md-9 col-6">
+                                    <div class="col-md-10 col-6">
                                         <span>{{ new Date( du_an.ngay_ket_thuc).toLocaleDateString() }}</span>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-3 col-6 font-bold">
-                                <span>
-                                    Trạng thái
-                                </span>
+                                    <div class="col-md-2 col-6 font-bold">
+                                                <span>
+                                                    Trạng thái
+                                                </span>
                                     </div>
-                                    <div class="col-md-9 col-6">
+                                    <div class="col-md-10 col-6">
                                         <span v-if=" du_an.trang_thai === 0" class="badge badge-warning">Chưa thực hiện</span>
                                         <span v-else-if=" du_an.trang_thai === 1" class="badge badge-primary">Đang thực hiện</span>
                                         <span v-else-if=" du_an.trang_thai === 2" class="badge badge-success">Đã hoàn thành</span>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-3 space-y-2">
                                 <div class="row">
-                                    <div class="col-md-3 col-6 font-bold">
-                                        <span>
-                                            Người nhận
-                                        </span>
+                                    <div class="col-md-2 col-6 font-bold">
+                                                <span>
+                                                    Người nhận
+                                                </span>
                                     </div>
-                                    <div class="col-md-9 col-6">
+                                    <div class="col-md-10 col-6">
                                         <span>{{  du_an.nhan_vien?.name }}</span>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-3 col-6 font-bold">
-                                <span>
-                                    Mô tả
-                                </span>
+                                    <div class="col-md-2 col-6 font-bold">
+                                                <span>
+                                                    Mô tả
+                                                </span>
                                     </div>
-                                    <div class="col-md-9 col-6">
+                                    <div class="col-md-10 col-6">
                                         <span>{{  du_an.mo_ta }}</span>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-3 col-6 font-bold">
-                                <span>
-                                    Tệp đính kèm
-                                </span>
+                                    <div class="col-md-2 col-6 font-bold">
+                                                <span>
+                                                    Tệp đính kèm
+                                                </span>
                                     </div>
-                                    <div class="col-md-9 col-6">
+                                    <div class="col-md-10 col-6">
                                         <ul>
                                             <li v-for="file in  du_an.files" :key="file.id">
                                                 <a :href="`/uploads/${file.ten}`" target="_blank">{{ file.ten }}</a>
@@ -199,46 +205,49 @@ function editModal(kh) {
                                         </ul>
                                     </div>
                                 </div>
+
                             </div>
-                        </div>
-                        <div class="mt-2">
-                            <div class="mb-1">
-                                <a class="btn btn-primary" @click.prevent="openModal(du_an.id)">Thêm hạng mục</a>
-                            </div>
-                            <div class="p-2 pt-3 pl-3">
-                                <div class="row ">
-                                    <div class="col-md-5">
-                                        <div style="height: 56px">
-                                            <div class="row h-100 border">
-                                                <div class="col-4 d-flex align-items-center">
-                                                    Tên
+                            <div class="tab-pane fade active show" id="chitiet" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
+                                <div id="chitiet" class="mt-3">
+                                    <div class="mb-1">
+                                        <a class="btn btn-primary" @click.prevent="openModal(du_an.id)">Thêm hạng mục</a>
+                                    </div>
+                                    <div class="p-2 pt-3 pl-3">
+                                        <div class="row ">
+                                            <div class="col-md-5">
+                                                <div style="height: 56px">
+                                                    <div class="row h-100 border">
+                                                        <div class="col-4 d-flex align-items-center">
+                                                            Tên
+                                                        </div>
+                                                        <div class="col-2 d-flex align-items-center">
+                                                            Bắt đầu
+                                                        </div>
+                                                        <div class="col-2 d-flex align-items-center">
+                                                            Kết thúc
+                                                        </div>
+                                                        <div class="col-2 d-flex align-items-center justify-content-center">
+                                                            Người nhận
+                                                        </div>
+                                                        <div class="col-2 d-flex align-items-center justify-content-center">
+                                                            Thao tác
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="col-2 d-flex align-items-center">
-                                                    Bắt đầu
-                                                </div>
-                                                <div class="col-2 d-flex align-items-center">
-                                                    Kết thúc
-                                                </div>
-                                                <div class="col-2 d-flex align-items-center justify-content-center">
-                                                   Người nhận
-                                                </div>
-                                                <div class="col-2 d-flex align-items-center justify-content-center">
-                                                    Thao tác
-                                                </div>
+                                                <TreeItem1
+                                                    class=""
+                                                    v-for="(item, index) in du_an.children"
+                                                    :key="item.id"
+                                                    :item="item"
+                                                    @edit="editModal"
+                                                    @add="openModal"
+                                                />
+
+                                            </div>
+                                            <div class="col-md-7">
+                                                <div class="gantt-target border"></div>
                                             </div>
                                         </div>
-                                        <TreeItem1
-                                            class=""
-                                            v-for="(item, index) in du_an.children"
-                                            :key="item.id"
-                                            :item="item"
-                                            @edit="editModal"
-                                            @add="openModal"
-                                        />
-
-                                    </div>
-                                    <div class="col-md-7">
-                                        <div class="gantt-target border"></div>
                                     </div>
                                 </div>
                             </div>

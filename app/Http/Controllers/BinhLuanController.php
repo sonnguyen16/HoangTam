@@ -14,6 +14,7 @@ class BinhLuanController extends Controller
 
         try {
             $binhLuan = BinhLuan::updateOrCreate($data);
+            $binhLuan = BinhLuan::with('nguoi_dung')->find($binhLuan->id);
             return response()->json($binhLuan, 201);
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage()], 500);

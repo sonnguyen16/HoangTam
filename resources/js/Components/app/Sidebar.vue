@@ -123,7 +123,7 @@ const user = computed(() => {
             </ul>
           </li>
           <hr class="m-2 mr-4 ml-3" />
-          <li v-if="user?.role === 0" class="nav-item menu-open mb-5">
+          <li v-if="user?.role == 0" class="nav-item menu-open mb-5">
             <NavLink title="Hệ thống" />
             <ul class="nav nav-treeview">
               <NavItem :href="route('donvi.index')" title="Danh sách đơn vị" />

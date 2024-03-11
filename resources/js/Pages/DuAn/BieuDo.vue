@@ -78,8 +78,22 @@ let hang_muc = ref({
     binh_luan: []
 })
 
+let hang_muc1 = ref({
+    id: "",
+    ten: "",
+    ngay_bat_dau: "",
+    ngay_ket_thuc: "",
+    user_id: "",
+    nhan_vien: {},
+    mo_ta: "",
+    trang_thai: "",
+    parent_id: "",
+    children: [],
+    files: [],
+    binh_luan: []
+})
+
 function openModal(id) {
-    $('#chitietdamodal').modal('hide');
     hang_muc.value = {
         id: "",
         ten: "",
@@ -97,7 +111,7 @@ function openModal(id) {
 }
 
 function editModal(kh) {
-    hang_muc.value = {
+    hang_muc1.value = {
         id: kh.id,
         ten: kh.ten,
         ngay_bat_dau: kh.ngay_bat_dau,
@@ -111,6 +125,24 @@ function editModal(kh) {
         binh_luan: kh.binh_luan
     }
     $('#chitietdamodal').modal('show');
+}
+
+function reload(){
+    function search(children){
+        children.forEach((item, index) => {
+            if (item.id === hang_muc1.value.id) {
+                editModal(item)
+            }
+            if (item.children) {
+                let found = search(item.children);
+                if (found) {
+                    editModal(found)
+                }
+            }
+        })
+    }
+
+   search(du_an.value.children);
 }
 
 </script>
@@ -257,14 +289,16 @@ function editModal(kh) {
             </div>
         </div>
         <ChiTiet
-            :du_an="hang_muc"
+            :du_an="hang_muc1"
             :users="nhan_vien_list"
             @add="openModal"
             @edit="editModal"
+
         />
         <DuAnModal
             :du_an="hang_muc"
             :users="nhan_vien_list"
+            @reload="reload"
         />
     </MainLayout>
 

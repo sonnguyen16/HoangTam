@@ -36,9 +36,11 @@ watchEffect(() => {
 const submit = () => {
     form.post(route('duan.store'), {
         onSuccess: () => {
-            $('#duanmodal').modal('hide');
-            $('#files').val('');
-            router.reload();
+            closeModal()
+            router.reload({
+                preserveState: true,
+            });
+            reload()
         },
         onError: () => {
             console.log(form.errors)
@@ -51,6 +53,12 @@ const closeModal = () => {
     form.reset();
     form.clearErrors();
     $('#files').val('');
+}
+
+const emit = defineEmits(['reload'])
+
+const reload = () => {
+    emit('reload')
 }
 
 

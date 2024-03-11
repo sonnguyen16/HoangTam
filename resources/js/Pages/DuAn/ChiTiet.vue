@@ -42,9 +42,10 @@ const submit = () => {
     form.post(route('duan.store'), {
         onSuccess: () => {
 
+            toastr.success('Cập nhật thành công')
         },
         onError: () => {
-            console.log(form.errors)
+            toastr.error('Có lỗi xảy ra, vui lòng thử lại')
         }
     })
 }
@@ -92,6 +93,8 @@ const editHangMuc = (item) => {
     emit('edit', item)
 }
 
+
+
 const addHangMuc = (id) => {
     emit('add', id)
 }
@@ -130,7 +133,7 @@ function addBinhLuan(){
                 <form @submit.prevent="submit">
                     <div class="modal-body">
                         <input type="hidden" v-model="form.id" id="id" class="form-control"/>
-                        <input type="text" class="font-weight-bold border-0 text-3xl pl-0" v-model="form.ten">
+                        <input type="text" class="font-weight-bold border-0 text-lg pl-0" v-model="form.ten">
                         <div class="d-flex align-items-center">
                             <label for="ngay_bat_dau" class="font-weight-bold text-secondary mt-2">Bắt đầu:</label>
                             <input type="date" v-model="form.ngay_bat_dau" id="ngay_bat_dau" class="border-0 mr-5 text-secondary"/>
@@ -148,12 +151,12 @@ function addBinhLuan(){
                             </select>
                         </div>
                         <div class="mt-3">
-                            <label for="mo_ta" class="font-weight-bold text-success text-lg ">Mô tả hạng mục:</label>
+                            <label for="mo_ta" class="font-weight-bold text-success ">Mô tả hạng mục:</label>
                             <textarea v-model="form.mo_ta" id="mo_ta" class="form-control border-0 pl-0" rows="3"></textarea>
                         </div>
                         <div class="mt-3">
                             <div class="d-flex align-items-center mb-2">
-                                <label for="mo_ta" class="font-weight-bold text-success mt-2 text-lg ">Attachments:</label>
+                                <label for="mo_ta" class="font-weight-bold text-success mt-2 ">Attachments:</label>
                                 <label for="files1" class="btn btn-success btn-sm mt-2 ml-3">Chọn file</label>
                                 <input accept=".png, .jpg, .jpeg, .gif, .bmp, .doc, .docx, .xls, .xlsx, .pdf"
                                        type="file"
@@ -188,18 +191,12 @@ function addBinhLuan(){
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-8">
-                                        <ul>
-                                            <li v-for="error in form.errors" class="text-danger text-md">{{ error }}</li>
-                                        </ul>
-
-                                    </div>
                                 </div>
                             </template>
                             <button type="submit" :disabled="form.processing" class="btn btn-primary right-0" >Lưu</button>
                             <hr>
                             <div class="mt-4 mb-4" id="subtasks">
-                                <label for="mo_ta" class="font-weight-bold text-success text-lg ">Hạng mục con:</label>
+                                <label for="mo_ta" class="font-weight-bold text-success ">Hạng mục con:</label>
                                 <a class="btn btn-primary btn-sm ml-3 font-weight-bold" @click.prevent="addHangMuc(du_an.id)">Thêm</a>
                                 <div class="mt-3 container">
                                     <TreeItem
@@ -214,7 +211,7 @@ function addBinhLuan(){
                             </div>
                             <hr>
                             <div id="comments" class="mt-4">
-                                <h5 class="font-weight-bold">Bình luận ({{ props.du_an.binh_luan.length }})</h5>
+                                <p class="font-weight-bold">Bình luận ({{ props.du_an.binh_luan.length }})</p>
                                 <div class="card">
                                     <div class="card-body">
                                         <div :class="['d-flex', {'mb-4': props.du_an.binh_luan.length > 0}]">

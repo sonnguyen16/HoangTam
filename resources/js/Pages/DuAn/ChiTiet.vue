@@ -1,8 +1,10 @@
 <script setup>
 import {ref, watchEffect} from "vue";
-import {router, useForm} from "@inertiajs/vue3";
+import {router, useForm, usePage} from "@inertiajs/vue3";
 import InputError from "@/Components/InputError.vue";
 import TreeItem from "@/Components/app/TreeItem.vue";
+
+const page = usePage()
 
 const props = defineProps({
     du_an: Object,
@@ -215,7 +217,8 @@ function addBinhLuan(){
                                 <div class="card">
                                     <div class="card-body">
                                         <div :class="['d-flex', {'mb-4': props.du_an.binh_luan.length > 0}]">
-                                            <img src="https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png" alt="avatar" class="rounded-full w-10 h-10">
+                                            <img v-if="page.props.user.hinh_anh" :src="'/uploads/nhan_vien/' + page.props.user.hinh_anh" alt="avatar" class="rounded-full w-10 h-10 object-cover">
+                                            <img v-else src="/uploads/avatardefault.png" alt="avatar" class="rounded-full w-10  object-cover">
                                             <form @submit.prevent="addBinhLuan()" class="flex-1 d-flex">
                                                 <input type="hidden" :value="props.du_an.id">
                                                 <input id="comment" class="form-control border-0 flex-1" placeholder="Nhập bình luận">
@@ -224,10 +227,11 @@ function addBinhLuan(){
                                                 </button>
                                             </form>
                                         </div>
-<!--                                        Show comment-->
+
                                         <div v-for="cm in props.du_an.binh_luan" class="">
                                             <div class="d-flex">
-                                                <img src="https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png" alt="avatar" class="rounded-full w-10 h-10">
+                                                <img v-if="cm.nguoi_dung.hinh_anh" :src="'/uploads/nhan_vien/' + cm.nguoi_dung.hinh_anh" alt="avatar" class="rounded-full w-10 h-10 object-cover">
+                                                <img v-else src="/uploads/avatardefault.png" alt="avatar" class="rounded-full w-10 h-10 object-cover">
                                                 <div class="flex-1 ml-3">
                                                     <div class="d-flex justify-content-between">
                                                         <span class="font-weight-bold">{{ cm.nguoi_dung.name }}</span>

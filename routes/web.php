@@ -21,6 +21,8 @@ use App\Http\Controllers\DonViController;
 use App\Http\Controllers\NguoiDungController;
 use App\Http\Controllers\BaoCaoNhapXuatController;
 use App\Http\Controllers\BinhLuanController;
+use App\Http\Controllers\PhongBanController;
+use App\Http\Controllers\DeXuatController;
 
 Route::prefix('/')->group(function (){
     Route::get('/', [AuthController::class, 'index'])->name('auth.index');
@@ -145,6 +147,18 @@ Route::prefix('/binhluan')->middleware('auth')->group(function (){
     Route::post('/', [BinhLuanController::class, 'store'])->name('binhluan.store');
 });
 
+Route::prefix('/phongban')->middleware('auth')->group(function (){
+    Route::get('/', [PhongBanController::class, 'index'])->name('phongban.index');
+    Route::post('/store', [PhongBanController::class, 'store'])->name('phongban.store');
+    Route::delete('/delete', [PhongBanController::class, 'delete'])->name('phongban.delete');
+});
+
+Route::prefix('/dexuat')->middleware('auth')->group(function (){
+    Route::get('/', [DeXuatController::class, 'index'])->name('dexuat.index');
+    Route::post('/store', [DeXuatController::class, 'store'])->name('dexuat.store');
+    Route::delete('/delete', [DeXuatController::class, 'delete'])->name('dexuat.delete');
+    Route::post('/duyet', [DeXuatController::class, 'duyet'])->name('dexuat.duyet');
+});
 
 
 

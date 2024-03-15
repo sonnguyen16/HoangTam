@@ -24,7 +24,8 @@ class BinhLuanRequest extends FormRequest
         return [
             'id' => [''],
             'noi_dung' => ['required', 'string'],
-            'du_an_id' => ['required', 'integer'],
+            'du_an_id' => '',
+            'de_xuat_id' => '',
         ];
     }
 
@@ -37,7 +38,6 @@ class BinhLuanRequest extends FormRequest
     {
         return [
             'noi_dung.required' => 'Nội dung không được để trống',
-            'du_an_id.required' => 'Dự án không được để trống',
         ];
     }
 

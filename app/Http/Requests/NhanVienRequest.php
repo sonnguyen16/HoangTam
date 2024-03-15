@@ -26,10 +26,19 @@ class NhanVienRequest extends FormRequest
             "name" => "required",
             "email" => "required|email",
             "role" => "",
+            "phong_ban_id" => "required",
+            "dia_chi" => "",
+            "dien_thoai" => "",
+            "cccd" => "",
+            "ngay_cap" => "",
+            "hinh_anh" => "",
+            "ghi_chu" => "",
+            "muc_luong" => "",
         ];
 
         if(!isset($this->id)) {
             $rules['password'] = "required";
+            $rules['email'] = "required|email|unique:users,email";
         }
 
         if(isset($this->password) && isset($this->id)) {
@@ -48,7 +57,9 @@ class NhanVienRequest extends FormRequest
             "name.required" => "Tên nhân viên không được để trống",
             "email.required" => "Email không được để trống",
             "email.email" => "Email không đúng định dạng",
+            "email.unique" => "Email đã tồn tại",
             "password.required" => "Mật khẩu không được để trống",
+            "phong_ban_id.required" => "Phòng ban không được để trống",
         ];
     }
 }

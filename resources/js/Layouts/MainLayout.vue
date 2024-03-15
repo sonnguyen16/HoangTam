@@ -23,7 +23,7 @@
             <Navbar/>
             <Sidebar/>
             <div class="content-wrapper">
-                <section class="content pt-3">
+                <section class="content" style="padding-top: 12px">
                     <div class="container-fluid">
                         <div class="card shadow bg-light-blue card-container">
                             <div class="card-body">

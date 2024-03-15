@@ -49,4 +49,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(DonVi::class, 'don_vi_id');
     }
+
+    public function phong_ban()
+    {
+        return $this->belongsTo(PhongBan::class, 'phong_ban_id');
+    }
 }

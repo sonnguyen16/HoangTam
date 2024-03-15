@@ -39,10 +39,12 @@ const submit = () => {
             closeModal()
             router.reload({
                 preserveState: true,
-            });
+            })
+            toastr.success('Lưu thành công')
             reload()
         },
         onError: () => {
+            toastr.error('Lưu thất bại')
             console.log(form.errors)
         }
     })

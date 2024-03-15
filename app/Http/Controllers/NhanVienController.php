@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PhongBan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -14,7 +15,14 @@ class NhanVienController extends Controller
     public function index(Request $request)
     {
         $query = User::query()->whereNull('deleted_at')->where('role', 1)
-            ->where('don_vi_id', Auth::user()->don_vi_id)->orderBy('id', 'desc');
+            ->where('don_vi_id', Auth::user()->don_vi_id)
+            ->with('phong_ban')
+            ->orderBy('id', 'desc');
+
+        $phong_ban_list = PhongBan::query()->whereNull('deleted_at')
+            ->whereHas('created_by.don_vi',function ($query){
+                $query->where('id', Auth::user()->don_vi_id);
+            })->get();
 
         if ($request->filled('search')) {
             $search = $request->search;
@@ -26,13 +34,19 @@ class NhanVienController extends Controller
 
         $nhan_vien_list = $query->paginate(20)->withQueryString();
 
-        return Inertia::render('NhanVien/Index', compact('nhan_vien_list'));
+        return Inertia::render('NhanVien/Index', compact('nhan_vien_list', 'phong_ban_list'));
     }
 
     public function store(NhanVienRequest $request)
     {
         $data = $request->validated();
         $data['don_vi_id'] = Auth::user()->don_vi_id;
+        if($request->hasFile('hinh_anh')){
+            $file = $request->file('hinh_anh');
+            $file_name = time() . '.' . $file->getClientOriginalExtension();
+            $file->move('uploads/nhan_vien', $file_name);
+            $data['hinh_anh'] = $file_name;
+        }
         User::updateOrCreate(['id' => $data['id']], $data);
     }
 

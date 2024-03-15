@@ -34,7 +34,7 @@ const tasks = computed(() => {
             }, ...subTasks];
         });
     }
-    // Gọi hàm đệ quy cho mảng ban đầu và sau đó sắp xếp theo ID tăng dần
+    // Gọi hàm đệ quy cho mảng ban đầu
     return mapChildren(du_an.value.children);
 })
 

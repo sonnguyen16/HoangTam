@@ -47,6 +47,8 @@ const user = computed(() => {
               <NavItem :href="route('khachhang.index')" title="Khách hàng" />
               <NavItem :href="route('nhacungcap.index')" title="Nhà cung cấp" />
               <NavItem :href="route('nhanvien.index')" title="Nhân viên" />
+              <NavItem :href="route('phongban.index')" title="Phòng ban" />
+              <NavItem :href="route('dexuat.index')" title="Đề xuất" />
             </ul>
           </li>
           <hr class="m-2 mr-4 ml-3" />
@@ -138,4 +140,10 @@ const user = computed(() => {
     </div>
   </aside>
 </template>
+<style scoped>
+  .nav-link{
+      padding: 0.1rem 1rem !important;
+  }
+</style>
+
 

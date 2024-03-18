@@ -168,7 +168,7 @@ function addBinhLuan(){
                                        multiple/>
                                 <span id="fileList" class="d-inline-block ml-3"></span>
                             </div>
-                            <template v-if="form.files.length > 0">
+                            <template v-if="files_temp.length > 0">
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="card">
@@ -184,7 +184,7 @@ function addBinhLuan(){
                                                     <tr v-for="file in files_temp" :key="file.id">
                                                         <td>{{ file.ten.length > 30 ? file.ten.slice(0,30) + '...' : file.ten }}</td>
                                                         <td class="d-flex gap-[5px] justify-content-center">
-                                                            <a v-if="file.id" :href="`/uploads/${file.ten}`" target="_blank" class="btn btn-primary btn-sm">View</a>
+                                                            <a v-if="file.id" :href="`/uploads/du_an/${file.ten}`" target="_blank" class="btn btn-primary btn-sm">View</a>
                                                             <a v-if="file.id" @click.prevent="deleteFile(file.id)" class="btn btn-sm btn-danger">Delete</a>
                                                         </td>
                                                     </tr>

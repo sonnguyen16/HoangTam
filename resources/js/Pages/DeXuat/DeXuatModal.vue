@@ -11,7 +11,7 @@ const form = useForm({
     id: "",
     ten: "",
     noi_dung: "",
-    nguoi_duyet: "",
+    nguoi_duyet: {},
     nguoi_theo_doi: [],
     file: "",
 })
@@ -21,14 +21,14 @@ watchEffect(() => {
     form.ten = props.de_xuat.ten
     form.noi_dung = props.de_xuat.noi_dung
     form.nguoi_duyet = props.de_xuat.nguoi_duyet.id
-    form.nguoi_theo_doi = props.de_xuat.nguoi_theo_doi.map(nv => String(nv.user_id))
+    form.nguoi_theo_doi = []
     form.file = props.de_xuat.file
 })
 const submit = () => {
     form.post(route('dexuat.store'), {
         onSuccess: () => {
             $('#dexuatmodal').modal('hide');
-            router.visit(route('dexuat.index'))
+            router.visit(route('dexuat.index'),)
         },
         onError: () => {
             console.log(form.errors)
@@ -52,7 +52,7 @@ onMounted(() => {
        placeholder: "Chọn người theo dõi",
    }).on('change', function (e) {
         form.nguoi_theo_doi = $(this).val();
-    });
+   });
 })
 
 
@@ -75,19 +75,19 @@ onMounted(() => {
                                     <span v-else class="txt-color mb-0 font-weight-bold">Thêm đề xuất</span>
                                 </div>
 
-                                <div class="form-group">
+                                <div v-show="!form.id" class="form-group">
                                     <label for="ten">Tên đề xuất</label>
                                     <input v-model="form.ten" type="text" :class="{'border border-danger' : form.errors.ten}" name="ten" class="form-control"
                                            placeholder="Nhập tên đề xuất">
                                 </div>
 
-                                <div class="form-group">
+                                <div v-show="!form.id" class="form-group">
                                     <label for="noi_dung">Nội dung</label>
                                     <textarea v-model="form.noi_dung" :class="{'border border-danger' : form.errors.noi_dung}" name="noi_dung" class="form-control"
                                               placeholder="Nhập nội dung đề xuất"></textarea>
                                 </div>
 
-                                <div class="form-group">
+                                <div  class="form-group">
                                     <label for="nguoi_duyet">Người duyệt</label>
                                     <select v-model="form.nguoi_duyet" :class="{'border border-danger' : form.errors.nguoi_duyet}" name="nguoi_duyet" class="form-control">
                                         <option v-for="nv in nhan_vien_list" :value="nv.id">{{nv.name}}</option>
@@ -101,7 +101,7 @@ onMounted(() => {
                                     </select>
                                 </div>
 
-                                <div class="form-group">
+                                <div v-show="!form.id" class="form-group">
                                     <label for="file">File đính kèm</label>
                                     <input type="file" :class="{'border border-danger' : form.errors.file}" name="file"
                                            placeholder="Chọn file đính kèm" multiple @change="updateImage">

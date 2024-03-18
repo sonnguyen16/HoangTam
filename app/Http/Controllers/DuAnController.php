@@ -60,6 +60,7 @@ class DuAnController extends Controller
 
         unset($data['files']);
 
+
         $du_an = DuAn::updateOrCreate(['id' => $data['id']], $data);
         if (isset($data['parent_id'])) {
             $parent = DuAn::find($data['parent_id']);
@@ -72,7 +73,7 @@ class DuAnController extends Controller
             $files = $request->file('files');
             foreach ($files as $file) {
                 $file_name = time().'_'.Str::random(10).'_'.$file->getClientOriginalName();
-                $file->move(public_path('uploads'), $file_name);
+                $file->move(public_path('uploads/du_an'), $file_name);
                 $file_du_an = new FileDuAn();
                 $file_du_an->du_an_id = $du_an->id;
                 $file_du_an->ten = $file_name;

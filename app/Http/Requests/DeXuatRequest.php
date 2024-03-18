@@ -25,8 +25,8 @@ class DeXuatRequest extends FormRequest
             'id' => '',
             'ten' => 'required',
             'noi_dung' => 'required',
-            'nguoi_duyet' => 'required',
-            'trang_thai' => ''
+            'nguoi_duyet' => 'sometimes|required',
+            'files' => ''
         ];
     }
 

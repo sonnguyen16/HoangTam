@@ -4,7 +4,6 @@ import MainLayout from "@/Layouts/MainLayout.vue";
 import {computed, ref, watch} from "vue";
 import DuAnModal from "@/Pages/duan/DuAnModal.vue";
 import {router} from "@inertiajs/vue3";
-import XemDuAnModal from "@/Pages/DuAn/XemDuAnModal.vue";
 
 const props = defineProps({
     du_an_list: Object,
@@ -203,11 +202,6 @@ function xemDuAnModal(kh) {
         <DuAnModal
             :du_an="hang_muc"
             :users="nhan_vien_list"
-        />
-        <XemDuAnModal
-            :du_an="du_an"
-            @edit="editModal"
-            @add="openModal"
         />
     </MainLayout>
 </template>

@@ -158,6 +158,7 @@ Route::prefix('/dexuat')->middleware('auth')->group(function (){
     Route::post('/store', [DeXuatController::class, 'store'])->name('dexuat.store');
     Route::delete('/delete', [DeXuatController::class, 'delete'])->name('dexuat.delete');
     Route::post('/duyet', [DeXuatController::class, 'duyet'])->name('dexuat.duyet');
+    Route::post('/xoatheodoi', [DeXuatController::class, 'xoaNguoiTheoDoi'])->name('dexuat.xoatheodoi');
 });
 
 

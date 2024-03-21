@@ -26,7 +26,7 @@ function toggle() {
     <div>
         <div @click.prevent="emit('edit', item)" :class="['row p-0', {'bg-second font-weight-bold': !isChild}] " style="height: 33px;">
             <div :class="['col-lg-4 col-9 d-flex align-items-center', {'child-container': isChild}]" :style="{ paddingLeft: `${level * 15}px` }">
-                <a @click.prevent="toggle"
+                <a @click.prevent.stop="toggle"
                    :class="item.children ? 'cursor-pointer' : 'cursor-text' "
                    class="text-black ml-3">
                     {{ item.ten }}

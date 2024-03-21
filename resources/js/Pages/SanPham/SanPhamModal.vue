@@ -49,8 +49,7 @@ watchEffect(() => {
 const submit = () => {
     form.post(route('sanpham.store'), {
         onSuccess: () => {
-            $('#sanphammodal').modal('hide');
-            router.visit(route('sanpham.index'))
+            closeModal()
         },
         onError: () => {
             console.log(form.errors)

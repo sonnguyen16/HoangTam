@@ -26,7 +26,7 @@ watchEffect(() => {
 const submit = () => {
     form.post(route('tonkho.store'), {
         onSuccess: () => {
-            router.visit(route('tonkho.index'))
+
         },
         onError: () => {
             console.log(form.errors)

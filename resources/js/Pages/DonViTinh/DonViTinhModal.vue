@@ -19,8 +19,7 @@ watchEffect(() => {
 const submit = () => {
     form.post(route('donvitinh.store'), {
         onSuccess: () => {
-            $('#donvitinhmodal').modal('hide');
-            router.visit(route('donvitinh.index'))
+            closeModal()
         },
         onError: () => {
             console.log(form.errors)

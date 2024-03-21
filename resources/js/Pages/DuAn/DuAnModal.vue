@@ -1,5 +1,5 @@
 <script setup>
-import {watchEffect} from "vue";
+import {onMounted, watchEffect} from "vue";
 import {router, useForm} from "@inertiajs/vue3";
 import InputError from "@/Components/InputError.vue";
 
@@ -18,6 +18,7 @@ const form = useForm({
     trang_thai: "",
     parent_id: "",
     children: [],
+    nguoi_theo_doi: [],
     files: []
 })
 
@@ -31,38 +32,38 @@ watchEffect(() => {
     form.trang_thai = props.du_an.trang_thai
     form.parent_id = props.du_an.parent_id
     form.children = props.du_an.children
+    form.nguoi_theo_doi = []
+    $('#nguoi_theo_doi').val(null).trigger('change');
     form.files = props.du_an.files
 })
+
+const emit = defineEmits(['reload'])
 const submit = () => {
     form.post(route('duan.store'), {
         onSuccess: () => {
+            emit('reload', form.id)
             closeModal()
-            router.reload({
-                preserveState: true,
-            })
-            toastr.success('Lưu thành công')
-            reload()
         },
         onError: () => {
-            toastr.error('Lưu thất bại')
             console.log(form.errors)
         }
     })
 }
 
 const closeModal = () => {
-    $('#duanmodal').modal('hide');
     form.reset();
     form.clearErrors();
     $('#files').val('');
+    $('#duanmodal').modal('hide');
 }
 
-const emit = defineEmits(['reload'])
 
-const reload = () => {
-    emit('reload')
-}
 
+onMounted(() => {
+    $('#nguoi_theo_doi').select2().on('change', function (e) {
+        form.nguoi_theo_doi = $(this).val();
+    });
+})
 
 </script>
 
@@ -78,18 +79,18 @@ const reload = () => {
                                 <input type="hidden" v-model="form.id" id="id" class="form-control"/>
 
                                 <div class="form-group-container">
-                                    <div class="form-group-title">
+                                    <div v-show="!form.id" class="form-group-title">
                                         <span v-if="du_an.id" class="txt-color mb-0 font-weight-bold">Sửa dự án</span>
                                         <span v-else class="txt-color mb-0 font-weight-bold">Thêm dự án</span>
                                     </div>
 
-                                    <div class="form-group">
+                                    <div v-show="!form.id" class="form-group">
                                         <label for="name">Tên dự án</label>
                                         <input :class="{ 'border-danger' : form.errors.ten }" type="text" v-model="form.ten" class="form-control" id="ten" />
                                     </div>
 <!--                                    <InputError :message="form.errors.ten" />-->
 
-                                    <div class="form-group">
+                                    <div v-show="!form.id" class="form-group">
                                         <label for="name">Người phụ trách</label>
                                         <select :class="{ 'border-danger' : form.errors.user_id }" v-model="form.user_id" class="form-control" id="user_id">
                                             <option value="">Chọn người phụ trách</option>
@@ -98,27 +99,39 @@ const reload = () => {
                                     </div>
 <!--                                    <InputError :message="form.errors.user_id" />-->
 
+                                    <div class="form-group">
+                                        <label for="nguoi_theo_doi">Người theo dõi</label>
+                                        <select id="nguoi_theo_doi"
+                                                v-model="form.nguoi_theo_doi"
+                                                :class="{'border border-danger' : form.errors.nguoi_theo_doi}"
+                                                name="nguoi_theo_doi[]" class="form-control"
+                                                multiple
+                                        >
+                                            <option v-for="nv in users" :value="nv.id">{{nv.name}}</option>
+                                        </select>
+                                    </div>
+
                                     <input type="hidden" v-model="form.parent_id">
 
-                                    <div class="form-group">
+                                    <div v-show="!form.id" class="form-group">
                                         <label for="name">Ngày bắt đầu</label>
                                         <input :class="{ 'border-danger' : form.errors.ngay_bat_dau }" type="date" v-model="form.ngay_bat_dau" class="form-control" id="ngay_bat_dau" />
                                     </div>
 <!--                                    <InputError :message="form.errors.ngay_bat_dau" />-->
 
-                                    <div class="form-group">
+                                    <div v-show="!form.id" class="form-group">
                                         <label for="name">Ngày kết thúc</label>
                                         <input :class="{ 'border-danger' : form.errors.ngay_ket_thuc }" type="date" v-model="form.ngay_ket_thuc" class="form-control" id="ngay_ket_thuc" />
                                     </div>
 <!--                                    <InputError :message="form.errors.ngay_ket_thuc" />-->
 
-                                    <div class="form-group">
+                                    <div v-show="!form.id" class="form-group">
                                         <label for="name">Mô tả</label>
                                         <textarea :class="{ 'border-danger' : form.errors.mo_ta }" type="text" v-model="form.mo_ta" class="form-control" id="mo_ta" ></textarea>
                                     </div>
 <!--                                    <InputError :message="form.errors.mo_ta" />-->
 
-                                    <div class="form-group">
+                                    <div v-show="!form.id" class="form-group">
                                         <label for="name">Trạng thái</label>
                                         <select :class="{ 'border-danger' : form.errors.trang_thai }" v-model="form.trang_thai" class="form-control" id="trang_thai">
                                             <option value="">Chọn trạng thái</option>
@@ -129,7 +142,7 @@ const reload = () => {
                                     </div>
 <!--                                    <InputError :message="form.errors.trang_thai" />-->
 
-                                    <div class="form-group">
+                                    <div v-show="!form.id" class="form-group">
                                         <label for="name">Tệp đính kèm</label>
                                         <input accept=".png, .jpg, .jpeg, .gif, .bmp, .doc, .docx, .xls, .xlsx, .pdf"
                                                type="file"
@@ -138,11 +151,6 @@ const reload = () => {
                                                multiple/>
                                     </div>
 
-                                    <ul>
-                                        <li v-for="file in form.files" :key="file.id">
-                                            <a :href="`/uploads/${file.ten}`" target="_blank">{{ file.ten }}</a>
-                                        </li>
-                                    </ul>
                                 </div>
 
                             </div>

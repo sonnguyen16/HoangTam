@@ -39,8 +39,7 @@ watchEffect(() => {
 const submit = () => {
     form.post(route('nhanvien.store'), {
         onSuccess: () => {
-            $('#nhanvienmodal').modal('hide');
-            router.visit(route('nhanvien.index'))
+            closeModal()
         },
         onError: () => {
             console.log(form.errors)

@@ -19,8 +19,7 @@ watchEffect(() => {
 const submit = () => {
     form.post(route('kho.store'), {
         onSuccess: () => {
-            $('#khomodal').modal('hide');
-            router.visit(route('kho.index'))
+            closeModal()
         },
         onError: () => {
             console.log(form.errors)

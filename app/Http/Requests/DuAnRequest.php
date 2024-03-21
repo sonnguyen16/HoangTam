@@ -26,11 +26,12 @@ class DuAnRequest extends FormRequest
             'ten' => ['required', 'string', 'max:255'],
             'user_id' => ['required', 'exists:users,id'],
             'parent_id' => ['nullable', 'exists:du_an,id'],
-            'mo_ta' => ['required', 'string', 'max:255'],
+            'mo_ta' => ['string'],
             'ngay_bat_dau' => ['required', 'date'],
             'ngay_ket_thuc' => ['required', 'date', 'after:ngay_bat_dau'],
             'trang_thai' => ['required', 'integer'],
             'files' => [],
+            'nguoi_theo_doi' => [],
         ];
     }
 

@@ -228,16 +228,18 @@ function addBinhLuan(){
                                             </form>
                                         </div>
 
-                                        <div v-for="cm in props.du_an.binh_luan" class="">
-                                            <div class="d-flex">
-                                                <img v-if="cm.nguoi_dung.hinh_anh" :src="'/uploads/nhan_vien/' + cm.nguoi_dung.hinh_anh" alt="avatar" class="rounded-full w-10 h-10 object-cover">
-                                                <img v-else src="/uploads/avatardefault.png" alt="avatar" class="rounded-full w-10 h-10 object-cover">
-                                                <div class="flex-1 ml-3">
-                                                    <div class="d-flex justify-content-between">
-                                                        <span class="font-weight-bold">{{ cm.nguoi_dung.name }}</span>
-                                                        <span class="text-secondary">{{ new Date(cm.created_at).toLocaleString() }}</span>
+                                        <div style="max-height: 200px; overflow: auto">
+                                            <div v-for="cm in props.du_an.binh_luan" class="">
+                                                <div class="d-flex">
+                                                    <img v-if="cm.nguoi_dung.hinh_anh" :src="'/uploads/nhan_vien/' + cm.nguoi_dung.hinh_anh" alt="avatar" class="rounded-full w-10 h-10 object-cover">
+                                                    <img v-else src="/uploads/avatardefault.png" alt="avatar" class="rounded-full w-10 h-10 object-cover">
+                                                    <div class="flex-1 ml-3">
+                                                        <div class="d-flex justify-content-between">
+                                                            <span class="font-weight-bold">{{ cm.nguoi_dung.name }}</span>
+                                                            <span class="text-secondary">{{ new Date(cm.created_at).toLocaleString() }}</span>
+                                                        </div>
+                                                        <p class="text-md">{{ cm.noi_dung }}</p>
                                                     </div>
-                                                    <p class="text-md">{{ cm.noi_dung }}</p>
                                                 </div>
                                             </div>
                                         </div>

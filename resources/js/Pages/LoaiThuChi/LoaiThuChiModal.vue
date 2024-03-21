@@ -20,8 +20,7 @@ watchEffect(() => {
 const submit = () => {
     form.post(route('loaithuchi.store'), {
         onSuccess: () => {
-            $('#loaithuchimodal').modal('hide');
-            router.visit(route('loaithuchi.index'))
+            closeModal()
         },
         onError: () => {
             console.log(form.errors)

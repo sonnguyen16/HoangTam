@@ -24,7 +24,7 @@ class DeXuatController extends Controller
                 $query->where('user_id', Auth::user()->id);
             })->orWhere('nguoi_duyet', Auth::user()->id)
             ->with('created_by', 'nguoi_duyet', 'nguoi_theo_doi.user','files', 'binh_luan.nguoi_dung')
-            ->orderBy('id', 'asc');
+            ->orderBy('trang_thai', 'asc');
 
         $nhan_vien_list = User::query()->whereNull('deleted_at')->where('role', 1)
             ->where('don_vi_id', Auth::user()->don_vi_id)
@@ -39,7 +39,7 @@ class DeXuatController extends Controller
             });
         }
 
-        $de_xuat_list = $query->paginate(4)->withQueryString();
+        $de_xuat_list = $query->paginate(5)->withQueryString();
 
         return Inertia::render('DeXuat/Index', compact('de_xuat_list', 'nhan_vien_list'));
     }
@@ -48,7 +48,6 @@ class DeXuatController extends Controller
     {
         $data = $request->validated();
         unset($data['files']);
-        $data['nguoi_duyet'] = is_array($data['nguoi_duyet']) ? $data['nguoi_duyet']['id'] : $data['nguoi_duyet'];
 
         $dexuat = DeXuat::updateOrCreate(['id' => $data['id']], $data);
         if ($request->hasFile('files')) {
@@ -56,41 +55,24 @@ class DeXuatController extends Controller
             foreach ($files as $file) {
                 $file_name = time().'_'.Str::random(10).'_'.$file->getClientOriginalName();
                 $file->move(public_path('uploads/de_xuat'), $file_name);
-                $file_du_an = new FileDuAn();
-                $file_du_an->de_xuat_id = $dexuat->id;
-                $file_du_an->ten = $file_name;
-                $file_du_an->save();
+                FileDuAn::create([
+                    'de_xuat_id' => $dexuat->id,
+                    'ten' => $file_name,
+                ]);
             }
         }
 
         if($request->filled('nguoi_theo_doi')){
             foreach ($request->nguoi_theo_doi as $user){
-                if(is_array($user)){
-                    NguoiTheoDoi::updateOrCreate(['id' => $user['id']],[
+                $nguoi_theo_doi = NguoiTheoDoi::where('de_xuat_id', $dexuat->id)->where('user_id', $user)->first();
+                if(!$nguoi_theo_doi)
+                    NguoiTheoDoi::create([
                         'de_xuat_id' => $dexuat->id,
-                        'user_id' => $user['user_id']
+                        'user_id' => $user
                     ]);
-                }else{
-                    $nguoi_theo_doi = NguoiTheoDoi::where('de_xuat_id', $dexuat->id)->where('user_id', $user)->first();
-                    if(!$nguoi_theo_doi)
-                        NguoiTheoDoi::create([
-                            'de_xuat_id' => $dexuat->id,
-                            'user_id' => $user
-                        ]);
-                }
             }
         }
     }
-
-    public function duyet(Request $request)
-    {
-        $de_xuat = DeXuat::find($request->id);
-        $de_xuat->trang_thai = $request->trang_thai;
-        $de_xuat->save();
-
-        return response()->json(['data' => $de_xuat], 200);
-    }
-
     public function xoaNguoiTheoDoi(Request $request)
     {
         $nguoi_theo_doi = NguoiTheoDoi::find($request->id);

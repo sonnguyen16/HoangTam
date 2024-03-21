@@ -43,8 +43,7 @@ const submit = () => {
     }
     form.post(route('donhang.store'), {
         onSuccess: () => {
-            $('#donhangmodal').modal('hide');
-            router.visit(route('donhang.index', { loai: 'donmua'}))
+            closeModal()
         },
         onError: () => {
             console.log(form.errors)

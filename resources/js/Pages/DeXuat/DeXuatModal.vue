@@ -1,11 +1,13 @@
 <script setup>
-import {watch, onMounted, watchEffect} from "vue";
+import {onMounted, watchEffect, onUpdated, watch} from "vue";
 import {router, useForm} from "@inertiajs/vue3";
 
 const props = defineProps({
     de_xuat: Object,
     nhan_vien_list: Object,
 })
+
+const emit = defineEmits(['reload'])
 
 const form = useForm({
     id: "",
@@ -21,14 +23,13 @@ watchEffect(() => {
     form.ten = props.de_xuat.ten
     form.noi_dung = props.de_xuat.noi_dung
     form.nguoi_duyet = props.de_xuat.nguoi_duyet.id
-    form.nguoi_theo_doi = []
     form.file = props.de_xuat.file
 })
 const submit = () => {
     form.post(route('dexuat.store'), {
         onSuccess: () => {
-            $('#dexuatmodal').modal('hide');
-            router.visit(route('dexuat.index'),)
+            emit('reload', form.id)
+            closeModal()
         },
         onError: () => {
             console.log(form.errors)
@@ -37,10 +38,10 @@ const submit = () => {
 }
 
 const closeModal = () => {
-    $('#dexuatmodal').modal('hide');
     form.reset();
-    $('#nguoi_theo_doi').val(null).trigger('change');
     form.clearErrors();
+    $('#dexuatmodal').modal('hide');
+    $('#nguoi_theo_doi').val(null).trigger('change');
 }
 
 function updateImage(event){
@@ -48,13 +49,10 @@ function updateImage(event){
 }
 
 onMounted(() => {
-   $('#nguoi_theo_doi').select2({
-       placeholder: "Chọn người theo dõi",
-   }).on('change', function (e) {
+   $('#nguoi_theo_doi').select2().on('change', function (e) {
         form.nguoi_theo_doi = $(this).val();
    });
 })
-
 
 </script>
 
@@ -96,7 +94,12 @@ onMounted(() => {
 
                                 <div class="form-group">
                                     <label for="nguoi_theo_doi">Người theo dõi</label>
-                                    <select id="nguoi_theo_doi" v-model="form.nguoi_theo_doi" :class="{'border border-danger' : form.errors.nguoi_theo_doi}" name="nguoi_theo_doi[]" class="form-control" multiple>
+                                    <select id="nguoi_theo_doi"
+                                            v-model="form.nguoi_theo_doi"
+                                            :class="{'border border-danger' : form.errors.nguoi_theo_doi}"
+                                            name="nguoi_theo_doi[]" class="form-control"
+                                            multiple
+                                            >
                                         <option v-for="nv in nhan_vien_list" :value="nv.id">{{nv.name}}</option>
                                     </select>
                                 </div>

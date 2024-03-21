@@ -28,8 +28,7 @@ watchEffect(() => {
 const submit = () => {
     form.post(route('khachhang.store'), {
         onSuccess: () => {
-            $('#khachhangmodal').modal('hide');
-            router.visit(route('khachhang.index'))
+            closeModal()
         },
         onError: () => {
             console.log(form.errors)

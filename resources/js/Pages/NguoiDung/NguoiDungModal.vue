@@ -25,8 +25,7 @@ watchEffect(() => {
 const submit = () => {
     form.post(route('nguoidung.store'), {
         onSuccess: () => {
-            $('#nguoidungmodal').modal('hide');
-            router.visit(route('nguoidung.index'))
+            closeModal()
         },
         onError: () => {
             console.log(form.errors)

@@ -18,8 +18,7 @@ watchEffect(() => {
 const submit = () => {
     form.post(route('loaisanpham.store'), {
         onSuccess: () => {
-            $('#loaisanphammodal').modal('hide');
-            router.visit(route('loaisanpham.index'))
+            closeModal()
         },
         onError: () => {
             console.log(form.errors)

@@ -43,8 +43,7 @@ const submit = () => {
     }
     form.post(route('phieuthuchi.store'), {
         onSuccess: () => {
-            $('#phieuthuchimodal').modal('hide');
-            router.visit(route('phieuthuchi.index', { loai: 'phieuchi'}))
+            closeModal()
         },
         onError: () => {
             console.log(form.errors)

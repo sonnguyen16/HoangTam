@@ -19,8 +19,7 @@ watchEffect(() => {
 const submit = () => {
     form.post(route('phongban.store'), {
         onSuccess: () => {
-            $('#phongbanmodal').modal('hide');
-            router.visit(route('phongban.index'))
+            closeModal()
         },
         onError: () => {
             console.log(form.errors)

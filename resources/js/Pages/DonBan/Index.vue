@@ -137,7 +137,7 @@ function deleledonhang(id) {
                         <td >{{ kh.ghi_chu }}</td>
                         <td class="date">{{ formatDate(kh.created_at) }}</td>
                         <td class="money">{{ kh.tong_tien.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</td>
-                        <td style="width: 10%">
+                        <td style="width: 10%" class="text-center">
                             <a class="btn btn-primary btn-sm d-inline-block mr-2" @click.prevent="editModal(kh)">Sửa</a>
                             <a class="btn btn-primary btn-sm d-inline-block mr-2" :href="route('donhang.print', {id: kh.id})">Xuất</a>
                             <a class="btn btn-danger btn-sm" @click.prevent="deleledonhang(kh.id)">Xóa</a>

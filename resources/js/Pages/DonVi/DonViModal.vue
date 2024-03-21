@@ -30,8 +30,7 @@ watchEffect(() => {
 const submit = () => {
     form.post(route('donvi.store'), {
         onSuccess: () => {
-            $('#donvimodal').modal('hide');
-            router.visit(route('donvi.index'))
+            closeModal()
         },
         onError: () => {
             console.log(form.errors)

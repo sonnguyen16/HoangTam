@@ -29,8 +29,7 @@ watchEffect(() => {
 const submit = () => {
     form.post(route('nhacungcap.store'), {
         onSuccess: () => {
-            $('#nhacungcapmodal').modal('hide');
-            router.visit(route('nhacungcap.index'))
+            closeModal()
         },
         onError: () => {
             console.log(form.errors)

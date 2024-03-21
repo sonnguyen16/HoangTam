@@ -42,4 +42,9 @@ class DuAn extends Model
     {
         return $this->belongsTo(User::class, "created_by");
     }
+
+    public function nguoi_theo_doi()
+    {
+        return $this->hasMany(NguoiTheoDoi::class, 'du_an_id');
+    }
 }

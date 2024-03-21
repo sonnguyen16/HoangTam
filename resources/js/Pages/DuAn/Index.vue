@@ -153,7 +153,7 @@ function reload(id){
                             <div class="d-flex align-items-center gap-[10px] ms-1">
                                 <h5 class="font-bold mb-0 mt-[2px]">{{ dx.ten }}</h5>
                             </div>
-                            <p class="mb-0 ms-1 mt-2 text-secondary">{{ dx.mo_ta.length > 100 ? dx.mo_ta.slice(0,100) + '...' : dx.mo_ta }}</p>
+                            <p class="mb-0 ms-1 mt-2 text-secondary">{{ dx.mo_ta?.length > 100 ? dx.mo_ta.slice(0,100) + '...' : dx.mo_ta }}</p>
                             <div class="d-flex justify-content-between align-items-center mt-2 mb-0">
                                 <div class="d-flex align-items-center gap-[5px]">
                                     <img v-if="dx.nhan_vien.hinh_anh" :src="'/uploads/nhan_vien/' + dx.nhan_vien.hinh_anh" alt="" class="object-cover" style="width: 30px; height: 30px; border-radius: 50%">

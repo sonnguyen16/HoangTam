@@ -132,7 +132,7 @@ function reload(id){
                     <div class="col-md-3">
                         <div class="row">
                             <div class=" col-md-4">
-                                <a @click.prevent="openModal" class="btn btn-primary form-control m-3">Thêm dự án</a>
+                                <a @click.prevent="openModal('')" class="btn btn-primary form-control m-3">Thêm dự án</a>
                             </div>
                             <div class="col-md-8 pt-3 pl-3">
                                 <div class="input-group">

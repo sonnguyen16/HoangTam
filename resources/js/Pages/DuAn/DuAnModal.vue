@@ -43,6 +43,9 @@ const submit = () => {
         onSuccess: () => {
             emit('reload', form.id)
             closeModal()
+            if(form.parent_id && form.children.length === 0){
+                location.reload()
+            }
         },
         onError: () => {
             console.log(form.errors)

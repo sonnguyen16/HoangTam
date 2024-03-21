@@ -147,9 +147,15 @@ function reload(id){
                                 </div>
                             </div>
                         </div>
-                        <h4 class="txt-color font-weight-bold ml-3 mb-3">Danh sách dự án</h4>
+                        <h4 class="txt-color font-weight-bold borders ml-3 mb-3">Danh sách dự án</h4>
 
-                        <div @click="editModal(dx)" v-for="dx in allData" :class="['p-3 border-bottom', {'bg-blue-200': hang_muc1.id === dx.id},{'bg-neutral-100 ': hang_muc1.id !== dx.id}]">
+                        <div @click="editModal(dx)" v-for="dx in allData"
+                             :class="['p-3 border-bottom',
+                             {'border-s-4 border-neutral-400': dx.id == hang_muc1.id},
+                             {'bg-neutral-100' : dx.trang_thai == 0},
+                             {'bg-blue-200' : dx.trang_thai == 1},
+                             {'bg-green-300' : dx.trang_thai == 2},
+                             ]">
                             <div class="d-flex align-items-center gap-[10px] ms-1">
                                 <h5 class="font-bold mb-0 mt-[2px]">{{ dx.ten }}</h5>
                             </div>

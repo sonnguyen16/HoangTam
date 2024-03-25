@@ -40,7 +40,7 @@ class DuAnController extends Controller
 
         $du_an_list = $query->get()->toTree();
 
-        return Inertia::render('DuAn/Index', compact('du_an_list', 'nhan_vien_list'));
+        return Inertia::render('DuAn/Index2', compact('du_an_list', 'nhan_vien_list'));
     }
 
     public function detail(Request $request)

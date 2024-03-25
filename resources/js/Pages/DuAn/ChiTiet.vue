@@ -43,7 +43,6 @@ watchEffect(() => {
 const submit = () => {
     form.post(route('duan.store'), {
         onSuccess: () => {
-
             toastr.success('Cập nhật thành công')
         },
         onError: () => {

@@ -60,8 +60,6 @@ const closeModal = () => {
     $('#duanmodal').modal('hide');
 }
 
-
-
 onMounted(() => {
     $('#nguoi_theo_doi').select2().on('change', function (e) {
         form.nguoi_theo_doi = $(this).val();

@@ -21,7 +21,7 @@ function showModal() {
 </script>
 
 <template>
-    <nav class="main-header navbar navbar-expand navbar-light sticky-top border-0 shadow">
+    <nav class="main-header navbar navbar-expand navbar-light sticky-top border-bottom">
         <!-- Left navbar links -->
         <ul class="navbar-nav ml-3">
             <li class="nav-item d-lg-none d-block mt-md-2 mt-0">

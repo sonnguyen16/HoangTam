@@ -77,13 +77,6 @@ function delelenguoidung(id) {
 
 <template>
     <MainLayout>
-        <div class="card shadow">
-            <div class="card-body card-brc">
-                <p class="txt-color mb-0 font-weight-bold">Hệ thống <i
-                    class="fa fa-angle-right mr-2 ml-2"></i> Quản lý người dùng</p>
-            </div>
-        </div>
-
         <div class="card shadow card-child" style="">
             <div class="card-body">
                 <div class="row mb-3">

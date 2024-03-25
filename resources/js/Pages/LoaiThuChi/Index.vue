@@ -70,13 +70,6 @@ function deleleloai_thu_chi(id) {
 
 <template>
     <MainLayout>
-        <div class="card shadow">
-            <div class="card-body card-brc">
-                <p class="txt-color mb-0 font-weight-bold">Phiếu thu chi <i
-                    class="fa fa-angle-right mr-2 ml-2"></i> Quản lý loại thu chi</p>
-            </div>
-        </div>
-
         <div class="card shadow card-child" style="">
             <div class="card-body">
                 <div class="row mb-3">

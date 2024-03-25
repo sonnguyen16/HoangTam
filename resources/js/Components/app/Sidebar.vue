@@ -17,7 +17,7 @@ const user = computed(() => {
 
 <template>
   <aside
-    class="main-sidebar sidebar-collapse sidebar-light-primary elevation-3 overflow-auto"
+    class="main-sidebar sidebar-collapse sidebar-light-primary border-top border-right overflow-auto"
   >
     <div class="sidebar">
       <nav class="mt-3">

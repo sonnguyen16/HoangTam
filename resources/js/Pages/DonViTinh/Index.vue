@@ -68,13 +68,6 @@ function deleledonvitinh(id) {
 
 <template>
     <MainLayout>
-        <div class="card shadow">
-            <div class="card-body card-brc">
-                <p class="txt-color mb-0 font-weight-bold">Danh mục quản lý <i
-                    class="fa fa-angle-right mr-2 ml-2"></i> Quản lý đơn vị tính</p>
-            </div>
-        </div>
-
         <div class="card shadow card-child" style="">
             <div class="card-body">
                 <div class="row mb-3">

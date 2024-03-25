@@ -93,13 +93,6 @@ function editModal(kh) {
 
 <template>
     <MainLayout>
-        <div class="card shadow">
-            <div class="card-body card-brc">
-                <p class="txt-color mb-0 font-weight-bold">Báo cáo <i
-                    class="fa fa-angle-right mr-2 ml-2"></i> Báo cáo nhập</p>
-            </div>
-        </div>
-
         <div class="card shadow card-child" style="">
             <div class="card-body">
                 <div class="row mb-3">
@@ -176,7 +169,6 @@ function editModal(kh) {
                                 </td>
                             </tr>
                         </template>
-
                     </tbody>
                 </table>
                 <div class="float-right mt-3 mb-0">

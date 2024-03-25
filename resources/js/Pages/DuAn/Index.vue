@@ -24,9 +24,7 @@ let hang_muc = ref({
     mo_ta: "",
     trang_thai: "",
     parent_id: "",
-    children: [],
     files: [],
-    binh_luan: []
 })
 
 let hang_muc1 = ref({
@@ -57,7 +55,6 @@ function openModal(id) {
         mo_ta: "",
         trang_thai: "",
         parent_id: id,
-        children: [],
         files: []
     }
     $('#duanmodal').modal('show');
@@ -191,6 +188,7 @@ function reload(id){
             :users="nhan_vien_list"
             @reload="reload"
         />
+
     </MainLayout>
 </template>
 <style scoped>

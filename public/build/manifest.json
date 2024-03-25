@@ -1,13 +1,13 @@
 {
   "MainLayout.css": {
-    "file": "assets/MainLayout-8e111f20.css",
+    "file": "assets/MainLayout-d826da0f.css",
     "src": "MainLayout.css"
   },
   "TreeItem.css": {
     "file": "assets/TreeItem-4f168e5f.css",
     "src": "TreeItem.css"
   },
-  "_MainLayout-17f1cb56.js": {
+  "_MainLayout-6535bde7.js": {
     "assets": [
       "assets/widgets-9f72c4f2.png",
       "assets/ico-72bc2471.png",
@@ -28,18 +28,18 @@
       "assets/fa-solid-900-9674eb1b.svg"
     ],
     "css": [
-      "assets/MainLayout-8e111f20.css",
+      "assets/MainLayout-d826da0f.css",
       "assets/adminlte-d4629afe.css",
-      "assets/style-6e38a70f.css"
+      "assets/style-65e00eff.css"
     ],
-    "file": "assets/MainLayout-17f1cb56.js",
+    "file": "assets/MainLayout-6535bde7.js",
     "imports": [
       "resources/js/app.js",
       "__plugin-vue_export-helper-c27b6911.js"
     ]
   },
-  "_Pagination-f09aba27.js": {
-    "file": "assets/Pagination-f09aba27.js",
+  "_Pagination-d612a44f.js": {
+    "file": "assets/Pagination-d612a44f.js",
     "imports": [
       "resources/js/app.js"
     ]
@@ -47,8 +47,8 @@
   "__plugin-vue_export-helper-c27b6911.js": {
     "file": "assets/_plugin-vue_export-helper-c27b6911.js"
   },
-  "_lodash-a33a19b6.js": {
-    "file": "assets/lodash-a33a19b6.js",
+  "_lodash-61915b2b.js": {
+    "file": "assets/lodash-61915b2b.js",
     "imports": [
       "resources/js/app.js"
     ]
@@ -95,7 +95,7 @@
       "assets/all-b7ef737e.css",
       "assets/adminlte-d4629afe.css"
     ],
-    "file": "assets/SignIn-3738cb19.js",
+    "file": "assets/SignIn-a274b475.js",
     "imports": [
       "resources/js/app.js"
     ],
@@ -103,7 +103,7 @@
     "src": "resources/js/Pages/Auth/SignIn.vue"
   },
   "resources/js/Pages/BaoCaoCongNo/ChiTietKhachHang.vue": {
-    "file": "assets/ChiTietKhachHang-7b219b2c.js",
+    "file": "assets/ChiTietKhachHang-590887c9.js",
     "imports": [
       "resources/js/app.js",
       "_moment-a9aaa855.js"
@@ -112,7 +112,7 @@
     "src": "resources/js/Pages/BaoCaoCongNo/ChiTietKhachHang.vue"
   },
   "resources/js/Pages/BaoCaoCongNo/ChiTietNhaCungCap.vue": {
-    "file": "assets/ChiTietNhaCungCap-8556d78d.js",
+    "file": "assets/ChiTietNhaCungCap-137cfb95.js",
     "imports": [
       "resources/js/app.js",
       "_moment-a9aaa855.js"
@@ -123,12 +123,12 @@
   "resources/js/Pages/BaoCaoCongNo/Index.vue": {
     "css": [
       "assets/adminlte-d4629afe.css",
-      "assets/style-6e38a70f.css"
+      "assets/style-65e00eff.css"
     ],
-    "file": "assets/Index-ecdb0e59.js",
+    "file": "assets/Index-b4a15304.js",
     "imports": [
       "resources/js/app.js",
-      "_MainLayout-17f1cb56.js",
+      "_MainLayout-6535bde7.js",
       "resources/js/Pages/BaoCaoCongNo/ChiTietNhaCungCap.vue",
       "__plugin-vue_export-helper-c27b6911.js",
       "_moment-a9aaa855.js"
@@ -139,12 +139,12 @@
   "resources/js/Pages/BaoCaoCongNo/KhachHang.vue": {
     "css": [
       "assets/adminlte-d4629afe.css",
-      "assets/style-6e38a70f.css"
+      "assets/style-65e00eff.css"
     ],
-    "file": "assets/KhachHang-ad47ca72.js",
+    "file": "assets/KhachHang-a40b41fb.js",
     "imports": [
       "resources/js/app.js",
-      "_MainLayout-17f1cb56.js",
+      "_MainLayout-6535bde7.js",
       "resources/js/Pages/BaoCaoCongNo/ChiTietKhachHang.vue",
       "__plugin-vue_export-helper-c27b6911.js",
       "_moment-a9aaa855.js"
@@ -178,9 +178,9 @@
       "assets/Print-d8a03101.css",
       "assets/all-b7ef737e.css",
       "assets/adminlte-d4629afe.css",
-      "assets/style-6e38a70f.css"
+      "assets/style-65e00eff.css"
     ],
-    "file": "assets/Print-a44724fa.js",
+    "file": "assets/Print-c89a9126.js",
     "imports": [
       "_script-4eb152de.js",
       "resources/js/app.js",
@@ -193,16 +193,16 @@
   "resources/js/Pages/BaoCaoNhap/Index.vue": {
     "css": [
       "assets/adminlte-d4629afe.css",
-      "assets/style-6e38a70f.css"
+      "assets/style-65e00eff.css"
     ],
-    "file": "assets/Index-8e52e693.js",
+    "file": "assets/Index-5fbadb2c.js",
     "imports": [
       "resources/js/app.js",
-      "_MainLayout-17f1cb56.js",
+      "_MainLayout-6535bde7.js",
       "_moment-a9aaa855.js",
       "resources/js/Pages/BaoCaoNhap/NhapKhoModal.vue",
       "__plugin-vue_export-helper-c27b6911.js",
-      "_lodash-a33a19b6.js"
+      "_lodash-61915b2b.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/BaoCaoNhap/Index.vue"
@@ -215,10 +215,10 @@
     "css": [
       "assets/NhapKhoModal-1eb625e5.css"
     ],
-    "file": "assets/NhapKhoModal-997d906c.js",
+    "file": "assets/NhapKhoModal-6c7e1bf3.js",
     "imports": [
       "resources/js/app.js",
-      "_lodash-a33a19b6.js",
+      "_lodash-61915b2b.js",
       "_moment-a9aaa855.js",
       "__plugin-vue_export-helper-c27b6911.js"
     ],
@@ -228,12 +228,12 @@
   "resources/js/Pages/BaoCaoTonKho/Index.vue": {
     "css": [
       "assets/adminlte-d4629afe.css",
-      "assets/style-6e38a70f.css"
+      "assets/style-65e00eff.css"
     ],
-    "file": "assets/Index-26ba3c5e.js",
+    "file": "assets/Index-2b89e747.js",
     "imports": [
       "resources/js/app.js",
-      "_MainLayout-17f1cb56.js",
+      "_MainLayout-6535bde7.js",
       "__plugin-vue_export-helper-c27b6911.js"
     ],
     "isDynamicEntry": true,
@@ -242,18 +242,18 @@
   "resources/js/Pages/BaoCaoXuat/Index.vue": {
     "css": [
       "assets/adminlte-d4629afe.css",
-      "assets/style-6e38a70f.css"
+      "assets/style-65e00eff.css"
     ],
-    "file": "assets/Index-234d4a4e.js",
+    "file": "assets/Index-fd22618b.js",
     "imports": [
       "resources/js/app.js",
-      "_MainLayout-17f1cb56.js",
+      "_MainLayout-6535bde7.js",
       "_moment-a9aaa855.js",
       "resources/js/Pages/BaoCaoXuat/XuatKhoModal.vue",
       "__plugin-vue_export-helper-c27b6911.js",
-      "_lodash-a33a19b6.js",
+      "_lodash-61915b2b.js",
       "resources/js/Pages/XuatKho/ChonDonHangModal.vue",
-      "_Pagination-f09aba27.js"
+      "_Pagination-d612a44f.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/BaoCaoXuat/Index.vue"
@@ -266,14 +266,14 @@
     "css": [
       "assets/XuatKhoModal-17d2b649.css"
     ],
-    "file": "assets/XuatKhoModal-ebad887d.js",
+    "file": "assets/XuatKhoModal-0eaccb09.js",
     "imports": [
       "resources/js/app.js",
-      "_lodash-a33a19b6.js",
+      "_lodash-61915b2b.js",
       "resources/js/Pages/XuatKho/ChonDonHangModal.vue",
       "_moment-a9aaa855.js",
       "__plugin-vue_export-helper-c27b6911.js",
-      "_Pagination-f09aba27.js"
+      "_Pagination-d612a44f.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/BaoCaoXuat/XuatKhoModal.vue"
@@ -286,7 +286,7 @@
     "css": [
       "assets/ChiTiet-68f34e25.css"
     ],
-    "file": "assets/ChiTiet-a72215a3.js",
+    "file": "assets/ChiTiet-eeaa8a43.js",
     "imports": [
       "resources/js/app.js",
       "_script-4eb152de.js",
@@ -296,7 +296,7 @@
     "src": "resources/js/Pages/DeXuat/ChiTiet.vue"
   },
   "resources/js/Pages/DeXuat/DeXuatModal.vue": {
-    "file": "assets/DeXuatModal-6fef9497.js",
+    "file": "assets/DeXuatModal-64e97c71.js",
     "imports": [
       "resources/js/app.js"
     ],
@@ -311,25 +311,25 @@
     "css": [
       "assets/Index-d6809dda.css",
       "assets/adminlte-d4629afe.css",
-      "assets/style-6e38a70f.css"
+      "assets/style-65e00eff.css"
     ],
-    "file": "assets/Index-98e0f003.js",
+    "file": "assets/Index-981750f5.js",
     "imports": [
       "resources/js/app.js",
-      "_MainLayout-17f1cb56.js",
+      "_MainLayout-6535bde7.js",
       "resources/js/Pages/DeXuat/DeXuatModal.vue",
       "_script-4eb152de.js",
-      "_Pagination-f09aba27.js",
+      "_Pagination-d612a44f.js",
       "resources/js/Pages/DeXuat/ChiTiet.vue",
       "resources/js/Pages/DeXuat/TheoDoi.vue",
-      "_lodash-a33a19b6.js",
+      "_lodash-61915b2b.js",
       "__plugin-vue_export-helper-c27b6911.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/DeXuat/Index.vue"
   },
   "resources/js/Pages/DeXuat/TheoDoi.vue": {
-    "file": "assets/TheoDoi-5136ddb4.js",
+    "file": "assets/TheoDoi-f3627b0d.js",
     "imports": [
       "resources/js/app.js"
     ],
@@ -344,10 +344,10 @@
     "css": [
       "assets/DonBanModal-9704df60.css"
     ],
-    "file": "assets/DonBanModal-0b296c43.js",
+    "file": "assets/DonBanModal-91e357d1.js",
     "imports": [
       "resources/js/app.js",
-      "_lodash-a33a19b6.js",
+      "_lodash-61915b2b.js",
       "_moment-a9aaa855.js",
       "__plugin-vue_export-helper-c27b6911.js"
     ],
@@ -357,16 +357,16 @@
   "resources/js/Pages/DonBan/Index.vue": {
     "css": [
       "assets/adminlte-d4629afe.css",
-      "assets/style-6e38a70f.css"
+      "assets/style-65e00eff.css"
     ],
-    "file": "assets/Index-917e4e76.js",
+    "file": "assets/Index-4c5a4b29.js",
     "imports": [
       "resources/js/app.js",
-      "_MainLayout-17f1cb56.js",
+      "_MainLayout-6535bde7.js",
       "resources/js/Pages/DonBan/DonBanModal.vue",
       "_script-4eb152de.js",
       "__plugin-vue_export-helper-c27b6911.js",
-      "_lodash-a33a19b6.js",
+      "_lodash-61915b2b.js",
       "_moment-a9aaa855.js"
     ],
     "isDynamicEntry": true,
@@ -380,10 +380,10 @@
     "css": [
       "assets/DonMuaModal-557425bb.css"
     ],
-    "file": "assets/DonMuaModal-6ccb6841.js",
+    "file": "assets/DonMuaModal-a5182228.js",
     "imports": [
       "resources/js/app.js",
-      "_lodash-a33a19b6.js",
+      "_lodash-61915b2b.js",
       "_moment-a9aaa855.js",
       "__plugin-vue_export-helper-c27b6911.js"
     ],
@@ -393,16 +393,16 @@
   "resources/js/Pages/DonMua/Index.vue": {
     "css": [
       "assets/adminlte-d4629afe.css",
-      "assets/style-6e38a70f.css"
+      "assets/style-65e00eff.css"
     ],
-    "file": "assets/Index-bc450522.js",
+    "file": "assets/Index-03af6bae.js",
     "imports": [
       "resources/js/app.js",
-      "_MainLayout-17f1cb56.js",
+      "_MainLayout-6535bde7.js",
       "resources/js/Pages/DonMua/DonMuaModal.vue",
       "_script-4eb152de.js",
       "__plugin-vue_export-helper-c27b6911.js",
-      "_lodash-a33a19b6.js",
+      "_lodash-61915b2b.js",
       "_moment-a9aaa855.js"
     ],
     "isDynamicEntry": true,
@@ -434,9 +434,9 @@
       "assets/Print-99f2d444.css",
       "assets/all-b7ef737e.css",
       "assets/adminlte-d4629afe.css",
-      "assets/style-6e38a70f.css"
+      "assets/style-65e00eff.css"
     ],
-    "file": "assets/Print-9187e4bc.js",
+    "file": "assets/Print-0bd14854.js",
     "imports": [
       "_script-4eb152de.js",
       "resources/js/app.js",
@@ -446,7 +446,7 @@
     "src": "resources/js/Pages/DonMua/Print.vue"
   },
   "resources/js/Pages/DonVi/DonViModal.vue": {
-    "file": "assets/DonViModal-9e0c091f.js",
+    "file": "assets/DonViModal-037cfd81.js",
     "imports": [
       "resources/js/app.js"
     ],
@@ -456,21 +456,21 @@
   "resources/js/Pages/DonVi/Index.vue": {
     "css": [
       "assets/adminlte-d4629afe.css",
-      "assets/style-6e38a70f.css"
+      "assets/style-65e00eff.css"
     ],
-    "file": "assets/Index-05168fe8.js",
+    "file": "assets/Index-73f52db7.js",
     "imports": [
       "resources/js/app.js",
-      "_MainLayout-17f1cb56.js",
+      "_MainLayout-6535bde7.js",
       "resources/js/Pages/DonVi/DonViModal.vue",
-      "_Pagination-f09aba27.js",
+      "_Pagination-d612a44f.js",
       "__plugin-vue_export-helper-c27b6911.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/DonVi/Index.vue"
   },
   "resources/js/Pages/DonViTinh/DonViTinhModal.vue": {
-    "file": "assets/DonViTinhModal-f0b62902.js",
+    "file": "assets/DonViTinhModal-4cdfe136.js",
     "imports": [
       "resources/js/app.js"
     ],
@@ -480,51 +480,51 @@
   "resources/js/Pages/DonViTinh/Index.vue": {
     "css": [
       "assets/adminlte-d4629afe.css",
-      "assets/style-6e38a70f.css"
+      "assets/style-65e00eff.css"
     ],
-    "file": "assets/Index-cc13e0de.js",
+    "file": "assets/Index-75ab38a4.js",
     "imports": [
       "resources/js/app.js",
-      "_MainLayout-17f1cb56.js",
+      "_MainLayout-6535bde7.js",
       "resources/js/Pages/DonViTinh/DonViTinhModal.vue",
-      "_Pagination-f09aba27.js",
+      "_Pagination-d612a44f.js",
       "__plugin-vue_export-helper-c27b6911.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/DonViTinh/Index.vue"
   },
   "resources/js/Pages/DuAn/BieuDo.css": {
-    "file": "assets/BieuDo-5cdce79f.css",
+    "file": "assets/BieuDo-6261f0e3.css",
     "src": "resources/js/Pages/DuAn/BieuDo.css"
   },
   "resources/js/Pages/DuAn/BieuDo.vue": {
     "css": [
-      "assets/BieuDo-5cdce79f.css",
+      "assets/BieuDo-6261f0e3.css",
       "assets/TreeItem-4f168e5f.css",
       "assets/adminlte-d4629afe.css",
-      "assets/style-6e38a70f.css"
+      "assets/style-65e00eff.css"
     ],
-    "file": "assets/BieuDo-292e7bef.js",
+    "file": "assets/BieuDo-39e39b53.js",
     "imports": [
       "resources/js/app.js",
       "resources/js/Pages/DuAn/DuAnModal.vue",
       "resources/js/Pages/DuAn/ChiTiet.vue",
-      "_MainLayout-17f1cb56.js",
+      "_MainLayout-6535bde7.js",
       "__plugin-vue_export-helper-c27b6911.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/DuAn/BieuDo.vue"
   },
   "resources/js/Pages/DuAn/ChiTiet.css": {
-    "file": "assets/ChiTiet-24f1be6d.css",
+    "file": "assets/ChiTiet-347b64d5.css",
     "src": "resources/js/Pages/DuAn/ChiTiet.css"
   },
   "resources/js/Pages/DuAn/ChiTiet.vue": {
     "css": [
-      "assets/ChiTiet-24f1be6d.css",
+      "assets/ChiTiet-347b64d5.css",
       "assets/TreeItem-4f168e5f.css"
     ],
-    "file": "assets/ChiTiet-155a7603.js",
+    "file": "assets/ChiTiet-7ac824c6.js",
     "imports": [
       "resources/js/app.js",
       "__plugin-vue_export-helper-c27b6911.js"
@@ -541,7 +541,7 @@
       "assets/ChiTiet2-a6d81508.css",
       "assets/TreeItem-4f168e5f.css"
     ],
-    "file": "assets/ChiTiet2-1e033113.js",
+    "file": "assets/ChiTiet2-5ae68aa6.js",
     "imports": [
       "resources/js/app.js",
       "__plugin-vue_export-helper-c27b6911.js"
@@ -550,14 +550,14 @@
     "src": "resources/js/Pages/DuAn/ChiTiet2.vue"
   },
   "resources/js/Pages/DuAn/DuAnModal.css": {
-    "file": "assets/DuAnModal-8ca33322.css",
+    "file": "assets/DuAnModal-3e6a4e96.css",
     "src": "resources/js/Pages/DuAn/DuAnModal.css"
   },
   "resources/js/Pages/DuAn/DuAnModal.vue": {
     "css": [
-      "assets/DuAnModal-8ca33322.css"
+      "assets/DuAnModal-3e6a4e96.css"
     ],
-    "file": "assets/DuAnModal-5c338352.js",
+    "file": "assets/DuAnModal-6c38d2cb.js",
     "imports": [
       "resources/js/app.js",
       "__plugin-vue_export-helper-c27b6911.js"
@@ -566,32 +566,49 @@
     "src": "resources/js/Pages/DuAn/DuAnModal.vue"
   },
   "resources/js/Pages/DuAn/Index.css": {
-    "file": "assets/Index-b9ef365c.css",
+    "file": "assets/Index-bea3dd29.css",
     "src": "resources/js/Pages/DuAn/Index.css"
   },
   "resources/js/Pages/DuAn/Index.vue": {
     "css": [
-      "assets/Index-b9ef365c.css",
+      "assets/Index-bea3dd29.css",
       "assets/adminlte-d4629afe.css",
-      "assets/style-6e38a70f.css",
+      "assets/style-65e00eff.css",
       "assets/TreeItem-4f168e5f.css"
     ],
-    "file": "assets/Index-2238eb08.js",
+    "file": "assets/Index-580c5746.js",
     "imports": [
       "resources/js/app.js",
-      "_MainLayout-17f1cb56.js",
+      "_MainLayout-6535bde7.js",
       "resources/js/Pages/DuAn/DuAnModal.vue",
       "_script-4eb152de.js",
       "resources/js/Pages/DuAn/ChiTiet2.vue",
       "resources/js/Pages/DuAn/TheoDoi.vue",
-      "_lodash-a33a19b6.js",
+      "_lodash-61915b2b.js",
       "__plugin-vue_export-helper-c27b6911.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/DuAn/Index.vue"
   },
+  "resources/js/Pages/DuAn/Index2.vue": {
+    "css": [
+      "assets/adminlte-d4629afe.css",
+      "assets/style-65e00eff.css",
+      "assets/TreeItem-4f168e5f.css"
+    ],
+    "file": "assets/Index2-5f0f5f1a.js",
+    "imports": [
+      "resources/js/app.js",
+      "_MainLayout-6535bde7.js",
+      "resources/js/Pages/DuAn/DuAnModal.vue",
+      "resources/js/Pages/DuAn/ChiTiet.vue",
+      "__plugin-vue_export-helper-c27b6911.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/DuAn/Index2.vue"
+  },
   "resources/js/Pages/DuAn/TheoDoi.vue": {
-    "file": "assets/TheoDoi-cf7e78d0.js",
+    "file": "assets/TheoDoi-bc7cffa5.js",
     "imports": [
       "resources/js/app.js"
     ],
@@ -601,21 +618,21 @@
   "resources/js/Pages/KhachHang/Index.vue": {
     "css": [
       "assets/adminlte-d4629afe.css",
-      "assets/style-6e38a70f.css"
+      "assets/style-65e00eff.css"
     ],
-    "file": "assets/Index-fe783d98.js",
+    "file": "assets/Index-dc2a79e2.js",
     "imports": [
       "resources/js/app.js",
-      "_MainLayout-17f1cb56.js",
+      "_MainLayout-6535bde7.js",
       "resources/js/Pages/KhachHang/KhachHangModal.vue",
-      "_Pagination-f09aba27.js",
+      "_Pagination-d612a44f.js",
       "__plugin-vue_export-helper-c27b6911.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/KhachHang/Index.vue"
   },
   "resources/js/Pages/KhachHang/KhachHangModal.vue": {
-    "file": "assets/KhachHangModal-e58a2f95.js",
+    "file": "assets/KhachHangModal-1cb9f222.js",
     "imports": [
       "resources/js/app.js"
     ],
@@ -625,21 +642,21 @@
   "resources/js/Pages/Kho/Index.vue": {
     "css": [
       "assets/adminlte-d4629afe.css",
-      "assets/style-6e38a70f.css"
+      "assets/style-65e00eff.css"
     ],
-    "file": "assets/Index-f41dcb77.js",
+    "file": "assets/Index-f1ad14f5.js",
     "imports": [
       "resources/js/app.js",
-      "_MainLayout-17f1cb56.js",
+      "_MainLayout-6535bde7.js",
       "resources/js/Pages/Kho/KhoModal.vue",
-      "_Pagination-f09aba27.js",
+      "_Pagination-d612a44f.js",
       "__plugin-vue_export-helper-c27b6911.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Kho/Index.vue"
   },
   "resources/js/Pages/Kho/KhoModal.vue": {
-    "file": "assets/KhoModal-d00d8851.js",
+    "file": "assets/KhoModal-caa3de6a.js",
     "imports": [
       "resources/js/app.js"
     ],
@@ -649,21 +666,21 @@
   "resources/js/Pages/LoaiSanPham/Index.vue": {
     "css": [
       "assets/adminlte-d4629afe.css",
-      "assets/style-6e38a70f.css"
+      "assets/style-65e00eff.css"
     ],
-    "file": "assets/Index-07e97e15.js",
+    "file": "assets/Index-723881ac.js",
     "imports": [
       "resources/js/app.js",
-      "_MainLayout-17f1cb56.js",
+      "_MainLayout-6535bde7.js",
       "resources/js/Pages/LoaiSanPham/LoaiSanPhamModal.vue",
-      "_Pagination-f09aba27.js",
+      "_Pagination-d612a44f.js",
       "__plugin-vue_export-helper-c27b6911.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/LoaiSanPham/Index.vue"
   },
   "resources/js/Pages/LoaiSanPham/LoaiSanPhamModal.vue": {
-    "file": "assets/LoaiSanPhamModal-63434c2a.js",
+    "file": "assets/LoaiSanPhamModal-f65fcd43.js",
     "imports": [
       "resources/js/app.js"
     ],
@@ -673,21 +690,21 @@
   "resources/js/Pages/LoaiThuChi/Index.vue": {
     "css": [
       "assets/adminlte-d4629afe.css",
-      "assets/style-6e38a70f.css"
+      "assets/style-65e00eff.css"
     ],
-    "file": "assets/Index-94d00dc7.js",
+    "file": "assets/Index-00c41da4.js",
     "imports": [
       "resources/js/app.js",
-      "_MainLayout-17f1cb56.js",
+      "_MainLayout-6535bde7.js",
       "resources/js/Pages/LoaiThuChi/LoaiThuChiModal.vue",
-      "_Pagination-f09aba27.js",
+      "_Pagination-d612a44f.js",
       "__plugin-vue_export-helper-c27b6911.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/LoaiThuChi/Index.vue"
   },
   "resources/js/Pages/LoaiThuChi/LoaiThuChiModal.vue": {
-    "file": "assets/LoaiThuChiModal-bbeb7279.js",
+    "file": "assets/LoaiThuChiModal-a5138780.js",
     "imports": [
       "resources/js/app.js"
     ],
@@ -697,12 +714,12 @@
   "resources/js/Pages/NguoiDung/Index.vue": {
     "css": [
       "assets/adminlte-d4629afe.css",
-      "assets/style-6e38a70f.css"
+      "assets/style-65e00eff.css"
     ],
-    "file": "assets/Index-37166029.js",
+    "file": "assets/Index-311cea8a.js",
     "imports": [
       "resources/js/app.js",
-      "_MainLayout-17f1cb56.js",
+      "_MainLayout-6535bde7.js",
       "resources/js/Pages/NguoiDung/NguoiDungModal.vue",
       "__plugin-vue_export-helper-c27b6911.js"
     ],
@@ -710,7 +727,7 @@
     "src": "resources/js/Pages/NguoiDung/Index.vue"
   },
   "resources/js/Pages/NguoiDung/NguoiDungModal.vue": {
-    "file": "assets/NguoiDungModal-c33d50d8.js",
+    "file": "assets/NguoiDungModal-c390dcf0.js",
     "imports": [
       "resources/js/app.js"
     ],
@@ -720,21 +737,21 @@
   "resources/js/Pages/NhaCungCap/Index.vue": {
     "css": [
       "assets/adminlte-d4629afe.css",
-      "assets/style-6e38a70f.css"
+      "assets/style-65e00eff.css"
     ],
-    "file": "assets/Index-a246f05c.js",
+    "file": "assets/Index-eb8dea45.js",
     "imports": [
       "resources/js/app.js",
-      "_MainLayout-17f1cb56.js",
+      "_MainLayout-6535bde7.js",
       "resources/js/Pages/NhaCungCap/NhaCungCapModal.vue",
-      "_Pagination-f09aba27.js",
+      "_Pagination-d612a44f.js",
       "__plugin-vue_export-helper-c27b6911.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/NhaCungCap/Index.vue"
   },
   "resources/js/Pages/NhaCungCap/NhaCungCapModal.vue": {
-    "file": "assets/NhaCungCapModal-e430cab4.js",
+    "file": "assets/NhaCungCapModal-30ec0eb9.js",
     "imports": [
       "resources/js/app.js"
     ],
@@ -744,21 +761,21 @@
   "resources/js/Pages/NhanVien/Index.vue": {
     "css": [
       "assets/adminlte-d4629afe.css",
-      "assets/style-6e38a70f.css"
+      "assets/style-65e00eff.css"
     ],
-    "file": "assets/Index-cf82583f.js",
+    "file": "assets/Index-b021fa6a.js",
     "imports": [
       "resources/js/app.js",
-      "_MainLayout-17f1cb56.js",
+      "_MainLayout-6535bde7.js",
       "resources/js/Pages/NhanVien/NhanVienModal.vue",
-      "_Pagination-f09aba27.js",
+      "_Pagination-d612a44f.js",
       "__plugin-vue_export-helper-c27b6911.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/NhanVien/Index.vue"
   },
   "resources/js/Pages/NhanVien/NhanVienModal.vue": {
-    "file": "assets/NhanVienModal-d3c9b90c.js",
+    "file": "assets/NhanVienModal-3472b949.js",
     "imports": [
       "resources/js/app.js"
     ],
@@ -768,16 +785,16 @@
   "resources/js/Pages/NhapKho/Index.vue": {
     "css": [
       "assets/adminlte-d4629afe.css",
-      "assets/style-6e38a70f.css"
+      "assets/style-65e00eff.css"
     ],
-    "file": "assets/Index-bc6db107.js",
+    "file": "assets/Index-dfc6525c.js",
     "imports": [
       "resources/js/app.js",
-      "_MainLayout-17f1cb56.js",
+      "_MainLayout-6535bde7.js",
       "resources/js/Pages/NhapKho/NhapKhoModal.vue",
       "_moment-a9aaa855.js",
       "__plugin-vue_export-helper-c27b6911.js",
-      "_lodash-a33a19b6.js"
+      "_lodash-61915b2b.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/NhapKho/Index.vue"
@@ -790,10 +807,10 @@
     "css": [
       "assets/NhapKhoModal-31ef808b.css"
     ],
-    "file": "assets/NhapKhoModal-961c05f0.js",
+    "file": "assets/NhapKhoModal-640ad436.js",
     "imports": [
       "resources/js/app.js",
-      "_lodash-a33a19b6.js",
+      "_lodash-61915b2b.js",
       "_moment-a9aaa855.js",
       "__plugin-vue_export-helper-c27b6911.js"
     ],
@@ -826,9 +843,9 @@
       "assets/Print-032c47c8.css",
       "assets/all-b7ef737e.css",
       "assets/adminlte-d4629afe.css",
-      "assets/style-6e38a70f.css"
+      "assets/style-65e00eff.css"
     ],
-    "file": "assets/Print-67b162ae.js",
+    "file": "assets/Print-4cf4f4a3.js",
     "imports": [
       "_script-4eb152de.js",
       "resources/js/app.js",
@@ -841,15 +858,15 @@
   "resources/js/Pages/PhieuChi/Index.vue": {
     "css": [
       "assets/adminlte-d4629afe.css",
-      "assets/style-6e38a70f.css"
+      "assets/style-65e00eff.css"
     ],
-    "file": "assets/Index-c51e71c2.js",
+    "file": "assets/Index-4e44a8ae.js",
     "imports": [
       "resources/js/app.js",
-      "_MainLayout-17f1cb56.js",
+      "_MainLayout-6535bde7.js",
       "resources/js/Pages/PhieuChi/PhieuChiModal.vue",
       "_script-4eb152de.js",
-      "_Pagination-f09aba27.js",
+      "_Pagination-d612a44f.js",
       "__plugin-vue_export-helper-c27b6911.js",
       "_moment-a9aaa855.js"
     ],
@@ -857,7 +874,7 @@
     "src": "resources/js/Pages/PhieuChi/Index.vue"
   },
   "resources/js/Pages/PhieuChi/PhieuChiModal.vue": {
-    "file": "assets/PhieuChiModal-0d1b83c7.js",
+    "file": "assets/PhieuChiModal-1e8049e9.js",
     "imports": [
       "resources/js/app.js",
       "_moment-a9aaa855.js"
@@ -868,15 +885,15 @@
   "resources/js/Pages/PhieuThu/Index.vue": {
     "css": [
       "assets/adminlte-d4629afe.css",
-      "assets/style-6e38a70f.css"
+      "assets/style-65e00eff.css"
     ],
-    "file": "assets/Index-33515bef.js",
+    "file": "assets/Index-b445e863.js",
     "imports": [
       "resources/js/app.js",
-      "_MainLayout-17f1cb56.js",
+      "_MainLayout-6535bde7.js",
       "resources/js/Pages/PhieuThu/PhieuThuModal.vue",
       "_script-4eb152de.js",
-      "_Pagination-f09aba27.js",
+      "_Pagination-d612a44f.js",
       "__plugin-vue_export-helper-c27b6911.js",
       "_moment-a9aaa855.js"
     ],
@@ -884,7 +901,7 @@
     "src": "resources/js/Pages/PhieuThu/Index.vue"
   },
   "resources/js/Pages/PhieuThu/PhieuThuModal.vue": {
-    "file": "assets/PhieuThuModal-d4080e45.js",
+    "file": "assets/PhieuThuModal-159915c0.js",
     "imports": [
       "resources/js/app.js",
       "_moment-a9aaa855.js"
@@ -918,9 +935,9 @@
       "assets/Print-4af901df.css",
       "assets/all-b7ef737e.css",
       "assets/adminlte-d4629afe.css",
-      "assets/style-6e38a70f.css"
+      "assets/style-65e00eff.css"
     ],
-    "file": "assets/Print-b18ad674.js",
+    "file": "assets/Print-9fb84094.js",
     "imports": [
       "_script-4eb152de.js",
       "resources/js/app.js",
@@ -932,13 +949,13 @@
   "resources/js/Pages/PhongBan/Index.vue": {
     "css": [
       "assets/adminlte-d4629afe.css",
-      "assets/style-6e38a70f.css"
+      "assets/style-65e00eff.css"
     ],
-    "file": "assets/Index-423448ce.js",
+    "file": "assets/Index-cac063c5.js",
     "imports": [
       "resources/js/app.js",
-      "_MainLayout-17f1cb56.js",
-      "_Pagination-f09aba27.js",
+      "_MainLayout-6535bde7.js",
+      "_Pagination-d612a44f.js",
       "resources/js/Pages/PhongBan/PhongBanModal.vue",
       "__plugin-vue_export-helper-c27b6911.js"
     ],
@@ -946,7 +963,7 @@
     "src": "resources/js/Pages/PhongBan/Index.vue"
   },
   "resources/js/Pages/PhongBan/PhongBanModal.vue": {
-    "file": "assets/PhongBanModal-61894275.js",
+    "file": "assets/PhongBanModal-126d0d52.js",
     "imports": [
       "resources/js/app.js"
     ],
@@ -956,25 +973,25 @@
   "resources/js/Pages/SanPham/Index.vue": {
     "css": [
       "assets/adminlte-d4629afe.css",
-      "assets/style-6e38a70f.css"
+      "assets/style-65e00eff.css"
     ],
-    "file": "assets/Index-1c90ff1d.js",
+    "file": "assets/Index-fca973cf.js",
     "imports": [
       "resources/js/app.js",
-      "_MainLayout-17f1cb56.js",
+      "_MainLayout-6535bde7.js",
       "resources/js/Pages/SanPham/SanPhamModal.vue",
-      "_Pagination-f09aba27.js",
+      "_Pagination-d612a44f.js",
       "__plugin-vue_export-helper-c27b6911.js",
-      "_lodash-a33a19b6.js"
+      "_lodash-61915b2b.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/SanPham/Index.vue"
   },
   "resources/js/Pages/SanPham/SanPhamModal.vue": {
-    "file": "assets/SanPhamModal-144913f7.js",
+    "file": "assets/SanPhamModal-53aa2f8a.js",
     "imports": [
       "resources/js/app.js",
-      "_lodash-a33a19b6.js"
+      "_lodash-61915b2b.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/SanPham/SanPhamModal.vue"
@@ -982,22 +999,22 @@
   "resources/js/Pages/TonKho/Index.vue": {
     "css": [
       "assets/adminlte-d4629afe.css",
-      "assets/style-6e38a70f.css"
+      "assets/style-65e00eff.css"
     ],
-    "file": "assets/Index-1486c195.js",
+    "file": "assets/Index-2e1520d5.js",
     "imports": [
       "resources/js/app.js",
-      "_MainLayout-17f1cb56.js",
+      "_MainLayout-6535bde7.js",
       "resources/js/Pages/TonKho/TonKhoModal.vue",
       "_script-4eb152de.js",
-      "_Pagination-f09aba27.js",
+      "_Pagination-d612a44f.js",
       "__plugin-vue_export-helper-c27b6911.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/TonKho/Index.vue"
   },
   "resources/js/Pages/TonKho/TonKhoModal.vue": {
-    "file": "assets/TonKhoModal-e78dc08a.js",
+    "file": "assets/TonKhoModal-2ea93c2f.js",
     "imports": [
       "resources/js/app.js"
     ],
@@ -1005,10 +1022,10 @@
     "src": "resources/js/Pages/TonKho/TonKhoModal.vue"
   },
   "resources/js/Pages/XuatKho/ChonDonHangModal.vue": {
-    "file": "assets/ChonDonHangModal-018d1baa.js",
+    "file": "assets/ChonDonHangModal-bd86483e.js",
     "imports": [
       "resources/js/app.js",
-      "_Pagination-f09aba27.js"
+      "_Pagination-d612a44f.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/XuatKho/ChonDonHangModal.vue"
@@ -1016,19 +1033,19 @@
   "resources/js/Pages/XuatKho/Index.vue": {
     "css": [
       "assets/adminlte-d4629afe.css",
-      "assets/style-6e38a70f.css"
+      "assets/style-65e00eff.css"
     ],
-    "file": "assets/Index-de9fcef4.js",
+    "file": "assets/Index-16e807e0.js",
     "imports": [
       "resources/js/app.js",
-      "_MainLayout-17f1cb56.js",
+      "_MainLayout-6535bde7.js",
       "resources/js/Pages/XuatKho/XuatKhoModal.vue",
       "_script-4eb152de.js",
       "_moment-a9aaa855.js",
       "__plugin-vue_export-helper-c27b6911.js",
-      "_lodash-a33a19b6.js",
+      "_lodash-61915b2b.js",
       "resources/js/Pages/XuatKho/ChonDonHangModal.vue",
-      "_Pagination-f09aba27.js"
+      "_Pagination-d612a44f.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/XuatKho/Index.vue"
@@ -1041,25 +1058,25 @@
     "css": [
       "assets/XuatKhoModal-bc981bf8.css"
     ],
-    "file": "assets/XuatKhoModal-7d00328b.js",
+    "file": "assets/XuatKhoModal-14e75524.js",
     "imports": [
       "resources/js/app.js",
-      "_lodash-a33a19b6.js",
+      "_lodash-61915b2b.js",
       "resources/js/Pages/XuatKho/ChonDonHangModal.vue",
       "_moment-a9aaa855.js",
       "__plugin-vue_export-helper-c27b6911.js",
-      "_Pagination-f09aba27.js"
+      "_Pagination-d612a44f.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/XuatKho/XuatKhoModal.vue"
   },
   "resources/js/app.css": {
-    "file": "assets/app-44024091.css",
+    "file": "assets/app-4764475e.css",
     "src": "resources/js/app.css"
   },
   "resources/js/app.js": {
     "css": [
-      "assets/app-44024091.css"
+      "assets/app-4764475e.css"
     ],
     "dynamicImports": [
       "resources/js/Pages/KhachHang/Index.vue",
@@ -1096,6 +1113,7 @@
       "resources/js/Pages/DuAn/ChiTiet2.vue",
       "resources/js/Pages/DuAn/DuAnModal.vue",
       "resources/js/Pages/DuAn/Index.vue",
+      "resources/js/Pages/DuAn/Index2.vue",
       "resources/js/Pages/DuAn/TheoDoi.vue",
       "resources/js/Pages/KhachHang/Index.vue",
       "resources/js/Pages/KhachHang/KhachHangModal.vue",
@@ -1129,7 +1147,7 @@
       "resources/js/Pages/XuatKho/Index.vue",
       "resources/js/Pages/XuatKho/XuatKhoModal.vue"
     ],
-    "file": "assets/app-bb51c9ce.js",
+    "file": "assets/app-f64b3015.js",
     "isEntry": true,
     "src": "resources/js/app.js"
   },
@@ -1206,7 +1224,7 @@
     "src": "resources/js/assets/img/widgets.png"
   },
   "style.css": {
-    "file": "assets/style-6e38a70f.css",
+    "file": "assets/style-65e00eff.css",
     "src": "style.css"
   }
 }

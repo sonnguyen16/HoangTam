@@ -29,8 +29,8 @@ const tasks = computed(() => {
                 start: item.ngay_bat_dau,
                 end: item.ngay_ket_thuc,
                 progress: 0,
-                dependencies: item.parent_id? [item.parent_id] : null,
-                custom_class: item.trang_thai === 0 ? 'warning' : item.trang_thai === 1 ? 'primary' : 'success'
+                custom_class: item.trang_thai === 0 ? 'warning' : item.trang_thai === 1 ? 'primary' : 'success',
+                user: item.nhan_vien
             }, ...subTasks];
         });
     }
@@ -38,29 +38,52 @@ const tasks = computed(() => {
     return mapChildren(du_an.value.children);
 })
 
-
-onMounted(() => {
-    const gantt = new Gantt(".gantt-target", tasks.value, {
+function drawgantt(){
+    new Gantt(".gantt-target", tasks.value, {
         on_click: (task) => {
             console.log(task)
         },
         view_mode: "Day",
         language: "en",
-        header_height: 45,
+        header_height: 43,
         padding: 13,
+        column_width: 10,
+        bar_height: 24,
+        step: 10,
+        arrow_curve: 2,
     })
+
+    let bar_group = document.getElementsByClassName("bar-group");
+    for(let i = 0; i < bar_group.length; i++){
+        let x = parseInt(bar_group[i].querySelector('text').getAttribute('x'))
+            + parseInt(bar_group[i].querySelector('rect').getAttribute('width'))/2
+        let y = parseInt(bar_group[i].querySelector('text').getAttribute('y'))
+        let div_user = `
+        <svg x="${x + 4}" y="${y - 17}" width="35" height="35">
+          <defs>
+            <clipPath id="myCircle">
+              <circle cx="17.5" cy="17.5" r="13"/>
+            </clipPath>
+          </defs>
+          <image
+            width="35"
+            height="35"
+            xlink:href="/uploads/nhan_vien/${tasks.value[i].user.hinh_anh}"
+            clip-path="url(#myCircle)"
+          />
+        </svg>
+         <text x=${x + 45} y=${y}  class="bar-label big">${tasks.value[i].user.name}</text>
+        `
+        bar_group[i].innerHTML += div_user
+    }
+}
+
+onMounted(() => {
+    drawgantt()
 })
 
 onUpdated(() => {
-    const gantt = new Gantt(".gantt-target", tasks.value, {
-        on_click: (task) => {
-            console.log(task)
-        },
-        view_mode: "Day",
-        language: "en",
-        header_height: 45,
-        padding: 13,
-   })
+    drawgantt()
 })
 
 let hang_muc = ref({
@@ -153,49 +176,47 @@ function reload(){
 
 <template>
     <MainLayout>
-        <div class="card shadow card-child" style="">
-            <div class="card-body">
+        <div class="card card-child" style="">
+            <div class="card-body p-0">
                 <div class="">
                     <div class="">
-                        <h4 class="txt-color mb-2 font-weight-bold">{{  du_an.ten }}</h4>
+                        <h4 class="txt-color mx-3 mt-3 font-weight-bold">{{  du_an.ten }}</h4>
                     </div>
-                    <div class="mt-2">
-                        <div class="mb-1">
-                            <a class="btn btn-primary" @click.prevent="openModal(du_an.id)">Thêm hạng mục</a>
-                        </div>
-                        <div class="p-2 pt-3 pl-3">
+                    <div class="mt-3">
+                        <div class="">
                             <div class="row ">
-                                <div class="col-md-5">
-                                    <div style="height: 56px">
-                                        <div class="row h-100 border">
-                                            <div class="col-4 d-flex align-items-center">
-                                                Tên
-                                            </div>
-                                            <div class="col-2 d-flex align-items-center">
-                                                Bắt đầu
-                                            </div>
-                                            <div class="col-2 d-flex align-items-center">
-                                                Kết thúc
-                                            </div>
-                                            <div class="col-2 d-flex align-items-center justify-content-center">
-                                                Người nhận
-                                            </div>
-                                            <div class="col-2 d-flex align-items-center justify-content-center">
-                                                Thao tác
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <TreeItem1
-                                        class=""
-                                        v-for="(item, index) in du_an.children"
-                                        :key="item.id"
-                                        :item="item"
-                                        @edit="editModal"
-                                        @add="openModal"
-                                    />
+                                <div class="col-md-4 pr-0">
+                                    <table class="table border-bottom">
+                                        <thead>
+                                            <tr class="h-[51px]">
+                                                <th >
+                                                    <a class="cursor-pointer text-blue-300 d-flex align-items-center gap-[5px] ps-3"
+                                                       @click.prevent="openModal(du_an.id)">
+                                                        <div class="text-white bg-blue-300 text-center rounded-full w-[20px] h-[20px]">
+                                                            <i class="fa fa-plus text-[10px]"></i>
+                                                        </div>
+                                                        Thêm hạng mục
+                                                    </a>
+                                                </th>
+                                                <th class="text-neutral-400">Bắt đầu</th>
+                                                <th class="text-neutral-400">Kết thúc</th>
+                                                <th class="text-neutral-400">Trạng thái</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <TreeItem1
+                                                v-for="(item, index) in du_an.children"
+                                                :key="item.id"
+                                                :item="item"
+                                                @edit="editModal"
+                                                @add="openModal"
+                                            />
+                                        </tbody>
+                                    </table>
 
                                 </div>
-                                <div class="col-md-7">
+                                <div class="col-md-8 pl-0">
                                     <div class="gantt-target border"></div>
                                 </div>
                             </div>
@@ -209,7 +230,6 @@ function reload(){
             :users="nhan_vien_list"
             @add="openModal"
             @edit="editModal"
-
         />
         <DuAnModal
             :du_an="hang_muc"
@@ -239,7 +259,7 @@ function reload(){
     opacity: 0.3 !important;
 }
 
-.card-child{
-    min-height: calc(100vh - 115px) !important;
+th{
+    text-align: start;
 }
 </style>

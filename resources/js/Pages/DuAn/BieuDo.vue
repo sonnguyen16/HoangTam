@@ -44,8 +44,8 @@ const tasks = computed(() => {
                 name: item.ten,
                 start: item.ngay_bat_dau,
                 end: item.ngay_ket_thuc,
-                progress: 0,
-                custom_class: item.trang_thai === 0 ? 'warning' : item.trang_thai === 1 ? 'primary' : 'success',
+                progress: item.tien_do,
+                custom_class: item.tien_do === 0 ? 'warning' : item.tien_do > 0 ? 'primary' : 'success',
                 user: item.nhan_vien
             }, ...subTasks];
         });
@@ -113,7 +113,7 @@ let hang_muc = ref({
     user_id: "",
     nhan_vien: {},
     mo_ta: "",
-    trang_thai: "",
+    tien_do: 0,
     parent_id: "",
     children: [],
     files: [],
@@ -128,7 +128,7 @@ let hang_muc1 = ref({
     user_id: "",
     nhan_vien: {},
     mo_ta: "",
-    trang_thai: "",
+    tien_do: 0,
     parent_id: "",
     children: [],
     files: [],
@@ -143,7 +143,7 @@ function openModal(id) {
         ngay_ket_thuc: "",
         user_id: "",
         mo_ta: "",
-        trang_thai: "",
+        tien_do: 0,
         parent_id: id,
         children: [],
         files: [],
@@ -165,7 +165,7 @@ function get(kh){
         ngay_ket_thuc: kh.ngay_ket_thuc,
         user_id: kh.user_id,
         mo_ta: kh.mo_ta,
-        trang_thai: kh.trang_thai,
+        tien_do: kh.tien_do,
         parent_id: kh.parent_id,
         children: kh.children,
         files: kh.files,
@@ -221,6 +221,7 @@ function reload(){
                                                 <th class="text-neutral-400">Kết thúc</th>
                                                 <th class="text-neutral-400">Trạng thái</th>
                                                 <th></th>
+                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -261,17 +262,11 @@ function reload(){
 
 <style>
 
-.gantt .warning .bar{
+.gantt .bar{
     fill: #ffc107;
 }
 
-.gantt .primary .bar{
-    fill: #007bff;
-}
 
-.gantt .success .bar{
-    fill: #28a745;
-}
 
 .today-highlight{
     fill: #007bff !important;

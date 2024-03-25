@@ -17,10 +17,23 @@ function xoaNguoiTheoDoi(id) {
 
 <template>
     <template v-if="du_an.id">
-        <div class="card p-3 elevation-2">
+        <div class="p-2">
+            <div class="d-flex justify-content-between align-items-center">
+                <h5 class="font-weight-bold mb-0">Người nhận</h5>
+<!--                <button @click.prevent="editNguoiTheoDoi()" class="fa fa-plus text-secondary"></button>-->
+            </div>
+
+            <hr class="mt-1 mb-2">
+            <div class="d-flex align-items-center gap-[10px] my-1">
+                <img v-if="du_an.nhan_vien?.hinh_anh" :src="'/uploads/nhan_vien/' + du_an.nhan_vien.hinh_anh" alt="avatar" class="rounded-full w-10 h-10 object-cover elevation-2">
+                <img v-else src="/uploads/avatardefault.png" alt="avatar" class="rounded-full w-10 h-10 object-cover">
+                <span class="font-weight-bold">{{ du_an.nhan_vien?.name }}</span>
+            </div>
+        </div>
+        <div class="p-2">
             <div class="d-flex justify-content-between align-items-center">
                 <h5 class="font-weight-bold mb-0">Người theo dõi</h5>
-                <button @click.prevent="editNguoiTheoDoi()" class="fa fa-plus text-secondary"></button>
+<!--                <button @click.prevent="editNguoiTheoDoi()" class="fa fa-plus text-secondary"></button>-->
             </div>
 
             <hr class="mt-1 mb-2">
@@ -30,7 +43,7 @@ function xoaNguoiTheoDoi(id) {
                     <img v-else src="/uploads/avatardefault.png" alt="avatar" class="rounded-full w-10 h-10 object-cover">
                     <span class="font-weight-bold">{{ ntd.user?.name }}</span>
                 </div>
-                <button @click.prevent="xoaNguoiTheoDoi(ntd.id)" class="fa fa-trash text-secondary"></button>
+<!--                <button @click.prevent="xoaNguoiTheoDoi(ntd.id)" class="fa fa-trash text-secondary"></button>-->
             </div>
         </div>
     </template>

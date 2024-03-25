@@ -20,7 +20,7 @@ const form = useForm({
     ngay_ket_thuc: "",
     user_id: "",
     mo_ta: "",
-    trang_thai: "",
+    tien_do: 0,
     parent_id: "",
     children: [],
     files: []
@@ -34,7 +34,7 @@ watchEffect(() => {
     form.user_id = props.du_an.user_id
     $('#user').val(props.du_an.user_id).trigger('change');
     form.mo_ta = props.du_an.mo_ta
-    form.trang_thai = props.du_an.trang_thai
+    form.tien_do = props.du_an.tien_do
     form.parent_id = props.du_an.parent_id
     form.children = props.du_an.children
     form.files = props.du_an.files
@@ -82,7 +82,7 @@ let hang_muc = ref({
     user_id: "",
     nhan_vien: {},
     mo_ta: "",
-    trang_thai: "",
+    tien_do: 0,
     parent_id: "",
     children: [],
     files: []
@@ -134,22 +134,14 @@ function addBinhLuan(){
                 <form @submit.prevent="submit">
                     <div class="modal-body">
                         <input type="hidden" v-model="form.id" id="id" class="form-control"/>
-                        <input type="text" class="font-weight-bold border-0 text-lg pl-0" v-model="form.ten">
+                        <input type="text" class="font-weight-bold border-0 w-100 text-lg pl-0" v-model="form.ten">
                         <div class="d-flex align-items-center">
                             <label for="ngay_bat_dau" class="font-weight-bold text-secondary mt-2">Bắt đầu:</label>
                             <input type="date" v-model="form.ngay_bat_dau" id="ngay_bat_dau" class="border-0 mr-5 text-secondary"/>
                             <label for="ngay_ket_thuc" class="font-weight-bold text-secondary mt-2">Kết thúc:</label>
                             <input type="date" v-model="form.ngay_ket_thuc" id="ngay_ket_thuc" class="border-0 mr-5 text-secondary"/>
-                            <label class="font-weight-bold text-secondary mt-2">Tình trạng</label>
-                            <select v-model="form.trang_thai" class="border-0 active:outline-0 outline-0 focus:outline-0 mr-5 font-bold" id="trang_thai">
-                                <option value="0">Chưa thực hiện</option>
-                                <option value="1">Đang thực hiện</option>
-                                <option value="2">Đã hoàn thành</option>
-                            </select>
-                            <label for="user" class="font-weight-bold text-secondary mt-2">Người thực hiện:</label>
-                            <select v-model="form.user_id" class="border-0 outline-0 font-bold focus:outline-0" id="user">
-                                <option v-for="user in users" :value="user.id">{{ user.name }}</option>
-                            </select>
+                            <label for="user" class="font-weight-bold text-secondary mt-2">Tiến độ:</label>
+                            <input v-model="form.tien_do" class="border-0 outline-0 font-bold focus:outline-0" type="number">
                         </div>
                         <div class="mt-3">
                             <label for="mo_ta" class="font-weight-bold text-success ">Mô tả hạng mục:</label>
@@ -158,7 +150,7 @@ function addBinhLuan(){
                         <div class="mt-3">
                             <div class="d-flex align-items-center mb-2">
                                 <label for="mo_ta" class="font-weight-bold text-success mt-2 ">Attachments:</label>
-                                <label for="files1" class="btn btn-success btn-sm mt-2 ml-3">Chọn file</label>
+                                <label for="files1" class="btn btn-dark btn-sm mt-2 ml-3">Chọn file</label>
                                 <input accept=".png, .jpg, .jpeg, .gif, .bmp, .doc, .docx, .xls, .xlsx, .pdf"
                                        type="file"
                                        @input="updateFileList($event)"
@@ -181,10 +173,16 @@ function addBinhLuan(){
                                                     </thead>
                                                     <tbody>
                                                     <tr v-for="file in files_temp" :key="file.id">
-                                                        <td>{{ file.ten.length > 30 ? file.ten.slice(0,30) + '...' : file.ten }}</td>
+                                                        <td>
+                                                            <a v-if="file.id" :href="`/uploads/du_an/${file.ten}`" target="_blank" class="">
+                                                                {{ file.ten.length > 40 ? file.ten.slice(0,40) + '...' : file.ten }}
+                                                            </a>
+                                                            <span v-else >{{ file.ten }}</span>
+                                                        </td>
                                                         <td class="d-flex gap-[5px] justify-content-center">
-                                                            <a v-if="file.id" :href="`/uploads/du_an/${file.ten}`" target="_blank" class="btn btn-primary btn-sm">View</a>
-                                                            <a v-if="file.id" @click.prevent="deleteFile(file.id)" class="btn btn-sm btn-danger">Delete</a>
+                                                            <a v-if="file.id" @click.prevent="deleteFile(file.id)" class="btn btn-sm btn-danger">
+                                                                <i class="fa fa-trash"></i>
+                                                            </a>
                                                         </td>
                                                     </tr>
                                                     </tbody>

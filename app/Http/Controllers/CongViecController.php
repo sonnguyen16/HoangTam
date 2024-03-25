@@ -17,14 +17,14 @@ class CongViecController extends Controller
                 $query->where('id', Auth::user()->id);
             })->orWhereHas('nguoi_theo_doi', function ($query) {
                 $query->where('user_id', Auth::user()->id);
-            })->orderBy('id', 'asc');
+            });
         $nhan_vien_list = User::query()->where('role', 1)->where('don_vi_id', Auth::user()->don_vi_id)->get();
 
         if ($request->filled('search')) {
             $search = $request->search;
-            $query= $query->where(function ($query) use ($search) {
-                $query->where('parent_id', null)
-                    ->where('ten', 'like', "%{$search}%")
+            $query = $query->where(function ($query) use ($search) {
+                $query->where('ten', 'like', "%{$search}%")
+                    ->orWhere('mo_ta', 'like', "%{$search}%")
                     ->orWhereHas('nhan_vien', function ($q) use ($search) {
                         $q->where('name', 'like', "%{$search}%");
                     });

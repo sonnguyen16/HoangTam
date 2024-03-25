@@ -31,27 +31,33 @@ function toggle() {
                     {{ item.ten }}
                 </a>
             </td>
-            <td class="">
+            <td style="width: 14%">
                 <span>{{ new Date(item.ngay_bat_dau).toLocaleDateString() }}</span>
             </td>
-            <td class="">
+            <td style="width: 14%">
                 <span>{{ new Date(item.ngay_ket_thuc).toLocaleDateString() }}</span>
             </td>
-            <td class="">
+            <td style="width: 5%">
                     <span>
-                        <span v-if="item.trang_thai == 0" class="badge badge-warning">Chưa thực hiện</span>
-                        <span v-else-if="item.trang_thai == 1" class="badge badge-primary">Đang thực hiện</span>
-                        <span v-else-if="item.trang_thai == 2" class="badge badge-success">Đã hoàn thành</span>
+                        <span v-if="item.tien_do == 0" class="badge badge-warning">Chưa thực hiện</span>
+                        <span v-else-if="item.tien_do > 0 && item.tien_do < 100" class="badge badge-primary">Đang thực hiện</span>
+                        <span v-else class="badge badge-success">Đã hoàn thành</span>
                     </span>
             </td>
-            <td class="">
+            <td style="width: 3%">
                 <a class="cursor-pointer text-blue-300 d-flex align-items-center gap-[5px] ps-3"
                    @click.prevent.stop=" emit('add', item.id);">
                     <div class="text-white bg-blue-300 text-center rounded-full w-[20px] h-[20px]">
                         <i class="fa fa-plus text-[10px]"></i>
                     </div>
                 </a>
-<!--                <a @click.prevent.stop="emit('edit', item);"><i class="fa fa-edit text-neutral-500"></i></a>-->
+            </td>
+            <td >
+                <a @click.prevent.stop="emit('edit', item);">
+                    <div class="text-white bg-blue-300 text-center rounded-full w-[20px] h-[20px]">
+                        <i class="fa fa-edit text-[10px]"></i>
+                    </div>
+                </a>
             </td>
         </tr>
         <TreeItem1

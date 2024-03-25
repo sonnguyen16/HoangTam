@@ -29,7 +29,7 @@ class DuAnRequest extends FormRequest
             'mo_ta' => [''],
             'ngay_bat_dau' => ['required', 'date'],
             'ngay_ket_thuc' => ['required', 'date', 'after:ngay_bat_dau'],
-            'trang_thai' => ['required', 'integer'],
+            'tien_do' => ['integer', 'min:0', 'max:100'],
             'files' => [],
             'nguoi_theo_doi' => [],
         ];
@@ -58,8 +58,9 @@ class DuAnRequest extends FormRequest
             'ngay_ket_thuc.required' => 'Ngày kết thúc không được để trống',
             'ngay_ket_thuc.date' => 'Ngày kết thúc phải là ngày',
             'ngay_ket_thuc.after' => 'Ngày kết thúc phải sau ngày bắt đầu',
-            'trang_thai.required' => 'Trạng thái không được để trống',
-            'trang_thai.integer' => 'Trạng thái phải là số nguyên',
+            'tien_do.integer' => 'Tiến độ phải là số nguyên',
+            'tien_do.min' => 'Tiến độ không được nhỏ hơn 0',
+            'tien_do.max' => 'Tiến độ không được lớn hơn 100',
         ];
     }
 }

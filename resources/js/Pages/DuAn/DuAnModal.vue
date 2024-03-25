@@ -15,7 +15,6 @@ const form = useForm({
     ngay_ket_thuc: "",
     user_id: "",
     mo_ta: "",
-    trang_thai: "",
     parent_id: "",
     children: [],
     nguoi_theo_doi: [],
@@ -29,7 +28,6 @@ watchEffect(() => {
     form.ngay_ket_thuc = props.du_an.ngay_ket_thuc
     form.user_id = props.du_an.user_id
     form.mo_ta = props.du_an.mo_ta
-    form.trang_thai = props.du_an.trang_thai
     form.parent_id = props.du_an.parent_id
     form.children = props.du_an.children
     form.nguoi_theo_doi = []
@@ -131,17 +129,6 @@ onMounted(() => {
                                         <textarea :class="{ 'border-danger' : form.errors.mo_ta }" type="text" v-model="form.mo_ta" class="form-control" id="mo_ta" ></textarea>
                                     </div>
 <!--                                    <InputError :message="form.errors.mo_ta" />-->
-
-                                    <div v-show="!form.id" class="form-group">
-                                        <label for="name">Trạng thái</label>
-                                        <select :class="{ 'border-danger' : form.errors.trang_thai }" v-model="form.trang_thai" class="form-control" id="trang_thai">
-                                            <option value="">Chọn trạng thái</option>
-                                            <option value="0">Chưa triển khai</option>
-                                            <option value="1">Đang triển khai</option>
-                                            <option value="2">Đã hoàn thành</option>
-                                        </select>
-                                    </div>
-<!--                                    <InputError :message="form.errors.trang_thai" />-->
 
                                     <div v-show="!form.id" class="form-group">
                                         <label for="name">Tệp đính kèm</label>

@@ -19,7 +19,7 @@ let hang_muc = ref({
     user_id: "",
     nhan_vien: {},
     mo_ta: "",
-    trang_thai: "",
+    tien_do: 0,
     parent_id: "",
     children: [],
     files: [],
@@ -34,7 +34,7 @@ let hang_muc1 = ref({
     user_id: "",
     nhan_vien: {},
     mo_ta: "",
-    trang_thai: "",
+    tien_do: 0,
     parent_id: "",
     children: [],
     files: [],
@@ -84,7 +84,7 @@ function editModal(kh) {
         ngay_ket_thuc: kh.ngay_ket_thuc,
         user_id: kh.user_id,
         mo_ta: kh.mo_ta,
-        trang_thai: kh.trang_thai,
+        tien_do: kh.tien_do,
         parent_id: kh.parent_id,
         children: kh.children,
         files: kh.files,
@@ -127,6 +127,7 @@ function reload(){
                         <table class="table table-bordered  table-responsive-md mt-3">
                             <thead>
                             <tr>
+                                <th class="text-center">STT</th>
                                 <th>Tên dự án</th>
                                 <th>Ngày bắt đầu</th>
                                 <th>Ngày kết thúc</th>
@@ -139,15 +140,16 @@ function reload(){
                             <tr v-if="allData?.length === 0">
                                 <td colspan="7" class="text-center">Không có dữ liệu</td>
                             </tr>
-                            <tr :key="kh.id" v-else v-for="kh in allData">
+                            <tr :key="kh.id" v-else v-for="(kh, index) in allData">
+                                <td style="width: 3% ; text-align: center">{{ index + 1 }}</td>
                                 <td >{{ kh.ten }}</td>
                                 <td >{{ new Date(kh.ngay_bat_dau).toLocaleDateString() }}</td>
                                 <td >{{ new Date(kh.ngay_bat_dau).toLocaleDateString() }}</td>
                                 <td >{{ kh.nhan_vien.name }}</td>
                                 <td >
-                                    <span v-if="kh.trang_thai === 0" class="badge badge-warning">Chưa triển khai</span>
-                                    <span v-else-if="kh.trang_thai === 1" class="badge badge-primary">Đang triển khai</span>
-                                    <span v-else-if="kh.trang_thai === 2" class="badge badge-success">Hoàn thành</span>
+                                    <span v-if="kh.tien_do === 0" class="badge badge-warning">Chưa triển khai</span>
+                                    <span v-else-if="kh.tien_do > 0" class="badge badge-primary">Đang triển khai</span>
+                                    <span v-else-if="kh.tien_do === 100" class="badge badge-success">Hoàn thành</span>
                                 </td>
                                 <td style="width: 8%">
                                     <a class="btn btn-primary btn-sm mr-2 ml-2" :href="route('duan.detail', {id: kh.id})">Chi tiết</a>

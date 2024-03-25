@@ -25,7 +25,8 @@ const form = useForm({
     parent_id: "",
     children: [],
     files: [],
-    binh_luan: []
+    binh_luan: [],
+    tien_do: 0
 })
 
 watchEffect(() => {
@@ -42,6 +43,7 @@ watchEffect(() => {
     form.files = props.du_an.files
     files_temp.value = props.du_an.files
     form.binh_luan = props.du_an.binh_luan
+    form.tien_do = props.du_an.tien_do
 })
 const submit = () => {
     form.post(route('duan.store'), {
@@ -93,39 +95,31 @@ function addBinhLuan(){
 </script>
 
 <template>
-    <form v-if="form.id" >
+    <form @submit.prevent="submit" v-if="form.id" >
             <input type="hidden" v-model="form.id" id="id" class="form-control"/>
-            <input type="text" class="font-weight-bold border-0 text-lg pl-0 pb-0" v-model="form.ten">
+            <input readonly type="text" class="font-weight-bold border-0 w-100 text-lg pl-0 pb-0" v-model="form.ten">
             <div class="d-flex align-items-center">
                 <label for="ngay_bat_dau" class="font-weight-bold text-secondary mt-2">Bắt đầu:</label>
-                <input type="date" v-model="form.ngay_bat_dau" id="ngay_bat_dau" class="border-0 mr-3 text-secondary"/>
+                <input readonly type="date" v-model="form.ngay_bat_dau" id="ngay_bat_dau" class="border-0 mr-3 text-secondary"/>
                 <label for="ngay_ket_thuc" class="font-weight-bold text-secondary mt-2">Kết thúc:</label>
-                <input type="date" v-model="form.ngay_ket_thuc" id="ngay_ket_thuc" class="border-0 mr-3 text-secondary"/>
-                <label class="font-weight-bold text-secondary mt-2">Tình trạng</label>
-                <select v-model="form.trang_thai" class="border-0 active:outline-0 outline-0 focus:outline-0 mr-3 font-bold" id="trang_thai">
-                    <option value="0">Chưa thực hiện</option>
-                    <option value="1">Đang thực hiện</option>
-                    <option value="2">Đã hoàn thành</option>
-                </select>
-                <label for="user" class="font-weight-bold text-secondary mt-2">Người thực hiện:</label>
-                <select v-model="form.user_id" class="border-0 outline-0 font-bold focus:outline-0" id="user">
-                    <option v-for="user in users" :value="user.id">{{ user.name }}</option>
-                </select>
+                <input readonly type="date" v-model="form.ngay_ket_thuc" id="ngay_ket_thuc" class="border-0 mr-3 text-secondary"/>
+                <label for="user" class="font-weight-bold text-secondary mt-2">Tiến độ:</label>
+                <input v-model="form.tien_do" class="border-0 outline-0 font-bold focus:outline-0" type="number">
             </div>
             <div class="mt-1">
                 <label for="mo_ta" class="font-weight-bold text-success ">Mô tả hạng mục:</label>
-                <textarea v-model="form.mo_ta" id="mo_ta" class="form-control border-0 pl-0" rows="3"></textarea>
+                <textarea readonly v-model="form.mo_ta" id="mo_ta" class="form-control border-0 pl-0" rows="3"></textarea>
             </div>
             <div class="mt-3">
                 <div class="d-flex align-items-center mb-2">
                     <label for="mo_ta" class="font-weight-bold text-success mt-2 ">Attachments:</label>
-<!--                    <label for="files1" class="btn btn-success btn-sm mt-2 ml-3">Chọn file</label>-->
-<!--                    <input accept=".png, .jpg, .jpeg, .gif, .bmp, .doc, .docx, .xls, .xlsx, .pdf"-->
-<!--                           type="file"-->
-<!--                           @input="updateFileList($event)"-->
-<!--                           id="files1"-->
-<!--                           class="d-none"-->
-<!--                           multiple/>-->
+                    <label for="files1" class="btn btn-dark btn-sm mt-2 ml-3">Chọn file</label>
+                    <input accept=".png, .jpg, .jpeg, .gif, .bmp, .doc, .docx, .xls, .xlsx, .pdf"
+                           type="file"
+                           @input="updateFileList($event)"
+                           id="files1"
+                           class="d-none"
+                           multiple/>
                     <span id="fileList" class="d-inline-block ml-3"></span>
                 </div>
                 <template v-if="files_temp.length > 0">
@@ -144,8 +138,9 @@ function addBinhLuan(){
                                         <tr v-for="file in files_temp" :key="file.id">
                                             <td colspan="2">
                                                 <a v-if="file.id" :href="`/uploads/du_an/${file.ten}`" target="_blank" class="">
-                                                  {{ file.ten.length > 40 ? file.ten.slice(0,40) + '...' : file.ten }}
+                                                    {{ file.ten.length > 40 ? file.ten.slice(0,40) + '...' : file.ten }}
                                                 </a>
+                                                <span v-else >{{ file.ten }}</span>
                                             </td>
 <!--                                            <td class="d-flex gap-[5px] justify-content-center">-->
 <!--                                                <a v-if="file.id" @click.prevent="deleteFile(file.id)" class="btn btn-sm btn-danger">-->
@@ -160,7 +155,7 @@ function addBinhLuan(){
                         </div>
                     </div>
                 </template>
-<!--                <button type="submit" :disabled="form.processing" class="btn btn-primary right-0" >Lưu</button>-->
+                <button type="submit" :disabled="form.processing" class="btn btn-primary right-0 font-weight-bold" >Lưu</button>
                 <hr>
                 <div class="" id="subtasks">
                     <label for="mo_ta" class="font-weight-bold text-success ">Hạng mục con:</label>

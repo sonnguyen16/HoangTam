@@ -7,7 +7,6 @@ import {router} from "@inertiajs/vue3";
 import {formatDate} from "@/assets/js/script.js";
 import ChiTiet2 from "@/Pages/duan/ChiTiet2.vue";
 import TheoDoi from "@/Pages/DuAn/TheoDoi.vue";
-import {cloneDeep} from "lodash";
 import Pagination from "@/Components/app/Pagination.vue";
 
 const props = defineProps({
@@ -23,7 +22,7 @@ let hang_muc = ref({
     user_id: "",
     nhan_vien: {},
     mo_ta: "",
-    trang_thai: "",
+    tien_do: 0,
     parent_id: "",
     files: [],
 })
@@ -36,7 +35,7 @@ let hang_muc1 = ref({
     user_id: "",
     nhan_vien: {},
     mo_ta: "",
-    trang_thai: "",
+    tien_do: 0,
     parent_id: "",
     children: [],
     files: [],
@@ -66,7 +65,7 @@ const allData = computed( () => {
 })
 
 watch(search, (value) => {
-    router.visit(route('duan.index', {search: value}), {
+    router.visit(route('congviec.index', {search: value}), {
         preserveState: true
     })
 })
@@ -86,12 +85,13 @@ function editModal(kh) {
         ngay_ket_thuc: kh.ngay_ket_thuc,
         user_id: kh.user_id,
         mo_ta: kh.mo_ta,
-        trang_thai: kh.trang_thai,
+        tien_do: kh.tien_do,
         parent_id: kh.parent_id,
         children: kh.children,
         files: kh.files,
         binh_luan: kh.binh_luan,
-        nguoi_theo_doi: kh.nguoi_theo_doi
+        nguoi_theo_doi: kh.nguoi_theo_doi,
+        nhan_vien: kh.nhan_vien
     }
 }
 
@@ -136,7 +136,7 @@ onMounted(() => {
                                 <div class="input-group">
                                     <input v-model="search" type="text" name="search"
                                            class="form-control"
-                                           placeholder="Tìm kiếm dự án">
+                                           placeholder="Tìm kiếm công việc">
                                     <div class="input-group-append">
                                         <button class="btn btn-primary" type="submit">
                                             <i class="fas fa-search"></i>
@@ -150,9 +150,9 @@ onMounted(() => {
                         <div @click="editModal(dx)" v-for="dx in allData.data"
                              :class="['p-3 border-bottom',
                              {'border-s-4 border-neutral-400': dx.id == hang_muc1.id},
-                             {'bg-neutral-100' : dx.trang_thai == 0},
-                             {'bg-blue-200' : dx.trang_thai == 1},
-                             {'bg-green-300' : dx.trang_thai == 2},
+                             {'bg-neutral-100' : dx.tien_do == 0},
+                             {'bg-blue-200' : dx.tien_do > 0},
+                             {'bg-green-300' : dx.tien_do >= 100},
                              ]">
                             <div class="d-flex align-items-center gap-[10px] ms-1">
                                 <h5 class="font-bold mb-0 mt-[2px]">{{ dx.ten }}</h5>

@@ -17,7 +17,7 @@ function xoaNguoiTheoDoi(id) {
 
 <template>
     <template v-if="de_xuat_selected.id">
-        <div class="card p-3 elevation-2">
+        <div class="p-2">
             <div class="d-flex justify-content-between align-items-center">
                 <h5 class="font-weight-bold mb-0">Người duyệt</h5>
                 <button @click.prevent="editNguoiTheoDoi()" class="fa fa-plus text-secondary"></button>
@@ -30,7 +30,7 @@ function xoaNguoiTheoDoi(id) {
                 <span class="font-weight-bold">{{ de_xuat_selected.nguoi_duyet?.name }}</span>
             </div>
         </div>
-        <div class="card p-3 elevation-2">
+        <div class="p-2">
             <div class="d-flex justify-content-between align-items-center">
                 <h5 class="font-weight-bold mb-0">Người theo dõi</h5>
                 <button @click.prevent="editNguoiTheoDoi()" class="fa fa-plus text-secondary"></button>

@@ -27,7 +27,7 @@ const user = computed(() => {
           role="menu"
           data-accordion="false"
         >
-          <li class="nav-item">
+          <li class="nav-item menu-open">
             <NavLink title="Danh mục quản lý" />
             <ul class="nav nav-treeview">
               <!--                            <li class="nav-item">-->
@@ -51,7 +51,7 @@ const user = computed(() => {
             </ul>
           </li>
           <hr class="m-2 mr-4 ml-3" />
-            <li class="nav-item">
+            <li class="nav-item menu-open">
                 <NavLink title="Quản lý dự án" />
                 <ul class="nav nav-treeview">
                     <NavItem :href="route('duan.index')" title="Dự án"/>
@@ -60,7 +60,7 @@ const user = computed(() => {
                 </ul>
             </li>
             <hr class="m-2 mr-4 ml-3" />
-          <li class="nav-item">
+          <li class="nav-item menu-open">
             <NavLink title="Nhập xuất kho" />
             <ul class="nav nav-treeview">
               <NavItem
@@ -78,7 +78,7 @@ const user = computed(() => {
             </ul>
           </li>
           <hr class="m-2 mr-4 ml-3" />
-          <li class="nav-item">
+          <li class="nav-item menu-open">
             <NavLink title="Đơn hàng" />
             <ul class="nav nav-treeview">
               <NavItem
@@ -92,7 +92,7 @@ const user = computed(() => {
             </ul>
           </li>
           <hr class="m-2 mr-4 ml-3" />
-          <li class="nav-item">
+          <li class="nav-item menu-open">
             <NavLink title="Phiếu thu chi" />
             <ul class="nav nav-treeview">
               <NavItem :href="route('loaithuchi.index')" title="Loại thu chi" />
@@ -107,7 +107,7 @@ const user = computed(() => {
             </ul>
           </li>
           <hr class="m-2 mr-4 ml-3" />
-          <li class="nav-item">
+          <li class="nav-item menu-open">
             <NavLink title="Báo cáo" />
             <ul class="nav nav-treeview">
                 <NavItem

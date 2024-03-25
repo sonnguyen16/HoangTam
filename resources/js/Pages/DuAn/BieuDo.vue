@@ -13,8 +13,24 @@ const props = defineProps({
 })
 
 const du_an = computed(() => {
-    return props.du_an.find(item => String(item.id) === props.du_an_id)
-})
+    function search(children) {
+        for (let i = 0; i < children.length; i++) {
+            const item = children[i];
+            if (String(item.id) === props.du_an_id) {
+                return item;
+            }
+            if (item.children) {
+                let found = search(item.children);
+                if (found) {
+                    return found;
+                }
+            }
+        }
+        return null; // Trả về null nếu không tìm thấy
+    }
+
+    return search(props.du_an);
+});
 
 const tasks = computed(() => {
     // Định nghĩa một hàm đệ quy để duyệt qua các mục con
@@ -79,11 +95,14 @@ function drawgantt(){
 }
 
 onMounted(() => {
-    drawgantt()
+    if(du_an.value.children.length > 0)
+        drawgantt()
 })
 
+
 onUpdated(() => {
-    drawgantt()
+    if(du_an.value.children.length > 0)
+        drawgantt()
 })
 
 let hang_muc = ref({
@@ -180,7 +199,7 @@ function reload(){
             <div class="card-body p-0">
                 <div class="">
                     <div class="">
-                        <h4 class="txt-color mx-3 mt-3 font-weight-bold">{{  du_an.ten }}</h4>
+                        <h4 class="txt-color mx-3 mt-3 font-weight-bold">{{ du_an.ten }}</h4>
                     </div>
                     <div class="mt-3">
                         <div class="">
@@ -262,4 +281,5 @@ function reload(){
 th{
     text-align: start;
 }
+
 </style>

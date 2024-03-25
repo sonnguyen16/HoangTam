@@ -23,6 +23,7 @@ use App\Http\Controllers\BaoCaoNhapXuatController;
 use App\Http\Controllers\BinhLuanController;
 use App\Http\Controllers\PhongBanController;
 use App\Http\Controllers\DeXuatController;
+use App\Http\Controllers\CongViecController;
 
 Route::prefix('/')->group(function (){
     Route::get('/', [AuthController::class, 'index'])->name('auth.index');
@@ -158,6 +159,10 @@ Route::prefix('/dexuat')->middleware('auth')->group(function (){
     Route::post('/store', [DeXuatController::class, 'store'])->name('dexuat.store');
     Route::delete('/delete', [DeXuatController::class, 'delete'])->name('dexuat.delete');
     Route::post('/xoatheodoi', [DeXuatController::class, 'xoaNguoiTheoDoi'])->name('dexuat.xoatheodoi');
+});
+
+Route::prefix('/congviec')->middleware('auth')->group(function (){
+    Route::get('/', [CongViecController::class, 'index'])->name('congviec.index');
 });
 
 

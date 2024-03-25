@@ -4,10 +4,7 @@ import MainLayout from "@/Layouts/MainLayout.vue";
 import {computed, onMounted, ref, watch} from "vue";
 import DuAnModal from "@/Pages/duan/DuAnModal.vue";
 import {router} from "@inertiajs/vue3";
-import {formatDate} from "@/assets/js/script.js";
-import ChiTiet2 from "@/Pages/duan/ChiTiet2.vue";
-import TheoDoi from "@/Pages/DuAn/TheoDoi.vue";
-import {cloneDeep} from "lodash";
+import ChiTiet from "@/Pages/DuAn/ChiTiet.vue";
 
 const props = defineProps({
     du_an_list: Object,
@@ -24,7 +21,9 @@ let hang_muc = ref({
     mo_ta: "",
     trang_thai: "",
     parent_id: "",
+    children: [],
     files: [],
+    binh_luan: []
 })
 
 let hang_muc1 = ref({
@@ -55,6 +54,7 @@ function openModal(id) {
         mo_ta: "",
         trang_thai: "",
         parent_id: id,
+        children: [],
         files: []
     }
     $('#duanmodal').modal('show');
@@ -76,7 +76,6 @@ function changePage(url) {
     })
 }
 
-
 function editModal(kh) {
     hang_muc1.value = {
         id: kh.id,
@@ -92,46 +91,26 @@ function editModal(kh) {
         binh_luan: kh.binh_luan,
         nguoi_theo_doi: kh.nguoi_theo_doi
     }
+    $('#chitietdamodal').modal('show');
 }
 
-onMounted(() => {
-    editModal(allData.value[0] ? allData.value[0] : {})
-})
-
-function editNguoiTheoDoi(){
-    hang_muc.value = {...hang_muc1.value}
-    $('#duanmodal').modal('show');
+function reload(){
+    hang_muc1.value = allData.value.find(item => item.id === hang_muc1.value.id)
 }
-
-function xoaNguoiTheoDoi(id){
-    hang_muc1.value.nguoi_theo_doi = hang_muc1.value.nguoi_theo_doi.filter(ntd => ntd.id != id)
-    allData.value.find(dx => dx.id == hang_muc1.value.id).nguoi_theo_doi = cloneDeep(hang_muc1.value.nguoi_theo_doi)
-    axios({
-        method: 'post',
-        url: route('dexuat.xoatheodoi', {id: id}),
-    })
-}
-
-function reload(id){
-    if(id){
-        hang_muc1.value.nguoi_theo_doi = [...allData.value.find(dx => dx.id == id).nguoi_theo_doi]
-    }
-}
-
 
 </script>
 
 <template>
     <MainLayout>
         <div class="card shadow card-child" style="">
-            <div class="card-body p-0">
+            <div class="card-body">
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-12">
                         <div class="row">
-                            <div class=" col-md-4">
-                                <a @click.prevent="openModal('')" class="btn btn-primary form-control m-3">Thêm dự án</a>
+                            <div class=" col-md-1">
+                                <a @click.prevent="openModal('')" class="btn btn-primary form-control">Thêm dự án</a>
                             </div>
-                            <div class="col-md-8 pt-3 pl-3">
+                            <div class="col-md-3">
                                 <div class="input-group">
                                     <input v-model="search" type="text" name="search"
                                            class="form-control"
@@ -144,45 +123,50 @@ function reload(id){
                                 </div>
                             </div>
                         </div>
-                        <h4 class="txt-color font-weight-bold borders ml-3 mb-3">Danh sách dự án</h4>
 
-                        <div @click="editModal(dx)" v-for="dx in allData"
-                             :class="['p-3 border-bottom',
-                             {'border-s-4 border-neutral-400': dx.id == hang_muc1.id},
-                             {'bg-neutral-100' : dx.trang_thai == 0},
-                             {'bg-blue-200' : dx.trang_thai == 1},
-                             {'bg-green-300' : dx.trang_thai == 2},
-                             ]">
-                            <div class="d-flex align-items-center gap-[10px] ms-1">
-                                <h5 class="font-bold mb-0 mt-[2px]">{{ dx.ten }}</h5>
-                            </div>
-                            <p class="mb-0 ms-1 mt-2 text-secondary">{{ dx.mo_ta?.length > 100 ? dx.mo_ta.slice(0,100) + '...' : dx.mo_ta }}</p>
-                            <div class="d-flex justify-content-between align-items-center mt-2 mb-0">
-                                <div class="d-flex align-items-center gap-[5px]">
-                                    <img v-if="dx.nhan_vien.hinh_anh" :src="'/uploads/nhan_vien/' + dx.nhan_vien.hinh_anh" alt="" class="object-cover" style="width: 30px; height: 30px; border-radius: 50%">
-                                    <img v-else src="/uploads/avatardefault.png" alt="" class="object-cover" style="width: 30px; height: 30px">
-                                    <span class="text-secondary">{{ dx.created_by.name }}</span>
-                                </div>
-                                <span class="text-secondary">{{ formatDate(dx.created_at) }}</span>
-                            </div>
-                        </div>
+                        <table class="table table-bordered  table-responsive-md mt-3">
+                            <thead>
+                            <tr>
+                                <th>Tên dự án</th>
+                                <th>Ngày bắt đầu</th>
+                                <th>Ngày kết thúc</th>
+                                <th>Người phụ trách</th>
+                                <th>Trạng thái</th>
+                                <th>Thao tác</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr v-if="allData?.length === 0">
+                                <td colspan="7" class="text-center">Không có dữ liệu</td>
+                            </tr>
+                            <tr :key="kh.id" v-else v-for="kh in allData">
+                                <td >{{ kh.ten }}</td>
+                                <td >{{ new Date(kh.ngay_bat_dau).toLocaleDateString() }}</td>
+                                <td >{{ new Date(kh.ngay_bat_dau).toLocaleDateString() }}</td>
+                                <td >{{ kh.nhan_vien.name }}</td>
+                                <td >
+                                    <span v-if="kh.trang_thai === 0" class="badge badge-warning">Chưa triển khai</span>
+                                    <span v-else-if="kh.trang_thai === 1" class="badge badge-primary">Đang triển khai</span>
+                                    <span v-else-if="kh.trang_thai === 2" class="badge badge-success">Hoàn thành</span>
+                                </td>
+                                <td style="width: 8%">
+                                    <a class="btn btn-primary btn-sm mr-2 ml-2" :href="route('duan.detail', {id: kh.id})">Chi tiết</a>
+                                    <a class="btn btn-primary btn-sm d-inline-block mr-2" @click.prevent="editModal(kh)">Sửa</a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <div class="col-md-7 p-3">
-                        <ChiTiet2
-                            :du_an="hang_muc1"
-                            :users="nhan_vien_list"
-                        />
-                    </div>
-                    <div class="col-md-2 pt-3 pr-4">
-                        <TheoDoi
-                            :du_an="hang_muc1"
-                            @editNguoiTheoDoi="editNguoiTheoDoi"
-                            @xoaNguoiTheoDoi="xoaNguoiTheoDoi"
-                        />
-                    </div>
+
                 </div>
             </div>
         </div>
+        <ChiTiet
+            :du_an="hang_muc1"
+            :users="nhan_vien_list"
+            @add="openModal"
+            @edit="editModal"
+        />
         <DuAnModal
             :du_an="hang_muc"
             :users="nhan_vien_list"
@@ -192,7 +176,5 @@ function reload(id){
     </MainLayout>
 </template>
 <style scoped>
-.card-child{
-    min-height: calc(100vh - 115px) !important;
-}
+
 </style>

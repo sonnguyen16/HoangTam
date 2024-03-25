@@ -184,7 +184,7 @@ function reload(id){
                     <div class="col-md-7 p-3">
                         <ChiTiet :de_xuat_selected="de_xuat_selected"/>
                     </div>
-                    <div class="col-md-2 pt-3 pr-4">
+                    <div class="col-md-2 pt-3 pr-2">
                         <TheoDoi
                             :de_xuat_selected="de_xuat_selected"
                             @editNguoiTheoDoi="editNguoiTheoDoi"
@@ -206,7 +206,7 @@ function reload(id){
     -webkit-box-shadow: none;
 }
 
-.card-child{
-    min-height: calc(100vh - 115px) !important;
+row{
+    margin-right: 0;
 }
 </style>

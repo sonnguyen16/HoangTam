@@ -93,7 +93,7 @@ function addBinhLuan(){
 </script>
 
 <template>
-    <form v-if="form.id" @submit.prevent="submit">
+    <form v-if="form.id" >
             <input type="hidden" v-model="form.id" id="id" class="form-control"/>
             <input type="text" class="font-weight-bold border-0 text-lg pl-0 pb-0" v-model="form.ten">
             <div class="d-flex align-items-center">
@@ -119,13 +119,13 @@ function addBinhLuan(){
             <div class="mt-3">
                 <div class="d-flex align-items-center mb-2">
                     <label for="mo_ta" class="font-weight-bold text-success mt-2 ">Attachments:</label>
-                    <label for="files1" class="btn btn-success btn-sm mt-2 ml-3">Chọn file</label>
-                    <input accept=".png, .jpg, .jpeg, .gif, .bmp, .doc, .docx, .xls, .xlsx, .pdf"
-                           type="file"
-                           @input="updateFileList($event)"
-                           id="files1"
-                           class="d-none"
-                           multiple/>
+<!--                    <label for="files1" class="btn btn-success btn-sm mt-2 ml-3">Chọn file</label>-->
+<!--                    <input accept=".png, .jpg, .jpeg, .gif, .bmp, .doc, .docx, .xls, .xlsx, .pdf"-->
+<!--                           type="file"-->
+<!--                           @input="updateFileList($event)"-->
+<!--                           id="files1"-->
+<!--                           class="d-none"-->
+<!--                           multiple/>-->
                     <span id="fileList" class="d-inline-block ml-3"></span>
                 </div>
                 <template v-if="files_temp.length > 0">
@@ -137,16 +137,21 @@ function addBinhLuan(){
                                         <thead>
                                         <tr>
                                             <th>File</th>
-                                            <th>Actions</th>
+<!--                                            <th>Actions</th>-->
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <tr v-for="file in files_temp" :key="file.id">
-                                            <td>{{ file.ten.length > 30 ? file.ten.slice(0,30) + '...' : file.ten }}</td>
-                                            <td class="d-flex gap-[5px] justify-content-center">
-                                                <a v-if="file.id" :href="`/uploads/du_an/${file.ten}`" target="_blank" class="btn btn-primary btn-sm">View</a>
-                                                <a v-if="file.id" @click.prevent="deleteFile(file.id)" class="btn btn-sm btn-danger">Delete</a>
+                                            <td colspan="2">
+                                                <a v-if="file.id" :href="`/uploads/du_an/${file.ten}`" target="_blank" class="">
+                                                  {{ file.ten.length > 40 ? file.ten.slice(0,40) + '...' : file.ten }}
+                                                </a>
                                             </td>
+<!--                                            <td class="d-flex gap-[5px] justify-content-center">-->
+<!--                                                <a v-if="file.id" @click.prevent="deleteFile(file.id)" class="btn btn-sm btn-danger">-->
+<!--                                                    <i class="fa fa-trash"></i>-->
+<!--                                                </a>-->
+<!--                                            </td>-->
                                         </tr>
                                         </tbody>
                                     </table>
@@ -155,7 +160,7 @@ function addBinhLuan(){
                         </div>
                     </div>
                 </template>
-                <button type="submit" :disabled="form.processing" class="btn btn-primary right-0" >Lưu</button>
+<!--                <button type="submit" :disabled="form.processing" class="btn btn-primary right-0" >Lưu</button>-->
                 <hr>
                 <div class="" id="subtasks">
                     <label for="mo_ta" class="font-weight-bold text-success ">Hạng mục con:</label>

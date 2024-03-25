@@ -20,8 +20,10 @@ class DuAnController extends Controller
     public function index(Request $request)
     {
         $query = DuAn::with(['parent','nhan_vien', 'files','binh_luan.nguoi_dung','nguoi_theo_doi.user'])->whereNull('deleted_at')
-            ->whereHas('created_by.don_vi', function ($query) {
-                $query->where('id', Auth::user()->don_vi_id);
+            ->whereHas('created_by', function ($query) {
+                $query->where('id', Auth::user()->id);
+            })->orWhereHas('nhan_vien', function ($query) {
+                $query->where('id', Auth::user()->id);
             })->orWhereHas('nguoi_theo_doi', function ($query) {
                 $query->where('user_id', Auth::user()->id);
             })->orderBy('id', 'asc');
@@ -40,7 +42,7 @@ class DuAnController extends Controller
 
         $du_an_list = $query->get()->toTree();
 
-        return Inertia::render('DuAn/Index2', compact('du_an_list', 'nhan_vien_list'));
+        return Inertia::render('DuAn/Index', compact('du_an_list', 'nhan_vien_list'));
     }
 
     public function detail(Request $request)

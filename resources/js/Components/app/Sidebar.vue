@@ -49,6 +49,7 @@ const user = computed(() => {
               <NavItem :href="route('nhanvien.index')" title="Nhân viên" />
               <NavItem :href="route('phongban.index')" title="Phòng ban" />
               <NavItem :href="route('dexuat.index')" title="Đề xuất" />
+              <NavItem :href="route('congviec.index')" title="Công việc" />
             </ul>
           </li>
           <hr class="m-2 mr-4 ml-3" />

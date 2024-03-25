@@ -191,7 +191,7 @@ onMounted(() => {
     </MainLayout>
 </template>
 <style scoped>
-row{
+.row{
     margin-right: 0;
 }
 </style>

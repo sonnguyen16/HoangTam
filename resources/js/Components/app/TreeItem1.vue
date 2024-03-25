@@ -37,11 +37,11 @@ function toggle() {
             <td style="width: 14%">
                 <span>{{ new Date(item.ngay_ket_thuc).toLocaleDateString() }}</span>
             </td>
-            <td style="width: 5%">
+            <td style="width: 5%" class="text-center">
                     <span>
-                        <span v-if="item.tien_do == 0" class="badge badge-warning">Chưa thực hiện</span>
-                        <span v-else-if="item.tien_do > 0 && item.tien_do < 100" class="badge badge-primary">Đang thực hiện</span>
-                        <span v-else class="badge badge-success">Đã hoàn thành</span>
+                        <span v-if="item.tien_do == 0" class="badge badge-warning">Chưa làm</span>
+                        <span v-else-if="item.tien_do > 0 && item.tien_do < 100" class="badge badge-primary">{{ item.tien_do }}%</span>
+                        <span v-else class="badge badge-success">Hoàn thành</span>
                     </span>
             </td>
             <td style="width: 3%">

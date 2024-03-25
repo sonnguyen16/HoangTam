@@ -206,7 +206,7 @@ function reload(id){
     -webkit-box-shadow: none;
 }
 
-row{
+.row{
     margin-right: 0;
 }
 </style>

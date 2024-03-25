@@ -140,7 +140,7 @@ function addBinhLuan(){
                             <input type="date" v-model="form.ngay_bat_dau" id="ngay_bat_dau" class="border-0 mr-5 text-secondary"/>
                             <label for="ngay_ket_thuc" class="font-weight-bold text-secondary mt-2">Kết thúc:</label>
                             <input type="date" v-model="form.ngay_ket_thuc" id="ngay_ket_thuc" class="border-0 mr-5 text-secondary"/>
-                            <label for="user" class="font-weight-bold text-secondary mt-2">Tiến độ:</label>
+                            <label for="user" class="font-weight-bold text-secondary mt-2">Tiến độ(%):</label>
                             <input v-model="form.tien_do" class="border-0 outline-0 font-bold focus:outline-0" type="number">
                         </div>
                         <div class="mt-3">
@@ -175,7 +175,16 @@ function addBinhLuan(){
                                                     <tr v-for="file in files_temp" :key="file.id">
                                                         <td>
                                                             <a v-if="file.id" :href="`/uploads/du_an/${file.ten}`" target="_blank" class="">
-                                                                {{ file.ten.length > 40 ? file.ten.slice(0,40) + '...' : file.ten }}
+                                                                <i v-if="file.ten.split('.')[file.ten.split('.').length - 1] === 'png' || file.ten.split('.')[file.ten.split('.').length - 1] === 'jpg'"
+                                                                   class="fa fa-image">
+                                                                </i>
+                                                                <i v-if="file.ten.split('.')[file.ten.split('.').length - 1] === 'pdf' || file.ten.split('.')[file.ten.split('.').length - 1] === 'docx'"
+                                                                   class="fa fa-file-pdf">
+                                                                </i>
+                                                                <i v-if="file.ten.split('.')[file.ten.split('.').length - 1] === 'xlsx' "
+                                                                   class="fa fa-file-excel">
+                                                                </i>
+                                                                {{ file.ten.length > 30 ? file.ten.slice(0,30) + '...' : file.ten }}
                                                             </a>
                                                             <span v-else >{{ file.ten }}</span>
                                                         </td>

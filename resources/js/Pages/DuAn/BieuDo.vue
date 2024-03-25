@@ -219,7 +219,7 @@ function reload(){
                                                 </th>
                                                 <th class="text-neutral-400">Bắt đầu</th>
                                                 <th class="text-neutral-400">Kết thúc</th>
-                                                <th class="text-neutral-400">Trạng thái</th>
+                                                <th class="text-neutral-400">Tiến độ</th>
                                                 <th></th>
                                                 <th></th>
                                             </tr>
@@ -266,7 +266,9 @@ function reload(){
     fill: #ffc107;
 }
 
-
+.row{
+    margin-right: 0;
+}
 
 .today-highlight{
     fill: #007bff !important;
@@ -275,6 +277,26 @@ function reload(){
 
 th{
     text-align: start;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #abd0f8;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }
 
 </style>

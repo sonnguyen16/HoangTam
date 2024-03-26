@@ -173,7 +173,7 @@ function addBinhLuan(){
                                                     </thead>
                                                     <tbody>
                                                     <tr v-for="file in files_temp" :key="file.id">
-                                                        <td>
+                                                        <td style="width: 90%">
                                                             <a v-if="file.id" :href="`/uploads/du_an/${file.ten}`" target="_blank" class="">
                                                                 <i v-if="file.ten.split('.')[file.ten.split('.').length - 1] === 'png' || file.ten.split('.')[file.ten.split('.').length - 1] === 'jpg'"
                                                                    class="fa fa-image">
@@ -184,11 +184,11 @@ function addBinhLuan(){
                                                                 <i v-if="file.ten.split('.')[file.ten.split('.').length - 1] === 'xlsx' "
                                                                    class="fa fa-file-excel">
                                                                 </i>
-                                                                {{ file.ten.length > 30 ? file.ten.slice(0,30) + '...' : file.ten }}
+                                                                {{ file.ten_goc?.length > 30 ? file.ten_goc.slice(0,30) + '...' : file.ten_goc }}
                                                             </a>
                                                             <span v-else >{{ file.ten }}</span>
                                                         </td>
-                                                        <td class="d-flex gap-[5px] justify-content-center">
+                                                        <td style="width: 10%" class="text-center">
                                                             <a v-if="file.id" @click.prevent="deleteFile(file.id)" class="btn btn-sm btn-danger">
                                                                 <i class="fa fa-trash"></i>
                                                             </a>

@@ -58,6 +58,7 @@ class DeXuatController extends Controller
                 FileDuAn::create([
                     'de_xuat_id' => $dexuat->id,
                     'ten' => $file_name,
+                    'ten_goc' => $file->getClientOriginalName()
                 ]);
             }
         }

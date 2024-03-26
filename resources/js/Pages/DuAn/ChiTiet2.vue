@@ -138,7 +138,16 @@ function addBinhLuan(){
                                         <tr v-for="file in files_temp" :key="file.id">
                                             <td colspan="2">
                                                 <a v-if="file.id" :href="`/uploads/du_an/${file.ten}`" target="_blank" class="">
-                                                    {{ file.ten.length > 40 ? file.ten.slice(0,40) + '...' : file.ten }}
+                                                    <i v-if="file.ten.split('.')[file.ten.split('.').length - 1] === 'png' || file.ten.split('.')[file.ten.split('.').length - 1] === 'jpg'"
+                                                       class="fa fa-image">
+                                                    </i>
+                                                    <i v-if="file.ten.split('.')[file.ten.split('.').length - 1] === 'pdf' || file.ten.split('.')[file.ten.split('.').length - 1] === 'docx'"
+                                                       class="fa fa-file-pdf">
+                                                    </i>
+                                                    <i v-if="file.ten.split('.')[file.ten.split('.').length - 1] === 'xlsx' "
+                                                       class="fa fa-file-excel">
+                                                    </i>
+                                                    {{ file.ten_goc?.length > 30 ? file.ten_goc.slice(0,30) + '...' : file.ten_goc }}
                                                 </a>
                                                 <span v-else >{{ file.ten }}</span>
                                             </td>

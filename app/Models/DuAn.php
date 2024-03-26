@@ -30,7 +30,7 @@ class DuAn extends Model
 
     public function files()
     {
-        return $this->hasMany(FileDuAn::class, 'du_an_id');
+        return $this->hasMany(FileDuAn::class, 'du_an_id')->whereNull('deleted_at');
     }
 
     public function binh_luan()

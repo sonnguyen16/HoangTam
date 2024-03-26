@@ -31,7 +31,7 @@ watchEffect(() => {
     de_xuat_selected.created_by = props.de_xuat_selected.created_by
     de_xuat_selected.binh_luan = props.de_xuat_selected.binh_luan
     de_xuat_selected.trang_thai = props.de_xuat_selected.trang_thai
-    files_temp.value = props.de_xuat_selected.files.map(file => ({id: file.id,ten: file.ten}))
+    files_temp.value = props.de_xuat_selected.files.map(file => ({id: file.id,ten: file.ten, ten_goc: file.ten_goc}))
 })
 
 const submit = () => {
@@ -145,10 +145,25 @@ function addBinhLuan(){
                                         </thead>
                                         <tbody>
                                         <tr v-for="file in files_temp" :key="file.id">
-                                            <td>{{ file.ten?.length > 30 ? file.ten.slice(0,30) + '...' : file.ten }}</td>
-                                            <td class="d-flex gap-[5px] justify-content-center" >
-                                                <a v-if="file.id" :href="`/uploads/de_xuat/${file.ten}`" target="_blank" class="btn btn-primary btn-sm">View</a>
-                                                <a v-if="file.id" @click.prevent="deleteFile(file.id)" class="btn btn-sm btn-danger">Delete</a>
+                                            <td style="width: 90%">
+                                                <a v-if="file.id" :href="`/uploads/du_an/${file.ten}`" target="_blank" class="">
+                                                    <i v-if="file.ten.split('.')[file.ten.split('.').length - 1] === 'png' || file.ten.split('.')[file.ten.split('.').length - 1] === 'jpg'"
+                                                       class="fa fa-image">
+                                                    </i>
+                                                    <i v-if="file.ten.split('.')[file.ten.split('.').length - 1] === 'pdf' || file.ten.split('.')[file.ten.split('.').length - 1] === 'docx'"
+                                                       class="fa fa-file-pdf">
+                                                    </i>
+                                                    <i v-if="file.ten.split('.')[file.ten.split('.').length - 1] === 'xlsx' "
+                                                       class="fa fa-file-excel">
+                                                    </i>
+                                                    {{ file.ten_goc?.length > 30 ? file.ten_goc.slice(0,30) + '...' : file.ten_goc }}
+                                                </a>
+                                                <span v-else >{{ file.ten }}</span>
+                                            </td>
+                                            <td style="width: 10%" class="text-center">
+                                                <a v-if="file.id" @click.prevent="deleteFile(file.id)" class="btn btn-sm btn-danger">
+                                                    <i class="fa fa-trash"></i>
+                                                </a>
                                             </td>
                                         </tr>
                                         </tbody>

@@ -79,8 +79,8 @@ onMounted(() => {
 
                                 <div class="form-group-container">
                                     <div v-show="!form.id" class="form-group-title">
-                                        <span v-if="du_an.id" class="txt-color mb-0 font-weight-bold">Sửa dự án</span>
-                                        <span v-else class="txt-color mb-0 font-weight-bold">Thêm dự án</span>
+                                        <span v-if="!form.parent_id" class="txt-color mb-0 font-weight-bold">Thêm dự án</span>
+                                        <span v-else class="txt-color mb-0 font-weight-bold">Thêm hạng mục</span>
                                     </div>
 
                                     <div v-show="!form.id" class="form-group">

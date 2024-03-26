@@ -83,6 +83,7 @@ class DuAnController extends Controller
                 FileDuAn::create([
                     'du_an_id' => $du_an->id,
                     'ten' => $file_name,
+                    'ten_goc' => $file->getClientOriginalName()
                 ]);
             }
         }
@@ -102,7 +103,8 @@ class DuAnController extends Controller
     public function deleteFile(Request $request)
     {
         $file = FileDuAn::find($request->id);
-        $file->delete();
+        $file->deleted_at = Carbon::now();
+        $file->save();
     }
 
     public function delete(Request $request)

@@ -44,9 +44,9 @@ function toggle() {
                 </div>
                 <div class="col-lg-2 d-lg-block d-none">
                     <span>
-                        <span v-if="item.trang_thai == 0" class="badge badge-warning">Chưa thực hiện</span>
-                        <span v-else-if="item.trang_thai == 1" class="badge badge-primary">Đang thực hiện</span>
-                        <span v-else-if="item.trang_thai == 2" class="badge badge-success">Đã hoàn thành</span>
+                        <span v-if="item.tien_do == 0" class="badge badge-warning">Chưa thực hiện</span>
+                        <span v-else-if="item.tien_do > 0 && item.tien_do < 100" class="badge badge-primary">Đang thực hiện</span>
+                        <span v-else class="badge badge-success">Đã hoàn thành</span>
                     </span>
                 </div>
                 <div class="col-lg-2 d-lg-block d-none">

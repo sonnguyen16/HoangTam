@@ -33,11 +33,11 @@ class DeXuat extends Model
     }
 
     public function files(){
-        return $this->hasMany(FileDuAn::class, 'de_xuat_id');
+        return $this->hasMany(FileDuAn::class, 'de_xuat_id')->whereNull('deleted_at');
     }
 
     public function binh_luan()
     {
-        return $this->hasMany(BinhLuan::class, 'de_xuat_id');
+        return $this->hasMany(BinhLuan::class, 'de_xuat_id')->whereNull('deleted_at');
     }
 }

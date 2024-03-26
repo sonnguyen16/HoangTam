@@ -146,7 +146,7 @@ function addBinhLuan(){
                                         <tbody>
                                         <tr v-for="file in files_temp" :key="file.id">
                                             <td style="width: 90%">
-                                                <a v-if="file.id" :href="`/uploads/du_an/${file.ten}`" target="_blank" class="">
+                                                <a v-if="file.id" :href="`/uploads/de_xuat/${file.ten}`" target="_blank" class="">
                                                     <i v-if="file.ten.split('.')[file.ten.split('.').length - 1] === 'png' || file.ten.split('.')[file.ten.split('.').length - 1] === 'jpg'"
                                                        class="fa fa-image">
                                                     </i>

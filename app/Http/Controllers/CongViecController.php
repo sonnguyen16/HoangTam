@@ -31,7 +31,7 @@ class CongViecController extends Controller
             });
         }
 
-        $du_an_list = $query->paginate(5);
+        $du_an_list = $query->get()->toTree();
 
         return Inertia::render('CongViec/Index', compact('du_an_list', 'nhan_vien_list'));
     }

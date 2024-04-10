@@ -249,6 +249,24 @@ function reload(){
                         </div>
                     </div>
                     <div class="px-[25px] py-[10px]" v-show="tab === 'files'">
+                        <div class="row font-weight-bold mb-3">
+                            <div class="col-lg-2 pl-0">
+                                Tên hạng mục
+                            </div>
+                            <div class="col-lg-1">
+                                Ngày bắt đầu
+                            </div>
+                            <div class="col-lg-1">
+                                Ngày kết thúc
+                            </div>
+                            <div class="col-lg-1">
+                                Trạng thái
+                            </div>
+                            <div class="col-lg-2">
+                                Files
+                            </div>
+
+                        </div>
                         <TreeFileItem
                             class=""
                             v-for="item in du_an.children"

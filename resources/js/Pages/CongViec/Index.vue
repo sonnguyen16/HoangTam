@@ -8,6 +8,8 @@ import {formatDate} from "@/assets/js/script.js";
 import ChiTiet2 from "@/Pages/duan/ChiTiet2.vue";
 import TheoDoi from "@/Pages/DuAn/TheoDoi.vue";
 import Pagination from "@/Components/app/Pagination.vue";
+import TreeItem from "@/Components/app/TreeItem.vue";
+import TreeSearchItem from "@/Components/app/TreeSearchItem.vue";
 
 const props = defineProps({
     du_an_list: Object,
@@ -44,6 +46,7 @@ let hang_muc1 = ref({
 })
 
 let search = ref("")
+const showTree = ref(false)
 
 function openModal(id) {
     hang_muc.value = {
@@ -64,6 +67,8 @@ const allData = computed( () => {
     return props.du_an_list
 })
 
+const selectedData = ref(props.du_an_list[0])
+
 watch(search, (value) => {
     router.visit(route('congviec.index', {search: value}), {
         preserveState: true
@@ -78,6 +83,7 @@ function changePage(url) {
 
 
 function editModal(kh) {
+    selectedData.value = kh
     hang_muc1.value = {
         id: kh.id,
         ten: kh.ten,
@@ -96,7 +102,7 @@ function editModal(kh) {
 }
 
 onMounted(() => {
-    editModal(allData.value.data[0] ? allData.value.data[0] : {})
+    editModal(allData.value[0] ? allData.value[0] : {})
 })
 
 // function editNguoiTheoDoi(){
@@ -128,11 +134,11 @@ onMounted(() => {
             <div class="card-body p-0">
                 <div class="row">
                     <div class="col-md-3">
-                        <div class="row">
+                        <div class="row p-3">
 <!--                            <div class=" col-md-4">-->
 <!--                                <a @click.prevent="openModal('')" class="btn btn-primary form-control m-3">Thêm dự án</a>-->
 <!--                            </div>-->
-                            <div class="col-md-8 p-3 ms-2">
+                            <div class="col-md-8">
                                 <div class="input-group">
                                     <input v-model="search" type="text" name="search"
                                            class="form-control"
@@ -143,31 +149,34 @@ onMounted(() => {
                                         </button>
                                     </div>
                                 </div>
+
                             </div>
+
                         </div>
                         <h4 class="txt-color font-weight-bold borders ml-3 mb-3">Danh sách công việc</h4>
 
-                        <div @click="editModal(dx)" v-for="dx in allData.data"
-                             :class="['p-3 border-bottom',
-                             {'border-s-4 border-neutral-400': dx.id == hang_muc1.id},
-                             {'bg-neutral-100' : dx.tien_do == 0},
-                             {'bg-blue-200' : dx.tien_do > 0},
-                             {'bg-green-300' : dx.tien_do >= 100},
-                             ]">
-                            <div class="d-flex align-items-center gap-[10px] ms-1">
-                                <h5 class="font-bold mb-0 mt-[2px]">{{ dx.ten }}</h5>
-                            </div>
-                            <p class="mb-0 ms-1 mt-2 text-secondary">{{ dx.mo_ta?.length > 100 ? dx.mo_ta.slice(0,100) + '...' : dx.mo_ta }}</p>
-                            <div class="d-flex justify-content-between align-items-center mt-2 mb-0">
-                                <div class="d-flex align-items-center gap-[5px]">
-                                    <img v-if="dx.nhan_vien.hinh_anh" :src="'/uploads/nhan_vien/' + dx.nhan_vien.hinh_anh" alt="" class="object-cover" style="width: 30px; height: 30px; border-radius: 50%">
-                                    <img v-else src="/uploads/avatardefault.png" alt="" class="object-cover" style="width: 30px; height: 30px">
-                                    <span class="text-secondary">{{ dx.created_by.name }}</span>
+                        <div class="border p-3">
+                            <template v-for="du_an in allData">
+                                <div class="d-flex justify-content-between mb-[8px]">
+                                    <h6 class="font-weight-bold text-emerald-600">
+                                        <i class="fa fa-file me-1"></i>
+                                        {{ du_an.ten }}
+                                    </h6>
+                                    <button @click.prevent="editModal(du_an)" class="me-4">
+                                        <i class="fa fa-search"></i>
+                                    </button>
                                 </div>
-                                <span class="text-secondary">{{ formatDate(dx.created_at) }}</span>
-                            </div>
+                                <div class="ms-[20px]">
+                                    <TreeSearchItem
+                                        v-for="item in du_an.children"
+                                        :key="item.id"
+                                        :item="item"
+                                        @choose="editModal"
+                                    />
+                                </div>
+                            </template>
                         </div>
-                        <Pagination :all-data="allData" @changePage="changePage"/>
+
                     </div>
                     <div class="col-md-7 p-3">
                         <ChiTiet2

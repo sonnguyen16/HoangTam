@@ -1,5 +1,5 @@
 <script setup>
-import {ref, defineProps, defineEmits, computed, onMounted} from "vue";
+import {ref, defineProps, defineEmits} from "vue";
 
 const props = defineProps({
     item: Object,
@@ -10,60 +10,33 @@ const props = defineProps({
     level: {
         type: Number,
         default: 0
-    },
+    }
 })
 
-let isOpen = ref(true);
-let isMounted = ref(false);
+let isOpen = ref(false);
 
-const emit = defineEmits(['edit', 'add']);
+const emit = defineEmits(['choose']);
 
 function toggle() {
     isOpen.value = !isOpen.value;
 }
-
-function caculateHeight(parent_id){
-   const id = 'fl' + parent_id
-   const file_length = document.getElementById(id)?.value
-   const height = file_length * 20 + 36
-   return `${height}px`
-}
-
-function caculateTop(parent_id){
-    const id = 'fl' + parent_id
-    const file_length = document.getElementById(id)?.value
-    const top = -file_length * 20 - 20
-    return `${top}px`
-}
-
-onMounted(() => {
-    isMounted.value = true;
-})
-
 
 </script>
 
 <template>
     <div>
         <div class="row mb-3">
-            <input type="hidden" :value="item.files.length" :id="`fl${item.id}`">
-            <div :class="['col-lg-2 col-9', {'child-container': isChild}]" :style="{ paddingLeft: `${level * 15}px` }">
+            <div :class="['col-lg-7 col-9', {'child-container': isChild}]" :style="{ paddingLeft: `${level * 15}px` }">
                 <span :style="{ width: `${level * 15}px` }" class="line-connector"></span>
-                <span v-if="isMounted" :style="{ height: caculateHeight(item.parent_id), top: caculateTop(item.parent_id)  }"  class="vertical-line"></span>
+                <span v-if="isChild" class="vertical-line"></span>
                 <a @click.prevent="toggle"
                    :class="item.children ? 'cursor-pointer' : 'cursor-text' "
-                   class="text-black">
+                   class="mb-2 text-black">
                     <i v-if="item.children" class="fa fa-folder mr-2 text-amber-400 text-lg" :class="isOpen ? 'fa-folder-open' : 'fa-folder-closed' "></i>
                     {{ item.ten }}
                 </a>
             </div>
-            <div class="col-lg-1 d-lg-block d-none">
-                <span>{{ item.ngay_bat_dau }}</span>
-            </div>
-            <div class="col-lg-1 d-lg-block d-none">
-                <span>{{ item.ngay_ket_thuc }}</span>
-            </div>
-            <div class="col-lg-1 d-lg-block d-none">
+            <div class="col-lg-3 d-lg-block d-none">
                     <span>
                         <span v-if="item.tien_do == 0" class="badge badge-warning">Chưa thực hiện</span>
                         <span v-else-if="item.tien_do > 0 && item.tien_do < 100" class="badge badge-primary">Đang thực hiện</span>
@@ -71,23 +44,20 @@ onMounted(() => {
                     </span>
             </div>
             <div class="col-lg-2">
-                <ul class="list-unstyled">
-                    <li class="ms-2" v-for="file in item.files">
-                        <a target="_blank"  :href="'/uploads/du_an/' + file.ten">{{ file.ten_goc }}</a>
-                    </li>
-                </ul>
+                <button @click.prevent="emit('choose', item)" class="ms-5">
+                    <i class="fa fa-search"></i>
+                </button>
             </div>
         </div>
         <div>
-            <TreeFileItem
+            <TreeSearchItem
                 v-if="isOpen"
                 :is-child="true"
                 :level="level + 1"
                 v-for="child in item.children"
                 :key="child.id"
                 :item="child"
-                @edit="$emit('edit', $event)"
-                @add="$emit('add', $event)"
+                @choose="$emit('choose', $event)"
             />
         </div>
     </div>
@@ -104,9 +74,11 @@ onMounted(() => {
 
 .vertical-line {
     position: absolute;
+    top: -20px;
     left: 0;
     width: 1px;
     background-color: #ccc;
+    height: 36px;
 }
 
 .child-container {

@@ -23,12 +23,15 @@ function toggle() {
 </script>
 
 <template>
-        <tr @click.prevent="emit('edit', item)" :class="[{'bg-second font-weight-bold': !isChild}] " style="height: 37px;">
-            <td>
+        <tr @click.prevent="emit('edit', item)" :class="[{'bg-second font-weight-bold': !isChild}]"  style="height: 37px;">
+            <td >
                 <a @click.prevent.stop="toggle"
-                   :class="[item.children.length > 0 ? 'cursor-pointer' : 'cursor-text' , `ms-${level}`]"
-                   class="text-black ps-3">
-                    {{ item.ten }}
+                   :class="[item.children.length > 0 ? 'cursor-pointer' : 'cursor-text']"
+                   :style="{ paddingLeft: `${level * 15}px` }"
+                   class="text-black">
+                    <span class="ms-3">
+                        {{ item.ten.length > 20 ? item.ten.substring(0, 20) + '...' : item.ten }}
+                    </span>
                 </a>
             </td>
             <td style="width: 14%">

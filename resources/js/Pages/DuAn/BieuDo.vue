@@ -26,11 +26,13 @@ const du_an = computed(() => {
                 }
             }
         }
-        return null; // Trả về null nếu không tìm thấy
+        return null;
     }
 
     return search(props.du_an);
 });
+
+const tab = ref("chart");
 
 const tasks = computed(() => {
     // Định nghĩa một hàm đệ quy để duyệt qua các mục con
@@ -201,46 +203,52 @@ function reload(){
                     <div class="">
                         <h4 class="txt-color mx-3 mt-3 font-weight-bold">{{ du_an.ten }}</h4>
                     </div>
-                    <div class="mt-3">
-                        <div class="">
-                            <div class="row ">
-                                <div class="col-md-4 pr-0">
-                                    <table class="table border-bottom">
-                                        <thead>
-                                            <tr class="h-[51px]">
-                                                <th >
-                                                    <a class="cursor-pointer text-blue-300 d-flex align-items-center gap-[5px] ps-3"
-                                                       @click.prevent="openModal(du_an.id)">
-                                                        <div class="text-white bg-blue-300 text-center rounded-full w-[20px] h-[20px]">
-                                                            <i class="fa fa-plus text-[10px]"></i>
-                                                        </div>
-                                                        Thêm hạng mục
-                                                    </a>
-                                                </th>
-                                                <th class="text-neutral-400">Bắt đầu</th>
-                                                <th class="text-neutral-400">Kết thúc</th>
-                                                <th class="text-neutral-400">Tiến độ</th>
-                                                <th></th>
-                                                <th></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <TreeItem1
-                                                v-for="(item, index) in du_an.children"
-                                                :key="item.id"
-                                                :item="item"
-                                                @edit="editModal"
-                                                @add="openModal"
-                                            />
-                                        </tbody>
-                                    </table>
-
-                                </div>
-                                <div class="col-md-8 pl-0">
-                                    <div class="gantt-target border"></div>
-                                </div>
-                            </div>
+                    <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
+                        <li class="nav-item">
+                            <a @click.prevent="tab = 'chart'" class="nav-link active" id="custom-tabs-three-home-tab" data-toggle="pill" href="#custom-tabs-three-home" role="tab" aria-controls="custom-tabs-three-home" aria-selected="true">Chi tiết</a>
+                        </li>
+                        <li class="nav-item">
+                            <a @click.prevent="tab = 'files'" class="nav-link" id="custom-tabs-three-profile-tab" data-toggle="pill" href="#custom-tabs-three-profile" role="tab" aria-controls="custom-tabs-three-profile" aria-selected="false">Files</a>
+                        </li>
+                    </ul>
+                    <div class="row" v-show="tab === 'chart'">
+                        <div class="col-md-4 pr-0">
+                            <table class="table border-bottom">
+                                <thead>
+                                <tr class="h-[51px]">
+                                    <th >
+                                        <a class="cursor-pointer text-blue-300 d-flex align-items-center gap-[5px] ps-3"
+                                           @click.prevent="openModal(du_an.id)">
+                                            <div class="text-white bg-blue-300 text-center rounded-full w-[20px] h-[20px]">
+                                                <i class="fa fa-plus text-[10px]"></i>
+                                            </div>
+                                            Thêm hạng mục
+                                        </a>
+                                    </th>
+                                    <th class="text-neutral-400">Bắt đầu</th>
+                                    <th class="text-neutral-400">Kết thúc</th>
+                                    <th class="text-neutral-400">Tiến độ</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <TreeItem1
+                                    v-for="(item, index) in du_an.children"
+                                    :key="item.id"
+                                    :item="item"
+                                    @edit="editModal"
+                                    @add="openModal"
+                                />
+                                </tbody>
+                            </table>
                         </div>
+                        <div class="col-md-8 pl-0">
+                            <div class="gantt-target border"></div>
+                        </div>
+                    </div>
+                    <div v-show="tab === 'files'">
+
                     </div>
                 </div>
             </div>

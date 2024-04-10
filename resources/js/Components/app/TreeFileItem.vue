@@ -13,7 +13,7 @@ const props = defineProps({
     },
 })
 
-let isOpen = ref(true);
+let isOpen = ref(false);
 let isMounted = ref(false);
 
 const emit = defineEmits(['edit', 'add']);
@@ -63,12 +63,16 @@ onMounted(() => {
             <div class="col-lg-1 d-lg-block d-none">
                 <span>{{ item.ngay_ket_thuc }}</span>
             </div>
+
             <div class="col-lg-1 d-lg-block d-none">
                     <span>
                         <span v-if="item.tien_do == 0" class="badge badge-warning">Chưa thực hiện</span>
                         <span v-else-if="item.tien_do > 0 && item.tien_do < 100" class="badge badge-primary">Đang thực hiện</span>
                         <span v-else class="badge badge-success">Đã hoàn thành</span>
                     </span>
+            </div>
+            <div class="col-lg-1 d-lg-block d-none">
+                <span>{{ item.nhan_vien?.name }}</span>
             </div>
             <div class="col-lg-2">
                 <ul class="list-unstyled">

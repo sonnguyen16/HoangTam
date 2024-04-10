@@ -1,8 +1,7 @@
 <script setup>
-import {onMounted, ref, watchEffect} from "vue";
-import {router, useForm, usePage} from "@inertiajs/vue3";
+import {ref, watchEffect} from "vue";
+import {useForm, usePage} from "@inertiajs/vue3";
 import InputError from "@/Components/InputError.vue";
-import TreeItem from "@/Components/app/TreeItem.vue";
 
 const page = usePage()
 
@@ -164,7 +163,7 @@ function addBinhLuan(){
                         </div>
                     </div>
                 </template>
-                <button type="submit" :disabled="form.processing" class="btn btn-primary right-0 font-weight-bold" >Lưu</button>
+                <button v-if="page.props.user.id === du_an.user_id" type="submit" :disabled="form.processing" class="btn btn-primary right-0 font-weight-bold" >Lưu</button>
                 <hr>
                 <div class="" id="subtasks">
                     <label for="mo_ta" class="font-weight-bold text-success ">Hạng mục con:</label>

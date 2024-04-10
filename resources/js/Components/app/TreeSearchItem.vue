@@ -45,7 +45,7 @@ function toggle() {
             </div>
             <div class="col-lg-2">
                 <button @click.prevent="emit('choose', item)" class="ms-5">
-                    <i class="fa fa-search"></i>
+                    <i class="fa fa-eye"></i>
                 </button>
             </div>
         </div>

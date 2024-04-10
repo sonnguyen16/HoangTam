@@ -262,6 +262,9 @@ function reload(){
                             <div class="col-lg-1">
                                 Trạng thái
                             </div>
+                            <div class="col-lg-1">
+                                Người phụ trách
+                            </div>
                             <div class="col-lg-2">
                                 Files
                             </div>

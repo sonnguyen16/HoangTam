@@ -162,8 +162,8 @@ onMounted(() => {
                                         <i class="fa fa-file me-1"></i>
                                         {{ du_an.ten }}
                                     </h6>
-                                    <button @click.prevent="editModal(du_an)" class="me-4">
-                                        <i class="fa fa-search"></i>
+                                    <button @click.prevent="editModal(du_an)" class="me-[18px]">
+                                        <i class="fa fa-eye"></i>
                                     </button>
                                 </div>
                                 <div class="ms-[20px]">

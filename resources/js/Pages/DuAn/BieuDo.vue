@@ -5,6 +5,7 @@ import ChiTiet from "@/Pages/DuAn/ChiTiet.vue";
 import MainLayout from "@/Layouts/MainLayout.vue";
 import TreeItem1 from "@/Components/app/TreeItem1.vue";
 import {computed, onMounted, onUpdated, ref} from "vue";
+import TreeFileItem from "@/Components/app/TreeFileItem.vue";
 
 const props = defineProps({
     du_an: Object,
@@ -247,8 +248,13 @@ function reload(){
                             <div class="gantt-target border"></div>
                         </div>
                     </div>
-                    <div v-show="tab === 'files'">
-
+                    <div class="px-[25px] py-[10px]" v-show="tab === 'files'">
+                        <TreeFileItem
+                            class=""
+                            v-for="item in du_an.children"
+                            :key="item.id"
+                            :item="item"
+                        />
                     </div>
                 </div>
             </div>

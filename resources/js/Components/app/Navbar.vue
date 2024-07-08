@@ -35,6 +35,30 @@ function showModal() {
 
         <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown show">
+                <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="true">
+                    <i class="far fa-comments"></i>
+                    <span class="badge badge-danger navbar-badge">3</span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="left: inherit; right: 0px;">
+                    <a href="#" class="dropdown-item">
+                        <div class="media d-flex align-items-center">
+                            <img src="/uploads/nhan_vien/1710727332.png" alt="User Avatar" style="border-radius: 20px; width: 40px; height: 40px; object-fit: cover" class="mr-3 border">
+                            <div class="media-body">
+                                <h3 class="dropdown-item-title">
+                                    Brad Diesel
+                                    <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
+                                </h3>
+                                <p class="text-sm">Call me whenever you can...</p>
+                                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+                            </div>
+                        </div>
+
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
+                </div>
+            </li>
 
             <li class="nav-item">
                 <a class="nav-link" data-widget="fullscreen" href="#" role="button">
@@ -46,7 +70,7 @@ function showModal() {
                     <i class="fas fa-user"></i>
                 </a>
                 <div class="dropdown-menu dropdown-menu-md dropdown-menu-right border-0 shadow">
-                    <a @click.prevent="showModal()" class=" dropdown-item px-4 py-2">
+                    <a @click.prevent="showModal()" class="cursor-pointer dropdown-item px-4 py-2">
                         Thông tin đơn vị
                     </a>
                     <DropdownLink :href="route('auth.logout')" method="post" class="dropdown-item" as="button">
